@@ -1,0 +1,1 @@
+Fixes an AI bug: hop farms were not counted against the AIV farm limit, so the AI kept over-building them (eventually filling its population with hop farmers and stopping troop production). Now hop farms count toward the same limit as the other farms.

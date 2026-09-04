@@ -1,0 +1,1 @@
+Behebt einen KI-Bug: an AIV-Positionen platzierte Starttruppen liefen nie zu ihren Plätzen — der Lader des Spiels verwarf drei Truppen-Zeilen (Pikeniere, Schwertkämpfer, arabische Schwertkämpfer). Jetzt marschieren auch diese Truppen zu ihren Positionen, so wie es Fernkämpfer und Ritter schon immer taten (und wie in der Definitive Edition).

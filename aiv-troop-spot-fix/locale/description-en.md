@@ -1,0 +1,1 @@
+Fixes an AI bug: start troops placed at AIV unit positions never walked to their spots — the game's loader silently discarded three troop rows (pikemen, swordsmen, Arabian swordsmen). Now those troops march to their positions like the ranged units and knights already did (and like the Definitive Edition).

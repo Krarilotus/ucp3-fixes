@@ -1,0 +1,11 @@
+name: aiv-troop-spot-fix
+display-name: AIV Troop Spot Fix (AI)
+author: Samurai
+version: 0.1.0
+type: module
+game: [SHC==1.41, SHCE==1.41]
+meta:
+  version: 1.0.0
+dependencies:
+  framework: ^3.0.0
+  frontend: ^1.0.0

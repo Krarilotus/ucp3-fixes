@@ -1,0 +1,1 @@
+Behebt einen KI-Bug: Hopfenfarmen zählten nicht gegen das AIV-Farm-Limit, daher baute die KI immer weiter welche (bis ihre Bevölkerung von Hopfenbauern voll war und keine Truppen mehr ausgebildet wurden). Jetzt zählen Hopfenfarmen wie die übrigen Farmen gegen dasselbe Limit.
