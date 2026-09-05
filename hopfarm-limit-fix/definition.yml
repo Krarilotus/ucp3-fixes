@@ -1,7 +1,7 @@
 name: hopfarm-limit-fix
 display-name: 'AI: Hop Farm Counting Fix'
 author: Samurai
-version: 0.1.1
+version: 0.1.2
 type: module
 game: [SHC==1.41, SHCE==1.41]
 meta:
