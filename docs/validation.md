@@ -187,7 +187,7 @@ menu defaults and disabled behavior preserve the original paths and three base
 loader fixes. These are emulated hook checks, not live gameplay verification.
 
 The collapsible switch controls and native-state display require frontend
-1.0.17, declared in the module definition. AIC guidance is in the localized
+1.0.16, declared in the module definition. AIC guidance is in the localized
 module descriptions and wiki, with no AIC reference panel in Customizations. The menu exposes Defend/Dig and Hold/Patrol;
 unconfigured controls preserve native behavior or inherit the common choice.
 

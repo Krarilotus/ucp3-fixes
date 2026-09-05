@@ -251,9 +251,6 @@ options:
         inheritFrom:
           url: aiv-troops-behaviour.behavior.defaults.InitialRole
           value: inherit
-        valuePresentation:
-          native:
-            text: '{{varies_by_ai}}'
       - name: Movement_Spearman
         display: Choice
         text: '{{slot_movement}}'
@@ -300,9 +297,6 @@ options:
         inheritFrom:
           url: aiv-troops-behaviour.behavior.defaults.InitialRole
           value: inherit
-        valuePresentation:
-          native:
-            text: '{{varies_by_ai}}'
       - name: Movement_Pikeman
         display: Choice
         text: '{{slot_movement}}'
@@ -346,9 +340,6 @@ options:
         inheritFrom:
           url: aiv-troops-behaviour.behavior.defaults.InitialRole
           value: inherit
-        valuePresentation:
-          native:
-            text: '{{varies_by_ai}}'
       - name: Movement_Maceman
         display: Choice
         text: '{{slot_movement}}'
@@ -486,9 +477,6 @@ options:
         inheritFrom:
           url: aiv-troops-behaviour.behavior.defaults.InitialRole
           value: inherit
-        valuePresentation:
-          native:
-            text: '{{varies_by_ai}}'
       - name: Movement_Slave
         display: Choice
         text: '{{slot_movement}}'

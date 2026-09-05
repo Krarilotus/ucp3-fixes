@@ -3,7 +3,7 @@
 Version 0.2.0 combines restored AIV positions with opt-in controls for initial
 troop assignments and defensive slot movement across all 15 supported troop types.
 The base patch restores rows **9, 11 and 18** (pikemen and both swordsman types).
-Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.17,
+Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.16,
 and aicloader >=1.1.0. The proposed store target is UCP 3.0.7.
 
 ## Name and migration
@@ -65,8 +65,7 @@ have no native slot-movement mark, even with the loading fix enabled. Engineers'
 special assignment/oil duties do not have a direct equivalent in these columns.
 
 Spearmen, pikemen, macemen and slaves can defend or dig depending on the AI's
-DefDiggingUnitMax and live digging capability. Their untouched role shows
-"Varies by AI". Archers and crossbowmen always take the native defense branch.
+DefDiggingUnitMax and live digging capability. Their untouched role has no selected box. Archers and crossbowmen always take the native defense branch.
 Explicit choices and common defaults replace the native display; reset restores
 inheritance. Opening the menu does not change runtime behavior or saved defaults.
 

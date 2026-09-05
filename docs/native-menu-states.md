@@ -9,11 +9,11 @@ marked native choice explicitly is still a customization.
 | --- | --- | --- |
 | Engineers | No equivalent; excluded by the initial-role routine | Special oil duties, no ordinary hold/patrol mark |
 | Crusader archers, crossbowmen | Defend | Hold |
-| Spearmen, macemen | Varies by AI | Patrol |
-| Pikemen | Varies by AI | No loaded position row in the unmodified game |
+| Spearmen, macemen | Conditional; no selected box | Patrol |
+| Pikemen | Conditional; no selected box | No loaded position row in the unmodified game |
 | Swordsmen, Arabian swordsmen | Defend | No loaded position row in the unmodified game |
 | Knights, slingers, assassins, Arabian archers, fire throwers | Defend | Hold |
-| Slaves | Varies by AI | Hold |
+| Slaves | Conditional; no selected box | Hold |
 | Horse archers | Defend | Patrol |
 
 `aiAssignMoatDiggers` at Crusader `0x4D3F20` excludes engineers. For other listed
