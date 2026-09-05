@@ -1,0 +1,37 @@
+ai: KI
+behavior_title: Truppeneinstellungen
+fixes: Fehlerbehebungen
+title: 'KI: AIV-Truppenverhalten'
+description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her.
+aic_overrides: AIC-Überschreibungen verwenden
+initial_role: Aufgabe der Starttruppen
+slot_movement: Bewegung der Verteidiger
+native: Originalverhalten des Spiels
+defend: AIV-Positionen verteidigen
+dig: Gräben ausheben
+hold: An der zugewiesenen Position bleiben
+patrol: Zwischen AIV-Positionen patrouillieren
+troop_Engineer: Ingenieure
+troop_Archer: Europäische Bogenschützen
+troop_Crossbowman: Armbrustschützen
+troop_Spearman: Lanzenträger
+troop_Pikeman: Pikeniere
+troop_Maceman: Streitkolbenkämpfer
+troop_Swordsman: Schwertkämpfer
+troop_Knight: Ritter
+troop_Slave: Sklaven
+troop_Slinger: Steinschleuderer
+troop_Assassin: Assassinen
+troop_ArabianArcher: Arabische Bogenschützen
+troop_HorseArcher: Berittene Bogenschützen
+troop_ArabianSwordsman: Arabische Schwertkämpfer
+troop_FireThrower: Feuerwerfer
+troops_category: AIV-Truppenverhalten
+table_unit: Truppe
+table_role: Startaufgabe
+table_movement: AIV-Bewegung
+table_defend: Wache
+table_dig: Graben
+table_hold: Halten
+table_patrol: Patrouille
+table_help: Starttruppen verteidigen oder graben. Verteidiger halten ihre Position oder patrouillieren.

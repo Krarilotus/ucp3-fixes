@@ -1,5 +1,0 @@
-ai: IA
-fixes: Correcciones
-title: 'IA: Corrección de posiciones AIV'
-description: Restaura las posiciones AIV que faltan para piqueros, espadachines y espadachines árabes.
-  Reinicia el juego tras modificar este ajuste.

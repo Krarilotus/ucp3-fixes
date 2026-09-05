@@ -1,0 +1,37 @@
+ai: AI
+behavior_title: Troop settings
+fixes: Fixes
+title: 'AI: AIV Troop Behaviour'
+description: Restores missing AIV positions for pikemen, swordsmen and Arabian swordsmen.
+aic_overrides: Use AIC overrides
+initial_role: Starting troop role
+slot_movement: Defender movement
+native: Native game behaviour
+defend: Defend AIV positions
+dig: Dig moats
+hold: Stay at the assigned position
+patrol: Patrol between AIV positions
+troop_Engineer: Engineers
+troop_Archer: Crusader archers
+troop_Crossbowman: Crossbowmen
+troop_Spearman: Spearmen
+troop_Pikeman: Pikemen
+troop_Maceman: Macemen
+troop_Swordsman: Swordsmen
+troop_Knight: Knights
+troop_Slave: Slaves
+troop_Slinger: Slingers
+troop_Assassin: Assassins
+troop_ArabianArcher: Arabian archers
+troop_HorseArcher: Horse archers
+troop_ArabianSwordsman: Arabian swordsmen
+troop_FireThrower: Fire throwers
+troops_category: AIV Troop Behaviour
+table_unit: Troop
+table_role: Starting role
+table_movement: Slot movement
+table_defend: Defend
+table_dig: Dig
+table_hold: Hold
+table_patrol: Patrol
+table_help: Starting troops defend or dig. Defenders hold their position or patrol.

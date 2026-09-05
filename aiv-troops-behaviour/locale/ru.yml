@@ -1,0 +1,37 @@
+ai: ИИ
+fixes: Исправления
+title: 'ИИ: Поведение войск AIV'
+description: Восстанавливает отсутствующие позиции AIV пикинёров, мечников и арабских мечников.
+behavior_title: Настройки войск
+aic_overrides: Использовать переопределения AIC
+initial_role: Задача стартовых войск
+slot_movement: Передвижение защитников
+native: Оригинальное поведение игры
+defend: Защищать позиции AIV
+dig: Рыть ров
+hold: Оставаться на назначенной позиции
+patrol: Патрулировать между позициями AIV
+troop_Engineer: Инженеры
+troop_Archer: Европейские лучники
+troop_Crossbowman: Арбалетчики
+troop_Spearman: Копейщики
+troop_Pikeman: Пикинёры
+troop_Maceman: Булавоносцы
+troop_Swordsman: Мечники
+troop_Knight: Рыцари
+troop_Slave: Рабы
+troop_Slinger: Пращники
+troop_Assassin: Ассасины
+troop_ArabianArcher: Арабские лучники
+troop_HorseArcher: Конные лучники
+troop_ArabianSwordsman: Арабские мечники
+troop_FireThrower: Огнеметатели
+troops_category: Поведение войск AIV
+table_unit: Войска
+table_role: Начальная роль
+table_movement: Движение AIV
+table_defend: Защита
+table_dig: Рытьё
+table_hold: Стоять
+table_patrol: Патруль
+table_help: Начальные войска защищают или копают. Защитники удерживают позицию или патрулируют.

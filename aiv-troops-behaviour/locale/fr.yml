@@ -1,0 +1,37 @@
+ai: IA
+fixes: Correctifs
+title: 'IA : Comportement des troupes AIV'
+description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes.
+behavior_title: Réglages des troupes
+aic_overrides: Utiliser les remplacements AIC
+initial_role: Rôle des troupes de départ
+slot_movement: Déplacement des défenseurs
+native: Comportement du jeu d’origine
+defend: Défendre les positions AIV
+dig: Creuser des douves
+hold: Rester à la position assignée
+patrol: Patrouiller entre les positions AIV
+troop_Engineer: Ingénieurs
+troop_Archer: Archers européens
+troop_Crossbowman: Arbalétriers
+troop_Spearman: Lanciers
+troop_Pikeman: Piquiers
+troop_Maceman: Massiers
+troop_Swordsman: Épéistes
+troop_Knight: Chevaliers
+troop_Slave: Esclaves
+troop_Slinger: Frondeurs
+troop_Assassin: Assassins
+troop_ArabianArcher: Archers arabes
+troop_HorseArcher: Archers montés
+troop_ArabianSwordsman: Épéistes arabes
+troop_FireThrower: Lanceurs de feu
+troops_category: Comportement des troupes AIV
+table_unit: Troupe
+table_role: Rôle initial
+table_movement: Déplacement AIV
+table_defend: Défendre
+table_dig: Creuser
+table_hold: Rester
+table_patrol: Patrouille
+table_help: Les troupes initiales défendent ou creusent. Les défenseurs restent en position ou patrouillent.

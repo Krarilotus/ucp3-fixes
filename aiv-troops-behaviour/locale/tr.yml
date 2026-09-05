@@ -1,0 +1,37 @@
+ai: Yapay zekâ
+fixes: Düzeltmeler
+title: 'Yapay zekâ: AIV birlik davranışı'
+description: Kargıcıların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
+behavior_title: Birlik ayarları
+aic_overrides: AIC geçersiz kılmalarını kullan
+initial_role: Başlangıç birliklerinin görevi
+slot_movement: Savunmacıların hareketi
+native: Oyunun özgün davranışı
+defend: AIV konumlarını savun
+dig: Hendek kaz
+hold: Atanan konumda kal
+patrol: AIV konumları arasında devriye gez
+troop_Engineer: Mühendisler
+troop_Archer: Avrupalı okçular
+troop_Crossbowman: Arbaletçiler
+troop_Spearman: Mızrakçılar
+troop_Pikeman: Mızraklı muhafızlar
+troop_Maceman: Gürzcüler
+troop_Swordsman: Kılıçlılar
+troop_Knight: Şövalyeler
+troop_Slave: Köleler
+troop_Slinger: Sapancılar
+troop_Assassin: Suikastçılar
+troop_ArabianArcher: Arap okçular
+troop_HorseArcher: Atlı okçular
+troop_ArabianSwordsman: Arap kılıçlılar
+troop_FireThrower: Ateş atıcılar
+troops_category: AIV birlik davranışı
+table_unit: Birlik
+table_role: Başlangıç görevi
+table_movement: AIV hareketi
+table_defend: Savun
+table_dig: Kaz
+table_hold: Bekle
+table_patrol: Devriye
+table_help: Başlangıç birlikleri savunur veya kazar. Savunucular konumlarını korur veya devriye gezer.

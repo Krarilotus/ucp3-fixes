@@ -1,0 +1,37 @@
+ai: هوش مصنوعی
+fixes: رفع اشکال
+title: 'هوش مصنوعی: رفتار نیروها در AIV'
+description: موقعیت‌های AIV گم‌شدهٔ پیک‌داران، شمشیرزنان و شمشیرزنان عرب را بازمی‌گرداند.
+behavior_title: تنظیمات نیروها
+aic_overrides: استفاده از بازنویسی AIC
+initial_role: وظیفهٔ نیروهای آغازین
+slot_movement: حرکت مدافعان
+native: رفتار اصلی بازی
+defend: دفاع از موقعیت‌های AIV
+dig: حفر خندق
+hold: ماندن در موقعیت تعیین‌شده
+patrol: گشت‌زنی بین موقعیت‌های AIV
+troop_Engineer: مهندسان
+troop_Archer: کمانداران اروپایی
+troop_Crossbowman: کمانداران زنبورکی
+troop_Spearman: نیزه‌داران
+troop_Pikeman: نیزه‌داران زره‌پوش
+troop_Maceman: گرزداران
+troop_Swordsman: شمشیرزنان
+troop_Knight: شوالیه‌ها
+troop_Slave: بردگان
+troop_Slinger: فلاخن‌اندازان
+troop_Assassin: آدم‌کشان
+troop_ArabianArcher: کمانداران عرب
+troop_HorseArcher: کمانداران سواره
+troop_ArabianSwordsman: شمشیرزنان عرب
+troop_FireThrower: آتش‌اندازان
+troops_category: رفتار نیروها در AIV
+table_unit: نیرو
+table_role: نقش آغازین
+table_movement: حرکت AIV
+table_defend: دفاع
+table_dig: حفاری
+table_hold: توقف
+table_patrol: گشت
+table_help: نیروهای آغازین دفاع یا حفاری می‌کنند. مدافعان در موقعیت می‌مانند یا گشت می‌زنند.

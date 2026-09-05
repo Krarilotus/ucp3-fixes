@@ -1,5 +1,0 @@
-ai: AI
-fixes: Fixes
-title: Load AIV positions for pikemen and swordsmen
-description: Restores missing AIV positions for pikemen, swordsmen and Arabian swordsmen. Other troop
-  types are unchanged. Restart the game after changing this setting.

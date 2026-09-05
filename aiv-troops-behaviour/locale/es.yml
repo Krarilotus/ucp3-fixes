@@ -1,0 +1,37 @@
+ai: IA
+fixes: Correcciones
+title: 'IA: Comportamiento de tropas AIV'
+description: Restaura las posiciones AIV ausentes de piqueros, espadachines y espadachines árabes.
+behavior_title: Ajustes de tropas
+aic_overrides: Usar anulaciones AIC
+initial_role: Tarea de las tropas iniciales
+slot_movement: Movimiento de los defensores
+native: Comportamiento original del juego
+defend: Defender posiciones AIV
+dig: Cavar fosos
+hold: Quedarse en la posición asignada
+patrol: Patrullar entre posiciones AIV
+troop_Engineer: Ingenieros
+troop_Archer: Arqueros europeos
+troop_Crossbowman: Ballesteros
+troop_Spearman: Lanceros
+troop_Pikeman: Piqueros
+troop_Maceman: Maceros
+troop_Swordsman: Espadachines
+troop_Knight: Caballeros
+troop_Slave: Esclavos
+troop_Slinger: Honderos
+troop_Assassin: Asesinos
+troop_ArabianArcher: Arqueros árabes
+troop_HorseArcher: Arqueros a caballo
+troop_ArabianSwordsman: Espadachines árabes
+troop_FireThrower: Lanzafuegos
+troops_category: Comportamiento de tropas AIV
+table_unit: Tropa
+table_role: Tarea inicial
+table_movement: Movimiento AIV
+table_defend: Defender
+table_dig: Cavar
+table_hold: Mantener
+table_patrol: Patrullar
+table_help: Las tropas iniciales defienden o cavan. Los defensores mantienen su posición o patrullan.

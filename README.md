@@ -6,7 +6,7 @@ independent UCP3 modules. Author: Samurai (Discord: D. Daniel).
 | Module | Scope |
 | --- | --- |
 | [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |
-| [aiv-troop-spot-fix](aiv-troop-spot-fix/) | Restores loading of rows 9, 11 and 18: pikemen, swordsmen and Arabian swordsmen. Does not fix slaves or every troop movement problem. |
+| [AI: AIV Troop Behaviour](aiv-troops-behaviour/) | Optional initial digging/defense assignments and defensive hold/patrol controls for 15 troop types, including slaves, with global defaults and per-AI AIC overrides. Includes the row 9/11/18 loading fix. |
 
 ## Installation and configuration
 
@@ -18,15 +18,17 @@ module package. There may be no published releases yet.
 
 Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
 the launch option **Disable Security**. Select the module in Content, then use its
-enable switch under **AI → Fixes**. Changing a switch requires restarting the game.
-The switch defaults to on for a selected module, preserving 0.1.0 behavior;
+settings under **AI → AIV Troop Behaviour** for troop controls, or **AI → Fixes**
+for the hop farm fix. Changing a switch requires restarting the game.
+The switch defaults to on for a selected module, preserving 0.1.0 behaviour;
 omitting `enabled` from an existing configuration also means on. The modules are
 not selected by default. A plugin can set `<module-name>.enabled` to `false`.
 
 Each module uses `core` and therefore has type `module`, not `plugin`. The
 `UCP2Switch` options follow the AI/Fixes presentation used by `ucp2-legacy`.
-The fixes remain independently selectable; neither changes the numerical AIV
-farm limit or offers speculative per-troop movement overrides.
+The fixes remain independently selectable. The AIV module's additional behaviour
+controls are opt-in and require aicloader, but no AI-swapping module. See its
+README for the Customizations defaults, AIC precedence and release limitations.
 
 Descriptions and option labels cover all nine frontend languages: English,
 German, French, Russian, Hungarian, Turkish, Chinese, Spanish and Persian.
@@ -46,7 +48,8 @@ string `contents.source.location` pointing to its subfolder, for example
 `location: hopfarm-limit-fix`; `location.root` is not supported by the 3.0.7 builder.
 Pin `github-sha` to the reviewed commit and match the version in `definition.yml`.
 The 3.0.7 store recipe currently lists only `en` under `supported-languages`;
-German store descriptions require adding `de` there as a separate store change.
+Other store descriptions require adding their language codes there as a separate
+store change. Installed Customizations load their translations from each package.
 Each module's `files.yml` keeps unrelated repository files out of its package.
 
 ## Validation

@@ -1,12 +1,12 @@
 --[[
-  AIV Troop Spot Fix
+  AI: AIV Troop Behaviour
 
   AI start troops placed at unit positions in the AIV (section 2012, a
   24-row x 10-column matrix of AIV-local positions, value = y*100 + x)
   are supposed to walk to those positions at the start of a skirmish.
   For several troop rows they do not, and the units stay idle at the keep.
-  This module fixes only the three loader exclusions described below; it
-  does not replace troop assignment, patrol, or movement behavior.
+  The base patch fixes only the three loader exclusions described below.
+  Optional behavior controls are implemented separately in behavior/.
 
   Root cause: the routine that decodes section 2012 into the per-AI spot
   arrays (position array 0x11F1754, decode loop at 0x4EF460) explicitly
@@ -22,7 +22,7 @@
   Arabic swordsmen standing idle, because the Arabic lords populate the
   skipped row 18 the heaviest.
 
-  Verified on Crusader Extreme by live memory + observation: with the
+  The original author reported on Crusader Extreme, with live memory + observation: with the
   three skip jumps removed, row 18 loads its positions and the troops
   march to them.
 
@@ -30,6 +30,9 @@
   `je 0x4EFB87`) by overwriting them with NOPs, so all rows 0-21 load
   their positions. The comparisons themselves are left in place and become
   harmless; no code is relocated and no other row handling changes.
+  Loading a row does not assign a starting role: pikemen selected by the
+  native moat-digger routine still dig. Only an explicit behavior setting
+  changes that assignment.
 ]]--
 
 -- The three back-to-back "cmp [esp+0x1C], imm8 / je 0x4EFB87" checks for
@@ -54,19 +57,26 @@ return {
     if config.enabled == false or self.applied then
       return
     end
+    -- Troop behaviour controls are opt-in. Resolve every behavior site before
+    -- applying even the base row fix, so a failed preflight leaves no patches.
+    local installBehavior
+    if config.behavior and config.behavior.enabled == true then
+      installBehavior = require("behavior").prepare(config.behavior)
+    end
     -- AOBScan raises on failure. Validate the entire block before any write.
     local ok, target = pcall(core.AOBScan, AOB)
     if not ok then
-      error("aiv-troop-spot-fix: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
+      error("aiv-troops-behaviour: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
     end
     for _, offset in ipairs(SKIP_OFFSETS) do
       core.writeCode(target + offset, NOP6)
     end
+    if installBehavior then installBehavior() end
     self.applied = true
-    log(INFO, string.format("aiv-troop-spot-fix: patched AIV spot decoder at 0x%X", target))
+    log(INFO, string.format("aiv-troops-behaviour: patched AIV spot decoder at 0x%X", target))
   end,
 
   disable = function(self, config)
-    return false, "aiv-troop-spot-fix: restart the game to change this option"
+    return false, "aiv-troops-behaviour: restart the game to change this option"
   end,
 }
