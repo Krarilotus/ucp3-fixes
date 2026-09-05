@@ -162,11 +162,18 @@ Confirmed details relevant to the feature:
   occurs during module enable, before the loaders' `afterInit` file application.
   aicloader is declared; honoring AIC overrides can be disabled in Customizations.
 
-The expanded suite currently has **26 passing tests**, including menu fallback,
+The expanded suite currently has **28 passing tests**, including menu fallback,
 per-personality precedence/reset, ignored overrides, invalid values before writes,
 all exposed choices, digging restrictions, raw AI numbering, both tribe strides,
 group capacities, UID checks, callback arguments, and x86 trampoline routing with
-stack/register preservation. All English/German option references resolve.
+stack/register preservation. All option references have translations in the
+frontend's nine languages: en, de, fr, ru, hu, tr, ch, es and fa.
+
+Package tests build the real ZIPs and check the explicit `locale/` directory
+entry used by frontend discovery, every language file and description, and
+unchanged runtime files in local try-outs. The original local ZIP builder
+omitted directory entries, so the frontend skipped even the included English
+and German files. `tools/build_modules.py` corrects that packaging error.
 
 The additional read-only audit is reproducible with:
 

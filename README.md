@@ -47,7 +47,8 @@ string `contents.source.location` pointing to its subfolder, for example
 `location: hopfarm-limit-fix`; `location.root` is not supported by the 3.0.7 builder.
 Pin `github-sha` to the reviewed commit and match the version in `definition.yml`.
 The 3.0.7 store recipe currently lists only `en` under `supported-languages`;
-German store descriptions require adding `de` there as a separate store change.
+Other store descriptions require adding their language codes there as a separate
+store change. Installed Customizations load their translations from each package.
 Each module's `files.yml` keeps unrelated repository files out of its package.
 
 ## Validation
