@@ -41,4 +41,30 @@ table_defend: 防守
 table_dig: 挖掘
 table_hold: 驻守
 table_patrol: 巡逻
-table_help: 每组选择一项。“默认”使用“所有部队”行的设置；“原版”保留游戏原有行为。横线表示该选项不可用。
+table_help: 按需选择防守/挖掘和驻守/巡逻。“所有部队”行未选择时保留游戏行为；其他行在修改前沿用该行。重置可恢复继承。横线表示不可用。
+aic_help_title: AIC字段与优先级
+aic_help: '每个AI性格的优先级：兵种AIC > 通用AIC > 兵种菜单选项 > 所有部队 > 游戏行为。需启用AIC覆盖才能使用这些字段。
+
+
+  InitialRole的数值2仅适用于下列六个兵种字段，不适用于通用字段。单位当前无法挖掘时改为防守。
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  数值：-1 = 继承；0 = 游戏行为（包含已启用的修复）；1 = 防守（InitialRole）/驻守（Movement）；2 = 挖掘（InitialRole）/巡逻（Movement）。
+
+
+  示例：为某个AI设置AIVTroops_InitialRole_Slave = 2和AIVTroops_Movement_Spearman = 2。该AI的奴隶将挖掘，长矛兵将巡逻，不受菜单默认值影响。缺失字段或-1表示继承。'

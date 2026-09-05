@@ -45,5 +45,37 @@ table_defend: Défendre
 table_dig: Creuser
 table_hold: Rester
 table_patrol: Patrouille
-table_help: Un choix par groupe. Défaut reprend la ligne Toutes les troupes ; Original conserve le comportement
-  du jeu. Un tiret indique une option indisponible.
+table_help: Choisissez Défendre/Creuser et Rester/Patrouille si nécessaire. Sans choix dans Toutes les
+  troupes, le jeu garde son comportement. Les autres lignes suivent cette ligne jusqu’à modification.
+  Réinitialiser rétablit l’héritage. Un tiret signifie indisponible.
+aic_help_title: Champs AIC et priorité
+aic_help: 'Pour chaque personnalité IA : AIC de la troupe > AIC commun > choix de la troupe dans le menu
+  > Toutes les troupes > comportement du jeu. Activez les remplacements AIC pour utiliser ces champs.
+
+
+  La valeur InitialRole 2 est réservée aux six champs de troupes ci-dessous, pas au champ commun. Une
+  unité incapable de creuser au moment de l’affectation défend à la place.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Valeurs : -1 = hériter ; 0 = comportement du jeu avec les correctifs activés ; 1 = Défendre (InitialRole)
+  / Rester (Movement) ; 2 = Creuser (InitialRole) / Patrouille (Movement).
+
+
+  Exemple : pour une IA, définissez AIVTroops_InitialRole_Slave à 2 et AIVTroops_Movement_Spearman à 2.
+  Ses esclaves creusent et ses lanciers patrouillent, quels que soient les réglages du menu. Les champs
+  absents ou à -1 héritent.'

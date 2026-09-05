@@ -162,7 +162,7 @@ Confirmed details relevant to the feature:
   occurs during module enable, before the loaders' `afterInit` file application.
   aicloader is declared; honoring AIC overrides can be disabled in Customizations.
 
-The expanded suite currently has **28 passing tests**, including menu fallback,
+The expanded suite currently has **31 passing tests**, including menu fallback,
 per-personality precedence/reset, ignored overrides, invalid values before writes,
 all exposed choices, digging restrictions, raw AI numbering, both tribe strides,
 group capacities, UID checks, callback arguments, and x86 trampoline routing with
@@ -174,6 +174,16 @@ entry used by frontend discovery, every language file and description, and
 unchanged runtime files in local try-outs. The original local ZIP builder
 omitted directory entries, so the frontend skipped even the included English
 and German files. `tools/build_modules.py` corrects that packaging error.
+
+The additional coverage exercises all 15 supported troop types across all 16 AI
+personalities: initial defense, own-row mapping, recruitment conversion, hold and
+patrol capacities/targets, and both Crusader and Extreme tribe strides. Native
+menu defaults and disabled behavior preserve the original paths and three base
+loader fixes. These are emulated hook checks, not live gameplay verification.
+
+The compact menu and localized AIC field reference require frontend 1.0.16,
+declared in the module definition. The menu exposes Defend/Dig and Hold/Patrol;
+unconfigured controls preserve native behavior or inherit the common choice.
 
 The additional read-only audit is reproducible with:
 

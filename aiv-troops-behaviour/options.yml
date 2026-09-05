@@ -39,6 +39,13 @@ options:
     enabled: aiv-troops-behaviour.behavior.enabled
     contents:
       value: true
+  - name: aic_reference
+    display: GroupBox
+    header: '{{aic_help_title}}'
+    text: '{{aic_help}}'
+    accordion:
+      enabled: true
+    children: []
   - name: precedence_notice
     display: Paragraph
     text: '{{precedence_notice}}'
@@ -53,25 +60,21 @@ options:
       - name: initial
         header: '{{table_role}}'
         choices:
-        - name: inherit
-          text: '{{table_inherit}}'
-        - name: native
-          text: '{{table_native}}'
         - name: defend
           text: '{{table_defend}}'
         - name: dig
           text: '{{table_dig}}'
+        unselectedValues:
+        - native
       - name: movement
         header: '{{table_movement}}'
         choices:
-        - name: inherit
-          text: '{{table_inherit}}'
-        - name: native
-          text: '{{table_native}}'
         - name: hold
           text: '{{table_hold}}'
         - name: patrol
           text: '{{table_patrol}}'
+        unselectedValues:
+        - native
     children:
     - name: all_troops
       display: GroupBox
@@ -124,6 +127,9 @@ options:
             text: '{{defend}}'
           - name: dig
             text: '{{dig}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Engineer
         display: Choice
         text: '{{slot_movement}}'
@@ -140,6 +146,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Archer
       display: GroupBox
@@ -161,6 +170,9 @@ options:
             text: '{{defend}}'
           - name: dig
             text: '{{dig}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Archer
         display: Choice
         text: '{{slot_movement}}'
@@ -177,6 +189,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Crossbowman
       display: GroupBox
@@ -196,6 +211,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Crossbowman
         display: Choice
         text: '{{slot_movement}}'
@@ -212,6 +230,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Spearman
       display: GroupBox
@@ -233,6 +254,9 @@ options:
             text: '{{defend}}'
           - name: dig
             text: '{{dig}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Spearman
         display: Choice
         text: '{{slot_movement}}'
@@ -249,6 +273,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Pikeman
       display: GroupBox
@@ -270,6 +297,9 @@ options:
             text: '{{defend}}'
           - name: dig
             text: '{{dig}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Pikeman
         display: Choice
         text: '{{slot_movement}}'
@@ -286,6 +316,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Maceman
       display: GroupBox
@@ -307,6 +340,9 @@ options:
             text: '{{defend}}'
           - name: dig
             text: '{{dig}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Maceman
         display: Choice
         text: '{{slot_movement}}'
@@ -323,6 +359,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Swordsman
       display: GroupBox
@@ -342,6 +381,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Swordsman
         display: Choice
         text: '{{slot_movement}}'
@@ -358,6 +400,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Knight
       display: GroupBox
@@ -377,6 +422,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Knight
         display: Choice
         text: '{{slot_movement}}'
@@ -393,6 +441,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Slave
       display: GroupBox
@@ -414,6 +465,9 @@ options:
             text: '{{defend}}'
           - name: dig
             text: '{{dig}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Slave
         display: Choice
         text: '{{slot_movement}}'
@@ -430,6 +484,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Slinger
       display: GroupBox
@@ -449,6 +506,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Slinger
         display: Choice
         text: '{{slot_movement}}'
@@ -465,6 +525,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_Assassin
       display: GroupBox
@@ -484,6 +547,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_Assassin
         display: Choice
         text: '{{slot_movement}}'
@@ -500,6 +566,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_ArabianArcher
       display: GroupBox
@@ -519,6 +588,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_ArabianArcher
         display: Choice
         text: '{{slot_movement}}'
@@ -535,6 +607,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_HorseArcher
       display: GroupBox
@@ -554,6 +629,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_HorseArcher
         display: Choice
         text: '{{slot_movement}}'
@@ -570,6 +648,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_ArabianSwordsman
       display: GroupBox
@@ -589,6 +670,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_ArabianSwordsman
         display: Choice
         text: '{{slot_movement}}'
@@ -605,6 +689,9 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2
     - name: troop_FireThrower
       display: GroupBox
@@ -624,6 +711,9 @@ options:
             text: '{{native}}'
           - name: defend
             text: '{{defend}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.InitialRole
+          value: inherit
       - name: Movement_FireThrower
         display: Choice
         text: '{{slot_movement}}'
@@ -640,4 +730,7 @@ options:
             text: '{{hold}}'
           - name: patrol
             text: '{{patrol}}'
+        inheritFrom:
+          url: aiv-troops-behaviour.behavior.defaults.Movement
+          value: inherit
       columns: 2

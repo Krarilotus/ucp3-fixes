@@ -45,5 +45,36 @@ table_defend: Defend
 table_dig: Dig
 table_hold: Hold
 table_patrol: Patrol
-table_help: Choose one option per group. Default uses the All troops row; Original keeps game behaviour.
-  A dash means the option is unavailable.
+table_help: Choose Defend/Dig and Hold/Patrol as needed. No selection in All troops keeps game behaviour;
+  other rows follow All troops until changed. Reset restores inheritance. A dash means unavailable.
+aic_help_title: AIC fields and priority
+aic_help: 'Per AI personality, priority is: troop AIC > common AIC > troop menu choice > All troops >
+  game behaviour. Enable AIC overrides to use these fields.
+
+
+  InitialRole value 2 is available only on the six troop fields listed below; it is not allowed on the
+  common field. A unit that cannot currently dig falls back to Defend.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Values: -1 = inherit; 0 = game behaviour, including enabled fixes; 1 = Defend (InitialRole) / Hold (Movement);
+  2 = Dig (InitialRole) / Patrol (Movement).
+
+
+  Example: for one AI, set AIVTroops_InitialRole_Slave to 2 and AIVTroops_Movement_Spearman to 2. That
+  AI uses slave diggers and patrolling spearmen regardless of the menu defaults. Missing fields or -1
+  inherit.'

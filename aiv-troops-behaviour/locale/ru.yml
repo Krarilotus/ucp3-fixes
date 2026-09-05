@@ -45,5 +45,36 @@ table_defend: Защита
 table_dig: Рытьё
 table_hold: Стоять
 table_patrol: Патруль
-table_help: Один выбор в каждой группе. По умолч. использует строку Все войска; Оригинал сохраняет поведение
-  игры. Прочерк означает недоступный вариант.
+table_help: При необходимости выберите Защита/Рытьё и Стоять/Патруль. Без выбора в строке Все войска сохраняется
+  поведение игры; остальные строки следуют ей до изменения. Сброс возвращает наследование. Прочерк означает
+  недоступный вариант.
+aic_help_title: Поля AIC и приоритет
+aic_help: 'Для каждой личности ИИ: AIC типа войск > общий AIC > выбор типа войск в меню > Все войска >
+  поведение игры. Для этих полей включите переопределения AIC.
+
+
+  Значение InitialRole 2 разрешено только для шести полей войск ниже, но не для общего поля. Если юнит
+  сейчас не может копать, он защищает позиции.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Значения: -1 = наследовать; 0 = поведение игры с включёнными исправлениями; 1 = Защита (InitialRole)
+  / Стоять (Movement); 2 = Рытьё (InitialRole) / Патруль (Movement).
+
+
+  Пример: для одного ИИ задайте AIVTroops_InitialRole_Slave = 2 и AIVTroops_Movement_Spearman = 2. Его
+  рабы копают, а копейщики патрулируют независимо от меню. Отсутствующие поля и -1 наследуют настройки.'

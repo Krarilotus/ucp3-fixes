@@ -45,5 +45,37 @@ table_defend: Wache
 table_dig: Graben
 table_hold: Halten
 table_patrol: Patrouille
-table_help: Eine Auswahl pro Gruppe. Standard übernimmt die Zeile Alle Truppen; Original behält das Spielverhalten
-  bei. Ein Strich bedeutet, dass die Option nicht verfügbar ist.
+table_help: Bei Bedarf Wache/Graben und Halten/Patrouille wählen. Ohne Auswahl bei Alle Truppen gilt das
+  Spielverhalten; andere Zeilen folgen Alle Truppen, bis sie geändert werden. Zurücksetzen stellt die
+  Vererbung wieder her. Ein Strich bedeutet nicht verfügbar.
+aic_help_title: AIC-Felder und Priorität
+aic_help: 'Pro KI-Persönlichkeit gilt: Truppen-AIC > gemeinsame AIC > Truppenauswahl im Menü > Alle Truppen
+  > Spielverhalten. Dafür AIC-Überschreibungen aktivieren.
+
+
+  InitialRole-Wert 2 ist nur bei den sechs unten aufgeführten Truppenfeldern erlaubt, nicht beim gemeinsamen
+  Feld. Kann eine Einheit aktuell nicht graben, verteidigt sie stattdessen.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Werte: -1 = erben; 0 = Spielverhalten einschließlich aktivierter Fehlerbehebungen; 1 = Wache (InitialRole)
+  / Halten (Movement); 2 = Graben (InitialRole) / Patrouille (Movement).
+
+
+  Beispiel: Für eine KI AIVTroops_InitialRole_Slave auf 2 und AIVTroops_Movement_Spearman auf 2 setzen.
+  Diese KI nutzt grabende Sklaven und patrouillierende Speerträger unabhängig von den Menüvorgaben. Fehlende
+  Felder oder -1 erben.'

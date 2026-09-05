@@ -45,5 +45,36 @@ table_defend: Védelem
 table_dig: Ásás
 table_hold: Tartás
 table_patrol: Járőr
-table_help: Csoportonként egy lehetőség választható. Az Alapérték a Minden egység sorát követi; az Eredeti
-  megtartja a játék viselkedését. A vonal nem elérhető lehetőséget jelöl.
+table_help: Igény szerint válassz Védelem/Ásás és Tartás/Járőr között. Ha a Minden egység sorban nincs
+  választás, a játék viselkedése marad. A többi sor ezt követi a módosításig. A visszaállítás újra öröklést
+  használ. A vonal nem elérhető lehetőséget jelöl.
+aic_help_title: AIC-mezők és elsőbbség
+aic_help: 'MI-személyiségenként: egység AIC > közös AIC > egység menübeállítása > Minden egység > játékviselkedés.
+  A mezőkhöz engedélyezd az AIC-felülírásokat.
+
+
+  Az InitialRole 2 értéke csak az alábbi hat egységmezőnél használható, a közös mezőnél nem. Ha az egység
+  éppen nem tud ásni, védekezik.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Értékek: -1 = öröklés; 0 = játékviselkedés a bekapcsolt javításokkal; 1 = Védelem (InitialRole) / Tartás
+  (Movement); 2 = Ásás (InitialRole) / Járőr (Movement).
+
+
+  Példa: egy MI-nél AIVTroops_InitialRole_Slave = 2 és AIVTroops_Movement_Spearman = 2. Rabszolgái ásnak,
+  lándzsásai járőröznek a menü alapértékeitől függetlenül. A hiányzó mezők és a -1 örökölnek.'

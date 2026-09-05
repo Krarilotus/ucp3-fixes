@@ -45,5 +45,36 @@ table_defend: دفاع
 table_dig: حفاری
 table_hold: توقف
 table_patrol: گشت
-table_help: در هر گروه یک گزینه را انتخاب کنید. پیش‌فرض از ردیف همهٔ نیروها پیروی می‌کند؛ اصلی رفتار بازی
-  را نگه می‌دارد. خط تیره یعنی گزینه در دسترس نیست.
+table_help: در صورت نیاز دفاع/حفاری و توقف/گشت را انتخاب کنید. بدون انتخاب در ردیف همهٔ نیروها، رفتار
+  بازی حفظ می‌شود؛ ردیف‌های دیگر تا زمان تغییر از آن پیروی می‌کنند. بازنشانی، ارث‌بری را برمی‌گرداند.
+  خط تیره یعنی گزینه در دسترس نیست.
+aic_help_title: فیلدهای AIC و اولویت
+aic_help: 'برای هر شخصیت هوش مصنوعی: AIC نوع نیرو > AIC عمومی > انتخاب نیرو در منو > همهٔ نیروها > رفتار
+  بازی. برای استفاده از این فیلدها، بازنویسی AIC را فعال کنید.
+
+
+  مقدار 2 برای InitialRole فقط در شش فیلد نیروی زیر مجاز است، نه در فیلد عمومی. اگر نیرو اکنون نتواند
+  حفاری کند، دفاع می‌کند.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  مقادیر: -1 = ارث‌بری؛ 0 = رفتار بازی همراه با اصلاحات فعال؛ 1 = دفاع (InitialRole) / توقف (Movement)؛
+  2 = حفاری (InitialRole) / گشت (Movement).
+
+
+  مثال: برای یک هوش مصنوعی، AIVTroops_InitialRole_Slave = 2 و AIVTroops_Movement_Spearman = 2 را تنظیم
+  کنید. بردگانش حفاری و نیزه‌دارانش گشت‌زنی می‌کنند، مستقل از منو. فیلدهای خالی یا -1 ارث‌بری می‌کنند.'

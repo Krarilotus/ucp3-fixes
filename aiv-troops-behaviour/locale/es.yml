@@ -45,5 +45,36 @@ table_defend: Defender
 table_dig: Cavar
 table_hold: Mantener
 table_patrol: Patrullar
-table_help: Una opción por grupo. Predeterm. usa la fila Todas las tropas; Original conserva el comportamiento
-  del juego. Un guion indica una opción no disponible.
+table_help: Elige Defender/Cavar y Mantener/Patrullar cuando sea necesario. Sin selección en Todas las
+  tropas se conserva el comportamiento del juego; las demás filas la siguen hasta modificarlas. Restablecer
+  recupera la herencia. Un guion significa no disponible.
+aic_help_title: Campos AIC y prioridad
+aic_help: 'Por personalidad de IA: AIC de tropa > AIC común > elección de tropa en el menú > Todas las
+  tropas > comportamiento del juego. Activa las anulaciones AIC para usar estos campos.
+
+
+  InitialRole 2 solo se permite en los seis campos de tropa indicados abajo, no en el campo común. Si
+  la unidad no puede cavar en ese momento, defiende.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Valores: -1 = heredar; 0 = comportamiento del juego con las correcciones activadas; 1 = Defender (InitialRole)
+  / Mantener (Movement); 2 = Cavar (InitialRole) / Patrullar (Movement).
+
+
+  Ejemplo: para una IA, establece AIVTroops_InitialRole_Slave = 2 y AIVTroops_Movement_Spearman = 2. Sus
+  esclavos cavan y sus lanceros patrullan sin depender del menú. Los campos ausentes o -1 heredan.'

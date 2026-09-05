@@ -45,5 +45,36 @@ table_defend: Savun
 table_dig: Kaz
 table_hold: Bekle
 table_patrol: Devriye
-table_help: Her grupta bir seçenek seçin. Varsayılan, Tüm birlikler satırını kullanır; Özgün, oyunun davranışını
-  korur. Tire, kullanılamayan seçeneği gösterir.
+table_help: Gerektiğinde Savun/Kaz ve Bekle/Devriye seçin. Tüm birlikler satırında seçim yoksa oyun davranışı
+  korunur; diğer satırlar değiştirilene kadar bu satırı izler. Sıfırlama, devralmayı geri getirir. Tire,
+  kullanılamayan seçeneği gösterir.
+aic_help_title: AIC alanları ve öncelik
+aic_help: 'Her yapay zekâ kişiliği için: birlik AIC > ortak AIC > birlik menü seçimi > Tüm birlikler >
+  oyun davranışı. Bu alanlar için AIC geçersiz kılmalarını etkinleştirin.
+
+
+  InitialRole 2 yalnızca aşağıdaki altı birlik alanında kullanılabilir; ortak alanda kullanılamaz. O anda
+  kazamayan bir birim savunmaya geçer.
+
+
+  AIVTroops_InitialRole: -1, 0, 1
+
+  AIVTroops_Movement: -1, 0, 1, 2
+
+  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+
+  <Troop>:
+
+  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
+  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
+
+
+  Değerler: -1 = devral; 0 = etkin düzeltmelerle oyun davranışı; 1 = Savun (InitialRole) / Bekle (Movement);
+  2 = Kaz (InitialRole) / Devriye (Movement).
+
+
+  Örnek: bir yapay zekâ için AIVTroops_InitialRole_Slave = 2 ve AIVTroops_Movement_Spearman = 2 ayarlayın.
+  Menüden bağımsız olarak köleleri kazar, mızraklıları devriye gezer. Eksik alanlar veya -1 devralır.'
