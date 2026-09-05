@@ -1,5 +1,11 @@
 # Review evidence and release checks
 
+The subsequent [live gameplay check](live-gameplay-validation.md) records the
+controlled Crusader role/movement results, the limited Extreme smoke check, and
+the final native GUI save/reload verification. Earlier emulation-only statements
+below describe the original review evidence; the linked report adds live evidence
+without treating the remaining release checks as complete.
+
 Reviewed submission: `20ead193dd71b6d0b30a4c8a3c6c8569a1ace402`.
 Review date: 2026-09-05. The proposed fixes are version 0.1.1.
 
