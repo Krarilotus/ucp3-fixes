@@ -1,1 +1,3 @@
-Behebt einen KI-Bug: an AIV-Positionen platzierte Starttruppen liefen nie zu ihren Plätzen — der Lader des Spiels verwarf drei Truppen-Zeilen (Pikeniere, Schwertkämpfer, arabische Schwertkämpfer). Jetzt marschieren auch diese Truppen zu ihren Positionen, so wie es Fernkämpfer und Ritter schon immer taten (und wie in der Definitive Edition).
+# AIV-Positionen für Pikeniere und Schwertkämpfer laden
+
+Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her. Andere Truppentypen bleiben unverändert. Nach Änderungen das Spiel neu starten.

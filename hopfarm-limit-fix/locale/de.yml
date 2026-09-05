@@ -1,0 +1,5 @@
+ai: KI
+fixes: Fehlerbehebungen
+title: 'KI: Korrekte Zählung von Hopfenfarmen'
+description: Zählt Hopfenfarmen beim Farmlimit der KI mit. Das Limit bleibt gleich. Nach Änderungen das
+  Spiel neu starten.

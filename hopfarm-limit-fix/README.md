@@ -1,4 +1,4 @@
-# Hop Farm Limit Fix
+# AI: Hop Farm Counting Fix
 
 **Status: test version. Statically analysed and confirmed to patch at runtime;
 the long-term gameplay effect is still being evaluated.**
@@ -48,8 +48,9 @@ nop (x10)
 ```
 
 No code is relocated. The register is reloaded every loop iteration and unused
-after the check. Located via AOB scan, so the patch refuses cleanly on
-unsupported game versions.
+after the check. Located via an AOB scan that also checks the preceding zero-extension and
+following flag-reset instruction. A failed scan raises an initialization error
+before any writes on unsupported or conflicting executables.
 
 ## Scope and side effect
 
@@ -70,3 +71,17 @@ shifts the balance of existing AIVs; check the farm-limit values (AIV field
 | `0x4CB470` | AI farm-build gate, sole caller of 0x40AA20      |
 | `0x4CB4B9` | limit compare `cmp ecx, [esi+0x74]`              |
 | `0x4F1A64` | dispatch call into the farm gate                 |
+
+## Configuration and review
+
+The enable switch appears under **AI → Fixes**. It defaults to on when this module
+is selected; existing configs without the option retain that behavior. Disable
+it and restart to restore the original counting behavior. The fix respects the
+existing AIV farm limit rather than introducing a separate configurable cap.
+
+The review confirmed the comparison block at `0x40AA42` in Crusader and
+`0x40AA52` in Crusader Extreme. The `movzx ecx, word ptr [edx]` before the patch
+makes the 32-bit range check valid; ECX is dead after the check and flags are
+reset by the following `test edi, edi`. See `docs/validation.md` in the source
+repository for hashes and test coverage. No claim that this prevents late-game
+recruitment collapse is made.

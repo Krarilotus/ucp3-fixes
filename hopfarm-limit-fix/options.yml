@@ -1,0 +1,14 @@
+meta:
+  version: 1.0.0
+options:
+- name: hopfarm_limit_fix
+  category:
+  - '{{ai}}'
+  - '{{fixes}}'
+  display: UCP2Switch
+  header: '{{title}}'
+  text: '{{description}}'
+  url: hopfarm-limit-fix.enabled
+  contents:
+    type: boolean
+    value: true

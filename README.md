@@ -1,34 +1,67 @@
 # ucp3-fixes
 
-Bug fixes for **Stronghold Crusader / Crusader Extreme**, packaged as UCP3 modules.
-Each fix is a self-contained module in its own subfolder with its own `definition.yml`.
+Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as two
+independent UCP3 modules. Author: Samurai (Discord: D. Daniel).
 
-Author: **Samurai** (Discord: D. Daniel).
+| Module | Scope |
+| --- | --- |
+| [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |
+| [aiv-troop-spot-fix](aiv-troop-spot-fix/) | Restores loading of rows 9, 11 and 18: pikemen, swordsmen and Arabian swordsmen. Does not fix slaves or every troop movement problem. |
 
-## ⚠️ Installing — use the Releases, not "Download ZIP"
+## Installation and configuration
 
-**Do not** use GitHub's green **Code → Download ZIP** button. That wraps everything in a
-sub-folder, so `definition.yml` no longer sits at the zip root and UCP3 shows nothing in the
-Content tab.
+Install signed packages through the extension store once published. For local
+testing, use a module ZIP from Releases if one is available, or create one by
+zipping that module folder's contents. `definition.yml` must be at the ZIP root.
+GitHub's repository-level **Download ZIP** is a source archive, not an installable
+module package. There may be no published releases yet.
 
-Instead, grab the ready-made package from the [**Releases**](../../releases) page — each module
-is zipped with `definition.yml` at the root — and drop the `.zip` unextracted into your
-`ucp/modules/` folder. Enable **"Disable Security"** in the Launch tab while the modules are
-unsigned. (Once merged into the extension store they install straight from the GUI.)
+Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
+the launch option **Disable Security**. Select the module in Content, then use its
+enable switch under **AI → Fixes**. Changing a switch requires restarting the game.
+The switch defaults to on for a selected module, preserving 0.1.0 behavior;
+omitting `enabled` from an existing configuration also means on. The modules are
+not selected by default. A plugin can set `<module-name>.enabled` to `false`.
 
-## Fixes
+Each module uses `core` and therefore has type `module`, not `plugin`. The
+`UCP2Switch` options follow the AI/Fixes presentation used by `ucp2-legacy`.
+The fixes remain independently selectable; neither changes the numerical AIV
+farm limit or offers speculative per-troop movement overrides.
 
-| Module | What it fixes |
-|--------|---------------|
-| [`hopfarm-limit-fix`](hopfarm-limit-fix/) | Hop farms were not counted against the AI's AIV farm limit, so the AI over-built them. Adds hops to the farm-count range check. |
-| [`aiv-troop-spot-fix`](aiv-troop-spot-fix/) | AI start troops placed in AIV section-2012 rows 9, 11 and 18 were discarded on load, so they never walked to their positions (most visibly the Arabic lords' troops). Removes the three skip jumps so all rows load. |
+Descriptions and option labels cover all nine frontend languages: English,
+German, French, Russian, Hungarian, Turkish, Chinese, Spanish and Persian.
+English and the root `description.md` provide fallback for other languages.
+Keep `description.md` identical to `locale/description-en.md`; tests check this
+because the installed-extension reader does not automatically fall back to the
+English locale description.
 
-Each module is type **module** (needs `core` access) and locates its patch site via AOB
-scan, so it fails cleanly on unsupported game versions instead of corrupting memory.
+An unsupported or conflicting executable causes a descriptive initialization
+error before any patch writes. UCP's `core.AOBScan` throws when no match exists;
+these modules do not silently report success with a missing fix.
 
-## Store / installation
+## Store integration
 
-Each subfolder is a standalone module. In the UCP3 extension store recipe, one entry per
-module points at this repo with `location.root` set to the module's subfolder. For local
-testing, zip a subfolder's contents (with `definition.yml` at the zip root) into
-`ucp/modules/<name>-<version>.zip` and enable "Disable Security" while unsigned.
+The actual store recipe is named `recipe.yml`. Use one entry per module with a
+string `contents.source.location` pointing to its subfolder, for example
+`location: hopfarm-limit-fix`; `location.root` is not supported by the 3.0.7 builder.
+Pin `github-sha` to the reviewed commit and match the version in `definition.yml`.
+The 3.0.7 store recipe currently lists only `en` under `supported-languages`;
+German store descriptions require adding `de` there as a separate store change.
+Each module's `files.yml` keeps unrelated repository files out of its package.
+
+## Validation
+
+Build local test packages with:
+
+```sh
+python tools/build_modules.py --output ./local-packages --local-tryout
+```
+
+The builder follows each `files.yml` and writes explicit ZIP directory entries.
+The frontend requires the `locale/` entry to discover translations; files under
+that path alone are insufficient. Install the unsigned ZIPs in `ucp/modules`.
+Use Disable Security for local testing, then select the modules in Content.
+
+See [the review and test matrix](docs/validation.md). Run the portable regression
+suite with `python -m unittest discover -s tests -v` after installing
+`tests/requirements.txt`. No game binaries are distributed with the tests.
