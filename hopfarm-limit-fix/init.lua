@@ -1,5 +1,5 @@
 --[[
-  Hop Farm Limit Fix
+  AI: Hop Farm Counting Fix
 
   When the AI wants to build a farm it passes through a gate (0x4CB470)
   that counts its existing farms and compares the count against the farm

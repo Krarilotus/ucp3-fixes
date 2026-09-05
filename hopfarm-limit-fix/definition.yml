@@ -1,5 +1,5 @@
 name: hopfarm-limit-fix
-display-name: Hop Farm Limit Fix (AI)
+display-name: 'AI: Hop Farm Counting Fix'
 author: Samurai
 version: 0.1.1
 type: module

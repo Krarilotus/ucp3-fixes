@@ -1,6 +1,6 @@
 ai: KI
 fixes: Fehlerbehebungen
-title: Hopfenfarmen beim KI-Farmlimit mitzählen
+title: 'KI: Korrekte Zählung von Hopfenfarmen'
 description: >-
   Zählt Hopfenfarmen beim bestehenden gemeinsamen AIV-Farmlimit mit.
   Dadurch können weniger Plätze für Nahrungsfarmen frei bleiben. Dass dies
