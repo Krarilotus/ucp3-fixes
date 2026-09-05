@@ -7,4 +7,4 @@ Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes ar
 - Définir des réglages pour toutes les IA et pour chaque type de troupe, y compris les esclaves.
 - Autoriser des réglages AIC propres à chaque IA à remplacer ces valeurs.
 
-Seules les troupes capables de creuser peuvent être choisies pour les douves. Réglages sous **IA → Correctifs**. Les réglages supplémentaires sont expérimentaux et désactivés par défaut. Après modification, redémarrez le jeu et lancez une nouvelle partie.
+Seules les troupes capables de creuser peuvent être choisies pour les douves. Réglages sous **IA → Comportement des troupes AIV**. Les réglages supplémentaires sont expérimentaux et désactivés par défaut. Après modification, redémarrez le jeu et lancez une nouvelle partie.

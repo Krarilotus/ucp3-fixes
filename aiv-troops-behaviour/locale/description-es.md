@@ -7,4 +7,4 @@ Restaura las posiciones AIV que faltan para piqueros, espadachines y espadachine
 - Define valores para todas las IA y ajustes por tipo de tropa, incluidos los esclavos.
 - Permite que los ajustes AIC de cada IA sustituyan estos valores.
 
-Solo las tropas capaces de cavar pueden hacerlo. Ajustes en **IA → Correcciones**. Los ajustes adicionales son experimentales y están desactivados por defecto. Tras los cambios, reinicia el juego y empieza una partida nueva.
+Solo las tropas capaces de cavar pueden hacerlo. Ajustes en **IA → Comportamiento de tropas AIV**. Los ajustes adicionales son experimentales y están desactivados por defecto. Tras los cambios, reinicia el juego y empieza una partida nueva.

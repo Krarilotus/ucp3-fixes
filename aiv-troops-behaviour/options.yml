@@ -4,7 +4,7 @@ options:
 - name: aiv_troops_behaviour
   category:
   - '{{ai}}'
-  - '{{fixes}}'
+  - '{{troops_category}}'
   display: UCP2Switch
   header: '{{title}}'
   text: '{{description}}'
@@ -15,7 +15,7 @@ options:
 - name: aiv_troop_behavior
   category:
   - '{{ai}}'
-  - '{{fixes}}'
+  - '{{troops_category}}'
   display: UCP2Switch
   header: '{{behavior_title}}'
   text: '{{behavior_description}}'
@@ -29,7 +29,7 @@ options:
   header: '{{defaults_title}}'
   category:
   - '{{ai}}'
-  - '{{fixes}}'
+  - '{{troops_category}}'
   columns: 1
   children:
   - name: precedence_notice

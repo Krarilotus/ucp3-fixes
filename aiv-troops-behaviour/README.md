@@ -43,7 +43,7 @@ the new review independently checks instructions, not that gameplay observation.
 
 ## Customizations: defaults for every AI
 
-Select the module and open **AI → Fixes**. The base fix is enabled by default for
+Select the module and open **AI → AIV Troop Behaviour**. The base fix is enabled by default for
 a selected module. **Experimental: troop settings** is off by
 default; enable it to activate the additional controls. Missing configuration
 keeps the base-only behaviour of 0.1.x.

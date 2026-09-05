@@ -18,7 +18,8 @@ module package. There may be no published releases yet.
 
 Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
 the launch option **Disable Security**. Select the module in Content, then use its
-enable switch under **AI → Fixes**. Changing a switch requires restarting the game.
+settings under **AI → AIV Troop Behaviour** for troop controls, or **AI → Fixes**
+for the hop farm fix. Changing a switch requires restarting the game.
 The switch defaults to on for a selected module, preserving 0.1.0 behaviour;
 omitting `enabled` from an existing configuration also means on. The modules are
 not selected by default. A plugin can set `<module-name>.enabled` to `false`.

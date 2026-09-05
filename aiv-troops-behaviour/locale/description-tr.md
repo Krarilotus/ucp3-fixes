@@ -7,4 +7,4 @@ Mızraklı muhafızların, kılıçlıların ve Arap kılıçlıların eksik AIV
 - Köleler dâhil her birlik türü için ayrı seçimlerle tüm yapay zekâlara varsayılanlar belirleyin.
 - Ayrı yapay zekâların AIC ayarlarının bu varsayılanları değiştirmesine izin verin.
 
-Kazma yalnızca bunu yapabilen birliklerde seçilebilir. Ayarlar **Yapay zekâ → Düzeltmeler** altındadır. Ek birlik ayarları deneyseldir ve varsayılan olarak kapalıdır. Değişikliklerden sonra oyunu yeniden başlatıp yeni bir maç açın.
+Kazma yalnızca bunu yapabilen birliklerde seçilebilir. Ayarlar **Yapay zekâ → AIV birlik davranışı** altındadır. Ek birlik ayarları deneyseldir ve varsayılan olarak kapalıdır. Değişikliklerden sonra oyunu yeniden başlatıp yeni bir maç açın.
