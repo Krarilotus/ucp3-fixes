@@ -3,7 +3,7 @@ fixes: Correctifs
 title: 'IA : Comportement des troupes AIV'
 description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes. Les réglages
   ci-dessous permettent aussi de modifier le comportement des autres troupes de l’IA.
-behavior_title: 'Expérimental : réglages des troupes'
+behavior_title: Réglages des troupes
 behavior_description: Choisissez les troupes de départ qui défendent ou creusent des douves, et si les
   défenseurs restent en place ou patrouillent. Seules les troupes capables de creuser ont cette option.
   Après modification, redémarrez le jeu et lancez une nouvelle partie.

@@ -54,7 +54,7 @@ return {
     if config.enabled == false or self.applied then
       return
     end
-    -- Experimental controls are opt-in. Resolve every behavior site before
+    -- Troop behaviour controls are opt-in. Resolve every behavior site before
     -- applying even the base row fix, so a failed preflight leaves no patches.
     local installBehavior
     if config.behavior and config.behavior.enabled == true then

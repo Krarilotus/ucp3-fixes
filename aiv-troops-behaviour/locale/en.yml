@@ -1,5 +1,5 @@
 ai: AI
-behavior_title: 'Experimental: troop settings'
+behavior_title: Troop settings
 behavior_description: Choose which starting troops defend or dig moats, and whether defenders stay at
   their positions or patrol. Only troops that can dig have that option. Restart and start a new match
   after changes.

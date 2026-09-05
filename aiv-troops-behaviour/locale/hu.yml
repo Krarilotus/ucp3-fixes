@@ -3,7 +3,7 @@ fixes: Javítások
 title: 'MI: AIV-csapatviselkedés'
 description: Visszaállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-pozícióit. Az alábbi
   beállításokkal más MI-csapatok viselkedése is módosítható.
-behavior_title: 'Kísérleti: csapatbeállítások'
+behavior_title: Csapatbeállítások
 behavior_description: Válaszd ki, mely kezdőcsapatok védekezzenek vagy árkot ássanak, és hogy a védők
   a helyükön maradjanak vagy járőrözzenek. Ásás csak az arra képes csapatoknál választható. Módosítás
   után indítsd újra a játékot és kezdj új játszmát.

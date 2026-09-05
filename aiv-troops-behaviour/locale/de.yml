@@ -1,5 +1,5 @@
 ai: KI
-behavior_title: 'Experimentell: Truppeneinstellungen'
+behavior_title: Truppeneinstellungen
 behavior_description: Festlegen, welche Starttruppen verteidigen oder Gräben ausheben und ob Verteidiger
   an ihren Positionen bleiben oder patrouillieren. Graben ist nur für geeignete Truppen wählbar. Nach
   Änderungen das Spiel neu starten und eine neue Partie beginnen.

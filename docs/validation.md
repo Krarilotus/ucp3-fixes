@@ -127,7 +127,7 @@ with the limited AIV scope made visible. Release validation still needs:
    offered. Installed English/German descriptions and English fallback are
    already packaged by these modules.
 
-## Experimental troop behaviour (0.2.0)
+## Troop behaviour (0.2.0)
 
 This feature is separate from the base-fixes PR. Both changes must be accepted
 and gameplay-validated before releasing the requested combined AIV module.

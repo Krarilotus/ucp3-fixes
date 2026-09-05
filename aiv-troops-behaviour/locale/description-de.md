@@ -7,4 +7,4 @@ Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Sch
 - Standardwerte für alle KIs festlegen, mit eigenen Einstellungen pro Truppentyp, einschließlich Sklaven.
 - Diese Standardwerte bei Bedarf durch AIC-Einstellungen für einzelne KIs überschreiben lassen.
 
-Graben ist nur für Truppen wählbar, die graben können. Einstellungen unter **KI → AIV-Truppenverhalten**. Die zusätzlichen Truppeneinstellungen sind experimentell und standardmäßig aus. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.
+Graben ist nur für Truppen wählbar, die graben können. Einstellungen unter **KI → AIV-Truppenverhalten**. Die zusätzlichen Truppeneinstellungen sind standardmäßig aus. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.

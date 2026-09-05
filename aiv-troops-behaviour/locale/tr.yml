@@ -3,7 +3,7 @@ fixes: Düzeltmeler
 title: 'Yapay zekâ: AIV birlik davranışı'
 description: Mızraklı muhafızların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
   Aşağıdaki ayarlarla diğer yapay zekâ birliklerinin davranışı da değiştirilebilir.
-behavior_title: 'Deneysel: birlik ayarları'
+behavior_title: Birlik ayarları
 behavior_description: Hangi başlangıç birliklerinin savunma yapacağını veya hendek kazacağını ve savunmacıların
   yerinde mi kalacağını yoksa devriye mi gezeceğini seçin. Kazma yalnızca bunu yapabilen birliklerde seçilebilir.
   Değişikliklerden sonra oyunu yeniden başlatıp yeni bir maç açın.

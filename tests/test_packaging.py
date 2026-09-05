@@ -31,17 +31,16 @@ class PackagingTests(unittest.TestCase):
                         self.assertTrue(archive.read(f'locale/description-{language}.md').decode('utf-8').strip())
                     self.assertEqual(archive.read('description.md'), archive.read('locale/description-en.md'))
 
-    def test_tryout_changes_only_display_name(self):
+    def test_package_preserves_source_files_and_release_name(self):
         with tempfile.TemporaryDirectory() as output:
             for name in FIXTURES:
                 folder = ROOT / name
-                with zipfile.ZipFile(builder.build_module(folder, output, True)) as archive:
+                with zipfile.ZipFile(builder.build_module(folder, output)) as archive:
                     original = yaml.safe_load((folder / 'definition.yml').read_text(encoding='utf-8'))
                     installed = yaml.safe_load(archive.read('definition.yml'))
-                    self.assertEqual(installed.pop('display-name'), original.pop('display-name') + ' (Local try-out)')
                     self.assertEqual(installed, original)
                     for entry in archive.infolist():
-                        if not entry.is_dir() and entry.filename != 'definition.yml':
+                        if not entry.is_dir():
                             self.assertEqual(archive.read(entry), (folder / entry.filename).read_bytes())
 
 

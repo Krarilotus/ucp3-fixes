@@ -7,4 +7,4 @@ Visszaállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-p
 - Közös beállítások minden MI-hez és külön beállítások csapattípusonként, a rabszolgákat is beleértve.
 - Az egyes MI-k AIC-beállításai felülírhatják az alapértékeket.
 
-Ásás csak az arra képes csapatoknál választható. Beállítások az **MI → AIV-csapatviselkedés** alatt. A további csapatbeállítások kísérletiek és alapból ki vannak kapcsolva. Módosítás után indítsd újra a játékot és kezdj új játszmát.
+Ásás csak az arra képes csapatoknál választható. Beállítások az **MI → AIV-csapatviselkedés** alatt. A további csapatbeállítások alapból ki vannak kapcsolva. Módosítás után indítsd újra a játékot és kezdj új játszmát.

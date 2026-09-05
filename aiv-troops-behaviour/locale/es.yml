@@ -3,7 +3,7 @@ fixes: Correcciones
 title: 'IA: Comportamiento de tropas AIV'
 description: Restaura las posiciones AIV que faltan para piqueros, espadachines y espadachines árabes.
   Los ajustes de abajo también permiten cambiar el comportamiento de otras tropas de la IA.
-behavior_title: 'Experimental: ajustes de tropas'
+behavior_title: Ajustes de tropas
 behavior_description: Elige qué tropas iniciales defienden o cavan fosos, y si los defensores se quedan
   en su posición o patrullan. Solo las tropas capaces de cavar tienen esa opción. Tras los cambios, reinicia
   el juego y empieza una partida nueva.
