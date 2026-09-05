@@ -1,7 +1,5 @@
 ai: AI
 fixes: Fixes
 title: 'AI: Hop Farm Counting Fix'
-description: >-
-  Includes hop farms in the existing shared AIV farm limit. This can leave
-  fewer slots for food farms. Preventing late-game recruitment problems has
-  not been established. Restart the game after changing this option.
+description: Count hop farms towards the AI farm limit. The limit stays the same. Restart the game after
+  changing this setting.

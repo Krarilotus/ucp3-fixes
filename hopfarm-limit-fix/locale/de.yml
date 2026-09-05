@@ -1,8 +1,5 @@
 ai: KI
 fixes: Fehlerbehebungen
 title: 'KI: Korrekte Zählung von Hopfenfarmen'
-description: >-
-  Zählt Hopfenfarmen beim bestehenden gemeinsamen AIV-Farmlimit mit.
-  Dadurch können weniger Plätze für Nahrungsfarmen frei bleiben. Dass dies
-  spätere Rekrutierungsprobleme verhindert, ist nicht nachgewiesen.
-  Das Spiel nach einer Änderung dieser Option neu starten.
+description: Zählt Hopfenfarmen beim Farmlimit der KI mit. Das Limit bleibt gleich. Nach Änderungen das
+  Spiel neu starten.

@@ -1,7 +1,5 @@
 # KI: Korrekte Zählung von Hopfenfarmen
 
-Zählt Hopfenfarmen zusammen mit Weizen-, Apfel- und Milchfarmen beim bestehenden gemeinsamen AIV-Farmlimit der KI mit. Dies korrigiert eine Auslassung im Farmzähler und erhöht das Limit nicht. Bei einem knappen Limit können dadurch weniger Plätze für Nahrungsfarmen frei bleiben.
+Zählt Hopfenfarmen beim Farmlimit der KI mit, genau wie Weizen-, Apfel- und Milchfarmen. Das Limit selbst bleibt gleich.
 
-Die langfristigen Auswirkungen auf das Spiel werden noch untersucht. Dass dies eine ausgelastete Bevölkerung oder einen Stillstand der Truppenproduktion verhindert, ist nicht nachgewiesen.
-
-Die Korrektur lässt sich unter **KI → Fehlerbehebungen** ein- und ausschalten. Das Spiel danach neu starten. Benötigt UCP3 und Stronghold Crusader / Crusader Extreme 1.41.
+Unter **KI → Fehlerbehebungen** ein- oder ausschalten. Nach Änderungen das Spiel neu starten.
