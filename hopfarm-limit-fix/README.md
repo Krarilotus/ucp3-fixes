@@ -1,4 +1,4 @@
-# Hop Farm Limit Fix
+# AI: Hop Farm Counting Fix
 
 **Status: test version. Statically analysed and confirmed to patch at runtime;
 the long-term gameplay effect is still being evaluated.**
