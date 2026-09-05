@@ -1,0 +1,4 @@
+ai: AI
+fixes: 修复
+title: AI：啤酒花农场计数修复
+description: 将啤酒花农场计入AI的农场上限。上限本身不变。修改后请重启游戏。

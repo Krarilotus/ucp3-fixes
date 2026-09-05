@@ -29,8 +29,9 @@ The fixes remain independently selectable. The AIV module's additional behaviour
 controls are opt-in and require aicloader, but no AI-swapping module. See its
 README for the Customizations defaults, AIC precedence and release limitations.
 
-English and German descriptions and option labels are included. Other GUI
-languages use English option fallback and the root `description.md` fallback.
+Descriptions and option labels cover all nine frontend languages: English,
+German, French, Russian, Hungarian, Turkish, Chinese, Spanish and Persian.
+English and the root `description.md` provide fallback for other languages.
 Keep `description.md` identical to `locale/description-en.md`; tests check this
 because the installed-extension reader does not automatically fall back to the
 English locale description.
@@ -50,6 +51,17 @@ German store descriptions require adding `de` there as a separate store change.
 Each module's `files.yml` keeps unrelated repository files out of its package.
 
 ## Validation
+
+Build local test packages with:
+
+```sh
+python tools/build_modules.py --output ./local-packages --local-tryout
+```
+
+The builder follows each `files.yml` and writes explicit ZIP directory entries.
+The frontend requires the `locale/` entry to discover translations; files under
+that path alone are insufficient. Install the unsigned ZIPs in `ucp/modules`.
+Use Disable Security for local testing, then select the modules in Content.
 
 See [the review and test matrix](docs/validation.md). Run the portable regression
 suite with `python -m unittest discover -s tests -v` after installing
