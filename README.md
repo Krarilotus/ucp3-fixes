@@ -6,7 +6,7 @@ independent UCP3 modules. Author: Samurai (Discord: D. Daniel).
 | Module | Scope |
 | --- | --- |
 | [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |
-| [aiv-troop-spot-fix](aiv-troop-spot-fix/) | Restores loading of rows 9, 11 and 18: pikemen, swordsmen and Arabian swordsmen. Does not fix slaves or every troop movement problem. |
+| [aiv-troop-spot-fix](aiv-troop-spot-fix/) | Restores rows 9, 11 and 18. Adds opt-in experimental global troop defaults and per-AI AIC overrides for initial digging/defense and holding/patrolling slots, including slaves. |
 
 ## Installation and configuration
 
@@ -25,8 +25,9 @@ not selected by default. A plugin can set `<module-name>.enabled` to `false`.
 
 Each module uses `core` and therefore has type `module`, not `plugin`. The
 `UCP2Switch` options follow the AI/Fixes presentation used by `ucp2-legacy`.
-The fixes remain independently selectable; neither changes the numerical AIV
-farm limit or offers speculative per-troop movement overrides.
+The fixes remain independently selectable. The AIV module's additional behavior
+controls are opt-in and require aicloader, but no AI-swapping module. See its
+README for the Customizations defaults, AIC precedence and release limitations.
 
 English and German descriptions and option labels are included. Other GUI
 languages use English option fallback and the root `description.md` fallback.

@@ -1,8 +1,41 @@
 ai: KI
+behavior_title: 'Experimentell: Truppenrollen und Bewegung an AIV-Positionen'
+behavior_description: Aktiviert die folgenden Standardwerte für alle KI-Persönlichkeiten, mit optionalen
+  AIC-Vorgaben pro KI. Nur Bogenschützen, Lanzenträger, Pikeniere, Streitkolbenkämpfer, Ingenieure und
+  Sklaven können graben. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen. Siehe Modul-README.
 fixes: Fehlerbehebungen
 title: AIV-Positionen für Pikeniere und Schwertkämpfer laden
-description: >-
-  Lädt auch die AIV-Positionen für Pikeniere, Schwertkämpfer und arabische
-  Schwertkämpfer (Zeilen 9, 11 und 18). Behebt keine Probleme mit Sklaven
-  oder anderen Truppentypen und ändert keine Bewegungs- oder Patrouillenregeln
-  der KI. Das Spiel nach einer Änderung dieser Option neu starten.
+description: Stellt das Laden der AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer
+  (Zeilen 9, 11 und 18) wieder her. Andere Truppenrollen und Bewegungsregeln benötigen die separaten experimentellen
+  Einstellungen unten. Nach Änderungen das Spiel neu starten.
+defaults_title: Standardverhalten der Truppen für jede KI
+precedence_notice: 'Diese Standardwerte gelten für alle KI-Persönlichkeiten. Bei aktivierten AIC-Vorgaben
+  gilt folgende Priorität: truppenspezifischer AIC-Wert, allgemeiner AIC-Wert, truppenspezifischer Standardwert
+  unten, allgemeiner Standardwert. Fehlende AIC-Werte oder -1 übernehmen den Standard. Originalverhalten
+  behält ausdrücklich die Spielregeln bei. Die Erstzuweisung betrifft noch nicht zugewiesene Start-/Szenariotruppen;
+  normale Rekruten werden dadurch nicht zu Grabentruppen. Halten und Patrouillieren betreffen Verteidigungsgruppen;
+  Bedrohungsreaktionen und Sonderaufgaben bleiben bestehen.'
+aic_overrides: Standardwerte durch AIC-Werte pro KI überschreiben lassen
+initial_role: Erstzuweisung
+slot_movement: Bewegung der Verteidigungsgruppen
+inherit: Allgemeinen Standard übernehmen
+native: Originalverhalten des Spiels
+defend: AIV-Positionen verteidigen
+dig: Als Grabentruppe zuweisen
+hold: Zugewiesene AIV-Position halten
+patrol: Zwischen AIV-Positionen patrouillieren
+troop_Engineer: Ingenieure
+troop_Archer: Bogenschützen
+troop_Crossbowman: Armbrustschützen
+troop_Spearman: Lanzenträger
+troop_Pikeman: Pikeniere
+troop_Maceman: Streitkolbenkämpfer
+troop_Swordsman: Schwertkämpfer
+troop_Knight: Ritter
+troop_Slave: Sklaven
+troop_Slinger: Steinschleuderer
+troop_Assassin: Assassinen
+troop_ArabianArcher: Arabische Bogenschützen
+troop_HorseArcher: Berittene Bogenschützen
+troop_ArabianSwordsman: Arabische Schwertkämpfer
+troop_FireThrower: Feuerwerfer

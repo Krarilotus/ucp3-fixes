@@ -71,7 +71,7 @@ The downstream routines are distinct: `assignUnitToATribe` at `0x4D2660`,
 `getUnitTypeIndexForUnitID` at `0x4CC390`, and movement/defense routines at
 `0x4D4130`, `0x4D4220` and `0x4D4340`. In particular, `getUnitTypeIndexForUnitID`
 can assign certain ranged units to row 13 during the first AIV pause for
-non-Caliph AIs with row-13 positions. Those behaviors remain unchanged.
+non-Caliph AIs with row-13 positions. Those behaviors remain unchanged by the base fix.
 This establishes the narrow patch scope; it does not diagnose every reported
 case of a slave or another unit failing to move. Reproducing those cases requires
 the relevant map, AIV, AIC, starting troops and AI state.
@@ -127,4 +127,75 @@ with the limited AIV scope made visible. Release validation still needs:
    offered. Installed English/German descriptions and English fallback are
    already packaged by these modules.
 
-No store recipe or store release is changed by this PR.
+## Experimental troop behavior (0.2.0)
+
+This feature is separate from the base-fixes PR. Both changes must be accepted
+and gameplay-validated before releasing the requested combined AIV module.
+The default configuration keeps the feature disabled. Its full menu and AIC
+contract is in [the module README](../aiv-troop-spot-fix/README.md).
+
+The review used the OpenSHC named Ghidra database imported from the published
+`sourcehold/OpenSHC` SARIF at `126f25c9`, then checked relevant instructions
+against the two exact-hash executables identified above. Existing OpenSHC names
+and types are evidence aids; assembly is the check on their interpretation.
+
+Confirmed details relevant to the feature:
+
+- `aiAssignMoatDiggers` (`0x4D3F20` in Crusader) processes live, selectable,
+  unassigned AI troops. Its role gate distinguishes native, defense and digging.
+  It is revisited by the AI and is not restricted to the match's first tick.
+- The native unit digging table at `0xB55440` permits types 22, 24, 25, 26, 30,
+  and 71: Crusader archers, spearmen, pikemen, macemen, engineers and slaves.
+  The live unit flag is checked too. Engineers require bypassing their native
+  initial-assignment exclusion only when an explicit custom role is selected.
+- `aiAddUnitToMoatDiggerTribe` (`0x4CC840`) assigns behavior 5; ordinary
+  `assignUnitToATribe` (`0x4D2660`) assigns behavior 1. Reusing these routines
+  preserves native tribe IDs, UIDs and assignment bookkeeping.
+- Native patrol rows are 8, 10 and 17. `smallestTribeOfUnitType` (`0x4CC990`)
+  limits these rows to DefWallPatrolGroups; holding them needs a capacity change
+  as well as a slot-target change. Custom patrol for other rows uses that same
+  AIC count and the existing rally-time counter.
+- PlayerData uses raw AI IDs 2–17; aicloader uses 1–16. AIC records have stride
+  `0x2A4`, indexed by aicloader ID. Player and unit strides are `0x39F4` and
+  `0x490`. Tribe strides differ: `0x334` in Crusader and `0x688` in Extreme.
+- aicloader owns additional-field registration, not aiSwapper. Registration
+  occurs during module enable, before the loaders' `afterInit` file application.
+  aicloader is declared; honoring AIC overrides can be disabled in Customizations.
+
+The expanded suite currently has **26 passing tests**, including menu fallback,
+per-personality precedence/reset, ignored overrides, invalid values before writes,
+all exposed choices, digging restrictions, raw AI numbering, both tribe strides,
+group capacities, UID checks, callback arguments, and x86 trampoline routing with
+stack/register preservation. All English/German option references resolve.
+
+The additional read-only audit is reproducible with:
+
+```sh
+python tests/audit_behavior_binaries.py "/path/to/Stronghold Crusader.exe" "/path/to/Stronghold_Crusader_Extreme.exe"
+```
+
+Both inspected executables have unique matches for all nine behavior signatures.
+Displaced instruction spans are complete and contain no relative branches/calls;
+the initial-role destinations call the expected native routines. The source game
+files are unchanged. This is not proof that the real RPS hooks or gameplay work.
+
+Additional release checks:
+
+1. Run through framework 3.0.7 with its real RPS runtime, aicloader, and optional
+   aiSwapper. Check menu-only settings, per-AI AIC files, character replacement,
+   disabled overrides and reset. Verify the Customizations layout in English,
+   German, and a fallback language.
+2. Exercise all 15 troop types on AIVs with zero, one and several valid slots.
+   Include slaves, every digging-capable type, and swordsmen as a non-digger.
+   Compare initial/scenario units with newly recruited defenders and moat recruits.
+3. Compare hold/patrol, zero and nonzero DefWallPatrolGroups, rally timing,
+   first AIV pause, all keep rotations, open/enclosed keeps, threat responses,
+   path failures, oil-duty engineers, and AI personalities at both ID boundaries.
+4. Check coexistence with ucp2-legacy/ai_defense, aivloader and other enabled
+   hooks. Static inspection found no direct overlap with ai_defense's hook, but
+   hook ordering and runtime composition still need testing.
+5. Validate long sessions, save/load and multiplayer before advertising support;
+   benchmark Lua callback overhead with large armies. Build/sign using the normal
+   store pipeline from the final accepted immutable commit.
+
+No store recipe or store release is changed by these PRs.

@@ -1,8 +1,40 @@
 ai: AI
+behavior_title: 'Experimental: troop roles and slot movement'
+behavior_description: Enable the defaults below for all AI personalities, with optional per-AI AIC overrides.
+  Only archers, spearmen, pikemen, macemen, engineers and slaves can dig. Restart and start a new match
+  after changing settings. See the module README.
 fixes: Fixes
 title: Load AIV positions for pikemen and swordsmen
-description: >-
-  Restores loading of AIV positions for pikemen, swordsmen and Arabian
-  swordsmen (rows 9, 11 and 18). Does not fix slaves or other troop types,
-  or override the AI's movement and patrol rules. Restart the game after
-  changing this option.
+description: Restore loading of AIV positions for pikemen, swordsmen and Arabian swordsmen (rows 9, 11
+  and 18). Other troop roles and movement require the separate experimental controls below. Restart the
+  game after changing this option.
+defaults_title: Troop behavior defaults for every AI
+precedence_notice: These defaults apply to all AI personalities. With AIC overrides enabled, a troop-specific
+  AIC value takes priority, then a common AIC value, then the troop default below, then the common default.
+  Missing or -1 AIC values inherit. Native explicitly keeps the game behavior. Initial role affects unassigned
+  starting/scenario troops; it does not turn normal recruits into diggers. Holding and patrolling apply
+  to defensive groups and retain native threat responses and special duties.
+aic_overrides: Allow per-AI AIC values to override these defaults
+initial_role: Initial assignment
+slot_movement: Defensive slot movement
+inherit: Inherit common default
+native: Native game behavior
+defend: Defend AIV slots
+dig: Assign as moat digger
+hold: Hold assigned AIV slot
+patrol: Patrol between AIV slots
+troop_Engineer: Engineers
+troop_Archer: Archers
+troop_Crossbowman: Crossbowmen
+troop_Spearman: Spearmen
+troop_Pikeman: Pikemen
+troop_Maceman: Macemen
+troop_Swordsman: Swordsmen
+troop_Knight: Knights
+troop_Slave: Slaves
+troop_Slinger: Slingers
+troop_Assassin: Assassins
+troop_ArabianArcher: Arabian archers
+troop_HorseArcher: Horse archers
+troop_ArabianSwordsman: Arabian swordsmen
+troop_FireThrower: Fire throwers

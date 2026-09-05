@@ -7,3 +7,4 @@ files:
 - src: description.md
 - src: README.md
 - src: locale
+- src: behavior
