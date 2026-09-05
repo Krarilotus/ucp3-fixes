@@ -1,9 +1,10 @@
 # KI: AIV-Truppenverhalten
 
-Verbindet wiederhergestellte AIV-Truppenpositionen mit optionalen Einstellungen für die **Erstzuweisung und die Bewegung von Verteidigungsgruppen** für alle 15 unterstützten Truppentypen, einschließlich Sklaven.
+Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her. Bietet zusätzliche Einstellungen dafür, wie KI-Truppen ihre Positionen nutzen.
 
-Optionale **experimentelle Truppeneinstellungen** unter **KI → Fehlerbehebungen** bieten Standardwerte für jede KI: Noch nicht zugewiesene Start-/Szenariotruppen können verteidigen oder Gräben ausheben; Verteidigungsgruppen können AIV-Positionen halten oder zwischen ihnen patrouillieren. Alle 15 unterstützten Truppentypen, einschließlich Sklaven, haben eigene Einstellungen. Nur europäische Bogenschützen, Lanzenträger, Pikeniere, Streitkolbenkämpfer, Ingenieure und Sklaven sind als Grabentruppen wählbar.
+- Festlegen, ob Starttruppen verteidigen oder Gräben ausheben.
+- Verteidiger an ihren Positionen bleiben oder zwischen ihnen patrouillieren lassen.
+- Standardwerte für alle KIs festlegen, mit eigenen Einstellungen pro Truppentyp, einschließlich Sklaven.
+- Diese Standardwerte bei Bedarf durch AIC-Einstellungen für einzelne KIs überschreiben lassen.
 
-AIC-Werte pro KI können die Menü-Standardwerte überschreiben; ein separater Schalter deaktiviert diese Vorgaben. Benötigt **aicloader**, aber nicht **aiSwapper**. Bedrohungsreaktionen und Sonderaufgaben folgen weiterhin den Spielregeln. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.
-
-Die grundlegende Fehlerbehebung stellt das Laden der Positionen für **Pikeniere, Schwertkämpfer und arabische Schwertkämpfer** (Zeilen 9, 11 und 18) wieder her und ist bei ausgewähltem Modul aktiv. Die experimentellen Einstellungen sind **standardmäßig aus**; die grundlegende Fehlerbehebung allein ändert keine Sklaven, deren Zeile bereits geladen wird. Vor einer stabilen Veröffentlichung benötigen die experimentellen Einstellungen noch Spieltests. Feldnamen, Prioritäten und Hinweise zum Umstieg von `aiv-troop-spot-fix` stehen im README. Benötigt Stronghold Crusader / Crusader Extreme 1.41 und UCP3.
+Graben ist nur für Truppen wählbar, die graben können. Einstellungen unter **KI → Fehlerbehebungen**. Die zusätzlichen Truppeneinstellungen sind experimentell und standardmäßig aus. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.

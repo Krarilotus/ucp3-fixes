@@ -1,30 +1,23 @@
 ai: KI
-behavior_title: 'Experimentell: Truppenrollen und Bewegung an AIV-Positionen'
-behavior_description: Aktiviert die Erstzuweisung und die Bewegung von Verteidigungsgruppen für alle
-  15 unterstützten Truppentypen, mit Standardwerten für jede KI und optionalen AIC-Vorgaben pro KI.
-  Nur europäische Bogenschützen, Lanzenträger, Pikeniere, Streitkolbenkämpfer, Ingenieure und
-  Sklaven können graben. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen. Siehe Modul-README.
+behavior_title: 'Experimentell: Truppeneinstellungen'
+behavior_description: Festlegen, welche Starttruppen verteidigen oder Gräben ausheben und ob Verteidiger
+  an ihren Positionen bleiben oder patrouillieren. Graben ist nur für geeignete Truppen wählbar. Nach
+  Änderungen das Spiel neu starten und eine neue Partie beginnen.
 fixes: Fehlerbehebungen
 title: 'KI: AIV-Truppenverhalten'
-description: Aktiviert das Modul und stellt das Laden der AIV-Positionen für Pikeniere, Schwertkämpfer
-  und arabische Schwertkämpfer (Zeilen 9, 11 und 18) wieder her. Die experimentellen Einstellungen unten
-  ermöglichen die Erstzuweisung sowie das Halten oder Patrouillieren an AIV-Positionen für alle
-  15 unterstützten Truppentypen, einschließlich Sklaven. Nach Änderungen das Spiel neu starten.
-defaults_title: Standardverhalten der Truppen für jede KI
-precedence_notice: 'Diese Standardwerte gelten für alle KI-Persönlichkeiten. Bei aktivierten AIC-Vorgaben
-  gilt folgende Priorität: truppenspezifischer AIC-Wert, allgemeiner AIC-Wert, truppenspezifischer Standardwert
-  unten, allgemeiner Standardwert. Fehlende AIC-Werte oder -1 übernehmen den Standard. Originalverhalten
-  behält ausdrücklich die Spielregeln bei. Die Erstzuweisung betrifft noch nicht zugewiesene Start-/Szenariotruppen;
-  normale Rekruten werden dadurch nicht zu Grabentruppen. Halten und Patrouillieren betreffen Verteidigungsgruppen;
-  Bedrohungsreaktionen und Sonderaufgaben bleiben bestehen.'
-aic_overrides: Standardwerte durch AIC-Werte pro KI überschreiben lassen
-initial_role: Erstzuweisung
-slot_movement: Bewegung der Verteidigungsgruppen
+description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer
+  wieder her. Mit den Truppeneinstellungen unten lässt sich auch das Verhalten anderer KI-Truppen anpassen.
+defaults_title: Standardwerte für die Truppen aller KIs
+precedence_notice: Diese Standardwerte gelten für jede KI. Aktivierte AIC-Vorgaben haben Vorrang; fehlende
+  AIC-Werte übernehmen diese Standardwerte.
+aic_overrides: Standardwerte durch AIC-Einstellungen überschreiben lassen
+initial_role: Aufgabe der Starttruppen
+slot_movement: Bewegung der Verteidiger
 inherit: Allgemeinen Standard übernehmen
 native: Originalverhalten des Spiels
 defend: AIV-Positionen verteidigen
-dig: Als Grabentruppe zuweisen
-hold: Zugewiesene AIV-Position halten
+dig: Gräben ausheben
+hold: An der zugewiesenen Position bleiben
 patrol: Zwischen AIV-Positionen patrouillieren
 troop_Engineer: Ingenieure
 troop_Archer: Europäische Bogenschützen

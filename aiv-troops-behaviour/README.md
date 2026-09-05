@@ -44,7 +44,7 @@ the new review independently checks instructions, not that gameplay observation.
 ## Customizations: defaults for every AI
 
 Select the module and open **AI → Fixes**. The base fix is enabled by default for
-a selected module. **Experimental: troop roles and slot movement** is off by
+a selected module. **Experimental: troop settings** is off by
 default; enable it to activate the additional controls. Missing configuration
 keeps the base-only behaviour of 0.1.x.
 
@@ -55,11 +55,11 @@ The defaults group provides two common choices and separate choices for all
   inherit that choice. Digging-capable troops additionally offer moat digging.
 - **Defensive slot movement:** native behaviour, hold an assigned slot, or patrol
   between slots. Each troop can inherit the common choice or choose its own.
-- **Allow per-AI AIC values to override these defaults:** enabled by default.
+- **Allow AIC settings to override these defaults:** enabled by default.
   Turn it off to use only the menu defaults, even if an AIC file supplies values.
 
-For example, choose common **Defend AIV slots** and **Hold assigned AIV slot**,
-then choose **Assign as moat digger** for slaves and **Patrol between AIV slots**
+For example, choose common **Defend AIV positions** and **Stay at the assigned position**,
+then choose **Dig moats** for slaves and **Patrol between AIV positions**
 for spearmen. This applies to every AI unless an enabled AIC override says otherwise.
 
 Initial assignment affects live, selectable, unassigned starting/scenario troops

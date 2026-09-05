@@ -1,0 +1,36 @@
+ai: IA
+fixes: Correctifs
+title: 'IA : Comportement des troupes AIV'
+description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes. Les réglages
+  ci-dessous permettent aussi de modifier le comportement des autres troupes de l’IA.
+behavior_title: 'Expérimental : réglages des troupes'
+behavior_description: Choisissez les troupes de départ qui défendent ou creusent des douves, et si les
+  défenseurs restent en place ou patrouillent. Seules les troupes capables de creuser ont cette option.
+  Après modification, redémarrez le jeu et lancez une nouvelle partie.
+defaults_title: Réglages des troupes pour toutes les IA
+precedence_notice: Ces réglages s’appliquent à toutes les IA. Les valeurs AIC ont priorité si leur utilisation
+  est activée ; les valeurs absentes utilisent ces réglages.
+aic_overrides: Autoriser les valeurs AIC à remplacer ces réglages
+initial_role: Rôle des troupes de départ
+slot_movement: Déplacement des défenseurs
+inherit: Utiliser le réglage commun
+native: Comportement du jeu d’origine
+defend: Défendre les positions AIV
+dig: Creuser des douves
+hold: Rester à la position assignée
+patrol: Patrouiller entre les positions AIV
+troop_Engineer: Ingénieurs
+troop_Archer: Archers européens
+troop_Crossbowman: Arbalétriers
+troop_Spearman: Lanciers
+troop_Pikeman: Piquiers
+troop_Maceman: Massiers
+troop_Swordsman: Épéistes
+troop_Knight: Chevaliers
+troop_Slave: Esclaves
+troop_Slinger: Frondeurs
+troop_Assassin: Assassins
+troop_ArabianArcher: Archers arabes
+troop_HorseArcher: Archers montés
+troop_ArabianSwordsman: Épéistes arabes
+troop_FireThrower: Lanceurs de feu

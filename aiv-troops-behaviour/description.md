@@ -1,9 +1,10 @@
 # AI: AIV Troop Behaviour
 
-Combines restored AIV troop positions with optional control of **initial troop assignments and defensive slot movement** for all 15 supported troop types, including slaves.
+Fixes missing AIV positions for pikemen, swordsmen and Arabian swordsmen. Adds optional settings for how AI troops use their positions.
 
-Optional **experimental troop controls** add defaults for every AI under **AI → Fixes**: assign unassigned starting/scenario troops to defense or moat digging, and make defensive groups hold or patrol AIV slots. All 15 supported troop types, including slaves, have separate choices. Only Crusader archers, spearmen, pikemen, macemen, engineers and slaves may be selected as diggers.
+- Choose whether starting troops defend or dig moats.
+- Let defenders stay at their positions or patrol between them.
+- Set defaults for all AIs, with separate choices per troop type, including slaves.
+- Allow AIC settings to override these defaults for individual AIs.
 
-Per-AI AIC values can override the menu defaults; a separate switch disables those overrides. Requires **aicloader**, but not **aiSwapper**. Threat responses and special duties retain their native rules. Restart and start a new match after changing settings.
-
-The base fix restores loading of positions for **pikemen, swordsmen and Arabian swordsmen** (rows 9, 11 and 18) and is on for a selected module. Experimental controls are **off by default**; the base fix alone does not change slaves, whose row already loads. The experimental controls still need gameplay validation before a stable release. See the README for field names, precedence and migration from `aiv-troop-spot-fix`. Requires Stronghold Crusader / Crusader Extreme 1.41 and UCP3.
+Digging is only available for troops that can dig. Configure under **AI → Fixes**. The additional troop settings are experimental and off by default. Restart and start a new match after changes.

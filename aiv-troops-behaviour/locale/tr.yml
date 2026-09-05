@@ -1,0 +1,36 @@
+ai: Yapay zekâ
+fixes: Düzeltmeler
+title: 'Yapay zekâ: AIV birlik davranışı'
+description: Mızraklı muhafızların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
+  Aşağıdaki ayarlarla diğer yapay zekâ birliklerinin davranışı da değiştirilebilir.
+behavior_title: 'Deneysel: birlik ayarları'
+behavior_description: Hangi başlangıç birliklerinin savunma yapacağını veya hendek kazacağını ve savunmacıların
+  yerinde mi kalacağını yoksa devriye mi gezeceğini seçin. Kazma yalnızca bunu yapabilen birliklerde seçilebilir.
+  Değişikliklerden sonra oyunu yeniden başlatıp yeni bir maç açın.
+defaults_title: Tüm yapay zekâlar için varsayılan birlik ayarları
+precedence_notice: Bu varsayılanlar tüm yapay zekâlara uygulanır. Etkin AIC ayarları önceliklidir; eksik
+  AIC değerleri için bu varsayılanlar kullanılır.
+aic_overrides: AIC ayarlarının bu varsayılanları değiştirmesine izin ver
+initial_role: Başlangıç birliklerinin görevi
+slot_movement: Savunmacıların hareketi
+inherit: Ortak varsayılanı kullan
+native: Oyunun özgün davranışı
+defend: AIV konumlarını savun
+dig: Hendek kaz
+hold: Atanan konumda kal
+patrol: AIV konumları arasında devriye gez
+troop_Engineer: Mühendisler
+troop_Archer: Avrupalı okçular
+troop_Crossbowman: Arbaletçiler
+troop_Spearman: Mızrakçılar
+troop_Pikeman: Mızraklı muhafızlar
+troop_Maceman: Gürzcüler
+troop_Swordsman: Kılıçlılar
+troop_Knight: Şövalyeler
+troop_Slave: Köleler
+troop_Slinger: Sapancılar
+troop_Assassin: Suikastçılar
+troop_ArabianArcher: Arap okçular
+troop_HorseArcher: Atlı okçular
+troop_ArabianSwordsman: Arap kılıçlılar
+troop_FireThrower: Ateş atıcılar
