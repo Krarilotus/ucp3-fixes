@@ -1,10 +1,11 @@
 # KI: AIV-Truppenverhalten
 
-Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her. Bietet zusätzliche Einstellungen dafür, wie KI-Truppen ihre Positionen nutzen.
+Stellt fehlende AIV-Positionen für Pikeniere und beide Schwertkämpfertypen wieder her. Optionale Einstellungen steuern Startrollen und Verteidigerbewegungen aller 15 Truppentypen.
 
-- Festlegen, ob Starttruppen verteidigen oder Gräben ausheben.
-- Verteidiger an ihren Positionen bleiben oder zwischen ihnen patrouillieren lassen.
-- Standardwerte für alle KIs festlegen, mit eigenen Einstellungen pro Truppentyp, einschließlich Sklaven.
-- Benannte AIC-Werte pro KI verwenden: InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Fehlende Felder erben die Vorgaben. Die genauen Feldnamen stehen unter AIC-Felder und Priorität in den Anpassungen.
+Truppen können verteidigen oder graben und ihre Position halten oder patrouillieren. Gemeinsame Vorgaben oder einzelne Truppeneinstellungen wählen. Graben ist nur für geeignete Truppen verfügbar.
 
-Graben ist nur für Truppen wählbar, die graben können. Einstellungen unter **KI → AIV-Truppenverhalten**. Die zusätzlichen Truppeneinstellungen sind standardmäßig aus. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.
+Für einzelne KIs: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) und `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Ohne Truppensuffix gilt die Einstellung für die ganze KI; die gemeinsame Rolle erlaubt nur `"defend"`. Aktivierte AIC-Überschreibungen haben Vorrang; fehlende Felder erben.
+
+Beispiel: `AIVTroops_InitialRole_Slave: "dig"` weist Sklaven dem Graben zu. Truppennamen und Details stehen in der [AIC-Feldreferenz](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour).
+
+Truppeneinstellungen sind anfangs deaktiviert. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.

@@ -1,17 +1,9 @@
 ai: MI
 fixes: Javítások
 title: 'MI: AIV-csapatviselkedés'
-description: Helyreállítja a pikások és mindkét kardforgatótípus hiányzó AIV-pozícióit. Az opcionális
-  beállítások szabályozzák a védekezést, ásást, helyben maradást és járőrözést. Az MI-nkénti AIC-értékek
-  felülírják a menü alapértékeit.
+description: Helyreállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-pozícióit.
 behavior_title: Csapatbeállítások
-behavior_description: Válaszd ki, mely kezdőcsapatok védekezzenek vagy árkot ássanak, és hogy a védők
-  a helyükön maradjanak vagy járőrözzenek. Ásás csak az arra képes csapatoknál választható. Módosítás
-  után indítsd újra a játékot és kezdj új játszmát.
-defaults_title: Alapértelmezett csapatbeállítások minden MI-hez
-precedence_notice: Ezek a beállítások minden MI-re érvényesek. Az engedélyezett AIC-felülírások elsőbbséget
-  élveznek; a hiányzó AIC-értékek helyett ezek a beállítások érvényesülnek.
-aic_overrides: Az AIC-beállítások felülírhatják ezeket az értékeket
+aic_overrides: AIC-felülírások használata
 initial_role: Kezdőcsapatok feladata
 slot_movement: Védők mozgása
 inherit: Közös alapbeállítás használata
@@ -40,47 +32,9 @@ table_unit: Egység
 table_all: Minden egység
 table_role: Kezdő feladat
 table_movement: AIV-mozgás
-table_inherit: Alapérték
-table_native: Eredeti
 table_defend: Védelem
 table_dig: Ásás
 table_hold: Tartás
 table_patrol: Járőr
-table_help: Igény szerint válassz Védelem/Ásás és Tartás/Járőr között. Ha a Minden egység sorban nincs
-  választás, a játék viselkedése marad. A többi sor ezt követi a módosításig. A visszaállítás újra öröklést
-  használ. A vonal nem elérhető lehetőséget jelöl.
-aic_help_title: AIC-mezők és elsőbbség
-aic_help: 'MI-személyiségenként: egység AIC > közös AIC > egység menübeállítása > Minden egység > játékviselkedés.
-  A mezőkhöz engedélyezd az AIC-felülírásokat.
-
-
-  Kisbetűs szöveges értékeket használj: InitialRole = "defend" vagy "dig"; Movement = "hold" vagy "patrol".
-  A kihagyott mező örököl. Számokat és kifejezett native/inherit értékeket nem használunk.
-
-
-  "defend" = AIV-pozíciók védelme; "dig" = Várárok ásása; "hold" = Maradjon a kijelölt pozíción; "patrol"
-  = Járőrözés az AIV-pozíciók között
-
-
-  A "dig" csak az alábbi hat egységmezőnél használható, a közös InitialRole mezőnél nem. Ha az egység
-  éppen nem tud ásni, a "defend" érvényesül.
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  Példa: AIVTroops_InitialRole_Slave: "dig" és AIVTroops_Movement_Spearman: "patrol" ásó rabszolgákat
-  és járőröző lándzsásokat ad egy MI-nek. A mezőnevek és értékek kis- és nagybetűérzékenyek. Módosítás
-  után indítsd újra a játékot és kezdj új meccset.'
+table_help: A kezdőcsapatok védekeznek vagy ásnak. A védők tartják a helyüket vagy járőröznek.
+varies_by_ai: MI-től függ

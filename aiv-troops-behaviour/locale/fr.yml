@@ -1,17 +1,9 @@
 ai: IA
 fixes: Correctifs
 title: 'IA : Comportement des troupes AIV'
-description: Rétablit les positions AIV manquantes des piquiers et des deux types d’épéistes. Les réglages
-  facultatifs contrôlent la défense, le creusement, le maintien en position et les patrouilles. Les valeurs
-  AIC par IA remplacent les réglages du menu.
+description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes.
 behavior_title: Réglages des troupes
-behavior_description: Choisissez les troupes de départ qui défendent ou creusent des douves, et si les
-  défenseurs restent en place ou patrouillent. Seules les troupes capables de creuser ont cette option.
-  Après modification, redémarrez le jeu et lancez une nouvelle partie.
-defaults_title: Réglages des troupes pour toutes les IA
-precedence_notice: Ces réglages s’appliquent à toutes les IA. Les valeurs AIC ont priorité si leur utilisation
-  est activée ; les valeurs absentes utilisent ces réglages.
-aic_overrides: Autoriser les valeurs AIC à remplacer ces réglages
+aic_overrides: Utiliser les remplacements AIC
 initial_role: Rôle des troupes de départ
 slot_movement: Déplacement des défenseurs
 inherit: Utiliser le réglage commun
@@ -40,47 +32,9 @@ table_unit: Troupe
 table_all: Toutes les troupes
 table_role: Rôle initial
 table_movement: Déplacement AIV
-table_inherit: Défaut
-table_native: Original
 table_defend: Défendre
 table_dig: Creuser
 table_hold: Rester
 table_patrol: Patrouille
-table_help: Choisissez Défendre/Creuser et Rester/Patrouille si nécessaire. Sans choix dans Toutes les
-  troupes, le jeu garde son comportement. Les autres lignes suivent cette ligne jusqu’à modification.
-  Réinitialiser rétablit l’héritage. Un tiret signifie indisponible.
-aic_help_title: Champs AIC et priorité
-aic_help: 'Pour chaque personnalité IA : AIC de la troupe > AIC commun > choix de la troupe dans le menu
-  > Toutes les troupes > comportement du jeu. Activez les remplacements AIC pour utiliser ces champs.
-
-
-  Utilisez des textes en minuscules : InitialRole = "defend" ou "dig" ; Movement = "hold" ou "patrol".
-  Omettez un champ pour hériter. Les nombres et les valeurs explicites native/inherit ne sont pas utilisés.
-
-
-  "defend" = Défendre les positions AIV; "dig" = Creuser des douves; "hold" = Rester à la position assignée;
-  "patrol" = Patrouiller entre les positions AIV
-
-
-  "dig" est réservé aux six champs de troupes ci-dessous, pas au champ InitialRole commun. Une unité incapable
-  de creuser au moment de l’affectation utilise "defend".
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  Exemple : AIVTroops_InitialRole_Slave: "dig" et AIVTroops_Movement_Spearman: "patrol" donnent à une
-  IA des esclaves qui creusent et des lanciers qui patrouillent. Respectez la casse des champs et des
-  valeurs. Redémarrez le jeu et commencez une nouvelle partie après modification.'
+table_help: Les troupes initiales défendent ou creusent. Les défenseurs restent en position ou patrouillent.
+varies_by_ai: Selon l’IA

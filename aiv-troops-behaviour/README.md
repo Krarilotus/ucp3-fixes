@@ -3,7 +3,7 @@
 Version 0.2.0 combines restored AIV positions with opt-in controls for initial
 troop assignments and defensive slot movement across all 15 supported troop types.
 The base patch restores rows **9, 11 and 18** (pikemen and both swordsman types).
-Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.16,
+Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.17,
 and aicloader >=1.1.0. The proposed store target is UCP 3.0.7.
 
 ## Name and migration
@@ -51,27 +51,30 @@ keeps the base-only behaviour of 0.1.x.
 The defaults group provides two common choices and separate choices for all
 15 supported troop types. No AIC file or AI replacement is needed to use them.
 
-The frontend's table layout shows one row per troop, with Defend/Dig and
-Hold/Patrol sword-checkbox choices. The All troops row supplies defaults; a dash
-marks an unavailable choice. No selection in All troops preserves native game
-behaviour, including enabled fixes. Other rows follow All troops until explicitly
-changed. Reset restores inheritance. The configuration keys and values stay the
-same, including `native` and `inherit` in saved menu configurations. AIC files
-use the named values below; leaving fields out supplies inheritance.
+Troop settings and all their controls share one collapsible switch section, as
+in the legacy menu style. Enabling opens the section; disabling closes it. The
+arrow can also expand/collapse it without changing the switch. The AIC override
+checkbox remains enabled by default inside this section. Field guidance lives
+in the module description and wiki, not in Customizations.
 
-Native starting assignments depend on each AI's `DefDiggingUnitMax` and the
-unit's live digging capability. Crusader archers and crossbowmen take the native
-defense branch; engineers have a separate native exclusion. Fixed per-troop
-Defend/Dig defaults cannot preserve all those cases across AIs. Unconfigured
-controls therefore retain the actual native path rather than displaying a false
-fixed assignment. The collapsible AIC reference in Customizations lists fields,
-values, allowed digging troops and the override priority.
+The table has Defend/Dig and Hold/Patrol sword-checkbox columns. It marks fixed
+native states without storing explicit overrides. Native role assignments are
+not the same as loaded AIV positions: swordsmen have native defense roles even
+though the base game skips their position rows. The three skipped rows therefore
+have no native slot-movement mark, even with the loading fix enabled. Engineers'
+special assignment/oil duties do not have a direct equivalent in these columns.
+
+Spearmen, pikemen, macemen and slaves can defend or dig depending on the AI's
+DefDiggingUnitMax and live digging capability. Their untouched role shows
+"Varies by AI". Archers and crossbowmen always take the native defense branch.
+Explicit choices and common defaults replace the native display; reset restores
+inheritance. Opening the menu does not change runtime behavior or saved defaults.
 
 - **Initial assignment:** native behaviour, or defend AIV slots. Each troop may
   inherit that choice. Digging-capable troops additionally offer moat digging.
 - **Defensive slot movement:** native behaviour, hold an assigned slot, or patrol
   between slots. Each troop can inherit the common choice or choose its own.
-- **Allow AIC settings to override these defaults:** enabled by default.
+- **Use AIC overrides:** enabled by default.
   Turn it off to use only the menu defaults, even if an AIC file supplies values.
 
 For example, choose common **Defend AIV positions** and **Stay at the assigned position**,

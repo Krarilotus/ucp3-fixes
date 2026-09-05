@@ -1,10 +1,11 @@
 # AI：AIV部队行为
 
-恢复长戟兵、剑士和阿拉伯剑士缺失的AIV位置。提供可选设置，调整AI部队如何使用这些位置。
+恢复长枪兵和两种剑士缺失的AIV位置。可选设置控制全部15种部队的初始职责和防御移动。
 
-- 选择初始部队负责防守还是挖掘护城河。
-- 让守军留在各自位置或在位置之间巡逻。
-- 为所有AI设置默认值，也可按部队类型分别设置，包括奴隶。
-- 为各AI使用具名AIC值：InitialRole = "defend"/"dig"，Movement = "hold"/"patrol"。省略字段则继承默认设置。完整字段名见自定义菜单中的“AIC字段与优先级”。
+选择防守或挖掘、驻守或巡逻。可统一设置或按兵种设置。仅能挖掘的部队可选择挖掘。
 
-只有能够挖掘的部队可选择挖掘。设置位于 **AI → AIV部队行为**。额外部队设置默认关闭。修改后请重启游戏并开始新对局。
+为各AI设置`AIVTroops_InitialRole_<Troop>`（`"defend"` / `"dig"`）和`AIVTroops_Movement_<Troop>`（`"hold"` / `"patrol"`）。去掉兵种后缀即为该AI的通用设置；通用职责仅接受`"defend"`。启用的AIC覆盖优先；省略的字段继承默认值。
+
+示例：`AIVTroops_InitialRole_Slave: "dig"`将奴隶分配为挖掘部队。兵种名和详细说明见[AIC字段参考](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour)。
+
+部队设置初始为关闭。修改后重启游戏并开始新对局。

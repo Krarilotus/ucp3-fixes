@@ -1,17 +1,9 @@
 ai: IA
 fixes: Correcciones
 title: 'IA: Comportamiento de tropas AIV'
-description: Restaura las posiciones AIV ausentes de piqueros y ambos tipos de espadachines. Los ajustes
-  opcionales controlan la defensa, la excavación, el mantenimiento de posiciones y las patrullas. Los
-  valores AIC por IA prevalecen sobre el menú.
+description: Restaura las posiciones AIV ausentes de piqueros, espadachines y espadachines árabes.
 behavior_title: Ajustes de tropas
-behavior_description: Elige qué tropas iniciales defienden o cavan fosos, y si los defensores se quedan
-  en su posición o patrullan. Solo las tropas capaces de cavar tienen esa opción. Tras los cambios, reinicia
-  el juego y empieza una partida nueva.
-defaults_title: Ajustes de tropas para todas las IA
-precedence_notice: Estos valores se aplican a todas las IA. Los valores AIC tienen prioridad si se permite
-  su uso; los que falten usan estos ajustes.
-aic_overrides: Permitir que los ajustes AIC sustituyan estos valores
+aic_overrides: Usar anulaciones AIC
 initial_role: Tarea de las tropas iniciales
 slot_movement: Movimiento de los defensores
 inherit: Usar el valor común
@@ -40,47 +32,9 @@ table_unit: Tropa
 table_all: Todas las tropas
 table_role: Tarea inicial
 table_movement: Movimiento AIV
-table_inherit: Predeterm.
-table_native: Original
 table_defend: Defender
 table_dig: Cavar
 table_hold: Mantener
 table_patrol: Patrullar
-table_help: Elige Defender/Cavar y Mantener/Patrullar cuando sea necesario. Sin selección en Todas las
-  tropas se conserva el comportamiento del juego; las demás filas la siguen hasta modificarlas. Restablecer
-  recupera la herencia. Un guion significa no disponible.
-aic_help_title: Campos AIC y prioridad
-aic_help: 'Por personalidad de IA: AIC de tropa > AIC común > elección de tropa en el menú > Todas las
-  tropas > comportamiento del juego. Activa las anulaciones AIC para usar estos campos.
-
-
-  Usa textos en minúsculas: InitialRole = "defend" o "dig"; Movement = "hold" o "patrol". Omite un campo
-  para heredar. No se usan números ni valores explícitos native/inherit.
-
-
-  "defend" = Defender posiciones AIV; "dig" = Cavar fosos; "hold" = Quedarse en la posición asignada;
-  "patrol" = Patrullar entre posiciones AIV
-
-
-  "dig" solo se permite en los seis campos de tropa indicados abajo, no en el InitialRole común. Si la
-  unidad no puede cavar en ese momento, se aplica "defend".
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  Ejemplo: AIVTroops_InitialRole_Slave: "dig" y AIVTroops_Movement_Spearman: "patrol" asignan esclavos
-  excavadores y lanceros patrulleros a una IA. Los nombres y valores distinguen mayúsculas y minúsculas.
-  Reinicia el juego y comienza una partida nueva tras los cambios.'
+table_help: Las tropas iniciales defienden o cavan. Los defensores mantienen su posición o patrullan.
+varies_by_ai: Según la IA

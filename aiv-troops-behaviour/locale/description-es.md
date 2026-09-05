@@ -1,10 +1,11 @@
 # IA: Comportamiento de tropas AIV
 
-Restaura las posiciones AIV que faltan para piqueros, espadachines y espadachines árabes. Añade ajustes opcionales para el uso de las posiciones por las tropas de la IA.
+Restaura las posiciones AIV ausentes de piqueros y ambos tipos de espadachines. Los ajustes opcionales controlan el papel inicial y el movimiento defensivo de los 15 tipos de tropa.
 
-- Elige si las tropas iniciales defienden o cavan fosos.
-- Deja a los defensores en sus posiciones o haz que patrullen entre ellas.
-- Define valores para todas las IA y ajustes por tipo de tropa, incluidos los esclavos.
-- Usa valores AIC con nombre para cada IA: InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Los campos omitidos heredan los ajustes predeterminados. Consulta Campos AIC y prioridad en personalizaciones para los nombres exactos.
+Elige defender o cavar, mantener la posición o patrullar. Usa ajustes comunes o por tipo de tropa. Solo las tropas capaces de cavar tienen esa opción.
 
-Solo las tropas capaces de cavar pueden hacerlo. Ajustes en **IA → Comportamiento de tropas AIV**. Los ajustes adicionales están desactivados por defecto. Tras los cambios, reinicia el juego y empieza una partida nueva.
+Por IA: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) y `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Sin sufijo de tropa, el ajuste es común para la IA; el papel común solo acepta `"defend"`. Las anulaciones AIC activadas tienen prioridad; los campos omitidos heredan.
+
+Ejemplo: `AIVTroops_InitialRole_Slave: "dig"` asigna esclavos a cavar. Los nombres de tropas y los detalles están en la [referencia AIC](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour).
+
+Los ajustes de tropas comienzan desactivados. Reinicia el juego y comienza una partida nueva tras los cambios.

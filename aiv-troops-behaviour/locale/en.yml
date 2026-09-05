@@ -1,16 +1,9 @@
 ai: AI
 behavior_title: Troop settings
-behavior_description: Choose which starting troops defend or dig moats, and whether defenders stay at
-  their positions or patrol. Only troops that can dig have that option. Restart and start a new match
-  after changes.
 fixes: Fixes
 title: 'AI: AIV Troop Behaviour'
-description: Fix missing AIV positions for pikemen and both swordsman types. Optional troop settings control
-  defending, digging, holding and patrolling. Per-AI AIC settings override the menu defaults.
-defaults_title: Default troop settings for all AIs
-precedence_notice: These defaults apply to every AI. Enabled AIC overrides take priority; missing AIC
-  values use these defaults.
-aic_overrides: Allow AIC settings to override these defaults
+description: Restores missing AIV positions for pikemen, swordsmen and Arabian swordsmen.
+aic_overrides: Use AIC overrides
 initial_role: Starting troop role
 slot_movement: Defender movement
 inherit: Inherit common default
@@ -39,46 +32,9 @@ table_unit: Troop
 table_all: All troops
 table_role: Starting role
 table_movement: Slot movement
-table_inherit: Default
-table_native: Original
 table_defend: Defend
 table_dig: Dig
 table_hold: Hold
 table_patrol: Patrol
-table_help: Choose Defend/Dig and Hold/Patrol as needed. No selection in All troops keeps game behaviour;
-  other rows follow All troops until changed. Reset restores inheritance. A dash means unavailable.
-aic_help_title: AIC fields and priority
-aic_help: 'Per AI personality, priority is: troop AIC > common AIC > troop menu choice > All troops >
-  game behaviour. Enable AIC overrides to use these fields.
-
-
-  Use lowercase text values: InitialRole = "defend" or "dig"; Movement = "hold" or "patrol". Omit a field
-  to inherit. Numeric values and explicit native/inherit values are not used.
-
-
-  "defend" = Defend AIV positions; "dig" = Dig moats; "hold" = Stay at the assigned position; "patrol"
-  = Patrol between AIV positions
-
-
-  "dig" is available only for the six troop fields listed below, not for the common InitialRole field.
-  A unit that cannot currently dig falls back to "defend".
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  Example: AIVTroops_InitialRole_Slave: "dig" and AIVTroops_Movement_Spearman: "patrol" give one AI slave
-  diggers and patrolling spearmen. Field names and values are case-sensitive. Restart and start a new
-  match after changes.'
+table_help: Starting troops defend or dig. Defenders hold their position or patrol.
+varies_by_ai: Varies by AI

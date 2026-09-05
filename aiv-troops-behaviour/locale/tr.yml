@@ -1,17 +1,9 @@
 ai: Yapay zekâ
 fixes: Düzeltmeler
 title: 'Yapay zekâ: AIV birlik davranışı'
-description: Kargıcıların ve her iki kılıçlı türünün eksik AIV konumlarını düzeltir. İsteğe bağlı ayarlar
-  savunmayı, kazmayı, konumda beklemeyi ve devriyeyi yönetir. Yapay zekâya özel AIC değerleri menü varsayılanlarını
-  geçersiz kılar.
+description: Kargıcıların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
 behavior_title: Birlik ayarları
-behavior_description: Hangi başlangıç birliklerinin savunma yapacağını veya hendek kazacağını ve savunmacıların
-  yerinde mi kalacağını yoksa devriye mi gezeceğini seçin. Kazma yalnızca bunu yapabilen birliklerde seçilebilir.
-  Değişikliklerden sonra oyunu yeniden başlatıp yeni bir maç açın.
-defaults_title: Tüm yapay zekâlar için varsayılan birlik ayarları
-precedence_notice: Bu varsayılanlar tüm yapay zekâlara uygulanır. Etkin AIC ayarları önceliklidir; eksik
-  AIC değerleri için bu varsayılanlar kullanılır.
-aic_overrides: AIC ayarlarının bu varsayılanları değiştirmesine izin ver
+aic_overrides: AIC geçersiz kılmalarını kullan
 initial_role: Başlangıç birliklerinin görevi
 slot_movement: Savunmacıların hareketi
 inherit: Ortak varsayılanı kullan
@@ -40,47 +32,9 @@ table_unit: Birlik
 table_all: Tüm birlikler
 table_role: Başlangıç görevi
 table_movement: AIV hareketi
-table_inherit: Varsayılan
-table_native: Özgün
 table_defend: Savun
 table_dig: Kaz
 table_hold: Bekle
 table_patrol: Devriye
-table_help: Gerektiğinde Savun/Kaz ve Bekle/Devriye seçin. Tüm birlikler satırında seçim yoksa oyun davranışı
-  korunur; diğer satırlar değiştirilene kadar bu satırı izler. Sıfırlama, devralmayı geri getirir. Tire,
-  kullanılamayan seçeneği gösterir.
-aic_help_title: AIC alanları ve öncelik
-aic_help: 'Her yapay zekâ kişiliği için: birlik AIC > ortak AIC > birlik menü seçimi > Tüm birlikler >
-  oyun davranışı. Bu alanlar için AIC geçersiz kılmalarını etkinleştirin.
-
-
-  Küçük harfli metin değerleri kullanın: InitialRole = "defend" veya "dig"; Movement = "hold" veya "patrol".
-  Atlanan alan ayarı devralır. Sayılar ve açık native/inherit değerleri kullanılmaz.
-
-
-  "defend" = AIV konumlarını savun; "dig" = Hendek kaz; "hold" = Atanan konumda kal; "patrol" = AIV konumları
-  arasında devriye gez
-
-
-  "dig" yalnızca aşağıdaki altı birlik alanında kullanılabilir; ortak InitialRole alanında kullanılamaz.
-  Birim o anda kazamıyorsa "defend" uygulanır.
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  Örnek: AIVTroops_InitialRole_Slave: "dig" ve AIVTroops_Movement_Spearman: "patrol", bir yapay zekâya
-  kazan köleler ve devriye gezen mızraklılar verir. Alan adları ve değerler büyük/küçük harfe duyarlıdır.
-  Değişiklikten sonra oyunu yeniden başlatıp yeni bir oyun açın.'
+table_help: Başlangıç birlikleri savunur veya kazar. Savunucular konumlarını korur veya devriye gezer.
+varies_by_ai: Yapay zekâya göre

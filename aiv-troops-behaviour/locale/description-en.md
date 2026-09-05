@@ -1,10 +1,11 @@
 # AI: AIV Troop Behaviour
 
-Fixes missing AIV positions for pikemen, swordsmen and Arabian swordsmen. Adds optional settings for how AI troops use their positions.
+Restores missing AIV positions for pikemen and both swordsman types. Optional settings control starting roles and defender movement for all 15 troop types.
 
-- Choose whether starting troops defend or dig moats.
-- Let defenders stay at their positions or patrol between them.
-- Set defaults for all AIs, with separate choices per troop type, including slaves.
-- Use named AIC values for individual AIs: InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Omitted fields inherit the defaults. See AIC fields and priority in Customizations for exact field names.
+Choose whether troops defend or dig, and hold their position or patrol. Set common defaults or individual troop choices. Digging is only available to capable troops.
 
-Digging is only available for troops that can dig. Configure under **AI → AIV Troop Behaviour**. The additional troop settings are off by default. Restart and start a new match after changes.
+For individual AIs, use `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) and `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Leave off the troop suffix for a common AI setting; the common role accepts only `"defend"`. AIC overrides take priority when enabled; omitted fields inherit.
+
+Example: `AIVTroops_InitialRole_Slave: "dig"` assigns slave diggers. See the [AIC field reference](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) for troop names and details.
+
+Troop settings start disabled. Restart and start a new match after changes.

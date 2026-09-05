@@ -1,10 +1,11 @@
 # IA : Comportement des troupes AIV
 
-Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes. Ajoute des réglages facultatifs pour l’utilisation des positions par les troupes de l’IA.
+Rétablit les positions AIV manquantes des piquiers et des deux types d’épéistes. Des réglages facultatifs contrôlent le rôle initial et les déplacements défensifs des 15 types de troupes.
 
-- Choisir si les troupes de départ défendent ou creusent des douves.
-- Faire rester les défenseurs à leur position ou les faire patrouiller.
-- Définir des réglages pour toutes les IA et pour chaque type de troupe, y compris les esclaves.
-- Utilisez des valeurs AIC nommées par IA : InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Les champs omis héritent des réglages par défaut. Consultez Champs AIC et priorité dans les personnalisations pour les noms exacts.
+Choisissez la défense ou le creusement, le maintien en position ou la patrouille. Utilisez des réglages communs ou propres à chaque troupe. Seules les troupes capables de creuser ont cette option.
 
-Seules les troupes capables de creuser peuvent être choisies pour les douves. Réglages sous **IA → Comportement des troupes AIV**. Les réglages supplémentaires sont désactivés par défaut. Après modification, redémarrez le jeu et lancez une nouvelle partie.
+Par IA : `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) et `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Sans suffixe de troupe, le réglage est commun à l’IA ; le rôle commun accepte seulement `"defend"`. Les remplacements AIC activés sont prioritaires ; les champs omis héritent.
+
+Exemple : `AIVTroops_InitialRole_Slave: "dig"` affecte les esclaves au creusement. Consultez la [référence AIC](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) pour les noms de troupes et les détails.
+
+Les réglages des troupes sont désactivés au départ. Redémarrez le jeu et commencez une nouvelle partie après modification.

@@ -1,17 +1,9 @@
 ai: هوش مصنوعی
 fixes: رفع اشکال
 title: 'هوش مصنوعی: رفتار نیروها در AIV'
-description: موقعیت‌های AIV گم‌شدهٔ پیک‌داران و هر دو نوع شمشیرزن را اصلاح می‌کند. تنظیمات اختیاری، دفاع،
-  حفاری، ماندن در موقعیت و گشت‌زنی را کنترل می‌کنند. مقادیر AIC هر هوش مصنوعی بر پیش‌فرض‌های منو اولویت
-  دارند.
+description: موقعیت‌های AIV گم‌شدهٔ پیک‌داران، شمشیرزنان و شمشیرزنان عرب را بازمی‌گرداند.
 behavior_title: تنظیمات نیروها
-behavior_description: انتخاب کنید کدام نیروهای آغازین دفاع کنند یا خندق بکنند و مدافعان در جای خود بمانند
-  یا گشت بزنند. حفر خندق فقط برای نیروهای دارای این توانایی قابل انتخاب است. پس از تغییرات، بازی را دوباره
-  اجرا کنید و یک نبرد تازه آغاز کنید.
-defaults_title: تنظیمات پیش‌فرض نیروها برای همهٔ هوش‌های مصنوعی
-precedence_notice: این پیش‌فرض‌ها برای همهٔ هوش‌های مصنوعی هستند. اگر جایگزینی با AIC فعال باشد، مقادیر
-  AIC اولویت دارند؛ مقادیر تعیین‌نشده از این پیش‌فرض‌ها استفاده می‌کنند.
-aic_overrides: اجازهٔ جایگزینی این پیش‌فرض‌ها با تنظیمات AIC
+aic_overrides: استفاده از بازنویسی AIC
 initial_role: وظیفهٔ نیروهای آغازین
 slot_movement: حرکت مدافعان
 inherit: استفاده از پیش‌فرض عمومی
@@ -40,47 +32,9 @@ table_unit: نیرو
 table_all: همهٔ نیروها
 table_role: نقش آغازین
 table_movement: حرکت AIV
-table_inherit: پیش‌فرض
-table_native: اصلی
 table_defend: دفاع
 table_dig: حفاری
 table_hold: توقف
 table_patrol: گشت
-table_help: در صورت نیاز دفاع/حفاری و توقف/گشت را انتخاب کنید. بدون انتخاب در ردیف همهٔ نیروها، رفتار
-  بازی حفظ می‌شود؛ ردیف‌های دیگر تا زمان تغییر از آن پیروی می‌کنند. بازنشانی، ارث‌بری را برمی‌گرداند.
-  خط تیره یعنی گزینه در دسترس نیست.
-aic_help_title: فیلدهای AIC و اولویت
-aic_help: 'برای هر شخصیت هوش مصنوعی: AIC نوع نیرو > AIC عمومی > انتخاب نیرو در منو > همهٔ نیروها > رفتار
-  بازی. برای استفاده از این فیلدها، بازنویسی AIC را فعال کنید.
-
-
-  از مقادیر متنی با حروف کوچک استفاده کنید: InitialRole = "defend" یا "dig"؛ Movement = "hold" یا "patrol".
-  فیلد حذف‌شده تنظیم را به ارث می‌برد. اعداد و مقادیر صریح native/inherit استفاده نمی‌شوند.
-
-
-  "defend" = دفاع از موقعیت‌های AIV; "dig" = حفر خندق; "hold" = ماندن در موقعیت تعیین‌شده; "patrol" =
-  گشت‌زنی بین موقعیت‌های AIV
-
-
-  "dig" فقط برای شش فیلد نیروی زیر مجاز است، نه فیلد عمومی InitialRole. اگر نیرو اکنون نتواند حفاری کند،
-  "defend" اعمال می‌شود.
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  مثال: AIVTroops_InitialRole_Slave: "dig" و AIVTroops_Movement_Spearman: "patrol" به یک هوش مصنوعی بردگان
-  حفار و نیزه‌داران گشتی می‌دهد. نام فیلدها و مقادیر به بزرگی و کوچکی حروف حساس‌اند. پس از تغییر، بازی
-  را دوباره اجرا کنید و نبرد جدیدی آغاز کنید.'
+table_help: نیروهای آغازین دفاع یا حفاری می‌کنند. مدافعان در موقعیت می‌مانند یا گشت می‌زنند.
+varies_by_ai: بسته به هوش مصنوعی

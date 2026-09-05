@@ -1,16 +1,10 @@
 ai: KI
 behavior_title: Truppeneinstellungen
-behavior_description: Festlegen, welche Starttruppen verteidigen oder Gräben ausheben und ob Verteidiger
-  an ihren Positionen bleiben oder patrouillieren. Graben ist nur für geeignete Truppen wählbar. Nach
-  Änderungen das Spiel neu starten und eine neue Partie beginnen.
 fixes: Fehlerbehebungen
 title: 'KI: AIV-Truppenverhalten'
-description: Behebt fehlende AIV-Positionen für Pikeniere und beide Schwertkämpfertypen. Optionale Truppeneinstellungen
-  steuern Verteidigen, Graben, Halten und Patrouillieren. AIC-Werte pro KI überschreiben die Menüvorgaben.
-defaults_title: Standardwerte für die Truppen aller KIs
-precedence_notice: Diese Standardwerte gelten für jede KI. Aktivierte AIC-Vorgaben haben Vorrang; fehlende
-  AIC-Werte übernehmen diese Standardwerte.
-aic_overrides: Standardwerte durch AIC-Einstellungen überschreiben lassen
+description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer
+  wieder her.
+aic_overrides: AIC-Überschreibungen verwenden
 initial_role: Aufgabe der Starttruppen
 slot_movement: Bewegung der Verteidiger
 inherit: Allgemeinen Standard übernehmen
@@ -39,47 +33,9 @@ table_unit: Truppe
 table_all: Alle Truppen
 table_role: Startaufgabe
 table_movement: AIV-Bewegung
-table_inherit: Standard
-table_native: Original
 table_defend: Wache
 table_dig: Graben
 table_hold: Halten
 table_patrol: Patrouille
-table_help: Bei Bedarf Wache/Graben und Halten/Patrouille wählen. Ohne Auswahl bei Alle Truppen gilt das
-  Spielverhalten; andere Zeilen folgen Alle Truppen, bis sie geändert werden. Zurücksetzen stellt die
-  Vererbung wieder her. Ein Strich bedeutet nicht verfügbar.
-aic_help_title: AIC-Felder und Priorität
-aic_help: 'Pro KI-Persönlichkeit gilt: Truppen-AIC > gemeinsame AIC > Truppenauswahl im Menü > Alle Truppen
-  > Spielverhalten. Dafür AIC-Überschreibungen aktivieren.
-
-
-  Kleingeschriebene Textwerte verwenden: InitialRole = "defend" oder "dig"; Movement = "hold" oder "patrol".
-  Fehlende Felder erben. Zahlenwerte und ausdrückliche native/inherit-Werte werden nicht verwendet.
-
-
-  "defend" = AIV-Positionen verteidigen; "dig" = Gräben ausheben; "hold" = An der zugewiesenen Position
-  bleiben; "patrol" = Zwischen AIV-Positionen patrouillieren
-
-
-  "dig" ist nur bei den sechs unten aufgeführten Truppenfeldern erlaubt, nicht beim gemeinsamen InitialRole-Feld.
-  Kann eine Einheit aktuell nicht graben, gilt "defend".
-
-
-  AIVTroops_InitialRole: "defend"
-
-  AIVTroops_Movement: "hold", "patrol"
-
-  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
-
-  AIVTroops_Movement_<Troop>: "hold", "patrol"
-
-
-  <Troop>:
-
-  Engineer, Archer, Crossbowman, Spearman, Pikeman, Maceman, Swordsman, Knight, Slave, Slinger, Assassin,
-  ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
-
-
-  Beispiel: AIVTroops_InitialRole_Slave: "dig" und AIVTroops_Movement_Spearman: "patrol" geben einer KI
-  grabende Sklaven und patrouillierende Speerträger. Groß-/Kleinschreibung beachten. Nach Änderungen das
-  Spiel neu starten und eine neue Partie beginnen.'
+table_help: Starttruppen verteidigen oder graben. Verteidiger halten ihre Position oder patrouillieren.
+varies_by_ai: Je nach KI
