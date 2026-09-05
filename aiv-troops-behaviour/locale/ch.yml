@@ -31,3 +31,14 @@ troop_HorseArcher: 骑射手
 troop_ArabianSwordsman: 阿拉伯剑士
 troop_FireThrower: 火焰投掷兵
 troops_category: AIV部队行为
+table_unit: 部队
+table_all: 所有部队
+table_role: 初始任务
+table_movement: AIV移动
+table_inherit: 默认
+table_native: 原版
+table_defend: 防守
+table_dig: 挖掘
+table_hold: 驻守
+table_patrol: 巡逻
+table_help: 每组选择一项。“默认”使用“所有部队”行的设置；“原版”保留游戏原有行为。横线表示该选项不可用。

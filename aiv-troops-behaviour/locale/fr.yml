@@ -35,3 +35,15 @@ troop_HorseArcher: Archers montés
 troop_ArabianSwordsman: Épéistes arabes
 troop_FireThrower: Lanceurs de feu
 troops_category: Comportement des troupes AIV
+table_unit: Troupe
+table_all: Toutes les troupes
+table_role: Rôle initial
+table_movement: Déplacement AIV
+table_inherit: Défaut
+table_native: Original
+table_defend: Défendre
+table_dig: Creuser
+table_hold: Rester
+table_patrol: Patrouille
+table_help: Un choix par groupe. Défaut reprend la ligne Toutes les troupes ; Original conserve le comportement
+  du jeu. Un tiret indique une option indisponible.

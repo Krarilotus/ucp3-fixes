@@ -51,6 +51,11 @@ keeps the base-only behaviour of 0.1.x.
 The defaults group provides two common choices and separate choices for all
 15 supported troop types. No AIC file or AI replacement is needed to use them.
 
+The frontend's table layout shows one row per troop, with grouped sword-checkbox
+choices for starting role and slot movement. The All troops row supplies defaults;
+a dash marks an unavailable choice. Older frontends display the ordinary controls.
+The table presentation uses the same configuration keys and values.
+
 - **Initial assignment:** native behaviour, or defend AIV slots. Each troop may
   inherit that choice. Digging-capable troops additionally offer moat digging.
 - **Defensive slot movement:** native behaviour, hold an assigned slot, or patrol

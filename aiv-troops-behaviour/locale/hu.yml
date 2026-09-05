@@ -35,3 +35,15 @@ troop_HorseArcher: Lovasíjászok
 troop_ArabianSwordsman: Arab kardforgatók
 troop_FireThrower: Tűzhajítók
 troops_category: AIV-csapatviselkedés
+table_unit: Egység
+table_all: Minden egység
+table_role: Kezdő feladat
+table_movement: AIV-mozgás
+table_inherit: Alapérték
+table_native: Eredeti
+table_defend: Védelem
+table_dig: Ásás
+table_hold: Tartás
+table_patrol: Járőr
+table_help: Csoportonként egy lehetőség választható. Az Alapérték a Minden egység sorát követi; az Eredeti
+  megtartja a játék viselkedését. A vonal nem elérhető lehetőséget jelöl.

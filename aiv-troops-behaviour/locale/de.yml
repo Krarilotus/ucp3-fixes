@@ -35,3 +35,15 @@ troop_HorseArcher: Berittene Bogenschützen
 troop_ArabianSwordsman: Arabische Schwertkämpfer
 troop_FireThrower: Feuerwerfer
 troops_category: AIV-Truppenverhalten
+table_unit: Truppe
+table_all: Alle Truppen
+table_role: Startaufgabe
+table_movement: AIV-Bewegung
+table_inherit: Standard
+table_native: Original
+table_defend: Wache
+table_dig: Graben
+table_hold: Halten
+table_patrol: Patrouille
+table_help: Eine Auswahl pro Gruppe. Standard übernimmt die Zeile Alle Truppen; Original behält das Spielverhalten
+  bei. Ein Strich bedeutet, dass die Option nicht verfügbar ist.

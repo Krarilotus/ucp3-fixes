@@ -35,3 +35,15 @@ troop_HorseArcher: Arqueros a caballo
 troop_ArabianSwordsman: Espadachines árabes
 troop_FireThrower: Lanzafuegos
 troops_category: Comportamiento de tropas AIV
+table_unit: Tropa
+table_all: Todas las tropas
+table_role: Tarea inicial
+table_movement: Movimiento AIV
+table_inherit: Predeterm.
+table_native: Original
+table_defend: Defender
+table_dig: Cavar
+table_hold: Mantener
+table_patrol: Patrullar
+table_help: Una opción por grupo. Predeterm. usa la fila Todas las tropas; Original conserva el comportamiento
+  del juego. Un guion indica una opción no disponible.

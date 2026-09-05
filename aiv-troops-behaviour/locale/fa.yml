@@ -35,3 +35,15 @@ troop_HorseArcher: کمانداران سواره
 troop_ArabianSwordsman: شمشیرزنان عرب
 troop_FireThrower: آتش‌اندازان
 troops_category: رفتار نیروها در AIV
+table_unit: نیرو
+table_all: همهٔ نیروها
+table_role: نقش آغازین
+table_movement: حرکت AIV
+table_inherit: پیش‌فرض
+table_native: اصلی
+table_defend: دفاع
+table_dig: حفاری
+table_hold: توقف
+table_patrol: گشت
+table_help: در هر گروه یک گزینه را انتخاب کنید. پیش‌فرض از ردیف همهٔ نیروها پیروی می‌کند؛ اصلی رفتار بازی
+  را نگه می‌دارد. خط تیره یعنی گزینه در دسترس نیست.

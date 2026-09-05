@@ -35,3 +35,15 @@ troop_HorseArcher: Atlı okçular
 troop_ArabianSwordsman: Arap kılıçlılar
 troop_FireThrower: Ateş atıcılar
 troops_category: AIV birlik davranışı
+table_unit: Birlik
+table_all: Tüm birlikler
+table_role: Başlangıç görevi
+table_movement: AIV hareketi
+table_inherit: Varsayılan
+table_native: Özgün
+table_defend: Savun
+table_dig: Kaz
+table_hold: Bekle
+table_patrol: Devriye
+table_help: Her grupta bir seçenek seçin. Varsayılan, Tüm birlikler satırını kullanır; Özgün, oyunun davranışını
+  korur. Tire, kullanılamayan seçeneği gösterir.

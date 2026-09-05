@@ -35,3 +35,15 @@ troop_HorseArcher: Horse archers
 troop_ArabianSwordsman: Arabian swordsmen
 troop_FireThrower: Fire throwers
 troops_category: AIV Troop Behaviour
+table_unit: Troop
+table_all: All troops
+table_role: Starting role
+table_movement: Slot movement
+table_inherit: Default
+table_native: Original
+table_defend: Defend
+table_dig: Dig
+table_hold: Hold
+table_patrol: Patrol
+table_help: Choose one option per group. Default uses the All troops row; Original keeps game behaviour.
+  A dash means the option is unavailable.

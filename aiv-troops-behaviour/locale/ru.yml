@@ -35,3 +35,15 @@ troop_HorseArcher: Конные лучники
 troop_ArabianSwordsman: Арабские мечники
 troop_FireThrower: Огнеметатели
 troops_category: Поведение войск AIV
+table_unit: Войска
+table_all: Все войска
+table_role: Начальная роль
+table_movement: Движение AIV
+table_inherit: По умолч.
+table_native: Оригинал
+table_defend: Защита
+table_dig: Рытьё
+table_hold: Стоять
+table_patrol: Патруль
+table_help: Один выбор в каждой группе. По умолч. использует строку Все войска; Оригинал сохраняет поведение
+  игры. Прочерк означает недоступный вариант.
