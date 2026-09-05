@@ -1,0 +1,5 @@
+ai: IA
+fixes: Correcciones
+title: 'IA: Corrección del recuento de granjas de lúpulo'
+description: Cuenta las granjas de lúpulo dentro del límite de granjas de la IA. El límite no cambia.
+  Reinicia el juego tras modificar este ajuste.
