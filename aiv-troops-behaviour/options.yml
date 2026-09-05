@@ -18,6 +18,7 @@ options:
   - '{{troops_category}}'
   display: UCP2Switch
   header: '{{behavior_title}}'
+  text: '{{table_help}}'
   url: aiv-troops-behaviour.behavior.enabled
   enabled: aiv-troops-behaviour.enabled
   contents:
@@ -31,9 +32,6 @@ options:
     enabled: aiv-troops-behaviour.behavior.enabled
     contents:
       value: true
-  - name: table_help
-    display: Paragraph
-    text: '{{table_help}}'
   - name: troop_defaults_table
     display: Group
     table:

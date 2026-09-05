@@ -30,6 +30,9 @@
   `je 0x4EFB87`) by overwriting them with NOPs, so all rows 0-21 load
   their positions. The comparisons themselves are left in place and become
   harmless; no code is relocated and no other row handling changes.
+  Loading a row does not assign a starting role: pikemen selected by the
+  native moat-digger routine still dig. Only an explicit behavior setting
+  changes that assignment.
 ]]--
 
 -- The three back-to-back "cmp [esp+0x1C], imm8 / je 0x4EFB87" checks for

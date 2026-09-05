@@ -32,6 +32,12 @@ skips rows 9, 11 and 18, so those rows receive no native movement mark even when
 the module's loading fix is enabled. Defense assignment remains distinct from
 position loading.
 
+The conditional-pikeman regression test executes the native assignment branch
+with zero/nonzero digging capacity and digging capability. It covers the base
+position fix, enabled but unconfigured controls, a movement-only setting, and
+explicit per-AI Defend/Dig settings. Position loading and movement settings
+preserve the native digging decision; only a role override changes it.
+
 The display describes the ordinary role/movement paths, not a promise that a
 unit is moving right now. AIV availability, patrol-group counts, danger responses,
 pathfinding and special duties still affect actual gameplay. The shared menu

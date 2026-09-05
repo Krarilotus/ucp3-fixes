@@ -6,8 +6,8 @@ import unittest
 import yaml
 
 from lupa.lua54 import lua_type
-from unicorn import Uc, UC_ARCH_X86, UC_MODE_32
-from unicorn.x86_const import UC_X86_REG_EAX, UC_X86_REG_EFLAGS, UC_X86_REG_ESP, UC_X86_REG_ESI
+from unicorn import Uc, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE
+from unicorn.x86_const import UC_X86_REG_EAX, UC_X86_REG_EFLAGS, UC_X86_REG_ESP, UC_X86_REG_ESI, UC_X86_REG_EBX, UC_X86_REG_EBP
 
 from test_modules import ROOT, BASE, AIV, FIXTURES, ModuleHarness, LuaError
 
@@ -203,6 +203,52 @@ class BehaviorTests(unittest.TestCase):
         policy_module = self.h.lua.execute('return (require("behavior.policy"))')
         actual = {t.unit for t in policy_module.troops.values() if t.digs}
         self.assertEqual(actual, {22, 24, 25, 26, 30, 71})
+
+    def test_position_fix_preserves_conditional_pikeman_digging(self):
+        # Execute the original assignment instructions, including the fallback
+        # from our trampoline. Loading row 9 must not force its diggers to defend.
+        for mode in ('base', 'unconfigured', 'hold', 'defend', 'dig'):
+            h = BehaviorHarness()
+            original = bytes(h.get(h.sites['initial'], 126))
+            if mode == 'base':
+                h.enable()
+                self.assertEqual(bytes(h.get(h.sites['initial'], 126)), original)
+                start = h.sites['initial']
+            else:
+                defaults = {'Movement_Pikeman': 'hold'} if mode == 'hold' else {}
+                h.install(defaults=defaults)
+                if mode in ('defend', 'dig'):
+                    h.set_aic(1, 'AIVTroops_InitialRole_Pikeman', mode)
+                start = h.inserted[0]
+            for ai in (1, 16):
+                for digging_max in (0, 20):
+                    for can_dig in (0, 1):
+                        with self.subTest(mode=mode, ai=ai, digging_max=digging_max, can_dig=can_dig):
+                            unit, aic = 0x120000, 0x170000
+                            h.i16(unit, 25)
+                            h.i16(unit + 0x2E0, can_dig)
+                            h.i32(aic + ai * 0x2A4 + 0x15C, digging_max)
+                            if mode != 'base':
+                                role = h.callbacks[0x1E0000][0](h.lua.table_from({'EBP': ai, 'ESI': unit})).EAX
+                                h.put(0x1E0000, b'\xB8' + struct.pack('<I', role) + b'\xC3')
+                            cpu = Uc(UC_ARCH_X86, UC_MODE_32)
+                            cpu.mem_map(BASE, 0x100000)
+                            cpu.mem_write(BASE, bytes(h.memory))
+                            for register, value in ((UC_X86_REG_ESI, unit), (UC_X86_REG_EBX, aic),
+                                                    (UC_X86_REG_EBP, ai), (UC_X86_REG_ESP, 0x1C0000)):
+                                cpu.reg_write(register, value)
+                            targets = {h.sites['initial'] + 109: 'dig', h.sites['initial'] + 119: 'defend'}
+                            reached = []
+                            def stop_at_assignment(cpu, address, size, _):
+                                if address in targets:
+                                    reached.append(targets[address])
+                                    cpu.emu_stop()
+                            cpu.hook_add(UC_HOOK_CODE, stop_at_assignment)
+                            cpu.emu_start(start, h.sites['initial'] + 126, count=70)
+                            expected = 'dig' if digging_max and can_dig else 'defend'
+                            if ai == 1 and mode in ('defend', 'dig'):
+                                expected = 'dig' if mode == 'dig' and can_dig else 'defend'
+                            self.assertEqual(reached, [expected])
 
     def test_menu_defaults_aic_precedence_reset_and_opt_out(self):
         for overrides in (True, False):

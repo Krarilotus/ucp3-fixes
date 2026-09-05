@@ -167,7 +167,7 @@ Registration/getter/reset checks cover every field and reject numbers, wrong-cas
 strings and values from the other setting. Internal numeric hook modes and saved
 menu values are unchanged.
 
-The expanded suite currently has **32 passing tests**, including menu fallback,
+The expanded suite currently has **33 passing tests**, including menu fallback,
 per-personality precedence/reset, ignored overrides, invalid values before writes,
 all exposed choices, digging restrictions, raw AI numbering, both tribe strides,
 group capacities, UID checks, callback arguments, and x86 trampoline routing with
