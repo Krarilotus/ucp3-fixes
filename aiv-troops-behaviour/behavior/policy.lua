@@ -44,7 +44,7 @@ local function new(config)
     local choice = (config.defaults or {})[suffix]
     local value = choice and CHOICES[kind][choice] or nil
     if choice ~= nil and (value == nil or value < field.min or value > field.max) then
-      error("aiv-troop-spot-fix: invalid customization " .. suffix .. "=" .. tostring(choice))
+      error("aiv-troops-behaviour: invalid customization " .. suffix .. "=" .. tostring(choice))
     end
     defaults[key] = value or (suffix == kind and 0 or -1)
   end

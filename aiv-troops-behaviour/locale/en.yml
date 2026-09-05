@@ -1,30 +1,32 @@
 ai: AI
 behavior_title: 'Experimental: troop roles and slot movement'
-behavior_description: Enable the defaults below for all AI personalities, with optional per-AI AIC overrides.
-  Only archers, spearmen, pikemen, macemen, engineers and slaves can dig. Restart and start a new match
+behavior_description: Enable initial assignments and defensive slot movement for all 15 supported troop
+  types, with defaults for every AI and optional per-AI AIC overrides. Only Crusader archers, spearmen,
+  pikemen, macemen, engineers and slaves can dig. Restart and start a new match
   after changing settings. See the module README.
 fixes: Fixes
-title: Load AIV positions for pikemen and swordsmen
-description: Restore loading of AIV positions for pikemen, swordsmen and Arabian swordsmen (rows 9, 11
-  and 18). Other troop roles and movement require the separate experimental controls below. Restart the
-  game after changing this option.
-defaults_title: Troop behavior defaults for every AI
+title: 'AI: AIV Troop Behaviour'
+description: Enable the module and restore loading of AIV positions for pikemen, swordsmen and Arabian
+  swordsmen (rows 9, 11 and 18). To customize initial troop assignments and holding or patrolling slots
+  for all 15 supported troop types, including slaves, enable the experimental controls below.
+  Restart the game after changing this option.
+defaults_title: Troop behaviour defaults for every AI
 precedence_notice: These defaults apply to all AI personalities. With AIC overrides enabled, a troop-specific
   AIC value takes priority, then a common AIC value, then the troop default below, then the common default.
-  Missing or -1 AIC values inherit. Native explicitly keeps the game behavior. Initial role affects unassigned
+  Missing or -1 AIC values inherit. Native explicitly keeps the game behaviour. Initial role affects unassigned
   starting/scenario troops; it does not turn normal recruits into diggers. Holding and patrolling apply
   to defensive groups and retain native threat responses and special duties.
 aic_overrides: Allow per-AI AIC values to override these defaults
 initial_role: Initial assignment
 slot_movement: Defensive slot movement
 inherit: Inherit common default
-native: Native game behavior
+native: Native game behaviour
 defend: Defend AIV slots
 dig: Assign as moat digger
 hold: Hold assigned AIV slot
 patrol: Patrol between AIV slots
 troop_Engineer: Engineers
-troop_Archer: Archers
+troop_Archer: Crusader archers
 troop_Crossbowman: Crossbowmen
 troop_Spearman: Spearmen
 troop_Pikeman: Pikemen

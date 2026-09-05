@@ -1,5 +1,5 @@
-name: aiv-troop-spot-fix
-display-name: AIV Troop Spot Fix (AI)
+name: aiv-troops-behaviour
+display-name: 'AI: AIV Troop Behaviour'
 author: Samurai
 version: 0.2.0
 type: module

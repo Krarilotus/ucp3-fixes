@@ -18,7 +18,7 @@ The 3.0.7 extension-store branch was checked at
   before writing. They now use the same `UCP2Switch` / AI / Fixes presentation.
 - Module selection already makes the fixes independently optional. The new
   boolean options additionally allow configuration plugins to disable them.
-  Defaults preserve the behavior of existing module selections. Per-AI caps and
+  Defaults preserve the behaviour of existing module selections. Per-AI caps and
   per-row controls would change the scope and are not necessary for these fixes.
 - Keeping the modules self-contained is preferable to a shared runtime helper
   dependency for two short entry points. AIV offsets are now a named list.
@@ -71,7 +71,7 @@ The downstream routines are distinct: `assignUnitToATribe` at `0x4D2660`,
 `getUnitTypeIndexForUnitID` at `0x4CC390`, and movement/defense routines at
 `0x4D4130`, `0x4D4220` and `0x4D4340`. In particular, `getUnitTypeIndexForUnitID`
 can assign certain ranged units to row 13 during the first AIV pause for
-non-Caliph AIs with row-13 positions. Those behaviors remain unchanged by the base fix.
+non-Caliph AIs with row-13 positions. Those behaviours remain unchanged by the base fix.
 This establishes the narrow patch scope; it does not diagnose every reported
 case of a slave or another unit failing to move. Reproducing those cases requires
 the relevant map, AIV, AIC, starting troops and AI state.
@@ -113,7 +113,7 @@ with the limited AIV scope made visible. Release validation still needs:
 
 1. Launch both game variants through UCP 3.0.7 with the modules individually,
    together, and with `ucp2-legacy` and `aivloader`; verify enabled/disabled config
-   behavior and signing through the normal store pipeline.
+   behaviour and signing through the normal store pipeline.
 2. Compare hop farm counts, food production and recruitment on fixed map/AIV/AIC
    setups, including low farm caps, several AIs and long destruction/rebuild runs.
    A fixed counting omission does not establish a cure for recruitment collapse.
@@ -127,12 +127,12 @@ with the limited AIV scope made visible. Release validation still needs:
    offered. Installed English/German descriptions and English fallback are
    already packaged by these modules.
 
-## Experimental troop behavior (0.2.0)
+## Experimental troop behaviour (0.2.0)
 
 This feature is separate from the base-fixes PR. Both changes must be accepted
 and gameplay-validated before releasing the requested combined AIV module.
 The default configuration keeps the feature disabled. Its full menu and AIC
-contract is in [the module README](../aiv-troop-spot-fix/README.md).
+contract is in [the module README](../aiv-troops-behaviour/README.md).
 
 The review used the OpenSHC named Ghidra database imported from the published
 `sourcehold/OpenSHC` SARIF at `126f25c9`, then checked relevant instructions
@@ -148,8 +148,8 @@ Confirmed details relevant to the feature:
   and 71: Crusader archers, spearmen, pikemen, macemen, engineers and slaves.
   The live unit flag is checked too. Engineers require bypassing their native
   initial-assignment exclusion only when an explicit custom role is selected.
-- `aiAddUnitToMoatDiggerTribe` (`0x4CC840`) assigns behavior 5; ordinary
-  `assignUnitToATribe` (`0x4D2660`) assigns behavior 1. Reusing these routines
+- `aiAddUnitToMoatDiggerTribe` (`0x4CC840`) assigns behaviour 5; ordinary
+  `assignUnitToATribe` (`0x4D2660`) assigns behaviour 1. Reusing these routines
   preserves native tribe IDs, UIDs and assignment bookkeeping.
 - Native patrol rows are 8, 10 and 17. `smallestTribeOfUnitType` (`0x4CC990`)
   limits these rows to DefWallPatrolGroups; holding them needs a capacity change
@@ -174,7 +174,7 @@ The additional read-only audit is reproducible with:
 python tests/audit_behavior_binaries.py "/path/to/Stronghold Crusader.exe" "/path/to/Stronghold_Crusader_Extreme.exe"
 ```
 
-Both inspected executables have unique matches for all nine behavior signatures.
+Both inspected executables have unique matches for all nine behaviour signatures.
 Displaced instruction spans are complete and contain no relative branches/calls;
 the initial-role destinations call the expected native routines. The source game
 files are unchanged. This is not proof that the real RPS hooks or gameplay work.

@@ -1,9 +1,32 @@
-# AIV Troop Spot Fix
+# AI: AIV Troop Behaviour
 
-Version 0.2.0 restores loading of **pikemen, swordsmen and Arabian swordsmen**
-positions in AIV rows **9, 11 and 18**, and adds opt-in experimental troop controls.
+Version 0.2.0 combines restored AIV positions with opt-in controls for initial
+troop assignments and defensive slot movement across all 15 supported troop types.
+The base patch restores rows **9, 11 and 18** (pikemen and both swordsman types).
 Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.2,
 and aicloader >=1.1.0. The proposed store target is UCP 3.0.7.
+
+## Name and migration
+
+The module ID and package folder are now **`aiv-troops-behaviour`**, reflecting
+the broader scope. The Content list uses **AI: AIV Troop Behaviour**. German
+Customizations and description headings use **KI: AIV-Truppenverhalten**;
+the current frontend's Content-list `display-name` is a single untranslated string.
+
+For an existing local `aiv-troop-spot-fix` installation, deselect the old module
+and select `aiv-troops-behaviour`. Do not enable both; they patch the same loader.
+Plugin dependencies and configuration keys must use the new ID. Move any existing
+`aiv-troop-spot-fix` configuration block to `aiv-troops-behaviour`, keeping its
+`enabled` and `behavior` contents. The `AIVTroops_*` AIC field names are unchanged.
+The frontend does not automatically migrate a renamed module. Restart and use a
+new match. This rename is part of the feature PR, before the proposed store release.
+
+**Umstieg:** Das alte Modul `aiv-troop-spot-fix` abwählen und
+`aiv-troops-behaviour` auswählen. Nicht beide gleichzeitig aktivieren.
+Abhängigkeiten und den Konfigurationsschlüssel auf den neuen Namen umstellen;
+`enabled`, `behavior` und die AIC-Feldnamen `AIVTroops_*` bleiben erhalten.
+Der Umstieg erfolgt nicht automatisch. Danach das Spiel neu starten und eine
+neue Partie beginnen.
 
 ## Base fix
 
@@ -23,14 +46,14 @@ the new review independently checks instructions, not that gameplay observation.
 Select the module and open **AI → Fixes**. The base fix is enabled by default for
 a selected module. **Experimental: troop roles and slot movement** is off by
 default; enable it to activate the additional controls. Missing configuration
-keeps the base-only behavior of 0.1.x.
+keeps the base-only behaviour of 0.1.x.
 
 The defaults group provides two common choices and separate choices for all
 15 supported troop types. No AIC file or AI replacement is needed to use them.
 
-- **Initial assignment:** native behavior, or defend AIV slots. Each troop may
+- **Initial assignment:** native behaviour, or defend AIV slots. Each troop may
   inherit that choice. Digging-capable troops additionally offer moat digging.
-- **Defensive slot movement:** native behavior, hold an assigned slot, or patrol
+- **Defensive slot movement:** native behaviour, hold an assigned slot, or patrol
   between slots. Each troop can inherit the common choice or choose its own.
 - **Allow per-AI AIC values to override these defaults:** enabled by default.
   Turn it off to use only the menu defaults, even if an AIC file supplies values.
@@ -60,7 +83,7 @@ still take priority in their existing routines.
 
 Restart UCP and start a **new match** after changing these settings. Changes to
 group capacities do not migrate existing armies. Do not hot-swap these fields
-mid-match; save/load and multiplayer behavior still need validation.
+mid-match; save/load and multiplayer behaviour still need validation.
 
 ## Optional per-AI AIC overrides
 
@@ -76,9 +99,9 @@ Precedence, highest first:
 1. Explicit troop-specific AIC value for that personality.
 2. Explicit common AIC value for that personality.
 3. Troop-specific Customizations default.
-4. Common Customizations default, then native behavior.
+4. Common Customizations default, then native behaviour.
 
-Missing or **-1** AIC values inherit. **0 explicitly selects native behavior**,
+Missing or **-1** AIC values inherit. **0 explicitly selects native behaviour**,
 even if the menu requests something else. Resetting an AI clears its overrides
 and restores the menu defaults. Personalities are aicloader IDs 1 (Rat) through
 16 (Abbot), not player slots; all players using one personality share its values.
@@ -128,7 +151,7 @@ The troop list and capability/field definitions live in `behavior/policy.lua`.
 Policy, AIC registration, address resolution and hook installation are separate.
 The hooks reuse native assignment and movement routines rather than duplicating
 their troop/group bookkeeping. They leave human players and unknown unit types alone.
-All behavior sites and the base row block resolve before patch installation.
+All behaviour sites and the base row block resolve before patch installation.
 Unsupported signatures fail initialization. Hook installation itself is not a
 transaction; an allocation/runtime failure requires restarting the game.
 

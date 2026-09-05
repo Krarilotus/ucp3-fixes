@@ -1,5 +1,5 @@
 --[[
-  AIV Troop Spot Fix
+  AI: AIV Troop Behaviour
 
   AI start troops placed at unit positions in the AIV (section 2012, a
   24-row x 10-column matrix of AIV-local positions, value = y*100 + x)
@@ -63,17 +63,17 @@ return {
     -- AOBScan raises on failure. Validate the entire block before any write.
     local ok, target = pcall(core.AOBScan, AOB)
     if not ok then
-      error("aiv-troop-spot-fix: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
+      error("aiv-troops-behaviour: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
     end
     for _, offset in ipairs(SKIP_OFFSETS) do
       core.writeCode(target + offset, NOP6)
     end
     if installBehavior then installBehavior() end
     self.applied = true
-    log(INFO, string.format("aiv-troop-spot-fix: patched AIV spot decoder at 0x%X", target))
+    log(INFO, string.format("aiv-troops-behaviour: patched AIV spot decoder at 0x%X", target))
   end,
 
   disable = function(self, config)
-    return false, "aiv-troop-spot-fix: restart the game to change this option"
+    return false, "aiv-troops-behaviour: restart the game to change this option"
   end,
 }

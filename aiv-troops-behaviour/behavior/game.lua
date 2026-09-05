@@ -17,7 +17,7 @@ local function resolve()
   local sites = {}
   for key, pattern in pairs(PATTERNS) do
     local ok, address = pcall(core.AOBScan, pattern)
-    if not ok then error("aiv-troop-spot-fix: cannot resolve behavior hook " .. key .. ": " .. tostring(address)) end
+    if not ok then error("aiv-troops-behaviour: cannot resolve behavior hook " .. key .. ": " .. tostring(address)) end
     sites[key] = address
   end
   local unitType = core.readInteger(sites.mapper + 13)
@@ -30,7 +30,7 @@ local function resolve()
   local tribeOwner = core.readInteger(sites.movement + 17)
   local tribeStride = core.readInteger(sites.movement + 11)
   if tribeStride ~= 0x334 and tribeStride ~= 0x688 then
-    error("aiv-troop-spot-fix: unsupported tribe layout")
+    error("aiv-troops-behaviour: unsupported tribe layout")
   end
   -- PlayerData: IDs 0x310C, UIDs 0x329C, rally hits 0x2B54.
   local tribeUIDs, rallyHits = tribeIDs + 0x190, tribeIDs - 0x5B8

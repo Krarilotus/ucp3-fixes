@@ -75,8 +75,8 @@ shifts the balance of existing AIVs; check the farm-limit values (AIV field
 ## Configuration and review
 
 The enable switch appears under **AI → Fixes**. It defaults to on when this module
-is selected; existing configs without the option retain that behavior. Disable
-it and restart to restore the original counting behavior. The fix respects the
+is selected; existing configs without the option retain that behaviour. Disable
+it and restart to restore the original counting behaviour. The fix respects the
 existing AIV farm limit rather than introducing a separate configurable cap.
 
 The review confirmed the comparison block at `0x40AA42` in Crusader and

@@ -12,7 +12,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 0x100000
 HOP = 'hopfarm-limit-fix'
-AIV = 'aiv-troop-spot-fix'
+AIV = 'aiv-troops-behaviour'
 FIXTURES = {
     HOP: bytes.fromhex('0F B7 0A 66 83 F9 1E 74 0C 66 83 F9 20 74 06 66 83 F9 21 75 11 85 FF'),
     AIV: bytes.fromhex('83 7C 24 1C 09 8B 44 24 38 C7 00 00 00 00 00 0F 84 32 03 00 00 83 7C 24 1C 0B 0F 84 27 03 00 00 83 7C 24 1C 12 0F 84 1C 03 00 00'),
