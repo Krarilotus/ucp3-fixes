@@ -5,6 +5,6 @@ Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes ar
 - Choisir si les troupes de départ défendent ou creusent des douves.
 - Faire rester les défenseurs à leur position ou les faire patrouiller.
 - Définir des réglages pour toutes les IA et pour chaque type de troupe, y compris les esclaves.
-- Autoriser des réglages AIC propres à chaque IA à remplacer ces valeurs.
+- Utilisez des valeurs AIC nommées par IA : InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Les champs omis héritent des réglages par défaut. Consultez Champs AIC et priorité dans les personnalisations pour les noms exacts.
 
 Seules les troupes capables de creuser peuvent être choisies pour les douves. Réglages sous **IA → Comportement des troupes AIV**. Les réglages supplémentaires sont désactivés par défaut. Après modification, redémarrez le jeu et lancez une nouvelle partie.

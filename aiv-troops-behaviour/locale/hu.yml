@@ -1,8 +1,9 @@
 ai: MI
 fixes: Javítások
 title: 'MI: AIV-csapatviselkedés'
-description: Visszaállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-pozícióit. Az alábbi
-  beállításokkal más MI-csapatok viselkedése is módosítható.
+description: Helyreállítja a pikások és mindkét kardforgatótípus hiányzó AIV-pozícióit. Az opcionális
+  beállítások szabályozzák a védekezést, ásást, helyben maradást és járőrözést. Az MI-nkénti AIC-értékek
+  felülírják a menü alapértékeit.
 behavior_title: Csapatbeállítások
 behavior_description: Válaszd ki, mely kezdőcsapatok védekezzenek vagy árkot ássanak, és hogy a védők
   a helyükön maradjanak vagy járőrözzenek. Ásás csak az arra képes csapatoknál választható. Módosítás
@@ -53,17 +54,25 @@ aic_help: 'MI-személyiségenként: egység AIC > közös AIC > egység menübe�
   A mezőkhöz engedélyezd az AIC-felülírásokat.
 
 
-  Az InitialRole 2 értéke csak az alábbi hat egységmezőnél használható, a közös mezőnél nem. Ha az egység
-  éppen nem tud ásni, védekezik.
+  Kisbetűs szöveges értékeket használj: InitialRole = "defend" vagy "dig"; Movement = "hold" vagy "patrol".
+  A kihagyott mező örököl. Számokat és kifejezett native/inherit értékeket nem használunk.
 
 
-  AIVTroops_InitialRole: -1, 0, 1
+  "defend" = AIV-pozíciók védelme; "dig" = Várárok ásása; "hold" = Maradjon a kijelölt pozíción; "patrol"
+  = Járőrözés az AIV-pozíciók között
 
-  AIVTroops_Movement: -1, 0, 1, 2
 
-  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+  A "dig" csak az alábbi hat egységmezőnél használható, a közös InitialRole mezőnél nem. Ha az egység
+  éppen nem tud ásni, a "defend" érvényesül.
 
-  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+  AIVTroops_InitialRole: "defend"
+
+  AIVTroops_Movement: "hold", "patrol"
+
+  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: "hold", "patrol"
 
 
   <Troop>:
@@ -72,9 +81,6 @@ aic_help: 'MI-személyiségenként: egység AIC > közös AIC > egység menübe�
   ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
 
 
-  Értékek: -1 = öröklés; 0 = játékviselkedés a bekapcsolt javításokkal; 1 = Védelem (InitialRole) / Tartás
-  (Movement); 2 = Ásás (InitialRole) / Járőr (Movement).
-
-
-  Példa: egy MI-nél AIVTroops_InitialRole_Slave = 2 és AIVTroops_Movement_Spearman = 2. Rabszolgái ásnak,
-  lándzsásai járőröznek a menü alapértékeitől függetlenül. A hiányzó mezők és a -1 örökölnek.'
+  Példa: AIVTroops_InitialRole_Slave: "dig" és AIVTroops_Movement_Spearman: "patrol" ásó rabszolgákat
+  és járőröző lándzsásokat ad egy MI-nek. A mezőnevek és értékek kis- és nagybetűérzékenyek. Módosítás
+  után indítsd újra a játékot és kezdj új meccset.'

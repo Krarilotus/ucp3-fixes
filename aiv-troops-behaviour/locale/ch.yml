@@ -1,7 +1,7 @@
 ai: AI
 fixes: 修复
 title: AI：AIV部队行为
-description: 恢复长戟兵、剑士和阿拉伯剑士缺失的AIV位置。下方的部队设置也可调整其他AI部队的行为。
+description: 修复长枪兵和两种剑士缺失的AIV位置。可选部队设置控制防守、挖掘、驻守和巡逻。每个AI的AIC值优先于菜单默认设置。
 behavior_title: 部队设置
 behavior_description: 选择初始部队负责防守还是挖掘护城河，以及守军留在原位还是巡逻。只有能够挖掘的部队可选择挖掘。修改后请重启游戏并开始新对局。
 defaults_title: 所有AI的默认部队设置
@@ -46,16 +46,22 @@ aic_help_title: AIC字段与优先级
 aic_help: '每个AI性格的优先级：兵种AIC > 通用AIC > 兵种菜单选项 > 所有部队 > 游戏行为。需启用AIC覆盖才能使用这些字段。
 
 
-  InitialRole的数值2仅适用于下列六个兵种字段，不适用于通用字段。单位当前无法挖掘时改为防守。
+  使用小写文本值：InitialRole = "defend"或"dig"；Movement = "hold"或"patrol"。省略字段即可继承。不使用数值或显式native/inherit值。
 
 
-  AIVTroops_InitialRole: -1, 0, 1
+  "defend" = 防守AIV位置; "dig" = 挖掘护城河; "hold" = 留在指定位置; "patrol" = 在AIV位置之间巡逻
 
-  AIVTroops_Movement: -1, 0, 1, 2
 
-  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+  "dig"仅适用于下列六个兵种字段，不适用于通用InitialRole字段。单位当前无法挖掘时使用"defend"。
 
-  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+  AIVTroops_InitialRole: "defend"
+
+  AIVTroops_Movement: "hold", "patrol"
+
+  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: "hold", "patrol"
 
 
   <Troop>:
@@ -64,7 +70,4 @@ aic_help: '每个AI性格的优先级：兵种AIC > 通用AIC > 兵种菜单选�
   ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
 
 
-  数值：-1 = 继承；0 = 游戏行为（包含已启用的修复）；1 = 防守（InitialRole）/驻守（Movement）；2 = 挖掘（InitialRole）/巡逻（Movement）。
-
-
-  示例：为某个AI设置AIVTroops_InitialRole_Slave = 2和AIVTroops_Movement_Spearman = 2。该AI的奴隶将挖掘，长矛兵将巡逻，不受菜单默认值影响。缺失字段或-1表示继承。'
+  示例：AIVTroops_InitialRole_Slave: "dig"和AIVTroops_Movement_Spearman: "patrol"让一个AI使用挖掘的奴隶和巡逻的长矛兵。字段名和值区分大小写。修改后重启游戏并开始新对局。'

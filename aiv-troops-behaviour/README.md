@@ -56,7 +56,8 @@ Hold/Patrol sword-checkbox choices. The All troops row supplies defaults; a dash
 marks an unavailable choice. No selection in All troops preserves native game
 behaviour, including enabled fixes. Other rows follow All troops until explicitly
 changed. Reset restores inheritance. The configuration keys and values stay the
-same, including `native` and `inherit` in saved configurations and AIC value 0.
+same, including `native` and `inherit` in saved menu configurations. AIC files
+use the named values below; leaving fields out supplies inheritance.
 
 Native starting assignments depend on each AI's `DefDiggingUnitMax` and the
 unit's live digging capability. Crusader archers and crossbowmen take the native
@@ -116,23 +117,36 @@ Precedence, highest first:
 3. Troop-specific Customizations default.
 4. Common Customizations default, then native behaviour.
 
-Missing or **-1** AIC values inherit. **0 explicitly selects native behaviour**,
-even if the menu requests something else. Resetting an AI clears its overrides
-and restores the menu defaults. Personalities are aicloader IDs 1 (Rat) through
-16 (Abbot), not player slots; all players using one personality share its values.
+Omitted AIC fields inherit the next applicable setting. There is no explicit
+inherit/native AIC value: use lowercase strings, not numbers. Resetting an AI
+clears its overrides and restores the menu defaults. Personalities are aicloader
+IDs 1 (Rat) through 16 (Abbot), not player slots; players using one personality
+share its settings. Restart and start a new match after editing files; omitting
+a field from a later partial write does not clear an already applied override.
 
-| AIC field | Values |
+| AIC field | Allowed values |
 | --- | --- |
-| `AIVTroops_InitialRole` | -1 inherit menu; 0 native; 1 defend |
-| `AIVTroops_InitialRole_<Troop>` | -1 inherit; 0 native; 1 defend; 2 dig (capable troops only) |
-| `AIVTroops_Movement` | -1 inherit menu; 0 native; 1 hold; 2 patrol |
-| `AIVTroops_Movement_<Troop>` | -1 inherit; 0 native; 1 hold; 2 patrol |
+| `AIVTroops_InitialRole` | `"defend"` |
+| `AIVTroops_InitialRole_<Troop>` | `"defend"`; `"dig"` for capable troops only |
+| `AIVTroops_Movement` | `"hold"`, `"patrol"` |
+| `AIVTroops_Movement_<Troop>` | `"hold"`, `"patrol"` |
+
+`InitialRole` controls the assignment of unassigned starting/scenario troops;
+`Movement` controls defenders at their AIV slots. These are independent settings:
+`"defend"` / `"dig"` are not movement values, and `"hold"` / `"patrol"` are not roles.
 
 `<Troop>` is one of: `Engineer`, `Archer`, `Crossbowman`, `Spearman`, `Pikeman`,
 `Maceman`, `Swordsman`, `Knight`, `Slave`, `Slinger`, `Assassin`, `ArabianArcher`,
-`HorseArcher`, `ArabianSwordsman`, `FireThrower`. Names are case-sensitive.
-Non-integer/out-of-range values are logged and leave the previous setting intact.
+`HorseArcher`, `ArabianSwordsman`, `FireThrower`. Names and values are case-sensitive.
+Only Engineer, Archer, Spearman, Pikeman, Maceman and Slave accept `"dig"`.
 The common initial-role field cannot select digging; select capable types explicitly.
+Invalid values are logged and leave the previous setting intact. The AIC getter
+returns the configured string, or nil when no override has been set.
+
+Earlier unreleased builds accepted numbers. Replace role 1/2 with `"defend"`/`"dig"`
+and movement 1/2 with `"hold"`/`"patrol"`; remove -1 and 0 fields. Removing an old
+explicit 0 now inherits common/menu choices instead of bypassing them. No change
+is needed to saved Customizations values.
 
 Example file supplied through aicloader's `aicFiles` configuration:
 
@@ -142,10 +156,10 @@ Example file supplied through aicloader's `aicFiles` configuration:
     {
       "Name": "Rat",
       "Personality": {
-        "AIVTroops_InitialRole": 1,
-        "AIVTroops_InitialRole_Slave": 2,
-        "AIVTroops_Movement": 1,
-        "AIVTroops_Movement_Spearman": 2,
+        "AIVTroops_InitialRole": "defend",
+        "AIVTroops_InitialRole_Slave": "dig",
+        "AIVTroops_Movement": "hold",
+        "AIVTroops_Movement_Spearman": "patrol",
         "DefWallPatrolGroups": 2,
         "DefWallPatrolRallyTime": 10
       }

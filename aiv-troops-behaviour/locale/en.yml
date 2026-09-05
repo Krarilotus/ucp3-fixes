@@ -5,8 +5,8 @@ behavior_description: Choose which starting troops defend or dig moats, and whet
   after changes.
 fixes: Fixes
 title: 'AI: AIV Troop Behaviour'
-description: Fix missing AIV positions for pikemen, swordsmen and Arabian swordsmen. Enable the troop
-  settings below to change how other AI troops use their positions too.
+description: Fix missing AIV positions for pikemen and both swordsman types. Optional troop settings control
+  defending, digging, holding and patrolling. Per-AI AIC settings override the menu defaults.
 defaults_title: Default troop settings for all AIs
 precedence_notice: These defaults apply to every AI. Enabled AIC overrides take priority; missing AIC
   values use these defaults.
@@ -52,17 +52,25 @@ aic_help: 'Per AI personality, priority is: troop AIC > common AIC > troop menu 
   game behaviour. Enable AIC overrides to use these fields.
 
 
-  InitialRole value 2 is available only on the six troop fields listed below; it is not allowed on the
-  common field. A unit that cannot currently dig falls back to Defend.
+  Use lowercase text values: InitialRole = "defend" or "dig"; Movement = "hold" or "patrol". Omit a field
+  to inherit. Numeric values and explicit native/inherit values are not used.
 
 
-  AIVTroops_InitialRole: -1, 0, 1
+  "defend" = Defend AIV positions; "dig" = Dig moats; "hold" = Stay at the assigned position; "patrol"
+  = Patrol between AIV positions
 
-  AIVTroops_Movement: -1, 0, 1, 2
 
-  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+  "dig" is available only for the six troop fields listed below, not for the common InitialRole field.
+  A unit that cannot currently dig falls back to "defend".
 
-  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+  AIVTroops_InitialRole: "defend"
+
+  AIVTroops_Movement: "hold", "patrol"
+
+  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: "hold", "patrol"
 
 
   <Troop>:
@@ -71,10 +79,6 @@ aic_help: 'Per AI personality, priority is: troop AIC > common AIC > troop menu 
   ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
 
 
-  Values: -1 = inherit; 0 = game behaviour, including enabled fixes; 1 = Defend (InitialRole) / Hold (Movement);
-  2 = Dig (InitialRole) / Patrol (Movement).
-
-
-  Example: for one AI, set AIVTroops_InitialRole_Slave to 2 and AIVTroops_Movement_Spearman to 2. That
-  AI uses slave diggers and patrolling spearmen regardless of the menu defaults. Missing fields or -1
-  inherit.'
+  Example: AIVTroops_InitialRole_Slave: "dig" and AIVTroops_Movement_Spearman: "patrol" give one AI slave
+  diggers and patrolling spearmen. Field names and values are case-sensitive. Restart and start a new
+  match after changes.'

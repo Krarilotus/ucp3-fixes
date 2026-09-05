@@ -19,14 +19,16 @@ local TROOPS = {
 
 local BY_UNIT, BY_ROW = {}, {}
 local FIELDS = {
-  AIVTroops_InitialRole = {default = -1, min = -1, max = 1},
-  AIVTroops_Movement = {default = -1, min = -1, max = 2},
+  AIVTroops_InitialRole = {min = -1, max = 1, choices = {defend = 1}},
+  AIVTroops_Movement = {min = -1, max = 2, choices = {hold = 1, patrol = 2}},
 }
 for _, troop in ipairs(TROOPS) do
   BY_UNIT[troop.unit], BY_ROW[troop.row] = troop, troop
   for _, kind in ipairs({"InitialRole", "Movement"}) do
     local maximum = (kind == "InitialRole" and not troop.digs) and 1 or 2
-    FIELDS["AIVTroops_" .. kind .. "_" .. troop.name] = {default = -1, min = -1, max = maximum}
+    local choices = kind == "Movement" and {hold = 1, patrol = 2} or {defend = 1}
+    if kind == "InitialRole" and troop.digs then choices.dig = 2 end
+    FIELDS["AIVTroops_" .. kind .. "_" .. troop.name] = {min = -1, max = maximum, choices = choices}
   end
 end
 
@@ -55,8 +57,7 @@ local function new(config)
   local policy = {}
   function policy:set(ai, key, value)
     local field = FIELDS[key]
-    if not values[ai] or not field or type(value) ~= "number" or value ~= math.floor(value)
-        or value < field.min or value > field.max then
+    if not values[ai] or not field or type(value) ~= "string" or not field.choices[value] then
       return false, "invalid AIV troop setting: " .. tostring(ai) .. "/" .. tostring(key) .. "=" .. tostring(value)
     end
     values[ai][key] = value
@@ -69,7 +70,7 @@ local function new(config)
   end
   function policy:raw(ai, key)
     if not values[ai] or not FIELDS[key] then return nil end
-    return values[ai][key] or FIELDS[key].default
+    return values[ai][key]
   end
   function policy:get(ai, kind, row)
     local troop = BY_ROW[row]
@@ -80,7 +81,7 @@ local function new(config)
     if config.aic_overrides ~= false then
       for _, setting in ipairs({key, prefix}) do
         local value = values[ai][setting]
-        if value ~= nil and value ~= -1 then return value end
+        if value ~= nil then return FIELDS[setting].choices[value] end
       end
     end
     if defaults[key] ~= -1 then return defaults[key] end

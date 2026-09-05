@@ -5,6 +5,6 @@ Fixes missing AIV positions for pikemen, swordsmen and Arabian swordsmen. Adds o
 - Choose whether starting troops defend or dig moats.
 - Let defenders stay at their positions or patrol between them.
 - Set defaults for all AIs, with separate choices per troop type, including slaves.
-- Allow AIC settings to override these defaults for individual AIs.
+- Use named AIC values for individual AIs: InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Omitted fields inherit the defaults. See AIC fields and priority in Customizations for exact field names.
 
 Digging is only available for troops that can dig. Configure under **AI → AIV Troop Behaviour**. The additional troop settings are off by default. Restart and start a new match after changes.

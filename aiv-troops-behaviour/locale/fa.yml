@@ -1,8 +1,9 @@
 ai: هوش مصنوعی
 fixes: رفع اشکال
 title: 'هوش مصنوعی: رفتار نیروها در AIV'
-description: موقعیت‌های ازدست‌رفتهٔ AIV برای نیزه‌داران زره‌پوش، شمشیرزنان و شمشیرزنان عرب را برمی‌گرداند.
-  با تنظیمات زیر می‌توان رفتار دیگر نیروهای هوش مصنوعی را هم تغییر داد.
+description: موقعیت‌های AIV گم‌شدهٔ پیک‌داران و هر دو نوع شمشیرزن را اصلاح می‌کند. تنظیمات اختیاری، دفاع،
+  حفاری، ماندن در موقعیت و گشت‌زنی را کنترل می‌کنند. مقادیر AIC هر هوش مصنوعی بر پیش‌فرض‌های منو اولویت
+  دارند.
 behavior_title: تنظیمات نیروها
 behavior_description: انتخاب کنید کدام نیروهای آغازین دفاع کنند یا خندق بکنند و مدافعان در جای خود بمانند
   یا گشت بزنند. حفر خندق فقط برای نیروهای دارای این توانایی قابل انتخاب است. پس از تغییرات، بازی را دوباره
@@ -53,17 +54,25 @@ aic_help: 'برای هر شخصیت هوش مصنوعی: AIC نوع نیرو > A
   بازی. برای استفاده از این فیلدها، بازنویسی AIC را فعال کنید.
 
 
-  مقدار 2 برای InitialRole فقط در شش فیلد نیروی زیر مجاز است، نه در فیلد عمومی. اگر نیرو اکنون نتواند
-  حفاری کند، دفاع می‌کند.
+  از مقادیر متنی با حروف کوچک استفاده کنید: InitialRole = "defend" یا "dig"؛ Movement = "hold" یا "patrol".
+  فیلد حذف‌شده تنظیم را به ارث می‌برد. اعداد و مقادیر صریح native/inherit استفاده نمی‌شوند.
 
 
-  AIVTroops_InitialRole: -1, 0, 1
+  "defend" = دفاع از موقعیت‌های AIV; "dig" = حفر خندق; "hold" = ماندن در موقعیت تعیین‌شده; "patrol" =
+  گشت‌زنی بین موقعیت‌های AIV
 
-  AIVTroops_Movement: -1, 0, 1, 2
 
-  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+  "dig" فقط برای شش فیلد نیروی زیر مجاز است، نه فیلد عمومی InitialRole. اگر نیرو اکنون نتواند حفاری کند،
+  "defend" اعمال می‌شود.
 
-  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+  AIVTroops_InitialRole: "defend"
+
+  AIVTroops_Movement: "hold", "patrol"
+
+  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: "hold", "patrol"
 
 
   <Troop>:
@@ -72,9 +81,6 @@ aic_help: 'برای هر شخصیت هوش مصنوعی: AIC نوع نیرو > A
   ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
 
 
-  مقادیر: -1 = ارث‌بری؛ 0 = رفتار بازی همراه با اصلاحات فعال؛ 1 = دفاع (InitialRole) / توقف (Movement)؛
-  2 = حفاری (InitialRole) / گشت (Movement).
-
-
-  مثال: برای یک هوش مصنوعی، AIVTroops_InitialRole_Slave = 2 و AIVTroops_Movement_Spearman = 2 را تنظیم
-  کنید. بردگانش حفاری و نیزه‌دارانش گشت‌زنی می‌کنند، مستقل از منو. فیلدهای خالی یا -1 ارث‌بری می‌کنند.'
+  مثال: AIVTroops_InitialRole_Slave: "dig" و AIVTroops_Movement_Spearman: "patrol" به یک هوش مصنوعی بردگان
+  حفار و نیزه‌داران گشتی می‌دهد. نام فیلدها و مقادیر به بزرگی و کوچکی حروف حساس‌اند. پس از تغییر، بازی
+  را دوباره اجرا کنید و نبرد جدیدی آغاز کنید.'

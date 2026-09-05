@@ -5,6 +5,6 @@ Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Sch
 - Festlegen, ob Starttruppen verteidigen oder Gräben ausheben.
 - Verteidiger an ihren Positionen bleiben oder zwischen ihnen patrouillieren lassen.
 - Standardwerte für alle KIs festlegen, mit eigenen Einstellungen pro Truppentyp, einschließlich Sklaven.
-- Diese Standardwerte bei Bedarf durch AIC-Einstellungen für einzelne KIs überschreiben lassen.
+- Benannte AIC-Werte pro KI verwenden: InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Fehlende Felder erben die Vorgaben. Die genauen Feldnamen stehen unter AIC-Felder und Priorität in den Anpassungen.
 
 Graben ist nur für Truppen wählbar, die graben können. Einstellungen unter **KI → AIV-Truppenverhalten**. Die zusätzlichen Truppeneinstellungen sind standardmäßig aus. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.

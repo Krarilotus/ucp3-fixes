@@ -139,18 +139,40 @@ class BehaviorTests(unittest.TestCase):
         h.install()
         self.assertEqual(len(h.aic), 32)
         key = 'AIVTroops_InitialRole_Slave'
-        self.assertEqual(h.aic[key][0](1, None), -1)
-        h.set_aic(1, key, 2)
-        self.assertEqual(h.aic[key][0](1, None), 2)
-        self.assertEqual(h.aic[key][0](16, None), -1)
-        for invalid in (3, -2, 0.5, True, '2', float('nan')):
+        self.assertIsNone(h.aic[key][0](1, None))
+        h.set_aic(1, key, 'dig')
+        self.assertEqual(h.aic[key][0](1, None), 'dig')
+        self.assertIsNone(h.aic[key][0](16, None))
+        for invalid in (-1, 0, 1, 2, 3, -2, 0.5, True, '2', 'native', 'inherit', 'Dig', 'hold', float('nan')):
             h.set_aic(1, key, invalid)
-            self.assertEqual(h.aic[key][0](1, None), 2)
+            self.assertEqual(h.aic[key][0](1, None), 'dig')
         h.aic[key][1](1)
-        self.assertEqual(h.aic[key][0](1, None), -1)
-        key = 'AIVTroops_InitialRole_Swordsman'
-        h.set_aic(1, key, 2)
-        self.assertEqual(h.aic[key][0](1, None), -1)
+        self.assertIsNone(h.aic[key][0](1, None))
+        for key in ('AIVTroops_InitialRole_Swordsman', 'AIVTroops_InitialRole'):
+            h.set_aic(1, key, 'dig')
+            self.assertIsNone(h.aic[key][0](1, None))
+
+    def test_each_named_field_reaches_expected_role_or_movement(self):
+        h = self.h
+        h.install()
+        policy = h.lua.execute('return require("behavior.policy").new()')
+        troops = h.lua.execute('return require("behavior.policy").troops')
+        for key, (handler, reset) in h.aic.items():
+            role = key.startswith('AIVTroops_InitialRole')
+            troop = next((t for t in troops.values() if key.endswith('_' + t.name)), None)
+            allowed = {'defend': 1} if role else {'hold': 1, 'patrol': 2}
+            if role and troop and troop.digs:
+                allowed['dig'] = 2
+            for value, expected in allowed.items():
+                with self.subTest(key=key, value=value):
+                    handler(16, value)
+                    self.assertEqual(handler(16, None), value)
+                    self.assertIsNone(handler(1, None))
+                    self.assertTrue(policy.set(policy, 16, key, value))
+                    self.assertEqual(policy.get(policy, 16, 'InitialRole' if role else 'Movement', troop.row if troop else 13), expected)
+                    policy.reset(policy, 16, key)
+                    reset(16)
+                    self.assertIsNone(handler(16, None))
 
     def test_ai_numbering_matches_aicloader_not_raw_player_data(self):
         game = self.h.lua.execute('return require("behavior.game").resolve()')
@@ -162,8 +184,8 @@ class BehaviorTests(unittest.TestCase):
     def test_initial_digger_is_capability_checked_and_ai_specific(self):
         h = self.h
         h.install()
-        h.set_aic(1, 'AIVTroops_InitialRole', 1)
-        h.set_aic(1, 'AIVTroops_InitialRole_Slave', 2)
+        h.set_aic(1, 'AIVTroops_InitialRole', 'defend')
+        h.set_aic(1, 'AIVTroops_InitialRole_Slave', 'dig')
         gate = h.callbacks[0x1E0000][0]
         unit = 0x120000
         h.i16(unit, 71)
@@ -191,20 +213,20 @@ class BehaviorTests(unittest.TestCase):
                 }}, recursive=True))
             self.assertEqual(p.get(p, 1, 'Movement', 8), 2)
             self.assertEqual(p.get(p, 16, 'InitialRole', 13), 2)
-            p.set(p, 1, 'AIVTroops_Movement', 0)
-            self.assertEqual(p.get(p, 1, 'Movement', 8), 0 if overrides else 2)
-            p.set(p, 1, 'AIVTroops_Movement_Spearman', 1)
+            p.set(p, 1, 'AIVTroops_Movement', 'hold')
+            self.assertEqual(p.get(p, 1, 'Movement', 8), 1 if overrides else 2)
+            p.set(p, 1, 'AIVTroops_Movement_Spearman', 'hold')
             self.assertEqual(p.get(p, 1, 'Movement', 8), 1 if overrides else 2)
             self.assertEqual(p.get(p, 16, 'Movement', 8), 2)
             p.reset(p, 1, 'AIVTroops_Movement_Spearman')
-            p.set(p, 1, 'AIVTroops_Movement', -1)
+            p.reset(p, 1, 'AIVTroops_Movement')
             self.assertEqual(p.get(p, 1, 'Movement', 8), 2)
-            self.assertEqual(p.raw(p, 1, 'AIVTroops_Movement_Spearman'), -1)
+            self.assertIsNone(p.raw(p, 1, 'AIVTroops_Movement_Spearman'))
 
     def test_menu_only_configuration_reaches_hooks_without_any_aic_file(self):
         h = self.h
         h.install(aic_overrides=False, defaults={'InitialRole': 'defend', 'Movement_Slave': 'hold'})
-        h.set_aic(1, 'AIVTroops_InitialRole', 0)
+        h.set_aic(1, 'AIVTroops_InitialRole_Slave', 'dig')
         h.i16(0x120000, 71)
         h.i16(0x120000 + 0x2E0, 1)
         gate = h.callbacks[0x1E0000][0]
@@ -236,18 +258,18 @@ class BehaviorTests(unittest.TestCase):
 
     def test_global_fallback_and_per_troop_override(self):
         p = self.h.lua.execute('return require("behavior.policy").new()')
-        p.set(p, 1, 'AIVTroops_Movement', 1)
-        p.set(p, 1, 'AIVTroops_Movement_Spearman', 2)
+        p.set(p, 1, 'AIVTroops_Movement', 'hold')
+        p.set(p, 1, 'AIVTroops_Movement_Spearman', 'patrol')
         self.assertEqual(p.get(p, 1, 'Movement', 8), 2)
         self.assertEqual(p.get(p, 1, 'Movement', 11), 1)
         self.assertEqual(p.get(p, 16, 'Movement', 8), 0)
-        p.set(p, 1, 'AIVTroops_Movement_Spearman', 0)
-        self.assertEqual(p.get(p, 1, 'Movement', 8), 0)
+        p.reset(p, 1, 'AIVTroops_Movement_Spearman')
+        self.assertEqual(p.get(p, 1, 'Movement', 8), 1)
 
     def test_held_patrol_rows_have_capacity_even_with_zero_patrol_groups(self):
         h = self.h
         h.install()
-        h.set_aic(1, 'AIVTroops_Movement_Spearman', 1)
+        h.set_aic(1, 'AIVTroops_Movement_Spearman', 'hold')
         h.i32(h.pointers['slotCounts'] + 0x39F4 + 8 * 4, 5)
         r = h.callback('groupLimit', EBP=1, EAX=8, EBX=0, EDX=0)
         self.assertEqual(r.EBX, 5)
@@ -267,7 +289,7 @@ class BehaviorTests(unittest.TestCase):
     def test_slot_mapping_prevents_ranged_troops_sharing_configured_slave_row(self):
         h = self.h
         h.install()
-        h.set_aic(1, 'AIVTroops_Movement_Slave', 1)
+        h.set_aic(1, 'AIVTroops_Movement_Slave', 'hold')
         h.i16(h.pointers['unitType'] + 0x490, 22)
         h.i16(h.pointers['unitOwner'] + 0x490, 1)
         mapper, argc, convention, size = h.hooks[h.sites['mapper']]
@@ -279,7 +301,7 @@ class BehaviorTests(unittest.TestCase):
     def test_movement_wrapper_preserves_native_arguments_and_validates_uid(self):
         h = self.h
         h.install()
-        h.set_aic(1, 'AIVTroops_Movement_Swordsman', 2)
+        h.set_aic(1, 'AIVTroops_Movement_Swordsman', 'patrol')
         tribe, row, ordinal, this = 1, 11, 1, 0x1D0000
         h.i32(h.pointers['tribeOwner'] + 0x334, 1)
         h.i32(h.pointers['tribeOwner'] + 0x334 + 8, 42)

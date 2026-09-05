@@ -5,6 +5,6 @@ Mızraklı muhafızların, kılıçlıların ve Arap kılıçlıların eksik AIV
 - Başlangıç birliklerinin savunma yapmasını veya hendek kazmasını seçin.
 - Savunmacıların konumlarında kalmasını veya aralarında devriye gezmesini sağlayın.
 - Köleler dâhil her birlik türü için ayrı seçimlerle tüm yapay zekâlara varsayılanlar belirleyin.
-- Ayrı yapay zekâların AIC ayarlarının bu varsayılanları değiştirmesine izin verin.
+- Her yapay zekâ için adlandırılmış AIC değerleri kullanın: InitialRole = "defend"/"dig", Movement = "hold"/"patrol". Atlanan alanlar varsayılanları devralır. Tam alan adları için özelleştirmelerde AIC alanları ve öncelik bölümüne bakın.
 
 Kazma yalnızca bunu yapabilen birliklerde seçilebilir. Ayarlar **Yapay zekâ → AIV birlik davranışı** altındadır. Ek birlik ayarları varsayılan olarak kapalıdır. Değişikliklerden sonra oyunu yeniden başlatıp yeni bir maç açın.

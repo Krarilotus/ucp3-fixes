@@ -1,8 +1,9 @@
 ai: Yapay zekâ
 fixes: Düzeltmeler
 title: 'Yapay zekâ: AIV birlik davranışı'
-description: Mızraklı muhafızların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
-  Aşağıdaki ayarlarla diğer yapay zekâ birliklerinin davranışı da değiştirilebilir.
+description: Kargıcıların ve her iki kılıçlı türünün eksik AIV konumlarını düzeltir. İsteğe bağlı ayarlar
+  savunmayı, kazmayı, konumda beklemeyi ve devriyeyi yönetir. Yapay zekâya özel AIC değerleri menü varsayılanlarını
+  geçersiz kılar.
 behavior_title: Birlik ayarları
 behavior_description: Hangi başlangıç birliklerinin savunma yapacağını veya hendek kazacağını ve savunmacıların
   yerinde mi kalacağını yoksa devriye mi gezeceğini seçin. Kazma yalnızca bunu yapabilen birliklerde seçilebilir.
@@ -53,17 +54,25 @@ aic_help: 'Her yapay zekâ kişiliği için: birlik AIC > ortak AIC > birlik men
   oyun davranışı. Bu alanlar için AIC geçersiz kılmalarını etkinleştirin.
 
 
-  InitialRole 2 yalnızca aşağıdaki altı birlik alanında kullanılabilir; ortak alanda kullanılamaz. O anda
-  kazamayan bir birim savunmaya geçer.
+  Küçük harfli metin değerleri kullanın: InitialRole = "defend" veya "dig"; Movement = "hold" veya "patrol".
+  Atlanan alan ayarı devralır. Sayılar ve açık native/inherit değerleri kullanılmaz.
 
 
-  AIVTroops_InitialRole: -1, 0, 1
+  "defend" = AIV konumlarını savun; "dig" = Hendek kaz; "hold" = Atanan konumda kal; "patrol" = AIV konumları
+  arasında devriye gez
 
-  AIVTroops_Movement: -1, 0, 1, 2
 
-  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+  "dig" yalnızca aşağıdaki altı birlik alanında kullanılabilir; ortak InitialRole alanında kullanılamaz.
+  Birim o anda kazamıyorsa "defend" uygulanır.
 
-  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+  AIVTroops_InitialRole: "defend"
+
+  AIVTroops_Movement: "hold", "patrol"
+
+  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: "hold", "patrol"
 
 
   <Troop>:
@@ -72,9 +81,6 @@ aic_help: 'Her yapay zekâ kişiliği için: birlik AIC > ortak AIC > birlik men
   ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
 
 
-  Değerler: -1 = devral; 0 = etkin düzeltmelerle oyun davranışı; 1 = Savun (InitialRole) / Bekle (Movement);
-  2 = Kaz (InitialRole) / Devriye (Movement).
-
-
-  Örnek: bir yapay zekâ için AIVTroops_InitialRole_Slave = 2 ve AIVTroops_Movement_Spearman = 2 ayarlayın.
-  Menüden bağımsız olarak köleleri kazar, mızraklıları devriye gezer. Eksik alanlar veya -1 devralır.'
+  Örnek: AIVTroops_InitialRole_Slave: "dig" ve AIVTroops_Movement_Spearman: "patrol", bir yapay zekâya
+  kazan köleler ve devriye gezen mızraklılar verir. Alan adları ve değerler büyük/küçük harfe duyarlıdır.
+  Değişiklikten sonra oyunu yeniden başlatıp yeni bir oyun açın.'

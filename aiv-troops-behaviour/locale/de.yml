@@ -5,8 +5,8 @@ behavior_description: Festlegen, welche Starttruppen verteidigen oder Gräben au
   Änderungen das Spiel neu starten und eine neue Partie beginnen.
 fixes: Fehlerbehebungen
 title: 'KI: AIV-Truppenverhalten'
-description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer
-  wieder her. Mit den Truppeneinstellungen unten lässt sich auch das Verhalten anderer KI-Truppen anpassen.
+description: Behebt fehlende AIV-Positionen für Pikeniere und beide Schwertkämpfertypen. Optionale Truppeneinstellungen
+  steuern Verteidigen, Graben, Halten und Patrouillieren. AIC-Werte pro KI überschreiben die Menüvorgaben.
 defaults_title: Standardwerte für die Truppen aller KIs
 precedence_notice: Diese Standardwerte gelten für jede KI. Aktivierte AIC-Vorgaben haben Vorrang; fehlende
   AIC-Werte übernehmen diese Standardwerte.
@@ -53,17 +53,25 @@ aic_help: 'Pro KI-Persönlichkeit gilt: Truppen-AIC > gemeinsame AIC > Truppenau
   > Spielverhalten. Dafür AIC-Überschreibungen aktivieren.
 
 
-  InitialRole-Wert 2 ist nur bei den sechs unten aufgeführten Truppenfeldern erlaubt, nicht beim gemeinsamen
-  Feld. Kann eine Einheit aktuell nicht graben, verteidigt sie stattdessen.
+  Kleingeschriebene Textwerte verwenden: InitialRole = "defend" oder "dig"; Movement = "hold" oder "patrol".
+  Fehlende Felder erben. Zahlenwerte und ausdrückliche native/inherit-Werte werden nicht verwendet.
 
 
-  AIVTroops_InitialRole: -1, 0, 1
+  "defend" = AIV-Positionen verteidigen; "dig" = Gräben ausheben; "hold" = An der zugewiesenen Position
+  bleiben; "patrol" = Zwischen AIV-Positionen patrouillieren
 
-  AIVTroops_Movement: -1, 0, 1, 2
 
-  AIVTroops_InitialRole_<Troop>: -1, 0, 1 (+ 2: Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+  "dig" ist nur bei den sechs unten aufgeführten Truppenfeldern erlaubt, nicht beim gemeinsamen InitialRole-Feld.
+  Kann eine Einheit aktuell nicht graben, gilt "defend".
 
-  AIVTroops_Movement_<Troop>: -1, 0, 1, 2
+
+  AIVTroops_InitialRole: "defend"
+
+  AIVTroops_Movement: "hold", "patrol"
+
+  AIVTroops_InitialRole_<Troop>: "defend" (+ "dig": Engineer, Archer, Spearman, Pikeman, Maceman, Slave)
+
+  AIVTroops_Movement_<Troop>: "hold", "patrol"
 
 
   <Troop>:
@@ -72,10 +80,6 @@ aic_help: 'Pro KI-Persönlichkeit gilt: Truppen-AIC > gemeinsame AIC > Truppenau
   ArabianArcher, HorseArcher, ArabianSwordsman, FireThrower
 
 
-  Werte: -1 = erben; 0 = Spielverhalten einschließlich aktivierter Fehlerbehebungen; 1 = Wache (InitialRole)
-  / Halten (Movement); 2 = Graben (InitialRole) / Patrouille (Movement).
-
-
-  Beispiel: Für eine KI AIVTroops_InitialRole_Slave auf 2 und AIVTroops_Movement_Spearman auf 2 setzen.
-  Diese KI nutzt grabende Sklaven und patrouillierende Speerträger unabhängig von den Menüvorgaben. Fehlende
-  Felder oder -1 erben.'
+  Beispiel: AIVTroops_InitialRole_Slave: "dig" und AIVTroops_Movement_Spearman: "patrol" geben einer KI
+  grabende Sklaven und patrouillierende Speerträger. Groß-/Kleinschreibung beachten. Nach Änderungen das
+  Spiel neu starten und eine neue Partie beginnen.'
