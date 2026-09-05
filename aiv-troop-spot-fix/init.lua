@@ -2,11 +2,11 @@
   AIV Troop Spot Fix
 
   AI start troops placed at unit positions in the AIV (section 2012, a
-  24-row x 10-column matrix of packed map positions, value = y*400 + x)
+  24-row x 10-column matrix of AIV-local positions, value = y*100 + x)
   are supposed to walk to those positions at the start of a skirmish.
   For several troop rows they do not, and the units stay idle at the keep.
-  Firefly fixed this for the Definitive Edition; the original engine
-  (Crusader / Crusader Extreme) was never patched.
+  This module fixes only the three loader exclusions described below; it
+  does not replace troop assignment, patrol, or movement behavior.
 
   Root cause: the routine that decodes section 2012 into the per-AI spot
   arrays (position array 0x11F1754, decode loop at 0x4EF460) explicitly
@@ -15,7 +15,7 @@
   (0x4EFB87) after zeroing that row's count - so those rows are never
   loaded and their placed troops receive no target position.
 
-  This is a genuine bug, not intended behaviour: Firefly's own stock AIVs
+  Firefly's own stock AIVs
   place real start troops in exactly these rows (row 18 is used by every
   Arabic lord - Saladin, Caliph, Sultan - and also by Sheriff, Wazir and
   Wolf; row 9 by Wolf, row 11 by Phillip). The most visible symptom is
@@ -43,21 +43,30 @@ local AOB =
   "0F 84 1C 03 00 00"                -- je for row 18  (offset +37)
 
 local NOP6 = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }
+local SKIP_OFFSETS = {
+  15, -- row 9: pikemen
+  26, -- row 11: swordsmen
+  37, -- row 18: Arabian swordsmen
+}
 
 return {
   enable = function(self, config)
-    local target = core.AOBScan(AOB, 0x400000)
-    if target == nil then
-      log(WARNING, "aiv-troop-spot-fix: pattern not found, game version not supported. No changes applied.")
+    if config.enabled == false or self.applied then
       return
     end
-    core.writeCode(target + 15, NOP6)   -- neutralise skip of row 9
-    core.writeCode(target + 26, NOP6)   -- neutralise skip of row 11
-    core.writeCode(target + 37, NOP6)   -- neutralise skip of row 18
+    -- AOBScan raises on failure. Validate the entire block before any write.
+    local ok, target = pcall(core.AOBScan, AOB)
+    if not ok then
+      error("aiv-troop-spot-fix: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
+    end
+    for _, offset in ipairs(SKIP_OFFSETS) do
+      core.writeCode(target + offset, NOP6)
+    end
+    self.applied = true
     log(INFO, string.format("aiv-troop-spot-fix: patched AIV spot decoder at 0x%X", target))
   end,
 
   disable = function(self, config)
-    log(WARNING, "aiv-troop-spot-fix: disable at runtime not supported, restart the game without this module.")
+    return false, "aiv-troop-spot-fix: restart the game to change this option"
   end,
 }

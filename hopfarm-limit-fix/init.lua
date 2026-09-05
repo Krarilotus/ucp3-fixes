@@ -24,20 +24,28 @@
   hop farms now share the limit, AIs with a tight limit build slightly
   fewer food farms in exchange.
 
-  Details: the analysis document accompanying this module.
+  See README.md for the analysis and the limits of the gameplay evidence.
 ]]--
 
 -- Unique to the broken routine: 0x1E and 0x20 compared back-to-back
 -- (the correct routine at 0x40CB20 has the 0x1F check in between).
-local AOB = "66 83 F9 1E 74 0C 66 83 F9 20 74 06 66 83 F9 21 75 11"
+-- Validate the zero-extension and following flag reset as well: the patch
+-- uses ECX rather than CX and leaves ECX/flags changed until the next instruction.
+local AOB = "0F B7 0A 66 83 F9 1E 74 0C 66 83 F9 20 74 06 66 83 F9 21 75 11 85 FF"
 
 return {
   enable = function(self, config)
-    local target = core.AOBScan(AOB, 0x400000)
-    if target == nil then
-      log(WARNING, "hopfarm-limit-fix: pattern not found, game version not supported. No changes applied.")
+    -- An omitted option preserves the behavior of existing 0.1.0 configs.
+    if config.enabled == false or self.applied then
       return
     end
+    -- AOBScan raises on failure. Resolve before writing; an enabled fix that
+    -- cannot be applied must visibly fail initialization, not silently do nothing.
+    local ok, target = pcall(core.AOBScan, AOB)
+    if not ok then
+      error("hopfarm-limit-fix: cannot locate the farm counter; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
+    end
+    target = target + 3
     core.writeCode(target, {
       0x83, 0xE9, 0x1E,        -- sub ecx, 0x1E
       0x83, 0xF9, 0x03,        -- cmp ecx, 3
@@ -45,10 +53,11 @@ return {
       0x90, 0x90, 0x90, 0x90, 0x90,
       0x90, 0x90, 0x90, 0x90, 0x90,
     })
+    self.applied = true
     log(INFO, string.format("hopfarm-limit-fix: patched farm counter at 0x%X", target))
   end,
 
   disable = function(self, config)
-    log(WARNING, "hopfarm-limit-fix: disable at runtime not supported, restart the game without this plugin.")
+    return false, "hopfarm-limit-fix: restart the game to change this option"
   end,
 }

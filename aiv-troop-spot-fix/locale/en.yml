@@ -1,0 +1,8 @@
+ai: AI
+fixes: Fixes
+title: Load AIV positions for pikemen and swordsmen
+description: >-
+  Restores loading of AIV positions for pikemen, swordsmen and Arabian
+  swordsmen (rows 9, 11 and 18). Does not fix slaves or other troop types,
+  or override the AI's movement and patrol rules. Restart the game after
+  changing this option.
