@@ -2,7 +2,7 @@
 
 Restaura las posiciones AIV ausentes de piqueros y ambos tipos de espadachines. Los ajustes opcionales controlan el papel inicial y el movimiento defensivo de los 15 tipos de tropa.
 
-Elige defender o cavar, mantener la posición o patrullar. Usa ajustes comunes o por tipo de tropa. Solo las tropas capaces de cavar tienen esa opción.
+Para cada tipo de tropa, elige defender o cavar, mantener la posición o patrullar. Solo las tropas capaces de cavar tienen esa opción.
 
 Por IA: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) y `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Sin sufijo de tropa, el ajuste es común para la IA; el papel común solo acepta `"defend"`. Las anulaciones AIC activadas tienen prioridad; los campos omitidos heredan.
 

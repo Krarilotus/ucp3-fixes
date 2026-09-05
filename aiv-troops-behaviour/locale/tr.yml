@@ -6,7 +6,6 @@ behavior_title: Birlik ayarları
 aic_overrides: AIC geçersiz kılmalarını kullan
 initial_role: Başlangıç birliklerinin görevi
 slot_movement: Savunmacıların hareketi
-inherit: Ortak varsayılanı kullan
 native: Oyunun özgün davranışı
 defend: AIV konumlarını savun
 dig: Hendek kaz
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: Arap kılıçlılar
 troop_FireThrower: Ateş atıcılar
 troops_category: AIV birlik davranışı
 table_unit: Birlik
-table_all: Tüm birlikler
 table_role: Başlangıç görevi
 table_movement: AIV hareketi
 table_defend: Savun

@@ -6,7 +6,6 @@ behavior_title: Réglages des troupes
 aic_overrides: Utiliser les remplacements AIC
 initial_role: Rôle des troupes de départ
 slot_movement: Déplacement des défenseurs
-inherit: Utiliser le réglage commun
 native: Comportement du jeu d’origine
 defend: Défendre les positions AIV
 dig: Creuser des douves
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: Épéistes arabes
 troop_FireThrower: Lanceurs de feu
 troops_category: Comportement des troupes AIV
 table_unit: Troupe
-table_all: Toutes les troupes
 table_role: Rôle initial
 table_movement: Déplacement AIV
 table_defend: Défendre

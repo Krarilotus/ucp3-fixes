@@ -6,7 +6,6 @@ behavior_title: 部队设置
 aic_overrides: 使用AIC覆盖
 initial_role: 初始部队任务
 slot_movement: 守军移动方式
-inherit: 使用通用默认值
 native: 游戏原版行为
 defend: 防守AIV位置
 dig: 挖掘护城河
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: 阿拉伯剑士
 troop_FireThrower: 火焰投掷兵
 troops_category: AIV部队行为
 table_unit: 部队
-table_all: 所有部队
 table_role: 初始任务
 table_movement: AIV移动
 table_defend: 防守

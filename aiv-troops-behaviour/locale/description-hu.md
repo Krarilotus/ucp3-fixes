@@ -2,7 +2,7 @@
 
 Helyreállítja a pikások és mindkét kardforgatótípus hiányzó AIV-pozícióit. Opcionális beállítások szabályozzák mind a 15 egységtípus kezdőszerepét és védelmi mozgását.
 
-Válassz védekezést vagy ásást, helyben maradást vagy járőrözést. Használj közös vagy egységenkénti beállításokat. Csak az arra képes egységek áshatnak.
+Egységtípusonként válassz védekezést vagy ásást, helyben maradást vagy járőrözést. Csak az arra képes egységek áshatnak.
 
 MI-nként: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) és `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Egységutótag nélkül a beállítás közös az MI számára; a közös szerep csak `"defend"` lehet. Az engedélyezett AIC-felülírások elsőbbséget élveznek; a kihagyott mezők örökölnek.
 

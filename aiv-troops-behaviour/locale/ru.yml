@@ -6,7 +6,6 @@ behavior_title: Настройки войск
 aic_overrides: Использовать переопределения AIC
 initial_role: Задача стартовых войск
 slot_movement: Передвижение защитников
-inherit: Использовать общую настройку
 native: Оригинальное поведение игры
 defend: Защищать позиции AIV
 dig: Рыть ров
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: Арабские мечники
 troop_FireThrower: Огнеметатели
 troops_category: Поведение войск AIV
 table_unit: Войска
-table_all: Все войска
 table_role: Начальная роль
 table_movement: Движение AIV
 table_defend: Защита

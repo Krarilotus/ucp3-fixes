@@ -6,7 +6,6 @@ description: Restores missing AIV positions for pikemen, swordsmen and Arabian s
 aic_overrides: Use AIC overrides
 initial_role: Starting troop role
 slot_movement: Defender movement
-inherit: Inherit common default
 native: Native game behaviour
 defend: Defend AIV positions
 dig: Dig moats
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: Arabian swordsmen
 troop_FireThrower: Fire throwers
 troops_category: AIV Troop Behaviour
 table_unit: Troop
-table_all: All troops
 table_role: Starting role
 table_movement: Slot movement
 table_defend: Defend

@@ -6,7 +6,6 @@ behavior_title: Csapatbeállítások
 aic_overrides: AIC-felülírások használata
 initial_role: Kezdőcsapatok feladata
 slot_movement: Védők mozgása
-inherit: Közös alapbeállítás használata
 native: Eredeti játékviselkedés
 defend: AIV-pozíciók védelme
 dig: Várárok ásása
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: Arab kardforgatók
 troop_FireThrower: Tűzhajítók
 troops_category: AIV-csapatviselkedés
 table_unit: Egység
-table_all: Minden egység
 table_role: Kezdő feladat
 table_movement: AIV-mozgás
 table_defend: Védelem

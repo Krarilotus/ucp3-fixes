@@ -2,7 +2,7 @@
 
 Kargıcıların ve her iki kılıçlı türünün eksik AIV konumlarını geri getirir. İsteğe bağlı ayarlar 15 birlik türünün başlangıç görevini ve savunma hareketini yönetir.
 
-Savunma veya kazma, konumda bekleme veya devriye seçin. Ortak ya da birlik türüne özel ayarlar kullanın. Kazma yalnızca bunu yapabilen birlikler için kullanılabilir.
+Her birlik türü için savunma veya kazma, konumda bekleme veya devriye seçin. Kazma yalnızca bunu yapabilen birlikler için kullanılabilir.
 
 Her yapay zekâ için: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) ve `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Birlik son eki olmadan ayar yapay zekânın tamamına uygulanır; ortak görev yalnızca `"defend"` kabul eder. Etkin AIC ayarları önceliklidir; atlanan alanlar devralır.
 

@@ -2,7 +2,7 @@
 
 Rétablit les positions AIV manquantes des piquiers et des deux types d’épéistes. Des réglages facultatifs contrôlent le rôle initial et les déplacements défensifs des 15 types de troupes.
 
-Choisissez la défense ou le creusement, le maintien en position ou la patrouille. Utilisez des réglages communs ou propres à chaque troupe. Seules les troupes capables de creuser ont cette option.
+Pour chaque type de troupe, choisissez la défense ou le creusement, le maintien en position ou la patrouille. Seules les troupes capables de creuser ont cette option.
 
 Par IA : `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) et `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Sans suffixe de troupe, le réglage est commun à l’IA ; le rôle commun accepte seulement `"defend"`. Les remplacements AIC activés sont prioritaires ; les champs omis héritent.
 

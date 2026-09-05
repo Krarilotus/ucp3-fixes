@@ -2,12 +2,10 @@ ai: KI
 behavior_title: Truppeneinstellungen
 fixes: Fehlerbehebungen
 title: 'KI: AIV-Truppenverhalten'
-description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer
-  wieder her.
+description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her.
 aic_overrides: AIC-Überschreibungen verwenden
 initial_role: Aufgabe der Starttruppen
 slot_movement: Bewegung der Verteidiger
-inherit: Allgemeinen Standard übernehmen
 native: Originalverhalten des Spiels
 defend: AIV-Positionen verteidigen
 dig: Gräben ausheben
@@ -30,7 +28,6 @@ troop_ArabianSwordsman: Arabische Schwertkämpfer
 troop_FireThrower: Feuerwerfer
 troops_category: AIV-Truppenverhalten
 table_unit: Truppe
-table_all: Alle Truppen
 table_role: Startaufgabe
 table_movement: AIV-Bewegung
 table_defend: Wache

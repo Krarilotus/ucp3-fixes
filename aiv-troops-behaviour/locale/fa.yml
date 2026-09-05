@@ -6,7 +6,6 @@ behavior_title: تنظیمات نیروها
 aic_overrides: استفاده از بازنویسی AIC
 initial_role: وظیفهٔ نیروهای آغازین
 slot_movement: حرکت مدافعان
-inherit: استفاده از پیش‌فرض عمومی
 native: رفتار اصلی بازی
 defend: دفاع از موقعیت‌های AIV
 dig: حفر خندق
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: شمشیرزنان عرب
 troop_FireThrower: آتش‌اندازان
 troops_category: رفتار نیروها در AIV
 table_unit: نیرو
-table_all: همهٔ نیروها
 table_role: نقش آغازین
 table_movement: حرکت AIV
 table_defend: دفاع

@@ -293,7 +293,10 @@ class BehaviorTests(unittest.TestCase):
                 yield from choices(node.get('children', []))
         menus = list(choices(options['options']))
         policy = self.h.lua.execute('return (require("behavior.policy"))')
-        self.assertEqual({'AIVTroops_' + n['url'].split('.')[-1] for n in menus}, set(policy.fields.keys()))
+        self.assertEqual({'AIVTroops_' + n['url'].split('.')[-1] for n in menus},
+                         set(policy.fields.keys()) - {'AIVTroops_InitialRole', 'AIVTroops_Movement'})
+        self.assertEqual(len(menus), 30)
+        self.assertTrue(all(n['contents']['value'] == 'native' and 'inheritFrom' not in n for n in menus))
         for menu in menus:
             suffix = menu['url'].split('.')[-1]
             for choice in menu['contents']['choices']:

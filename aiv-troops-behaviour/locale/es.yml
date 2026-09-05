@@ -6,7 +6,6 @@ behavior_title: Ajustes de tropas
 aic_overrides: Usar anulaciones AIC
 initial_role: Tarea de las tropas iniciales
 slot_movement: Movimiento de los defensores
-inherit: Usar el valor común
 native: Comportamiento original del juego
 defend: Defender posiciones AIV
 dig: Cavar fosos
@@ -29,7 +28,6 @@ troop_ArabianSwordsman: Espadachines árabes
 troop_FireThrower: Lanzafuegos
 troops_category: Comportamiento de tropas AIV
 table_unit: Tropa
-table_all: Todas las tropas
 table_role: Tarea inicial
 table_movement: Movimiento AIV
 table_defend: Defender

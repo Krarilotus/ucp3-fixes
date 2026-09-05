@@ -1,7 +1,7 @@
 # Native states shown in the troop table
 
 The table describes the unmodified game's roles and slot-movement modes. These
-are presentation hints for `native` values after menu inheritance is resolved;
+are presentation hints for each troop's `native` value;
 they do not replace saved defaults or enable any behavior hooks. Selecting a
 marked native choice explicitly is still a customization.
 

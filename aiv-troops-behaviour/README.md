@@ -48,8 +48,8 @@ a selected module. **Troop settings** is off by
 default; enable it to activate the additional controls. Missing configuration
 keeps the base-only behaviour of 0.1.x.
 
-The defaults group provides two common choices and separate choices for all
-15 supported troop types. No AIC file or AI replacement is needed to use them.
+The table provides separate choices for all 15 supported troop types.
+No AIC file or AI replacement is needed to use them.
 
 Troop settings and all their controls share one collapsible switch section, as
 in the legacy menu style. Enabling opens the section; disabling closes it. The
@@ -66,18 +66,15 @@ special assignment/oil duties do not have a direct equivalent in these columns.
 
 Spearmen, pikemen, macemen and slaves can defend or dig depending on the AI's
 DefDiggingUnitMax and live digging capability. Their untouched role has no selected box. Archers and crossbowmen always take the native defense branch.
-Explicit choices and common defaults replace the native display; reset restores
-inheritance. Opening the menu does not change runtime behavior or saved defaults.
+Explicit choices replace the native display; reset restores game behaviour.
+Opening the menu does not change runtime behavior or saved defaults.
 
-- **Initial assignment:** native behaviour, or defend AIV slots. Each troop may
-  inherit that choice. Digging-capable troops additionally offer moat digging.
-- **Defensive slot movement:** native behaviour, hold an assigned slot, or patrol
-  between slots. Each troop can inherit the common choice or choose its own.
+- **Initial assignment:** defend AIV slots or, for capable troops, dig moats.
+- **Defensive slot movement:** hold an assigned slot or patrol between slots.
 - **Use AIC overrides:** enabled by default.
   Turn it off to use only the menu defaults, even if an AIC file supplies values.
 
-For example, choose common **Defend AIV positions** and **Stay at the assigned position**,
-then choose **Dig moats** for slaves and **Patrol between AIV positions**
+For example, choose **Dig moats** for slaves and **Patrol between AIV positions**
 for spearmen. This applies to every AI unless an enabled AIC override says otherwise.
 
 Initial assignment affects live, selectable, unassigned starting/scenario troops
@@ -117,7 +114,7 @@ Precedence, highest first:
 1. Explicit troop-specific AIC value for that personality.
 2. Explicit common AIC value for that personality.
 3. Troop-specific Customizations default.
-4. Common Customizations default, then native behaviour.
+4. Native behaviour.
 
 Omitted AIC fields inherit the next applicable setting. There is no explicit
 inherit/native AIC value: use lowercase strings, not numbers. Resetting an AI
