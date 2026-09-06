@@ -34,4 +34,4 @@ table_defend: Védelem
 table_dig: Ásás
 table_hold: Tartás
 table_patrol: Járőr
-table_help: A kezdőcsapatok védekeznek vagy ásnak. A védők tartják a helyüket vagy járőröznek.
+table_help: 'Egységtípusonként mindkét párból legfeljebb egy lehetőséget válassz. Védelem: az AIV-helyek elfoglalása; Ásás: a kezdőcsapatok várárokásásra kijelölése. Tartás: maradás a védelmi helyen; Járőr: mozgás a védelmi helyek között az MI AIC-járőrbeállításai szerint. A kijelölt négyzetre újra kattintva törölheted a pár kijelölését, így a játék eredeti viselkedése érvényesül.'

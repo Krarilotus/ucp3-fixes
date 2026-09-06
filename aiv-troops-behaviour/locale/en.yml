@@ -34,4 +34,4 @@ table_defend: Defend
 table_dig: Dig
 table_hold: Hold
 table_patrol: Patrol
-table_help: Starting troops defend or dig. Defenders hold their position or patrol.
+table_help: 'Per troop, choose at most one option in each pair. Defend: move to AIV positions; Dig: assign starting troops to moat digging. Hold: stay at a defense slot; Patrol: move between defense slots using the AI''s AIC patrol settings. Click a selected box again to clear the pair and use game behaviour.'

@@ -2,7 +2,7 @@
 
 Restores missing AIV positions for pikemen and both swordsman types. Optional settings control starting roles and defender movement for all 15 troop types.
 
-For each troop type, choose whether to defend or dig, and hold position or patrol. Digging is only available to capable troops.
+Per troop, choose at most one option in each pair. Defend: move to AIV positions; Dig: assign starting troops to moat digging. Hold: stay at a defense slot; Patrol: move between defense slots using the AI's AIC patrol settings. Click a selected box again to clear the pair and use game behaviour.
 
 For individual AIs, use `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) and `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Leave off the troop suffix for a common AI setting; the common role accepts only `"defend"`. AIC overrides take priority when enabled; omitted fields inherit.
 

@@ -34,4 +34,4 @@ table_defend: Défendre
 table_dig: Creuser
 table_hold: Rester
 table_patrol: Patrouille
-table_help: Les troupes initiales défendent ou creusent. Les défenseurs restent en position ou patrouillent.
+table_help: 'Pour chaque troupe, choisir au plus une option par paire. Défendre : rejoindre les positions AIV ; Creuser : affecter les troupes initiales au creusement des douves. Rester : garder un poste défensif ; Patrouille : circuler entre les postes selon les réglages de patrouille AIC de l’IA. Cliquer à nouveau sur une case cochée pour vider la paire et utiliser le comportement du jeu.'

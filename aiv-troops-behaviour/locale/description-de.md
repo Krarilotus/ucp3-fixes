@@ -2,7 +2,7 @@
 
 Stellt fehlende AIV-Positionen für Pikeniere und beide Schwertkämpfertypen wieder her. Optionale Einstellungen steuern Startrollen und Verteidigerbewegungen aller 15 Truppentypen.
 
-Für jeden Truppentyp wählen: verteidigen oder graben, Position halten oder patrouillieren. Graben ist nur für geeignete Truppen verfügbar.
+Pro Truppentyp höchstens eine Option je Paar wählen. Wache: AIV-Positionen beziehen; Graben: Starttruppen dem Ausheben von Burggräben zuweisen. Halten: am Verteidigungsplatz bleiben; Patrouille: gemäß den AIC-Patrouilleneinstellungen der KI zwischen Verteidigungsplätzen wechseln. Ein gewähltes Kästchen erneut anklicken, um das Paar abzuwählen und das Spielverhalten zu verwenden.
 
 Für einzelne KIs: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) und `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Ohne Truppensuffix gilt die Einstellung für die ganze KI; die gemeinsame Rolle erlaubt nur `"defend"`. Aktivierte AIC-Überschreibungen haben Vorrang; fehlende Felder erben.
 
