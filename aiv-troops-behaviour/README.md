@@ -1,9 +1,9 @@
 # AI: AIV Troop Behaviour
 
-Version 0.2.2 combines restored AIV positions with opt-in controls for initial
+Version 0.2.3 combines restored AIV positions with opt-in controls for initial
 troop assignments and defensive slot movement across all 15 supported troop types.
 The base patch restores rows **9, 11 and 18** (pikemen and both swordsman types).
-Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.17,
+Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.16,
 and aicloader >=1.1.0. The proposed store target is UCP 3.0.7.
 
 ## Name and migration
@@ -59,11 +59,9 @@ in the module description and wiki, not in Customizations.
 
 The table has two independent sword-checkbox pairs per troop: Defend/Dig and
 Hold/Patrol. Each pair stores one value, so both choices cannot be active together.
-A pair may be empty when native behaviour has no matching fixed state. Clicking
-a selected box again clears the pair and restores game behaviour. An explicit
-clear stays empty after saving/loading; reset removes it and restores native ticks.
-It marks fixed
-native states without storing explicit overrides. Native role assignments are
+A pair may be empty when native behaviour has no matching fixed state. Reset
+restores game behaviour and its default selection. The table marks fixed native
+states without storing explicit overrides. Native role assignments are
 not the same as loaded AIV positions: swordsmen have native defense roles even
 though the base game skips their position rows. The three skipped rows therefore
 have no native slot-movement mark, even with the loading fix enabled. Engineers'

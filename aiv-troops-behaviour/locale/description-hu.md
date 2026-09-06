@@ -2,7 +2,7 @@
 
 Helyreállítja a pikások és mindkét kardforgatótípus hiányzó AIV-pozícióit. Opcionális beállítások szabályozzák mind a 15 egységtípus kezdőszerepét és védelmi mozgását.
 
-Egységtípusonként mindkét párból legfeljebb egy lehetőséget válassz. Védelem: az AIV-helyek elfoglalása; Ásás: a kezdőcsapatok várárokásásra kijelölése. Tartás: maradás a védelmi helyen; Járőr: mozgás a védelmi helyek között az MI AIC-járőrbeállításai szerint. A kijelölt négyzetre újra kattintva törölheted a pár kijelölését, így a játék eredeti viselkedése érvényesül.
+Egységtípusonként mindkét párból legfeljebb egy lehetőséget válassz. Védelem: az AIV-helyek elfoglalása; Ásás: a kezdőcsapatok várárokásásra kijelölése. Tartás: maradás a védelmi helyen; Járőr: mozgás a védelmi helyek között az MI AIC-járőrbeállításai szerint. A visszaállítás a játék eredeti viselkedését állítja vissza.
 
 MI-nként: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) és `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Egységutótag nélkül a beállítás közös az MI számára; a közös szerep csak `"defend"` lehet. Az engedélyezett AIC-felülírások elsőbbséget élveznek; a kihagyott mezők örökölnek.
 

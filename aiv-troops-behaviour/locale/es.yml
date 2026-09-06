@@ -34,4 +34,4 @@ table_defend: Defender
 table_dig: Cavar
 table_hold: Mantener
 table_patrol: Patrullar
-table_help: 'Por cada tropa, elige como máximo una opción de cada par. Defender: ir a las posiciones AIV; Cavar: asignar las tropas iniciales a cavar fosos. Mantener: permanecer en un puesto defensivo; Patrullar: recorrer los puestos según los ajustes de patrulla AIC de la IA. Pulsa de nuevo una casilla marcada para desmarcar el par y usar el comportamiento del juego.'
+table_help: 'Por cada tropa, elige como máximo una opción de cada par. Defender: ir a las posiciones AIV; Cavar: asignar las tropas iniciales a cavar fosos. Mantener: permanecer en un puesto defensivo; Patrullar: recorrer los puestos según los ajustes de patrulla AIC de la IA. Restablecer recupera el comportamiento del juego.'

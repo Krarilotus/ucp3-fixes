@@ -34,4 +34,4 @@ table_defend: Savun
 table_dig: Kaz
 table_hold: Bekle
 table_patrol: Devriye
-table_help: 'Her birlik türü için her çiftten en fazla bir seçenek seçin. Savun: AIV konumlarına git; Kaz: başlangıç birliklerini hendek kazmaya ata. Bekle: savunma noktasında kal; Devriye: yapay zekânın AIC devriye ayarlarına göre savunma noktaları arasında dolaş. Çifti temizleyip oyunun varsayılan davranışını kullanmak için seçili kutuya tekrar tıklayın.'
+table_help: 'Her birlik türü için her çiftten en fazla bir seçenek seçin. Savun: AIV konumlarına git; Kaz: başlangıç birliklerini hendek kazmaya ata. Bekle: savunma noktasında kal; Devriye: yapay zekânın AIC devriye ayarlarına göre savunma noktaları arasında dolaş. Sıfırlama, oyunun varsayılan davranışını geri getirir.'

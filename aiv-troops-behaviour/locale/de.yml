@@ -34,4 +34,4 @@ table_defend: Wache
 table_dig: Graben
 table_hold: Halten
 table_patrol: Patrouille
-table_help: 'Pro Truppentyp höchstens eine Option je Paar wählen. Wache: AIV-Positionen beziehen; Graben: Starttruppen dem Ausheben von Burggräben zuweisen. Halten: am Verteidigungsplatz bleiben; Patrouille: gemäß den AIC-Patrouilleneinstellungen der KI zwischen Verteidigungsplätzen wechseln. Ein gewähltes Kästchen erneut anklicken, um das Paar abzuwählen und das Spielverhalten zu verwenden.'
+table_help: 'Pro Truppentyp höchstens eine Option je Paar wählen. Wache: AIV-Positionen beziehen; Graben: Starttruppen dem Ausheben von Burggräben zuweisen. Halten: am Verteidigungsplatz bleiben; Patrouille: gemäß den AIC-Patrouilleneinstellungen der KI zwischen Verteidigungsplätzen wechseln. Zurücksetzen stellt das Spielverhalten wieder her.'
