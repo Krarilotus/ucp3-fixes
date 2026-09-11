@@ -14,8 +14,3 @@ tags:
 - ai
 - aiv
 - behavior
-capabilities:
-  files: false
-  code: true
-  configuration: false
-  options: true

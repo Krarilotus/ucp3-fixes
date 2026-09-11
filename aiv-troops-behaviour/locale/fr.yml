@@ -35,3 +35,6 @@ table_dig: Creuser
 table_hold: Rester
 table_patrol: Patrouille
 table_help: 'Pour chaque troupe, choisir au plus une option par paire. Défendre : rejoindre les positions AIV ; Creuser : affecter les troupes initiales au creusement des douves. Rester : garder un poste défensif ; Patrouille : circuler entre les postes selon les réglages de patrouille AIC de l’IA. Réinitialiser rétablit le comportement du jeu.'
+tags.ai: IA
+tags.aiv: Châteaux IA
+tags.behavior: Comportement
