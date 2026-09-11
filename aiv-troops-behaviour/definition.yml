@@ -1,7 +1,7 @@
 name: aiv-troops-behaviour
 display-name: 'AI: AIV Troop Behaviour'
 author: Samurai
-version: 0.2.3
+version: 0.2.4
 type: module
 game: [SHC==1.41, SHCE==1.41]
 meta:
@@ -10,3 +10,7 @@ dependencies:
   framework: '>=3.0.4 <4.0.0'
   frontend: '>=1.0.16 <2.0.0'
   aicloader: '>=1.1.0 <2.0.0'
+tags:
+- ai
+- aiv
+- behavior

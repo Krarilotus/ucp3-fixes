@@ -35,3 +35,6 @@ table_dig: 挖掘
 table_hold: 驻守
 table_patrol: 巡逻
 table_help: '每种部队的每组选项最多选一项。防守：前往AIV位置；挖掘：将初始部队分配为护城河挖掘单位。驻守：留在防御位置；巡逻：按照该AI的AIC巡逻设置在防御位置之间移动。重置可恢复游戏默认行为。'
+tags.ai: 人工智能
+tags.aiv: AI 城堡
+tags.behavior: 行为

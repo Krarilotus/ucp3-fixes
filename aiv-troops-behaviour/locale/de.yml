@@ -35,3 +35,6 @@ table_dig: Graben
 table_hold: Halten
 table_patrol: Patrouille
 table_help: 'Pro Truppentyp höchstens eine Option je Paar wählen. Wache: AIV-Positionen beziehen; Graben: Starttruppen dem Ausheben von Burggräben zuweisen. Halten: am Verteidigungsplatz bleiben; Patrouille: gemäß den AIC-Patrouilleneinstellungen der KI zwischen Verteidigungsplätzen wechseln. Zurücksetzen stellt das Spielverhalten wieder her.'
+tags.ai: KI
+tags.aiv: KI-Burgen
+tags.behavior: Verhalten
