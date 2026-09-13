@@ -1,0 +1,10 @@
+bugfixes: Corrections
+crew_lifecycle: Suppression des équipages de siège
+crew_lifecycle_descr: Corrige la suppression ignorée des équipages de siège et rejette les références
+  périmées lors de la sortie d'un engin. Les ingénieurs survivants conservent leur identité et leur santé.
+  Redémarrez le jeu après une modification.
+ai: IA
+fixes: Correctifs
+tunneler_response: Réaction au combat des tunneliers
+tunneler_response_descr: Les tunneliers inactifs réagissent aux ennemis proches selon la posture de leur
+  groupe, comme les autres unités de mêlée. Redémarrez le jeu après modification.

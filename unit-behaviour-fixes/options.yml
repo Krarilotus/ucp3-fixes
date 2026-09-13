@@ -1,0 +1,21 @@
+meta:
+  version: 1.0.0
+options:
+- name: crew_lifecycle
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{crew_lifecycle}}'
+  text: '{{crew_lifecycle_descr}}'
+  url: unit-behaviour-fixes.crew_lifecycle
+  contents:
+    type: boolean
+    value: true
+- name: tunneler_response
+  category: ['{{ai}}', '{{fixes}}']
+  display: UCP2Switch
+  header: '{{tunneler_response}}'
+  text: '{{tunneler_response_descr}}'
+  url: unit-behaviour-fixes.tunneler_response
+  contents:
+    type: boolean
+    value: true

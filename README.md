@@ -3,6 +3,10 @@
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as two
 independent UCP3 modules. Author: Samurai (Discord: D. Daniel).
 
+A separate [unit lifecycle development candidate](docs/native-unit-lifecycle.md)
+is being prepared in `unit-behaviour-fixes`. It is not a released third module;
+the native crew correction and its remaining acceptance are tracked there.
+
 | Module | Scope |
 | --- | --- |
 | [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |

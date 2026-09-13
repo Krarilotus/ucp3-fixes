@@ -1,0 +1,7 @@
+bugfixes: 错误修复
+crew_lifecycle: 清理攻城器械操作人员
+crew_lifecycle_descr: 修复攻城器械乘员清理被跳过的问题，并在离开器械时拒绝过期的乘员引用。幸存工程师保留原有身份和生命值。更改设置后请重启游戏。
+ai: AI
+fixes: 修复
+tunneler_response: 隧道兵战斗反应
+tunneler_response_descr: 空闲的隧道兵会像其他近战部队一样，根据所属小组的姿态对附近敌人作出反应。更改此设置后请重新启动游戏。

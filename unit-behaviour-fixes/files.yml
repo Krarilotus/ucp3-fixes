@@ -1,0 +1,12 @@
+meta:
+  version: 1.0.0
+files:
+- src: definition.yml
+- src: options.yml
+- src: init.lua
+- src: crew.lua
+- src: unman.lua
+- src: unit-handlers.lua
+- src: tunneler.lua
+- src: description.md
+- src: locale

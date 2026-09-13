@@ -1,0 +1,10 @@
+bugfixes: Hibajavítások
+crew_lifecycle: Ostromgép legénységének eltávolítása
+crew_lifecycle_descr: Javítja az ostromgépek legénységének elmaradt eltávolítását, és kiszálláskor elutasítja
+  az elavult hivatkozásokat. A túlélő mérnökök megőrzik azonosítójukat és életerejüket. Módosítás után
+  indítsd újra a játékot.
+ai: MI
+fixes: Javítások
+tunneler_response: Alagútásók harci reakciója
+tunneler_response_descr: A tétlen alagútásók a többi közelharci egységhez hasonlóan, csoportjuk harcállása
+  szerint reagálnak a közeli ellenségekre. Módosítás után indítsd újra a játékot.

@@ -1,0 +1,10 @@
+bugfixes: Hata düzeltmeleri
+crew_lifecycle: Kuşatma mürettebatını kaldırma
+crew_lifecycle_descr: Kuşatma mürettebatının atlanan temizliğini düzeltir ve araçtan çıkarken geçersiz
+  mürettebat başvurularını reddeder. Hayatta kalan mühendislerin kimliği ve sağlığı korunur. Ayarı değiştirdikten
+  sonra oyunu yeniden başlatın.
+ai: Yapay zekâ
+fixes: Düzeltmeler
+tunneler_response: Tünelcilerin savaş tepkisi
+tunneler_response_descr: Boştaki tünelciler, diğer yakın dövüş birlikleri gibi gruplarının duruşuna göre
+  yakındaki düşmanlara tepki verir. Değişiklikten sonra oyunu yeniden başlatın.
