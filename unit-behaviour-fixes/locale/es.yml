@@ -8,3 +8,6 @@ tunneler_response: Reacci?n de combate de los tuneladores
 tunneler_response_descr: Los tuneladores inactivos reaccionan a los enemigos cercanos seg?n la actitud
   de su grupo, como las dem?s tropas cuerpo a cuerpo. Las ?rdenes de excavaci?n en curso no cambian. Reinicia
   el juego tras cambiar este ajuste.
+siege_target_stop: Detener m?quinas de asedio al apuntar
+siege_target_stop_descr: Las catapultas y trabuquetes interrumpen su movimiento anterior al recibir la
+  orden de atacar una unidad, igual que al atacar el suelo. Reinicia el juego tras cambiar esta opci?n.

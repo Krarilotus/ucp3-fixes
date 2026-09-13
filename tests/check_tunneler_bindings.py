@@ -59,13 +59,13 @@ for fixture in [f for p in args.fixtures for f in json.loads(p.read_text())]:
     # All OFF must work even on an unsupported image, without discovery.
     h = CrewFramework(b'unsupported', base, args.framework)
     init = h.lua.execute((Path(__file__).resolve().parents[1] / 'unit-behaviour-fixes/init.lua').read_text())
-    init.enable(init, h.lua.table_from(dict(crew_lifecycle=False, tunneler_response=False)))
+    init.enable(init, h.lua.table_from(dict(crew_lifecycle=False, tunneler_response=False, siege_target_stop=False)))
     assert not h.patches and not h.allocations
     # Both ON prepare first and share dispatch ownership; each OFF path installs
     # only the selected existing correction.
     for crew, idle, allocations in ((True, True, 11), (True, False, 9), (False, True, 2)):
         h = CrewFramework(mapped, base, args.framework)
         init = h.lua.execute((Path(__file__).resolve().parents[1] / 'unit-behaviour-fixes/init.lua').read_text())
-        init.enable(init, h.lua.table_from(dict(crew_lifecycle=crew, tunneler_response=idle)))
+        init.enable(init, h.lua.table_from(dict(crew_lifecycle=crew, tunneler_response=idle, siege_target_stop=False)))
         assert len(h.allocations) == allocations
     print(f'{path}: idle binding, occupied/layout/ambiguity/preflight, ON/OFF and crew composition passed')

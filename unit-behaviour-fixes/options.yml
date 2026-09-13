@@ -1,6 +1,15 @@
 meta:
   version: 1.0.0
 options:
+- name: siege_target_stop
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{siege_target_stop}}'
+  text: '{{siege_target_stop_descr}}'
+  url: unit-behaviour-fixes.siege_target_stop
+  contents:
+    type: boolean
+    value: true
 - name: crew_lifecycle
   category: ['{{bugfixes}}']
   display: UCP2Switch

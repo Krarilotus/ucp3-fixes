@@ -8,3 +8,6 @@ tunneler_response: T?nelcilerin sava? tepkisi
 tunneler_response_descr: Bo?taki t?nelciler, di?er yak?n d?v?? birlikleri gibi gruplar?n?n duru?una g?re
   yak?ndaki d??manlara tepki verir. Devam eden t?nel kazma emirleri de?i?mez. Bu ayar? de?i?tirdikten
   sonra oyunu yeniden ba?lat?n.
+siege_target_stop: Hedef se?ildi?inde ku?atma ara?lar?n? durdur
+siege_target_stop_descr: Manc?n?klar ve trebu?eler, bir birime sald?r? emri ald???nda yere sald?r?da oldu?u
+  gibi ?nceki hareketlerini durdurur. De?i?iklikten sonra oyunu yeniden ba?lat?n.

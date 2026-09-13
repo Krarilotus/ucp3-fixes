@@ -8,3 +8,6 @@ tunneler_response: R?action au combat des tunneliers
 tunneler_response_descr: Les tunneliers inactifs r?agissent aux ennemis proches selon la posture de leur
   groupe, comme les autres unit?s de m?l?e. Les ordres de creusement en cours restent inchang?s. Red?marrez
   le jeu apr?s modification.
+siege_target_stop: Arr?ter les engins lors du ciblage
+siege_target_stop_descr: Les catapultes et tr?buchets cessent leur d?placement pr?c?dent lorsqu?ils re?oivent
+  l?ordre d?attaquer une unit?, comme pour une attaque au sol. Red?marrez le jeu apr?s modification.

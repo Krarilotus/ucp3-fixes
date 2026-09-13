@@ -7,3 +7,6 @@ fixes: Fixes
 tunneler_response: Tunneler combat response
 tunneler_response_descr: Idle tunnelers respond to nearby enemies according to their group stance, like
   other melee troops. Active tunneling orders are unchanged. Restart the game after changing this setting.
+siege_target_stop: Stop siege engines when targeting
+siege_target_stop_descr: Catapults and trebuchets stop their previous movement when ordered to attack
+  a unit, as with ground attacks. Restart the game after changing this setting.

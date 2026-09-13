@@ -7,5 +7,6 @@ files:
 - src: crew.lua
 - src: unit-handlers.lua
 - src: tunneler.lua
+- src: siege-targeting.lua
 - src: description.md
 - src: locale
