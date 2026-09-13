@@ -130,6 +130,15 @@ for fixture in fixtures:
                 u.reg_write(UC_X86_REG_ECX, units)
                 u.emu_start(fire_entry, sentinel, count=10000)
                 assert u.reg_read(UC_X86_REG_ESP) == stack + 16
+                if not args.baseline and fire_health == 1:
+                    assert get(engine + 0x8c, '<H') == 2
+                    assert get(engine + 0x2a0, '<H') == 1
+                    assert get(engine + 0x2c0, '<H') == 114
+                    u.reg_write(UC_X86_REG_ESP, stack)
+                    u.reg_write(UC_X86_REG_ESI, units)
+                    u.reg_write(UC_X86_REG_EBX, 1)
+                    u.reg_write(UC_X86_REG_EBP, 0)
+                    u.emu_start(advance_entry, dispatch_end, count=10000)
             elif complete_dispatch:
                 u.reg_write(UC_X86_REG_ESI, units)
                 u.reg_write(UC_X86_REG_EBX, 1)
@@ -141,6 +150,7 @@ for fixture in fixtures:
                 assert u.reg_read(UC_X86_REG_ESP) == stack + 4
             states = [get(record + i * 0x490 + 0x8c, '<H') for i in (300, 1300)]
             expected_removed = fire_health is None and cycle == 0 and (not args.baseline or not (complete_dispatch and advance_due))
+            expected_removed |= not args.baseline and fire_health == 1
             if args.reset_death_action and complete_dispatch:
                 expected_removed = True
             if args.crew_mode == 'already-attributed':
@@ -150,7 +160,7 @@ for fixture in fixtures:
                 expected_states[1] = 2
             assert states == expected_states, (kind, cycle, complete_dispatch, advance_due, states)
             first_writes = len(crew_state_writes)
-            if complete_dispatch:
+            if complete_dispatch or (not args.baseline and fire_health == 1):
                 # A second real update must not run casualty/crew cleanup again.
                 u.reg_write(UC_X86_REG_ESP, stack)
                 u.reg_write(UC_X86_REG_ESI, units)

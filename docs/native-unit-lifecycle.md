@@ -3,7 +3,9 @@
 This branch addresses [UCP issue79](https://github.com/UnofficialCrusaderPatch/UnofficialCrusaderPatch/issues/79).
 The initial implementation preserves the eight original engine handlers' crew
 ID/UID validation and casualty logic. It changes their animation-cycle gate so
-that advancement before the first death dispatch cannot skip cleanup. No second
+that advancement before the first death dispatch cannot skip cleanup. Fatal
+fire damage now enters the existing dying initialization for siege engines
+instead of converting them to corpses before their crew handlers run. No second
 crew array, native deletion service, census, DLL bridge or patch manager is added.
 
 The supporting unit behavior surface is proposed in
@@ -19,7 +21,8 @@ ownership; the active AIC branch is unchanged. Final integration is pending.
 | Discovery and patching | Released UCP3.0.7 core.lua, data.cache.AOB, RPS1.5.1; existing AIV behavior caller | Use core.AOBScan, scanForAOB, insertCode, itob and writeCodeByte. No custom scanner, cache, allocator or hook bridge. |
 | Crew tracking | Original SHC/Extreme unit pool and eight engine behavior handlers | Already preserves mounted engineer records. Retain native ownership and cleanup rather than rebuilding it. |
 | General unit API | AI Swapper startup, AIC native-context/native-group-actions, Mapstate, running-units, Legacy ports, this repository's AIV behavior | None exports a general human/AI crew lifecycle API. AIC's group adapter is internal and its policy hooks remain its owner. |
-| Unique discovery | Stock scanner and held framework PR149/RPS PR16 | Do not depend on or publish the held API proposals. Initial dispatch uses stock uniqueness checks. Each engine guard must belong to its independently decoded native handler and be unique in that interval. Measure startup cost before release. |
+| Unique discovery | Stock scanner and held framework PR149/RPS PR16 | Do not depend on or publish the held API proposals. Dispatch and fire use stock uniqueness checks. Each engine guard must belong to its independently decoded native handler and be unique in that interval. Measure startup cost before release. |
+| Fire damage | Original health/attribution calculation and fatal classification; AIC PR17 at 28fd320, combat-native.lua entry observer | Retain the original damage owner. Extend only its fatal classification, using an independent interior context; do not detour or duplicate the function. AIC's five-byte entry observer remains untouched. Full composition acceptance is pending. |
 
 Preparation occurs before enable-time writes. Dispatch context includes the
 16-bit type load, original handler-table operand, indirect call and current-unit
@@ -36,6 +39,15 @@ whose destination is retained. There is no native function call or per-frame
 Lua callback. Existing ID/UID cleanup and casualty bodies remain untouched.
 Only the first death-frame guard changes; live unit behavior is unchanged.
 
+Fire discovery identifies the fatal-health guard through the complete existing
+dying initialization and thiscall RET12. The ten overwritten bytes contain the
+type comparison and cycle reset. The trampoline extends the comparison to the
+eight engine types, preserves registers and the displaced reset, and supplies
+ZF to the existing conditional branch. It does not change the native damage
+calculation or attribution. The original lord behavior is retained. Nine
+framework allocations total217 bytes;66 original bytes are patched. All sites
+are checked before any write and checked again when installing.
+
 ## Acceptance status
 
 The actual source through released UCP3.0.7 core/cache/byte compiler passes
@@ -44,8 +56,14 @@ SHC/Extreme fixtures. These cover both native animation timings, the generic
 death-action reset, partial crews, a reused slot occupied by a different lord
 UID, the existing already-attributed predicate and a second complete update
 without repeated crew-state writes. Native callees are not stubbed. Another
-54 binding checks reject missing/occupied, duplicate and changed-layout cases
-before writes, including changes between preparation and installation.
+66 binding checks reject missing/occupied, duplicate and changed-layout cases
+before writes, including changes between preparation and installation, and
+verify discovery remains independent of a patched fire entry. Another1,392
+paired whole-function fire comparisons cover all80 unit types and selected
+damage-owner/half-damage combinations. Non-engine and nonfatal controls retain
+the original unit record, native write sequence and return registers. Fatal
+engine cases enter dying state and the native engine cleanup on the following
+update. These remain synthetic-state instruction tests, not gameplay acceptance.
 
 Controlled Polish SHC gameplay, original executable SHA256
 `2aab6b3da99148b0796bd00a92b4b19db7548d1e2c50fa4372035f716fd33cab`,
@@ -64,13 +82,10 @@ Module enable to bootstrap completion took 1.413s, including native binding and
 patch setup. There is no per-frame Lua callback or census. Final controlled
 composition/performance acceptance remains pending. The native process28168
 closed normally, its absence was checked and the desktop released18:51:34CEST.
-The private fixture configuration was restored. Later description/localization
-edits are not represented by this particular ZIP hash; native Lua is unchanged.
-
-The fire path is a separate bypass. A research candidate extends only fatal
-fire classification to enter existing dying initialization and engine cleanup;
-288 original-instruction cases pass. It is not included in crew.lua until its
-complete casualty and non-engine comparison checks are established.
+The private fixture configuration was restored. This ZIP tested only the timing
+correction at commit586d5c9. Later fire and description/localization changes are
+not represented by this ZIP hash. Native fire gameplay and complete casualty
+accounting remain unverified; the component comparisons do not discharge them.
 
 Remaining: corrected native gameplay, live first-transition trace, damage and
 casualty matrix, partial/stale crew, dismount/remount identity and health,
@@ -98,5 +113,6 @@ python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --
 python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --crew-mode reused-slot
 python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --crew-mode already-attributed
 python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --reset-death-action
+python tests/check_crew_fire.py --framework code.zip --fixtures matrix.json
 python -m unittest discover -s tests -p test_packaging.py -v
 ```
