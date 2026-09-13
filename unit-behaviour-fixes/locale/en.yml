@@ -1,0 +1,4 @@
+bugfixes: Bugfixes
+crew_lifecycle: Siege crew cleanup
+crew_lifecycle_descr: Fix skipped crew cleanup at the start of a siege engine's death
+  animation. Restart the game after changing this setting.

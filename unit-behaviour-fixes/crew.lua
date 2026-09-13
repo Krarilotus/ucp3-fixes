@@ -1,0 +1,77 @@
+-- The original engine handlers retain ownership of crew records and casualties.
+-- Prepare all bindings before applying any patch. This is a draft correction;
+-- native lifecycle and collection integration acceptance are recorded in docs.
+local guards = {
+  {39, "39 AE ? ? ? ? 0F 85 93 00 00 00 66 39 AE ? ? ? ? 0F 85 86 00 00 00"},
+  {40, "39 96 ? ? ? ? 0F 85 8B 00 00 00 66 39 96 ? ? ? ? 0F 85 7E 00 00 00"},
+  {41, "39 BE ? ? ? ? 0F 85 83 00 00 00 66 39 BE ? ? ? ? 75 7A"},
+  {58, "39 9E ? ? ? ? 0F 85 8D 00 00 00 66 39 9E ? ? ? ? 0F 85 80 00 00 00"},
+  {59, "39 96 ? ? ? ? 0F 85 85 00 00 00 66 39 96 ? ? ? ? 0F 85 78 00 00 00"},
+  {60, "39 90 ? ? ? ? 0F 85 8E 00 00 00 66 83 B8 ? ? ? ? 00 0F 85 80 00 00 00"},
+  {61, "39 BE ? ? ? ? 0F 85 87 00 00 00 66 39 BE ? ? ? ? 75 7E"},
+  {77, "39 AE ? ? ? ? 0F 85 8F 00 00 00 66 39 AE ? ? ? ? 0F 85 82 00 00 00"},
+}
+local dispatchPattern = "0F BF 91 A2 06 00 00 8B 04 95 ? ? ? ? FF D0 A1 ? ? ? ? 69 C0 90 04 00 00"
+
+local function prepare()
+  local dispatch = core.AOBScan(dispatchPattern)
+  -- Stock UCP has no published unique-main-image resolver. Use its own scanner;
+  -- never substitute a private scanner or the held framework API proposal.
+  assert(core.scanForAOB(dispatchPattern) == dispatch
+      and core.scanForAOB(dispatchPattern, dispatch + 1) == nil,
+    "unit-behaviour-fixes: ambiguous unit dispatch")
+  local handlers = core.readInteger(dispatch + 10)
+  local entries = {}
+  for kind = 0, 79 do entries[kind] = core.readInteger(handlers + kind * 4) end
+  local sites, recordRoot = {}, nil
+  for _, guard in ipairs(guards) do
+    local kind, pattern = guard[1], guard[2]
+    local address = core.AOBScan(pattern)
+    local first, last = entries[kind], nil
+    for _, entry in pairs(entries) do
+      if entry > first and (not last or entry < last) then last = entry end
+    end
+    assert(last and address >= first and address + 25 < last,
+      "unit-behaviour-fixes: crew guard is outside its native engine handler")
+    -- The table supplies an independently decoded owner interval. The old RPS
+    -- scanner can return beyond a requested bound; reject only matches within
+    -- this interval and never treat an out-of-range match as an owned binding.
+    local before = core.scanForAOB(pattern, first, last - 1)
+    local after = core.scanForAOB(pattern, address + 1, last - 1)
+    assert(before == address and (after == nil or after >= last),
+      "unit-behaviour-fixes: ambiguous engine crew guard")
+    local cycle = core.readInteger(address + 2)
+    local killed = core.readInteger(address + 15)
+    local root = cycle - 0x2B0
+    assert(killed == root + 0x3F0 and (not recordRoot or recordRoot == root),
+      "unit-behaviour-fixes: inconsistent native crew layout")
+    recordRoot = root
+    local operand = kind == 60 and 0x90 or 0x96 -- [eax+disp32] or [esi+disp32], EDX
+    sites[#sites + 1] = {address = address, original = core.readBytes(address, 25), code = {
+      0x52,                         -- push edx
+      0x8B, operand, core.itob(root + 0x50), -- mov edx, [animationAdvanced]
+      0x39, operand, core.itob(cycle),       -- cmp [animationCycle], edx
+      0x5A,                         -- pop edx (preserves comparison flags)
+    }}
+  end
+  local applied = false
+  return function()
+    if applied then return end
+    for _, site in ipairs(sites) do
+      for index, byte in ipairs(site.original) do
+        assert(core.readByte(site.address + index - 1) == byte,
+          "unit-behaviour-fixes: crew guard changed after preparation")
+      end
+    end
+    for _, site in ipairs(sites) do
+      core.insertCode(site.address, 6, site.code)
+      -- Keep the existing branch destination and complete native cleanup loop.
+      -- Zero remains eligible after the generic death-action reset; one is
+      -- eligible only when it advanced this tick. Later frames cannot repeat it.
+      core.writeCodeByte(site.address + 7, 0x87) -- JNE -> unsigned JA
+    end
+    applied = true
+  end
+end
+
+return {prepare = prepare}

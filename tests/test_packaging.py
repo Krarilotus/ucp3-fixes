@@ -12,12 +12,13 @@ spec = importlib.util.spec_from_file_location('build_modules', ROOT / 'tools/bui
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
+PACKAGED_MODULES = (*FIXTURES, 'unit-behaviour-fixes')
 
 
 class PackagingTests(unittest.TestCase):
     def test_all_frontend_languages_are_discoverable_inside_zip(self):
         with tempfile.TemporaryDirectory() as output:
-            for name in FIXTURES:
+            for name in PACKAGED_MODULES:
                 with self.subTest(module=name), zipfile.ZipFile(builder.build_module(ROOT / name, output)) as archive:
                     self.assertIsNone(archive.testzip())
                     # readLocales checks this exact entry before loading any .yml.
@@ -33,13 +34,14 @@ class PackagingTests(unittest.TestCase):
 
     def test_package_preserves_source_files_and_release_name(self):
         with tempfile.TemporaryDirectory() as output:
-            for name in FIXTURES:
+            for name in PACKAGED_MODULES:
                 folder = ROOT / name
                 with zipfile.ZipFile(builder.build_module(folder, output)) as archive:
                     original = yaml.safe_load((folder / 'definition.yml').read_text(encoding='utf-8'))
                     installed = yaml.safe_load(archive.read('definition.yml'))
                     self.assertEqual(installed, original)
                     for entry in archive.infolist():
+                        self.assertEqual(entry.compress_type, zipfile.ZIP_STORED)
                         if not entry.is_dir():
                             self.assertEqual(archive.read(entry), (folder / entry.filename).read_bytes())
 

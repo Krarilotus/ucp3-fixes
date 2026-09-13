@@ -1,0 +1,4 @@
+bugfixes: Hibajavítások
+crew_lifecycle: Ostromgép legénységének eltávolítása
+crew_lifecycle_descr: Javítja a legénység eltávolításának kimaradását az ostromgép
+  pusztulási animációjának kezdetén. A beállítás módosítása után indítsd újra a játékot.

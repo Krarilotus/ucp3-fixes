@@ -1,0 +1,4 @@
+bugfixes: Corrections
+crew_lifecycle: Suppression des équipages de siège
+crew_lifecycle_descr: Corrige la suppression ignorée de l'équipage au début de l'animation
+  de destruction d'un engin de siège. Redémarrez le jeu après avoir modifié ce réglage.

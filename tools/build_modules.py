@@ -31,7 +31,8 @@ def build_module(folder, output):
                 entries[relative.as_posix()] = path.read_bytes()
     output.mkdir(parents=True, exist_ok=True)
     target = output / f"{definition['name']}-{definition['version']}.zip"
-    with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as archive:
+    # Match the framework/store module packager (7z -m0=Copy).
+    with zipfile.ZipFile(target, 'w', zipfile.ZIP_STORED) as archive:
         # The frontend probes locale/ by its exact ZIP entry name before reading
         # any translations. Having locale/en.yml alone does not satisfy that probe.
         for directory in sorted(directories):

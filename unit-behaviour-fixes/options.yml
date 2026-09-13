@@ -1,0 +1,12 @@
+meta:
+  version: 1.0.0
+options:
+- name: crew_lifecycle
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{crew_lifecycle}}'
+  text: '{{crew_lifecycle_descr}}'
+  url: unit-behaviour-fixes.crew_lifecycle
+  contents:
+    type: boolean
+    value: true

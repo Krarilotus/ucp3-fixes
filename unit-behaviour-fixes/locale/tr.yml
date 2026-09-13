@@ -1,0 +1,5 @@
+bugfixes: Hata düzeltmeleri
+crew_lifecycle: Kuşatma mürettebatını kaldırma
+crew_lifecycle_descr: Kuşatma aracının yok olma animasyonu başladığında mürettebatın
+  kaldırılmasının atlanmasını düzeltir. Bu ayarı değiştirdikten sonra oyunu yeniden
+  başlatın.

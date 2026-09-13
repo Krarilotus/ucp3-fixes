@@ -1,0 +1,9 @@
+meta:
+  version: 1.0.0
+files:
+- src: definition.yml
+- src: options.yml
+- src: init.lua
+- src: crew.lua
+- src: description.md
+- src: locale
