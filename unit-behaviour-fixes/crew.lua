@@ -11,7 +11,6 @@ local guards = {
   {61, "39 BE ? ? ? ? 0F 85 87 00 00 00 66 39 BE ? ? ? ? 75 7E"},
   {77, "39 AE ? ? ? ? 0F 85 8F 00 00 00 66 39 AE ? ? ? ? 0F 85 82 00 00 00"},
 }
-local dispatchPattern = "0F BF 91 A2 06 00 00 8B 04 95 ? ? ? ? FF D0 A1 ? ? ? ? 69 C0 90 04 00 00"
 -- Fatal-health guard through native dying initialization and its thiscall RET12.
 -- This interior context remains independent of AIC's five-byte entry observer.
 local firePattern = "39 9E DC 09 00 00 66 89 86 4C 06 00 00 0F 8F 4A 01 00 00 " ..
@@ -19,33 +18,12 @@ local firePattern = "39 9E DC 09 00 00 66 89 86 4C 06 00 00 0F 8F 4A 01 00 00 " 
   "5F 66 89 AE B4 08 00 00 66 89 AE 0A 07 00 00 8B C5 5D " ..
   "89 9E DC 09 00 00 89 9E C4 08 00 00 66 C7 86 D4 08 00 00 72 00 5E 5B C2 0C 00"
 
-local function prepare()
-  local dispatch = core.AOBScan(dispatchPattern)
-  -- Stock UCP has no published unique-main-image resolver. Use its own scanner;
-  -- never substitute a private scanner or the held framework API proposal.
-  assert(core.scanForAOB(dispatchPattern) == dispatch
-      and core.scanForAOB(dispatchPattern, dispatch + 1) == nil,
-    "unit-behaviour-fixes: ambiguous unit dispatch")
-  local handlers = core.readInteger(dispatch + 10)
-  local entries = {}
-  for kind = 0, 79 do entries[kind] = core.readInteger(handlers + kind * 4) end
+local function prepare(native)
+  native = native or require("unit-handlers").resolve()
   local sites, recordRoot = {}, nil
   for _, guard in ipairs(guards) do
     local kind, pattern = guard[1], guard[2]
-    local address = core.AOBScan(pattern)
-    local first, last = entries[kind], nil
-    for _, entry in pairs(entries) do
-      if entry > first and (not last or entry < last) then last = entry end
-    end
-    assert(last and address >= first and address + 25 < last,
-      "unit-behaviour-fixes: crew guard is outside its native engine handler")
-    -- The table supplies an independently decoded owner interval. The old RPS
-    -- scanner can return beyond a requested bound; reject only matches within
-    -- this interval and never treat an out-of-range match as an owned binding.
-    local before = core.scanForAOB(pattern, first, last - 1)
-    local after = core.scanForAOB(pattern, address + 1, last - 1)
-    assert(before == address and (after == nil or after >= last),
-      "unit-behaviour-fixes: ambiguous engine crew guard")
+    local address = native.find(kind, pattern, 25)
     local cycle = core.readInteger(address + 2)
     local killed = core.readInteger(address + 15)
     local root = cycle - 0x2B0

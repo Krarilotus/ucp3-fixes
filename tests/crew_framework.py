@@ -60,6 +60,10 @@ class CrewFramework:
             lua.execute('package.preload.core = function() return core end; log=function() end')
             lua.globals().utils = lua.execute(archive.read('utils.lua').decode())
             lua.globals().data = lua.table_from({'cache': lua.execute(archive.read('data/cache.lua').decode())})
+        module_root = Path(__file__).resolve().parents[1] / 'unit-behaviour-fixes'
+        for name in ('unit-handlers', 'tunneler', 'crew'):
+            factory = lua.eval('function(source) return function() return assert(load(source))() end end')
+            lua.globals().package.preload[name] = factory((module_root / (name + '.lua')).read_text(encoding='utf-8'))
         self.module = lua.execute((Path(__file__).resolve().parents[1] /
                                    'unit-behaviour-fixes/crew.lua').read_text())
 

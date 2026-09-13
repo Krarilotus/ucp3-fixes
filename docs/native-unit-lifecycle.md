@@ -1,4 +1,4 @@
-# Native unit lifecycle correction (draft)
+# Native unit lifecycle and idle tunneler corrections (draft)
 
 This branch addresses [UCP issue79](https://github.com/UnofficialCrusaderPatch/UnofficialCrusaderPatch/issues/79).
 The initial implementation preserves the eight original engine handlers' crew
@@ -14,6 +14,15 @@ The existing AIV and hop-farm modules are unchanged. No collection manifest or
 store recipe is added. AIC PR17 retains recruitment/census/moat/reserve/group
 ownership; the active AIC branch is unchanged. Final integration is pending.
 
+The same unit module now contains an independently switchable idle-tunneler
+response candidate. Native tunneler states5/6 omit the melee-response flag
+which ordinary melee handlers set. The existing enemy-notice routine therefore
+skips the group's stance when choosing whether to pursue a nearby enemy. Set
+that flag in the two idle branches, then execute the displaced original
+instruction. Group stance, assignment, target selection and recruitment remain
+owned by the original game and AIC. This is not a new AIV slot or a change to
+AI Swapper's native initial-defense placement.
+
 ## Reuse and binding review
 
 | Capability | Inspected implementation | Decision |
@@ -23,6 +32,7 @@ ownership; the active AIC branch is unchanged. Final integration is pending.
 | General unit API | AI Swapper startup, AIC native-context/native-group-actions, Mapstate, running-units, Legacy ports, this repository's AIV behavior | None exports a general human/AI crew lifecycle API. AIC's group adapter is internal and its policy hooks remain its owner. |
 | Unique discovery | Stock scanner and held framework PR149/RPS PR16 | Do not depend on or publish the held API proposals. Dispatch and fire use stock uniqueness checks. Each engine guard must belong to its independently decoded native handler and be unique in that interval. Measure startup cost before release. |
 | Fire damage | Original health/attribution calculation and fatal classification; AIC PR17 at 28fd320, combat-native.lua entry observer | Retain the original damage owner. Extend only its fatal classification, using an independent interior context; do not detour or duplicate the function. AIC's five-byte entry observer remains untouched. Full composition acceptance is pending. |
+| Idle melee response | Released AIC Loader1.1.2 at b494248, AI: AIV Troop Behaviour0.2.3 at b20dad6, AI Swapper at26e1b1f and original unit dispatch/notice callers | These configuration/placement owners expose no common idle-response capability. Reuse the existing unit module's decoded handler ownership, extracted to unit-handlers.lua; do not copy AIC group/recruitment handling. Restore the native eligibility field inside type5's own idle branches. |
 
 Preparation occurs before enable-time writes. Dispatch context includes the
 16-bit type load, original handler-table operand, indirect call and current-unit
@@ -37,7 +47,8 @@ The patch displaces one complete six-byte comparison. Its trampoline preserves
 EDX and stack balance and intentionally supplies flags to the original branch,
 whose destination is retained. There is no native function call or per-frame
 Lua callback. Existing ID/UID cleanup and casualty bodies remain untouched.
-Only the first death-frame guard changes; live unit behavior is unchanged.
+This crew gate changes only the first death frame. The separate tunneler option
+below intentionally changes live idle response eligibility.
 
 Fire discovery identifies the fatal-health guard through the complete existing
 dying initialization and thiscall RET12. The ten overwritten bytes contain the
@@ -48,7 +59,58 @@ calculation or attribution. The original lord behavior is retained. Nine
 framework allocations total217 bytes;66 original bytes are patched. All sites
 are checked before any write and checked again when installing.
 
+The tunneler binding derives the unit-record root from the type5 handler's
+owner load and validates the native stride/prologue and three idle operands.
+Each complete state5/6 signature must be unique within the independently
+decoded handler. Two insertCode calls each retain a complete six-byte MOV and
+add a word write at verified Unit+0x3FC; they preserve registers, flags and
+stack. Two framework allocations total40 bytes, with12 original bytes patched.
+There is no call, frame hook, Lua scan or extra persistent record. Both options
+are prepared before either installs; all OFF performs no discovery or writes.
+The shared resolver extraction retains the existing crew payloads unchanged.
+
+Research addresses, not runtime bindings: SHC54F04E/54F153 and
+Extreme54F46E/54F573. The next native enemy-notice consumer is
+SHC54A7B0/Extreme54ABD0: eligibility gate at+0x52, group stance load at+0xAD.
+The central update clears eligibility before the type handler sets it for the
+following update. Active-order transitions must therefore be tested explicitly,
+not inferred solely from the idle patch locations. The exact ownership proposal
+was [shared with AIC PR17](https://github.com/UnofficialCrusaderPatch/extension-aic-tactics/pull/17#issuecomment-5655323602).
+AIC head28fd320 remained unchanged at the13September21:13 refresh.
+
 ## Acceptance status
+
+Idle response:42 paired original-instruction cases across all six fixture
+identities execute original spawn, role20 assignment, type handler and enemy
+notice without callee stubs. Idle5/6 now reach native stance handling like
+swordsman1/3; working4/7/9 controls retain their complete unit record. The only
+expected idle differences are eligibility and the original no-enemy retry.
+These are controlled states, not a nearby-threat gameplay reproduction.
+Actual framework binding tests cover occupied/missing/ambiguous/layout changes,
+changed-after-prepare rejection, repeat enable and both independent OFF paths.
+The shared resolver also passes the66 existing crew binding checks unchanged.
+
+Polish SHC, UCP3.0.7, unsigned candidate ZIP
+`91bab0f7a7004757123cab8483bc7e5db12e9f2303f25610f98fb50e73f445e2`:
+the same preserved `temixedadvused` save was loaded with crew OFF and response
+OFF/ON, alongside signed AI Swapper26e1b1f and published AIV0.2.3. OFF107 samples
+over40.03s (ticks45659..58282) had340 idle records with eligibility0. ON112
+samples over40.18s (45067..57880) had387 idle records with eligibility1 and one
+transient0. Both runs retained the same ten tunneler identities/roles and
+continued through native tunneling states7/8/9. No tunneler target was observed;
+this proves live flag installation/load compatibility, not nearby-threat
+pursuit, active-order safety under threat or main-attack-slot acceptance.
+The fixture contains old role15 tunnelers and is not the role20 reproduction.
+Both processes closed normally; the desktop was released21:12:24CEST and the
+private modules/config restored. No save was overwritten. The one source edit
+after this ZIP only changes signature interval length validation; a final ZIP
+must be rebuilt. Native Extreme response, controlled threats/stances, active
+order transitions, save/reload and performance acceptance remain outstanding.
+
+The new response option defaults ON under the existing AI / Fixes category and
+has all nine option catalogs. GUI verification, runtime-error localization,
+root descriptions and collection/store integration remain unfinished. The
+signed AI Swapper preview does not contain this unit module.
 
 The actual source through released UCP3.0.7 core/cache/byte compiler passes
 1,440 original-instruction cases across local, official EFIGS and Polish
@@ -140,5 +202,8 @@ python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --
 python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --crew-mode already-attributed
 python tests/check_crew_native.py --framework code.zip --fixtures matrix.json --reset-death-action
 python tests/check_crew_fire.py --framework code.zip --fixtures matrix.json
+python tests/check_tunneler_bindings.py --framework code.zip --fixtures matrix.json
+python tests/check_tunneler_native.py --framework code.zip --fixtures matrix.json --baseline --report baseline.json
+python tests/check_tunneler_native.py --framework code.zip --fixtures matrix.json --compare baseline.json
 python -m unittest discover -s tests -p test_packaging.py -v
 ```

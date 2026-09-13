@@ -10,3 +10,12 @@ options:
   contents:
     type: boolean
     value: true
+- name: tunneler_response
+  category: ['{{ai}}', '{{fixes}}']
+  display: UCP2Switch
+  header: '{{tunneler_response}}'
+  text: '{{tunneler_response_descr}}'
+  url: unit-behaviour-fixes.tunneler_response
+  contents:
+    type: boolean
+    value: true

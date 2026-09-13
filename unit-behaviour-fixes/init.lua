@@ -1,8 +1,11 @@
 return {
   enable = function(self, config)
-    if config.crew_lifecycle == false or self.applied then return end
-    local install = require("crew").prepare()
-    install()
+    if self.applied or (config.crew_lifecycle == false and config.tunneler_response == false) then return end
+    local native = require("unit-handlers").resolve()
+    local crew = config.crew_lifecycle ~= false and require("crew").prepare(native)
+    local tunneler = config.tunneler_response ~= false and require("tunneler").prepare(native)
+    if crew then crew() end
+    if tunneler then tunneler() end
     self.applied = true
   end,
   disable = function()

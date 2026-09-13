@@ -5,5 +5,7 @@ files:
 - src: options.yml
 - src: init.lua
 - src: crew.lua
+- src: unit-handlers.lua
+- src: tunneler.lua
 - src: description.md
 - src: locale

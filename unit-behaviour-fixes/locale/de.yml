@@ -1,5 +1,9 @@
 bugfixes: Fehlerkorrekturen
 crew_lifecycle: Belagerungsbesatzung entfernen
-crew_lifecycle_descr: Behebt das übersprungene Entfernen der Besatzung zu Beginn der
-  Zerstörungsanimation einer Belagerungsmaschine. Nach einer Änderung das Spiel neu
-  starten.
+crew_lifecycle_descr: Behebt das übersprungene Entfernen der Besatzung zu Beginn der Zerstörungsanimation
+  einer Belagerungsmaschine. Nach einer Änderung das Spiel neu starten.
+ai: KI
+fixes: Fehlerbehebungen
+tunneler_response: Kampfverhalten der Tunnelgr?ber
+tunneler_response_descr: Unt?tige Tunnelgr?ber reagieren wie andere Nahk?mpfer gem?? ihrer Gruppenhaltung
+  auf nahe Gegner. Aktive Tunnelgrabebefehle bleiben unver?ndert. Nach einer ?nderung das Spiel neu starten.
