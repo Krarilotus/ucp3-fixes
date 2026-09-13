@@ -87,6 +87,32 @@ correction at commit586d5c9. Later fire and description/localization changes are
 not represented by this ZIP hash. Native fire gameplay and complete casualty
 accounting remain unverified; the component comparisons do not discharge them.
 
+Polish Extreme gameplay at92f838a used unsigned ZIP
+`962151a1cd2985bd69d71ccb0beccf1005add711e5dc791956f735ebb0f2a9dc`
+and unchanged executable
+`e7e82625a39d3840bf44a84456967eeecafe7ec9d716afa67f1856ad59a9d460`.
+The preserved `teextbaseline767signed7` save loaded successfully.148 read-only
+samples over50.22s covered ticks7246..38842 and29 engine identities.17 catapult
+or fire-ballista deaths had two valid living crew before death; none of those34
+engineers remained alive in the first later sample without the original engine.
+Death actions111/113/114 were observed, but the damage source was not traced;
+this is not specific fire-path acceptance or a matched unmodified Extreme
+control. The full native run also does not establish casualty totals. Enable
+through bootstrap took4.728s, requiring further startup-performance work.
+The game closed normally, PID27040 absence was checked, the desktop released
+19:27:52CEST and the private fixture config restored. No save was overwritten.
+
+A separate original-command regression now demonstrates that normal unman
+validates the engine UID but not the individual crew UIDs. On all six fixtures,
+reusing crew slot1300 for a different lord UID still causes29 writes, including
+fade action109 and relocation. The entire original command and its callees
+return with the correct ABI; valid injured engineers retain UID and health.
+This is instruction evidence, not gameplay or historical-incident attribution.
+The exact proposed instruction17 context was shared with AIC before production
+changes in [the owner handoff](https://github.com/UnofficialCrusaderPatch/extension-aic-tactics/pull/17#issuecomment-5654832850).
+No unman correction is included yet. The tower deployment's separate UID check
+does not establish safety for the normal exit-equipment command.
+
 Remaining: corrected native gameplay, live first-transition trace, damage and
 casualty matrix, partial/stale crew, dismount/remount identity and health,
 save/load/offline restoration, AI lifecycle/composition, supported variants,
