@@ -1,5 +1,7 @@
-# Eliminación de la dotación de asedio
+# Correcciones del comportamiento de las unidades
 
-Corrige la omisión de la eliminación de la dotación al comenzar la animación de destrucción de una máquina de asedio. Reinicia el juego después de cambiar este ajuste.
+Corrige la eliminación omitida de las dotaciones de asedio. Los zapadores inactivos usan la reacción normal ante enemigos cercanos según la actitud de su grupo.
 
-Versión de desarrollo, no definitiva. El daño por fuego, las demás comprobaciones del ciclo de vida de la dotación y el recuento de reclutamiento siguen pendientes. Solo para pruebas de un jugador. La opción está activada por defecto al seleccionar este módulo.
+Ambas correcciones se activan por defecto al seleccionar el módulo y pueden desactivarse por separado en Personalizaciones: dotaciones en Correcciones, reacción de zapadores en IA / Correcciones. Reinicia el juego tras cambiar una opción.
+
+Versión de prueba para un jugador. El ciclo completo de las dotaciones, el recuento de reclutamiento y la validación en partida siguen pendientes. Las tropas iniciales se configuran en AI Swapper. Las pruebas multijugador corresponden a los jugadores.

@@ -1,5 +1,7 @@
-# Kuşatma mürettebatını kaldırma
+# Birim davranışı düzeltmeleri
 
-Kuşatma aracının yok olma animasyonu başladığında mürettebatın kaldırılmasının atlanmasını düzeltir. Bu ayarı değiştirdikten sonra oyunu yeniden başlatın.
+Kuşatma mürettebatının kaldırılmasının atlanmasını düzeltir. Boştaki tünelciler, gruplarının duruşuna göre yakındaki düşmanlara normal tepkiyi verir.
 
-Geliştirme sürümüdür, yayıma hazır değildir. Ateş hasarı, kalan mürettebat yaşam döngüsü kontrolleri ve asker alımı sayımı henüz tamamlanmamıştır. Yalnızca tek oyunculu test içindir. Modül seçildiğinde bu seçenek varsayılan olarak açıktır.
+Modül seçildiğinde iki düzeltme de varsayılan olarak açıktır. Özelleştirmeler bölümünde ayrı ayrı kapatılabilir: mürettebat düzeltmesi Hata Düzeltmeleri, tünelci tepkisi Yapay Zekâ / Düzeltmeler altında. Değişiklikten sonra oyunu yeniden başlatın.
+
+Tek oyunculu test sürümüdür. Mürettebatın tüm yaşam döngüsü, asker alım sayımı ve oyun içi doğrulama henüz tamamlanmadı. Başlangıç birlikleri AI Swapper içinde ayarlanır. Çok oyunculu testleri oyuncular yapar.

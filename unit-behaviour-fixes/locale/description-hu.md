@@ -1,5 +1,7 @@
-# Ostromgép legénységének eltávolítása
+# Egységviselkedési javítások
 
-Javítja a legénység eltávolításának kimaradását az ostromgép pusztulási animációjának kezdetén. A beállítás módosítása után indítsd újra a játékot.
+Javítja az ostromgépek legénységének elmaradó eltávolítását. A tétlen alagútásók a csoportjuk harcállása szerint, a szokásos módon reagálnak a közeli ellenségekre.
 
-Fejlesztői változat, nem végleges kiadás. A tűzkár, a legénység életciklusának további ellenőrzései és a toborzás számlálása még nincs kész. Csak egyjátékos tesztelésre. A modul kiválasztásakor a beállítás alapértelmezetten bekapcsolt.
+A modul kiválasztásakor mindkét javítás alapértelmezetten bekapcsol, és külön kikapcsolható a testreszabásban: a legénység javítása a Hibajavítások, az alagútásók reakciója az MI / Hibajavítások alatt. Módosítás után indítsd újra a játékot.
+
+Egyjátékos tesztverzió. A legénység teljes életciklusa, a toborzási számlálás és a játékbeli ellenőrzések még nem készültek el. A kezdőcsapatokat az AI Swapper kezeli. A többjátékos teszteket a játékosok végzik.

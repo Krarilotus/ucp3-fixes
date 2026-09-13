@@ -1,10 +1,10 @@
 bugfixes: Hibajavítások
 crew_lifecycle: Ostromgép legénységének eltávolítása
-crew_lifecycle_descr: Javítja a legénység eltávolításának kimaradását az ostromgép pusztulási animációjának
-  kezdetén. A beállítás módosítása után indítsd újra a játékot.
+crew_lifecycle_descr: Javítja az ostromgépek legénységének elmaradt eltávolítását, és kiszálláskor elutasítja
+  az elavult hivatkozásokat. A túlélő mérnökök megőrzik azonosítójukat és életerejüket. Módosítás után
+  indítsd újra a játékot.
 ai: MI
 fixes: Javítások
-tunneler_response: Alag?t?s?k harci reakci?ja
-tunneler_response_descr: A t?tlen alag?t?s?k a csoportjuk harc?ll?sa szerint reag?lnak a k?zeli ellens?gre,
-  a t?bbi k?zelharci egys?ghez hasonl?an. A folyamatban l?v? alag?t?s?si parancsok nem v?ltoznak. M?dos?t?s
-  ut?n ind?tsd ?jra a j?t?kot.
+tunneler_response: Alagútásók harci reakciója
+tunneler_response_descr: A tétlen alagútásók a többi közelharci egységhez hasonlóan, csoportjuk harcállása
+  szerint reagálnak a közeli ellenségekre. Módosítás után indítsd újra a játékot.

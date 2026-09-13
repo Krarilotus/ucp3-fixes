@@ -1,9 +1,10 @@
 bugfixes: Bugfixes
 crew_lifecycle: Siege crew cleanup
-crew_lifecycle_descr: Fix skipped crew cleanup at the start of a siege engine's death animation. Restart
-  the game after changing this setting.
+crew_lifecycle_descr: Correct skipped siege crew cleanup and reject stale crew references when leaving
+  equipment. Surviving engineers keep their native identity and health. Restart the game after changing
+  this setting.
 ai: AI
 fixes: Fixes
 tunneler_response: Tunneler combat response
 tunneler_response_descr: Idle tunnelers respond to nearby enemies according to their group stance, like
-  other melee troops. Active tunneling orders are unchanged. Restart the game after changing this setting.
+  other melee troops. Restart the game after changing this setting.

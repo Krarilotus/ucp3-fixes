@@ -1,5 +1,7 @@
-# Suppression des équipages de siège
+# Corrections du comportement des unités
 
-Corrige la suppression ignorée de l'équipage au début de l'animation de destruction d'un engin de siège. Redémarrez le jeu après avoir modifié ce réglage.
+Corrige la suppression ignorée des équipages de siège. Les tunneliers inactifs utilisent la réaction normale aux ennemis proches selon la posture de leur groupe.
 
-Version de développement, pas une version finale. Les dégâts de feu, les autres vérifications du cycle de vie des équipages et le décompte du recrutement restent inachevés. Tests en solo uniquement. L'option est activée par défaut lorsque ce module est sélectionné.
+Les deux corrections sont activées par défaut avec ce module et peuvent être désactivées séparément dans Personnalisations : équipages dans Corrections, réaction des tunneliers dans IA / Corrections. Redémarrez le jeu après une modification.
+
+Version de test solo. Le cycle de vie complet des équipages, le décompte du recrutement et la validation en jeu restent inachevés. Les troupes initiales se configurent dans AI Swapper. Les tests multijoueurs sont laissés aux joueurs.

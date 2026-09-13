@@ -1,10 +1,10 @@
 bugfixes: Hata düzeltmeleri
 crew_lifecycle: Kuşatma mürettebatını kaldırma
-crew_lifecycle_descr: Kuşatma aracının yok olma animasyonu başladığında mürettebatın kaldırılmasının atlanmasını
-  düzeltir. Bu ayarı değiştirdikten sonra oyunu yeniden başlatın.
+crew_lifecycle_descr: Kuşatma mürettebatının atlanan temizliğini düzeltir ve araçtan çıkarken geçersiz
+  mürettebat başvurularını reddeder. Hayatta kalan mühendislerin kimliği ve sağlığı korunur. Ayarı değiştirdikten
+  sonra oyunu yeniden başlatın.
 ai: Yapay zekâ
 fixes: Düzeltmeler
-tunneler_response: T?nelcilerin sava? tepkisi
-tunneler_response_descr: Bo?taki t?nelciler, di?er yak?n d?v?? birlikleri gibi gruplar?n?n duru?una g?re
-  yak?ndaki d??manlara tepki verir. Devam eden t?nel kazma emirleri de?i?mez. Bu ayar? de?i?tirdikten
-  sonra oyunu yeniden ba?lat?n.
+tunneler_response: Tünelcilerin savaş tepkisi
+tunneler_response_descr: Boştaki tünelciler, diğer yakın dövüş birlikleri gibi gruplarının duruşuna göre
+  yakındaki düşmanlara tepki verir. Değişiklikten sonra oyunu yeniden başlatın.

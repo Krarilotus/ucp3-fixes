@@ -10,8 +10,8 @@ crew array, native deletion service, census, DLL bridge or patch manager is adde
 
 The supporting unit behavior surface is proposed in
 [the ownership handoff](https://github.com/UnofficialCrusaderPatch/UnofficialCrusaderPatch/issues/79#issuecomment-5654553608).
-The existing AIV and hop-farm modules are unchanged. No collection manifest or
-store recipe is added. AIC PR17 retains recruitment/census/moat/reserve/group
+The existing AIV and hop-farm modules are unchanged. No collection manifest is
+added. The store candidate is tracked in PR42. AIC PR17 retains recruitment/census/moat/reserve/group
 ownership; the active AIC branch is unchanged. Final integration is pending.
 
 The same unit module now contains an independently switchable idle-tunneler
@@ -33,6 +33,7 @@ AI Swapper's native initial-defense placement.
 | Unique discovery | Stock scanner and held framework PR149/RPS PR16 | Do not depend on or publish the held API proposals. Dispatch and fire use stock uniqueness checks. Each engine guard must belong to its independently decoded native handler and be unique in that interval. Measure startup cost before release. |
 | Fire damage | Original health/attribution calculation and fatal classification; AIC PR17 at 28fd320, combat-native.lua entry observer | Retain the original damage owner. Extend only its fatal classification, using an independent interior context; do not detour or duplicate the function. AIC's five-byte entry observer remains untouched. Full composition acceptance is pending. |
 | Idle melee response | Released AIC Loader1.1.2 at b494248, AI: AIV Troop Behaviour0.2.3 at b20dad6, AI Swapper at26e1b1f and original unit dispatch/notice callers | These configuration/placement owners expose no common idle-response capability. Reuse the existing unit module's decoded handler ownership, extracted to unit-handlers.lua; do not copy AIC group/recruitment handling. Restore the native eligibility field inside type5's own idle branches. |
+| Exit equipment | Original command instruction17 and engine crew ID/UID fields; released data.version.isExtreme() and core byte compiler | No public subsystem API corrects the interior stale-crew write. Derive case17 from its original dispatch tables, validate engine UID guard, group stride and loop continuation, then guard the first crew write. Keep command submission, native placement and health unchanged. Use the framework version API for the verified pool capacity; no private hash/version resolver. |
 
 Preparation occurs before enable-time writes. Dispatch context includes the
 16-bit type load, original handler-table operand, indirect call and current-unit
@@ -80,6 +81,28 @@ AIC head28fd320 remained unchanged at the13September21:13 refresh.
 
 ## Acceptance status
 
+Latest user direction: prioritize implementation by code analysis and keep
+remaining tests focused. No further broad gameplay matrix is scheduled; the
+unperformed checks below remain explicit acceptance gaps.
+
+The complete original exit-equipment command now passes focused baseline and
+candidate checks on all six fixtures, with no callee stubs. Valid partial,
+two-person and four-person crews retain the complete original unit-pool bytes,
+UIDs and injured health. Reused UID references receive zero record writes;
+empty, negative and out-of-pool IDs are skipped. Invalid engine UID and repeated
+command controls retain native behavior and RET20 stack cleanup. This is
+original-instruction evidence, not a new gameplay run. One framework allocation
+adds83 bytes and replaces7 original bytes. The guard runs only while dismounting,
+does no census, and is controlled by the existing default-ON crew_lifecycle option.
+
+Nearby-enemy response additionally passes378 baseline and378 corrected cases
+across all six fixtures using the complete original spawn/assignment/handler/
+notice paths, original map-geometry initializers and controlled enemy census
+inputs. Corrected idle tunnelers match swordsmen at defensive/aggressive ranges;
+hold stance and out-of-range cases do not pursue. Target is read from+0x346.
+Working states4/7/9 with cleared eligibility remain unchanged. This does not
+prove the cached-eligibility transition from an idle state into a new work order.
+
 Idle response:42 paired original-instruction cases across all six fixture
 identities execute original spawn, role20 assignment, type handler and enemy
 notice without callee stubs. Idle5/6 now reach native stance handling like
@@ -97,8 +120,10 @@ OFF/ON, alongside signed AI Swapper26e1b1f and published AIV0.2.3. OFF107 sample
 over40.03s (ticks45659..58282) had340 idle records with eligibility0. ON112
 samples over40.18s (45067..57880) had387 idle records with eligibility1 and one
 transient0. Both runs retained the same ten tunneler identities/roles and
-continued through native tunneling states7/8/9. No tunneler target was observed;
-this proves live flag installation/load compatibility, not nearby-threat
+continued through native tunneling states7/8/9. The first sampler read the
+command target at+0x39E, not the pursuit target at+0x346; its zero readings
+cannot establish absence of pursuit. The sampler is corrected for subsequent
+tests. This run proves live flag installation/load compatibility, not nearby-threat
 pursuit, active-order safety under threat or main-attack-slot acceptance.
 The fixture contains old role15 tunnelers and is not the role20 reproduction.
 Both processes closed normally; the desktop was released21:12:24CEST and the
@@ -172,8 +197,15 @@ return with the correct ABI; valid injured engineers retain UID and health.
 This is instruction evidence, not gameplay or historical-incident attribution.
 The exact proposed instruction17 context was shared with AIC before production
 changes in [the owner handoff](https://github.com/UnofficialCrusaderPatch/extension-aic-tactics/pull/17#issuecomment-5654832850).
-No unman correction is included yet. The tower deployment's separate UID check
-does not establish safety for the normal exit-equipment command.
+The new unman.lua correction guards the first crew-record write inside this
+command. It rejects nonpositive/out-of-pool IDs and mismatched saved crew UIDs,
+preserving EAX, ECX and flags. The original engine crew-ID entry has already
+been cleared at this point. The invalid branch advances the original cursor
+and resumes at the original loop comparison, skipping every crew-record write,
+including the final two writes after the normal cursor increment. Valid crew
+execute the displaced seven-byte instruction and the unchanged native body.
+The tower deployment's separate UID check is unchanged. Arbitrarily corrupted
+crew counts are not covered by this correction.
 
 Remaining: corrected native gameplay, live first-transition trace, damage and
 casualty matrix, partial/stale crew, dismount/remount identity and health,
@@ -205,5 +237,7 @@ python tests/check_crew_fire.py --framework code.zip --fixtures matrix.json
 python tests/check_tunneler_bindings.py --framework code.zip --fixtures matrix.json
 python tests/check_tunneler_native.py --framework code.zip --fixtures matrix.json --baseline --report baseline.json
 python tests/check_tunneler_native.py --framework code.zip --fixtures matrix.json --compare baseline.json
+python tests/check_tunneler_native.py --framework code.zip --fixtures matrix.json --threat
+python tests/check_unman_native.py --framework code.zip --fixtures matrix.json
 python -m unittest discover -s tests -p test_packaging.py -v
 ```

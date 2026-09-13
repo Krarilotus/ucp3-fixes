@@ -1,10 +1,10 @@
 bugfixes: Correcciones
 crew_lifecycle: Eliminación de la dotación de asedio
-crew_lifecycle_descr: Corrige la omisión de la eliminación de la dotación al comenzar la animación de
-  destrucción de una máquina de asedio. Reinicia el juego después de cambiar este ajuste.
+crew_lifecycle_descr: Corrige la eliminación omitida de dotaciones de asedio y rechaza referencias obsoletas
+  al abandonar una máquina. Los ingenieros supervivientes conservan su identidad y salud. Reinicia el
+  juego tras cambiar esta opción.
 ai: IA
 fixes: Correcciones
-tunneler_response: Reacci?n de combate de los tuneladores
-tunneler_response_descr: Los tuneladores inactivos reaccionan a los enemigos cercanos seg?n la actitud
-  de su grupo, como las dem?s tropas cuerpo a cuerpo. Las ?rdenes de excavaci?n en curso no cambian. Reinicia
-  el juego tras cambiar este ajuste.
+tunneler_response: Reacción de combate de los zapadores
+tunneler_response_descr: Los zapadores inactivos reaccionan a los enemigos cercanos según la actitud de
+  su grupo, como otras tropas de combate cuerpo a cuerpo. Reinicia el juego tras cambiar esta opción.
