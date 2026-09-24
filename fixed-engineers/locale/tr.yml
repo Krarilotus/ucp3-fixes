@@ -1,0 +1,5 @@
+bugfixes: Hata düzeltmeleri
+crew_lifecycle: Kuşatma mürettebatını kaldırma
+crew_lifecycle_descr: Kuşatma mürettebatının atlanan temizliğini düzeltir ve araçtan
+  çıkarken geçersiz mürettebat başvurularını reddeder. Hayatta kalan mühendislerin
+  kimliği ve sağlığı korunur. Ayarı değiştirdikten sonra oyunu yeniden başlatın.

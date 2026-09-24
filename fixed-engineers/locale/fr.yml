@@ -1,0 +1,5 @@
+bugfixes: Corrections
+crew_lifecycle: Suppression des équipages de siège
+crew_lifecycle_descr: Corrige la suppression ignorée des équipages de siège et rejette
+  les références périmées lors de la sortie d'un engin. Les ingénieurs survivants
+  conservent leur identité et leur santé. Redémarrez le jeu après une modification.
