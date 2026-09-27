@@ -1,12 +1,17 @@
 return {
   enable = function(self, config)
-    if self.applied or (config and config.crew_lifecycle == false) then return end
-    local native = require("unit-handlers").resolve()
-    local crew = require("crew").prepare(native)
-    local unman = require("unman").prepare()
-    -- Validate both native sites before installing either correction.
-    crew()
-    unman()
+    if self.applied then return end
+    local crewEnabled = not config or config.crew_lifecycle ~= false
+    local stopEnabled = not config or config.siege_target_stop ~= false
+    if not crewEnabled and not stopEnabled then return end
+    local native = crewEnabled and require("unit-handlers").resolve()
+    local crew = crewEnabled and require("crew").prepare(native)
+    local unman = crewEnabled and require("unman").prepare()
+    local targeting = stopEnabled and require("siege-targeting").prepare()
+    -- Resolve and validate every enabled site before installing a patch.
+    if targeting then targeting() end
+    if crew then crew() end
+    if unman then unman() end
     self.applied = true
   end,
   disable = function()

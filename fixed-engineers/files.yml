@@ -6,6 +6,7 @@ files:
 - src: init.lua
 - src: crew.lua
 - src: unman.lua
+- src: siege-targeting.lua
 - src: unit-handlers.lua
 - src: description.md
 - src: locale

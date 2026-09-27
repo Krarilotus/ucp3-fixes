@@ -65,7 +65,7 @@ class CrewFramework:
             native_version.game_version = lua.table_from({'extreme': 'E' if b'crusaderExtreme.cfg' in mapped else None})
             lua.globals().data.version = native_version
         module_root = Path(__file__).resolve().parents[1] / 'fixed-engineers'
-        for name in ('unit-handlers', 'crew', 'unman'):
+        for name in ('unit-handlers', 'crew', 'unman', 'siege-targeting'):
             factory = lua.eval('function(source) return function() return assert(load(source))() end end')
             lua.globals().package.preload[name] = factory((module_root / (name + '.lua')).read_text(encoding='utf-8'))
         self.module = lua.execute((Path(__file__).resolve().parents[1] /
