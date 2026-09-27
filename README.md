@@ -3,6 +3,11 @@
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as two
 independent UCP3 modules. Author: Samurai (Discord: D. Daniel).
 
+[Fixed Engineers](docs/fixed-engineers.md) is an additional focused test candidate
+for siege crew cleanup and safe dismounting. It replaces that part of the older
+Unit Behaviour Fixes preview; tunneler behaviour belongs to Improved Tunnelers
+and starting troops to AI Swapper. Do not enable both old and replacement patches.
+
 | Module | Scope |
 | --- | --- |
 | [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |

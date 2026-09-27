@@ -1,0 +1,8 @@
+bugfixes: Hata düzeltmeleri
+crew_lifecycle: Kuşatma mürettebatını kaldırma
+crew_lifecycle_descr: Kuşatma mürettebatının atlanan temizliğini düzeltir ve araçtan
+  çıkarken geçersiz mürettebat başvurularını reddeder. Hayatta kalan mühendislerin
+  kimliği ve sağlığı korunur. Ayarı değiştirdikten sonra oyunu yeniden başlatın.
+siege_target_stop: Nişan alırken kuşatma araçlarını durdur
+siege_target_stop_descr: Mancınıklar ve trebuşeler bir birime saldırı emri alınca durur.
+  Bu ayarı değiştirdikten sonra oyunu yeniden başlatın.

@@ -1,0 +1,9 @@
+bugfixes: Fehlerkorrekturen
+crew_lifecycle: Belagerungsbesatzung entfernen
+crew_lifecycle_descr: Behebt die übersprungene Entfernung von Belagerungsbesatzungen
+  und verwirft veraltete Besatzungsverweise beim Verlassen der Ausrüstung. Überlebende
+  Ingenieure behalten ihre Identität und Gesundheit. Nach Änderungen das Spiel neu
+  starten.
+siege_target_stop: Belagerungsgeräte beim Zielen anhalten
+siege_target_stop_descr: Katapulte und Triboke halten an, wenn sie eine Einheit angreifen sollen.
+  Nach einer Änderung das Spiel neu starten.

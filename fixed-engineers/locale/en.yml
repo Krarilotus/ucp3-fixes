@@ -1,0 +1,8 @@
+bugfixes: Bugfixes
+crew_lifecycle: Siege crew cleanup
+crew_lifecycle_descr: Correct skipped siege crew cleanup and reject stale crew references
+  when leaving equipment. Surviving engineers keep their native identity and health.
+  Restart the game after changing this setting.
+siege_target_stop: Stop siege engines when targeting
+siege_target_stop_descr: Catapults and trebuchets stop moving when ordered to attack a unit.
+  Restart the game after changing this setting.
