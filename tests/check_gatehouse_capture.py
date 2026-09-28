@@ -1,6 +1,6 @@
 """Probe the native gatehouse patch on licensed SHC/Extreme executables.
 
-Usage: python tests/check_gatehouse_capture.py <game.exe> [more-game.exe ...]
+Usage: python tests/check_gatehouse_capture.py --framework <3.0.7/core.lua> <game.exe> [more-game.exe ...]
 """
 import argparse
 from pathlib import Path
@@ -13,15 +13,14 @@ from unicorn.x86_const import UC_X86_REG_ESI, UC_X86_REG_ESP
 
 
 MODULE = Path(__file__).resolve().parents[1] / 'gatehouse-capture-fix'
-FRAMEWORK = Path(r'C:\Projects\UCP\UnofficialCrusaderPatch3\content\ucp\code\core.lua')
 CAVE = 0x3000000
 
 
-def check(path):
+def check(path, framework):
     pe = pefile.PE(str(path))
     base, image = pe.OPTIONAL_HEADER.ImageBase, pe.get_memory_mapped_image()
     lua = LuaRuntime(unpack_returned_tuples=True)
-    core = lua.execute(FRAMEWORK.read_text(encoding='utf-8'))
+    core = lua.execute(framework.read_text(encoding='utf-8'))
     lua.globals().core = core
     lua.globals().utils = lua.table_from({'itob': core.itob})
     lua.globals().package.path = MODULE.as_posix() + '/?.lua'
@@ -96,6 +95,8 @@ def check(path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--framework', type=Path, required=True)
     parser.add_argument('executables', type=Path, nargs='+')
-    for executable in parser.parse_args().executables:
-        print(check(executable))
+    args = parser.parse_args()
+    for executable in args.executables:
+        print(check(executable, args.framework))

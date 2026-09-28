@@ -38,11 +38,19 @@ default cached scan path, and repeated enable calls do not apply patches twice.
 
 ## Binary inspection
 
+Hunter Targeting Fix binds the native deer selector and hunter update path with
+UCP-managed AOB scans. Its six edits matched the two local 1.41 executables;
+`python tests/check_hunter_targeting.py --framework <3.0.7/core.lua> <SHC.exe> <Extreme.exe>` checked the
+near-range edits and executed the blocked-shot branches in isolation, including
+fallback, native-path continuation and termination. No deer enumeration or
+pathfinding code is duplicated. This is static/emulated evidence, not gameplay
+or performance acceptance.
+
 Gatehouse Capture Fix's occupancy signature matched exactly once in each local
 1.41 executable: SHC at `0x422600`, Extreme at `0x422610`. The native selectable
 field is `0x2A4` bytes into a unit; the dying field is `0x2A0`. The patch is
 resolved from the matched instruction, not from these reference addresses.
-`python tests/check_gatehouse_capture.py <SHC.exe> <Extreme.exe>` executes the
+`python tests/check_gatehouse_capture.py --framework <3.0.7/core.lua> <SHC.exe> <Extreme.exe>` executes the
 installed patch code in isolation and checks living, dying and unselectable
 occupants. This is static/emulated evidence only, not gameplay acceptance.
 
