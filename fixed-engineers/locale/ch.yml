@@ -4,3 +4,4 @@ crew_lifecycle_descr: 修复攻城器械乘员清理被跳过的问题，并在�
 siege_target_stop: 瞄准时停止攻城器械
 siege_target_stop_descr: 投石车和重型投石机收到攻击单位的命令后会停止移动。
   更改此设置后请重新启动游戏。
+tags.bugfixes: 错误修复

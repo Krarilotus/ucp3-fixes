@@ -6,3 +6,4 @@ crew_lifecycle_descr: Corrige la suppression ignorée des équipages de siège e
 siege_target_stop: Arrêter les engins de siège pour viser
 siege_target_stop_descr: Les catapultes et trébuchets s'arrêtent quand ils reçoivent l'ordre
   d'attaquer une unité. Redémarrez le jeu après modification.
+tags.bugfixes: Corrections

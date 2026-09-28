@@ -6,3 +6,4 @@ crew_lifecycle_descr: Javítja az ostromgépek legénységének elmaradt eltávo
 siege_target_stop: Ostromgépek megállítása célzáskor
 siege_target_stop_descr: A katapultok és hajítógépek megállnak, ha egység megtámadására
   kapnak parancsot. Módosítás után indítsd újra a játékot.
+tags.bugfixes: Hibajavítások
