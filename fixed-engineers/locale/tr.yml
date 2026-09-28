@@ -6,3 +6,4 @@ crew_lifecycle_descr: Kuşatma mürettebatının atlanan temizliğini düzeltir 
 siege_target_stop: Nişan alırken kuşatma araçlarını durdur
 siege_target_stop_descr: Mancınıklar ve trebuşeler bir birime saldırı emri alınca durur.
   Bu ayarı değiştirdikten sonra oyunu yeniden başlatın.
+tags.bugfixes: Hata düzeltmeleri
