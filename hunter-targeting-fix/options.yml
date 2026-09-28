@@ -1,0 +1,12 @@
+meta:
+  version: 1.0.0
+options:
+- name: hunter_targeting
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{hunter_targeting}}'
+  text: '{{hunter_targeting_descr}}'
+  url: hunter-targeting-fix.hunter_targeting
+  contents:
+    type: boolean
+    value: true
