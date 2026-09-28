@@ -23,12 +23,12 @@ class FixesFamilyTests(unittest.TestCase):
         }
         root = definitions[FAMILY]
         self.assertEqual(root['type'], 'module')
-        self.assertEqual(root['family'], [{'name': FAMILY, 'root': True}])
+        self.assertNotIn('family', root)
         self.assertEqual(set(root['dependencies']) - {'frontend', 'framework'}, set(MEMBERS))
         self.assertFalse((ROOT / FAMILY / 'config.yml').exists())
         for name in MEMBERS:
             member = definitions[name]
-            self.assertEqual(member['family'], [{'name': FAMILY}])
+            self.assertNotIn('family', member)
             self.assertIn('bugfixes', member['tags'])
             self.assertEqual(root['dependencies'][name], f"^{member['version']}")
             option = yaml.safe_load((ROOT / name / 'options.yml').read_text(encoding='utf-8'))['options'][0]
