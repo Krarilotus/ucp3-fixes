@@ -35,3 +35,6 @@ table_dig: Ásás
 table_hold: Tartás
 table_patrol: Járőr
 table_help: 'Egységtípusonként mindkét párból legfeljebb egy lehetőséget válassz. Védelem: az AIV-helyek elfoglalása; Ásás: a kezdőcsapatok várárokásásra kijelölése. Tartás: maradás a védelmi helyen; Járőr: mozgás a védelmi helyek között az MI AIC-járőrbeállításai szerint. A visszaállítás a játék eredeti viselkedését állítja vissza.'
+tags.ai: MI
+tags.aiv: MI-várak
+tags.behavior: Viselkedés
