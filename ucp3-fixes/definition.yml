@@ -1,0 +1,17 @@
+name: ucp3-fixes
+display-name: UCP3 Fixes
+author: UCP contributors
+version: 0.1.0
+type: plugin
+game: [SHC==1.41, SHCE==1.41]
+family:
+  - name: ucp3-fixes
+    root: true
+tags: [bugfixes]
+meta:
+  version: 1.0.0
+dependencies:
+  frontend: ^1.0.0
+  worker-delivery-fix: ^0.1.1
+  gatehouse-capture-fix: ^0.1.1
+  hunter-targeting-fix: ^0.1.1

@@ -1,9 +1,12 @@
 name: gatehouse-capture-fix
 display-name: Gatehouse Capture Fix
 author: UCP contributors
-version: 0.1.0
+version: 0.1.1
 type: module
 game: [SHC==1.41, SHCE==1.41]
+family:
+  - name: ucp3-fixes
+tags: [bugfixes]
 meta:
   version: 1.0.0
 dependencies:
