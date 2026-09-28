@@ -1,8 +1,10 @@
 # ucp3-fixes
 
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as six
-independently selectable UCP3 modules. The hop farm and AIV troop modules were
-created by Samurai (Discord: D. Daniel); Fixed Engineers is maintained by UCP
+independently selectable UCP3 modules. An optional UCP3 Fixes bundle selects
+Worker Delivery, Gatehouse Capture and Hunter Targeting together. The hop farm
+and AIV troop modules were created by Samurai (Discord: D. Daniel); Fixed
+Engineers is maintained by UCP
 contributors. Worker Delivery Fix is a code-reviewed preview awaiting in-game
 acceptance.
 
@@ -22,6 +24,13 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Worker Delivery Fix](docs/worker-delivery.md) | Lets workers deliver to reachable granaries and armories when the keep route is blocked, and prevents AI from removing otherwise valid stores for that reason. Stockpiles use a different native check. In-game acceptance is pending. |
 | [Gatehouse Capture Fix](docs/gatehouse-capture.md) | Counts living troops, but not dying troops, for gatehouse capture and defense. In-game acceptance is pending. |
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
+
+The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
+descriptions, not copies of the fixes. Its three member modules still own their
+native code and independent Bugfixes switches. UCP 3.0.7 shows the packages
+separately; the draft GUI family feature will group them under the bundle root.
+Selecting the bundle activates all three. Selecting a member alone activates
+only that fix.
 
 ## Installation and configuration
 
