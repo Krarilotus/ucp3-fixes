@@ -1,0 +1,12 @@
+meta:
+  version: 1.0.0
+options:
+- name: reachable_delivery
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{reachable_delivery}}'
+  text: '{{reachable_delivery_descr}}'
+  url: worker-delivery-fix.reachable_delivery
+  contents:
+    type: boolean
+    value: true

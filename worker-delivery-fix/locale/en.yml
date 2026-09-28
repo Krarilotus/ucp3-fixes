@@ -1,0 +1,3 @@
+bugfixes: Bugfixes
+reachable_delivery: Granary and armory delivery
+reachable_delivery_descr: Workers can reach granaries and armories by their own route. AI players keep those stores when the keep route is blocked. Restart after changing.
