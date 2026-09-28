@@ -38,6 +38,14 @@ default cached scan path, and repeated enable calls do not apply patches twice.
 
 ## Binary inspection
 
+Gatehouse Capture Fix's occupancy signature matched exactly once in each local
+1.41 executable: SHC at `0x422600`, Extreme at `0x422610`. The native selectable
+field is `0x2A4` bytes into a unit; the dying field is `0x2A0`. The patch is
+resolved from the matched instruction, not from these reference addresses.
+`python tests/check_gatehouse_capture.py <SHC.exe> <Extreme.exe>` executes the
+installed patch code in isolation and checks living, dying and unselectable
+occupants. This is static/emulated evidence only, not gameplay acceptance.
+
 Read-only inspection of these installed executables found exactly one match for
 each module, inside an executable PE section. No executable was modified.
 
