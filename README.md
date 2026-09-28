@@ -1,17 +1,23 @@
 # ucp3-fixes
 
-Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as two
-independent UCP3 modules. Author: Samurai (Discord: D. Daniel).
+Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as three
+independently selectable UCP3 modules. The hop farm and AIV troop modules were
+created by Samurai (Discord: D. Daniel); Fixed Engineers is maintained by UCP
+contributors.
 
-[Fixed Engineers](docs/fixed-engineers.md) is an additional focused test candidate
-for siege crew cleanup and safe dismounting. It replaces that part of the older
-Unit Behaviour Fixes preview; tunneler behaviour belongs to Improved Tunnelers
-and starting troops to AI Swapper. Do not enable both old and replacement patches.
+Fixed Engineers 0.2.0 is merged into this repository. Its signed
+[test package](https://github.com/UnofficialCrusaderPatch/UCP3-extensions-store/releases/download/fixed-engineers-test-0.2.0-merged/fixed-engineers-ucp3.0.7-test-0.2.0-merged.zip)
+and [3.0.7 store PR](https://github.com/UnofficialCrusaderPatch/UCP3-extensions-store/pull/42)
+are available, but in-game acceptance is still pending. It replaces the crew
+and equipment-command corrections from the older Unit Behaviour Fixes preview;
+disable that preview before selecting Fixed Engineers. Tunneler behaviour belongs
+to Improved Tunnelers and starting troops to AI Swapper.
 
 | Module | Scope |
 | --- | --- |
 | [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |
 | [AI: AIV Troop Behaviour](aiv-troops-behaviour/) | Optional initial digging/defense assignments and defensive hold/patrol controls for 15 troop types, including slaves, with global defaults and per-AI AIC overrides. Includes the row 9/11/18 loading fix. |
+| [Fixed Engineers](docs/fixed-engineers.md) | Corrects siege crew cleanup, safe dismounting, and catapult/trebuchet attack-order stopping. In-game acceptance of this combined module remains pending. |
 
 ## Installation and configuration
 
@@ -23,14 +29,14 @@ module package. There may be no published releases yet.
 
 Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
 the launch option **Disable Security**. Select the module in Content, then use its
-settings under **AI → AIV Troop Behaviour** for troop controls, or **AI → Fixes**
-for the hop farm fix. Changing a switch requires restarting the game.
-The switch defaults to on for a selected module, preserving 0.1.0 behaviour;
-omitting `enabled` from an existing configuration also means on. The modules are
-not selected by default. A plugin can set `<module-name>.enabled` to `false`.
+settings under **AI → AIV Troop Behaviour** for troop controls, **AI → Fixes**
+for the hop farm fix, or **Bugfixes** for Fixed Engineers. Changing a switch
+requires restarting the game. Simple fixes default to on when their module is
+selected; the AIV module's additional troop controls are opt-in. The modules are
+not selected by default.
 
-Each module uses `core` and therefore has type `module`, not `plugin`. The
-`UCP2Switch` options follow the AI/Fixes presentation used by `ucp2-legacy`.
+Each module uses `core` and therefore has type `module`, not `plugin`. Their
+`UCP2Switch` controls follow the established AI or Bugfixes categories.
 The fixes remain independently selectable. The AIV module's additional behaviour
 controls are opt-in and require aicloader, but no AI-swapping module. See its
 README for the Customizations defaults, AIC precedence and release limitations.
@@ -52,9 +58,8 @@ The actual store recipe is named `recipe.yml`. Use one entry per module with a
 string `contents.source.location` pointing to its subfolder, for example
 `location: hopfarm-limit-fix`; `location.root` is not supported by the 3.0.7 builder.
 Pin `github-sha` to the reviewed commit and match the version in `definition.yml`.
-The 3.0.7 store recipe currently lists only `en` under `supported-languages`;
-Other store descriptions require adding their language codes there as a separate
-store change. Installed Customizations load their translations from each package.
+The 3.0.7 store recipe lists all nine supported languages. Installed
+Customizations load their translations from each package.
 Each module's `files.yml` keeps unrelated repository files out of its package.
 
 ## Validation
