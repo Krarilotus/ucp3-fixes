@@ -7,3 +7,4 @@ crew_lifecycle_descr: Behebt die übersprungene Entfernung von Belagerungsbesatz
 siege_target_stop: Belagerungsgeräte beim Zielen anhalten
 siege_target_stop_descr: Katapulte und Triboke halten an, wenn sie eine Einheit angreifen sollen.
   Nach einer Änderung das Spiel neu starten.
+tags.bugfixes: Fehlerkorrekturen
