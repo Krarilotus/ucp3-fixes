@@ -2,7 +2,7 @@ name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
 version: 0.1.0
-type: plugin
+type: module
 game: [SHC==1.41, SHCE==1.41]
 family:
   - name: ucp3-fixes
@@ -11,6 +11,7 @@ tags: [bugfixes]
 meta:
   version: 1.0.0
 dependencies:
+  framework: ^3.0.7
   frontend: ^1.0.0
   worker-delivery-fix: ^0.1.1
   gatehouse-capture-fix: ^0.1.1

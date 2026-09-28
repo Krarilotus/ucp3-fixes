@@ -2,5 +2,6 @@ meta:
   version: 1.0.0
 files:
 - src: definition.yml
+- src: init.lua
 - src: description.md
 - src: locale

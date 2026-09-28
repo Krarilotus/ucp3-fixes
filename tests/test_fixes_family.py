@@ -22,10 +22,9 @@ class FixesFamilyTests(unittest.TestCase):
             for name in (FAMILY, *MEMBERS)
         }
         root = definitions[FAMILY]
-        self.assertEqual(root['type'], 'plugin')
+        self.assertEqual(root['type'], 'module')
         self.assertEqual(root['family'], [{'name': FAMILY, 'root': True}])
-        self.assertEqual(set(root['dependencies']) - {'frontend'}, set(MEMBERS))
-        self.assertFalse((ROOT / FAMILY / 'init.lua').exists())
+        self.assertEqual(set(root['dependencies']) - {'frontend', 'framework'}, set(MEMBERS))
         self.assertFalse((ROOT / FAMILY / 'config.yml').exists())
         for name in MEMBERS:
             member = definitions[name]
@@ -45,7 +44,7 @@ class FixesFamilyTests(unittest.TestCase):
                 self.assertIsNone(archive.testzip())
                 self.assertIn('locale/', archive.namelist())
                 self.assertEqual(archive.read('description.md'), archive.read('locale/description-en.md'))
-                self.assertFalse(any(name.endswith('.lua') for name in archive.namelist()))
+                self.assertEqual([name for name in archive.namelist() if name.endswith('.lua')], ['init.lua'])
                 for language in LANGUAGES:
                     self.assertTrue(archive.read(f'locale/description-{language}.md').decode('utf-8').strip())
 
