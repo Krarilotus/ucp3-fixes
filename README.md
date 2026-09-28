@@ -1,9 +1,10 @@
 # ucp3-fixes
 
-Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as three
+Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as four
 independently selectable UCP3 modules. The hop farm and AIV troop modules were
 created by Samurai (Discord: D. Daniel); Fixed Engineers is maintained by UCP
-contributors.
+contributors. Worker Delivery Fix is a code-reviewed preview awaiting in-game
+acceptance.
 
 Fixed Engineers 0.2.0 is merged into this repository. Its signed
 [test package](https://github.com/UnofficialCrusaderPatch/UCP3-extensions-store/releases/download/fixed-engineers-test-0.2.0-merged/fixed-engineers-ucp3.0.7-test-0.2.0-merged.zip)
@@ -18,6 +19,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [hopfarm-limit-fix](hopfarm-limit-fix/) | Counts hops against the existing shared AIV farm limit. Long-term economy effects still need gameplay testing. |
 | [AI: AIV Troop Behaviour](aiv-troops-behaviour/) | Optional initial digging/defense assignments and defensive hold/patrol controls for 15 troop types, including slaves, with global defaults and per-AI AIC overrides. Includes the row 9/11/18 loading fix. |
 | [Fixed Engineers](docs/fixed-engineers.md) | Corrects siege crew cleanup, safe dismounting, and catapult/trebuchet attack-order stopping. In-game acceptance of this combined module remains pending. |
+| [Worker Delivery Fix](docs/worker-delivery.md) | Lets workers deliver to reachable granaries and armories when the keep route is blocked, and prevents AI from removing otherwise valid stores for that reason. Stockpiles use a different native check. In-game acceptance is pending. |
 
 ## Installation and configuration
 
@@ -30,7 +32,7 @@ module package. There may be no published releases yet.
 Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
 the launch option **Disable Security**. Select the module in Content, then use its
 settings under **AI → AIV Troop Behaviour** for troop controls, **AI → Fixes**
-for the hop farm fix, or **Bugfixes** for Fixed Engineers. Changing a switch
+for the hop farm fix, or **Bugfixes** for Fixed Engineers and Worker Delivery Fix. Changing a switch
 requires restarting the game. Simple fixes default to on when their module is
 selected; the AIV module's additional troop controls are opt-in. The modules are
 not selected by default.
@@ -67,7 +69,7 @@ Each module's `files.yml` keeps unrelated repository files out of its package.
 Build local test packages with:
 
 ```sh
-python tools/build_modules.py --output ./local-packages --local-tryout
+python tools/build_modules.py --output ./local-packages
 ```
 
 The builder follows each `files.yml` and writes explicit ZIP directory entries.
