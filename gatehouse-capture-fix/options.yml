@@ -1,0 +1,12 @@
+meta:
+  version: 1.0.0
+options:
+- name: living_gatehouse_occupants
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{living_gatehouse_occupants}}'
+  text: '{{living_gatehouse_occupants_descr}}'
+  url: gatehouse-capture-fix.living_gatehouse_occupants
+  contents:
+    type: boolean
+    value: true

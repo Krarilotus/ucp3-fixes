@@ -1,6 +1,6 @@
 # ucp3-fixes
 
-Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as four
+Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as five
 independently selectable UCP3 modules. The hop farm and AIV troop modules were
 created by Samurai (Discord: D. Daniel); Fixed Engineers is maintained by UCP
 contributors. Worker Delivery Fix is a code-reviewed preview awaiting in-game
@@ -20,6 +20,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [AI: AIV Troop Behaviour](aiv-troops-behaviour/) | Optional initial digging/defense assignments and defensive hold/patrol controls for 15 troop types, including slaves, with global defaults and per-AI AIC overrides. Includes the row 9/11/18 loading fix. |
 | [Fixed Engineers](docs/fixed-engineers.md) | Corrects siege crew cleanup, safe dismounting, and catapult/trebuchet attack-order stopping. In-game acceptance of this combined module remains pending. |
 | [Worker Delivery Fix](docs/worker-delivery.md) | Lets workers deliver to reachable granaries and armories when the keep route is blocked, and prevents AI from removing otherwise valid stores for that reason. Stockpiles use a different native check. In-game acceptance is pending. |
+| [Gatehouse Capture Fix](docs/gatehouse-capture.md) | Counts living troops, but not dying troops, for gatehouse capture and defense. In-game acceptance is pending. |
 
 ## Installation and configuration
 
@@ -32,7 +33,7 @@ module package. There may be no published releases yet.
 Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
 the launch option **Disable Security**. Select the module in Content, then use its
 settings under **AI → AIV Troop Behaviour** for troop controls, **AI → Fixes**
-for the hop farm fix, or **Bugfixes** for Fixed Engineers and Worker Delivery Fix. Changing a switch
+for the hop farm fix, or **Bugfixes** for Fixed Engineers, Worker Delivery Fix and Gatehouse Capture Fix. Changing a switch
 requires restarting the game. Simple fixes default to on when their module is
 selected; the AIV module's additional troop controls are opt-in. The modules are
 not selected by default.
