@@ -50,6 +50,13 @@ provider or preset merely to make a family header appear.
 | `SmarterGatehouses` (created 1 October 2026) | Independent gatehouse module; related to Fixes, with optional balance controls |
 | `ImprovedTunnelers` (created 24 September 2026) | Independent tunneler module; no ownership transfer to Fixes |
 | [Attack Move](https://github.com/Monsterfisch/AttackMove) (created 2 October 2026) | Independent troop-command extension. Keep optional Alt behavior outside the basic Fixes bundle; input/command composition needs its own review |
+| [Smarter Recruits](https://github.com/Monsterfisch/smarter-recruits) | Independent recruitment/rally and troop-behavior extension. Coordinate its horse-archer, monk, rally and stance hooks with the existing troop-behavior and AIC owners; verify any separable vanilla correction before considering a Fixes member |
+| [Resolution Based Zoom](https://github.com/Monsterfisch/resolution-based-zoom) | Optional interface/graphics extension; coordinate its hotkey and resolution owners, not the Fixes bundle |
+| [Resource Grid Overlay](https://github.com/Monsterfisch/resource-grid-overlay) | Optional map-editor visualization; coordinate render and input hooks with their existing owners |
+| [Autosave](https://github.com/Monsterfisch/Stronghold_Crusader_Autosave) | Separate save-management extension, including its delete/restore UI and file handling |
+| [Exe Value Patcher](https://github.com/Monsterfisch/exe-value-patcher-1.0.0) | General executable-value editing tool; outside the Fixes bundle and subject to its own binding review |
+| [Build over Workers](https://github.com/Monsterfisch/Build-over-Workers) | Repository exists but has no published files; review the complete implementation when published |
+| [Production fixes and features](https://github.com/Monsterfisch/Stronghold-crusader-various-production-fixes-and-features) | Repository exists but has no published files; stable behavior and entrance changes cannot yet be reviewed there |
 | [Conquering Arabia](https://github.com/Monsterfisch/ConqueringArabia_-fixed_updated_StrongholdCrusader_texture-) | Existing texture extension, using the existing files owner |
 | [Conquering Europe](https://github.com/Monsterfisch/ConqueringEurope_-Stronghold1_textures-) | Existing texture extension, using the existing files owner |
 | [Conquering Christmas](https://github.com/Monsterfisch/ConqueringChristmas_-Stronghold1_textures-with-snow-) | Existing texture extension, using the existing files owner |
@@ -63,12 +70,35 @@ texture content discovery. If exclusive theme selection or per-player texture
 composition is introduced, implement it through the existing texture/files owner,
 not through Fixes or a new private resource loader.
 
-No public Build Over Workers or stable repository was found in the eight public
-repositories initially returned for Monsterfisch; the later inventory also includes
-AttackMove. The stables implementation has not yet been published, as confirmed
-by the user. The chat's additional changes remain
-review candidates until their complete sources are available; the supplied worker
-`init.lua` alone cannot establish assembly, packaging or lifecycle safety.
+The 2 October evening inventory has 16 public repositories. Build over Workers
+and the production fixes repository are now public but empty. No stable source has
+been published there. The chat's additional changes remain review candidates
+until their complete sources are available; the supplied worker `init.lua` alone
+cannot establish assembly, packaging or lifecycle safety.
+
+The six newly populated gameplay/tool repositories are source-review candidates,
+not new Fixes dependencies. Their current manifests expose only English locale
+files and declare no framework, frontend or subsystem dependencies. `AttackMove`
+and `smarter-recruits` put their package versions (`1.0.1` and `1.0.10`) in
+`meta.version`, where existing UCP manifests use schema version `1.0.0`.
+These are packaging issues to resolve before store submission; they do not prove
+the native changes fail. `Smarter Recruits` also enables diagnostic logging by
+default and mixes corrections with new troop behavior under its own category.
+
+Source inspection found two specific native integration concerns. `Exe Value
+Patcher` uses address entries from `config.yml`; its `skip_mismatched: false`
+default writes even when the expected original bytes do not match. A range check
+against the executable image does not establish the intended binding or hook
+ownership across supported builds. `Resource Grid Overlay` patches the native
+window-message arm directly and documents a shared screen-change hook collision
+with Resolution Based Zoom; the available `winProcHandler` API already provides
+registered priority and `CallNextProc` for Windows messages. The render hook is
+a separate ownership decision. Autosave calls the game's own save command, which
+is promising for save format compatibility, but its private settings file,
+custom dialog hooks and direct Windows file operations need owner/API, deletion,
+save/replay and lifecycle review. Zoom's default `E` key also retains the vanilla
+aggressive-stance action, as its README explicitly states. These findings are
+source review only, not cross-module or gameplay acceptance.
 
 For the reported optional horse-refill timing and progress display, **Stable
 Production** is a descriptive name. Any verified native horse-cap/lifecycle fix
