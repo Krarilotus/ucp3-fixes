@@ -28,9 +28,17 @@ to Improved Tunnelers and starting troops to AI Swapper.
 The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
 descriptions, not copies of the fixes. Its three member modules still own their
 native code and independent Bugfixes switches. UCP 3.0.7 shows the packages
-separately; the draft GUI family feature will group them under the bundle root.
+separately. Compatible fixes should remain independently selectable; the
+[family-metadata correction](https://github.com/Krarilotus/ucp3-fixes/pull/9)
+keeps them outside configuration families.
 Selecting the bundle activates all three. Selecting a member alone activates
 only that fix.
+
+The [extension ownership review](docs/extension-ownership.md) maps related
+gatehouse, tunneler, stable, building, projectile, texture and AI work to its
+existing owner. Improved Tunnelers remains its own module. Smarter Gatehouses
+can be selected alongside the capture fix after composition checks; its hooks
+are not copied into this repository or automatically added to the bundle.
 
 ## Installation and configuration
 
