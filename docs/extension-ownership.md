@@ -6,21 +6,24 @@ module: selecting Fixes must not silently enable extra tunneler abilities.
 
 This is an ownership review of the public Monsterfisch repositories on 2 October
 2026, not a claim that their gameplay or cross-module composition has passed.
-No new bundle dependencies are added by this review.
+The 0.1.2 integration candidate selects Gatehouse Fixes, Fixed Engineers and AI
+Hop Farm Counting through their existing modules. Gatehouse Fixes uses the external
+`smarter-gatehouses: ^1.0.3` dependency. It remains a test candidate pending
+upstream review and composition acceptance; no external native code is copied.
 
 ## Where the code belongs
 
 | Change | Implementation owner | Selection and integration |
 | --- | --- | --- |
 | Dead troops affecting gate capture/defense | `gatehouse-capture-fix` in this repository | Existing default-on Fixes bundle member |
-| Gate closing, enemy-gate routes, optional gate stairs | [Smarter Gatehouses](https://github.com/Monsterfisch/SmarterGatehouses) | Keep its existing module. Consider a reviewed dependency after acceptance; stairs stay opt-in |
+| Gate closing, enemy-gate routes, optional gate stairs | [Gatehouse Fixes](https://github.com/Monsterfisch/SmarterGatehouses), package ID `smarter-gatehouses` | Existing module dependency in the 0.1.1 test candidate; each switch remains configurable and stairs stay opt-in |
 | Tunneler digging, target selection, collapse, terrain cleanup and raid participation | [Improved Tunnelers](https://github.com/Monsterfisch/ImprovedTunnelers) | Keep its own module and test package; no mandatory Fixes dependency |
 | AI starting troop counts and initial acquisition/assignment | [AI Swapper](https://github.com/UnofficialCrusaderPatch/extension-aiSwapper) | AI Swapper owns the native initialization consumer, including tunnelers |
-| Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module; candidate for the bundle after its acceptance |
+| Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module selected by the unreleased bundle; Store acceptance remains pending |
 | AI recruitment roles, siege placement, harassment and resource payment | [AIC Tactics](https://github.com/UnofficialCrusaderPatch/extension-aic-tactics) | AI policy and per-AI AIC overrides stay with that owner |
 | Delivery to granary/armory with a blocked keep route | `worker-delivery-fix` in this repository | Already a bundle member. Compare any new implementation here before adding another hook |
 | Hunter deer targeting and approach | `hunter-targeting-fix` in this repository | Already a bundle member; unrelated new hunter combat rules need separate scope |
-| Hop farms counted against the existing farm limit | `hopfarm-limit-fix` in this repository | Existing independent module; candidate after gameplay acceptance |
+| Hop farms counted against the existing farm limit | `hopfarm-limit-fix` in this repository | Existing independent module selected by the unreleased bundle; gameplay acceptance remains pending |
 | AIV troop behavior and per-AI assignments | `aiv-troops-behaviour` in this repository | Keep its independent selection and AIC controls; do not force optional AI behavior through Fixes |
 | Building entrances not refreshed when blocked | Building entrance/pathing owner, after tracing the trigger | New fix candidate; distinct from delivery's choice of route origin |
 | Building over workers and safe relocation | Existing Build Over Workers implementation, after lifecycle review | Optional placement capability. Do not copy its work into delivery or gatehouse code |
@@ -47,6 +50,14 @@ provider or preset merely to make a family header appear.
 | --- | --- |
 | `SmarterGatehouses` (created 1 October 2026) | Independent gatehouse module; related to Fixes, with optional balance controls |
 | `ImprovedTunnelers` (created 24 September 2026) | Independent tunneler module; no ownership transfer to Fixes |
+| [Attack Move](https://github.com/Monsterfisch/AttackMove) (created 2 October 2026) | Independent troop-command extension. Keep optional Alt behavior outside the basic Fixes bundle; input/command composition needs its own review |
+| [Smarter Recruits](https://github.com/Monsterfisch/smarter-recruits) | Independent recruitment/rally and troop-behavior extension. Coordinate its horse-archer, monk, rally and stance hooks with the existing troop-behavior and AIC owners; verify any separable vanilla correction before considering a Fixes member |
+| [Resolution Based Zoom](https://github.com/Monsterfisch/resolution-based-zoom) | Optional interface/graphics extension; coordinate its hotkey and resolution owners, not the Fixes bundle |
+| [Resource Grid Overlay](https://github.com/Monsterfisch/resource-grid-overlay) | Optional map-editor visualization; coordinate render and input hooks with their existing owners |
+| [Autosave](https://github.com/Monsterfisch/Stronghold_Crusader_Autosave) | Separate save-management extension, including its delete/restore UI and file handling |
+| [Exe Value Patcher](https://github.com/Monsterfisch/exe-value-patcher-1.0.0) | General executable-value editing tool; outside the Fixes bundle and subject to its own binding review |
+| [Build over Workers](https://github.com/Monsterfisch/Build-over-Workers) | Repository exists but has no published files; review the complete implementation when published |
+| [Smarter Buildings](https://github.com/Monsterfisch/smarter-buildings) | Repository exists but has no published files; stable behavior and entrance changes cannot yet be reviewed there |
 | [Conquering Arabia](https://github.com/Monsterfisch/ConqueringArabia_-fixed_updated_StrongholdCrusader_texture-) | Existing texture extension, using the existing files owner |
 | [Conquering Europe](https://github.com/Monsterfisch/ConqueringEurope_-Stronghold1_textures-) | Existing texture extension, using the existing files owner |
 | [Conquering Christmas](https://github.com/Monsterfisch/ConqueringChristmas_-Stronghold1_textures-with-snow-) | Existing texture extension, using the existing files owner |
@@ -60,10 +71,22 @@ texture content discovery. If exclusive theme selection or per-player texture
 composition is introduced, implement it through the existing texture/files owner,
 not through Fixes or a new private resource loader.
 
-No public Build Over Workers or stable repository was found in the eight public
-repositories returned for Monsterfisch. The chat's additional changes remain
-review candidates until their complete sources are available; the supplied worker
-`init.lua` alone cannot establish assembly, packaging or lifecycle safety.
+The 2 October evening inventory has 16 public repositories. Build over Workers
+and Smarter Buildings are now public but empty. No stable source has
+been published there. The chat's additional changes remain review candidates
+until their complete sources are available; the supplied worker `init.lua` alone
+cannot establish assembly, packaging or lifecycle safety.
+
+The six newly populated gameplay/tool modules now have focused upstream package
+PRs. The [full review](monsterfisch-module-review.md) records corrected descriptions,
+locales, controls and ownership, along with the native gaps that remain. These
+PRs do not add the modules as new Fixes dependencies or establish acceptance.
+
+For the reported optional horse-refill timing and progress display, **Stable
+Production** is a descriptive name. Any verified native horse-cap/lifecycle fix
+should be separately configurable under Bugfixes; production slowdown, delay caps
+and added behavior belong under Balance Changes and remain opt-in. Exact source,
+ownership and defaults cannot be finalized from the chat summary alone.
 
 ## Gatehouse composition evidence and remaining checks
 
@@ -111,3 +134,7 @@ Before adding an external package to the bundle:
 
 Multiplayer testing remains player-owned. Acceptance gaps stay open; a bundle
 dependency or installable ZIP does not turn an untested module into a release.
+
+The full [module review and corrective PR list](monsterfisch-module-review.md) records
+the new descriptions/locales, Zoom hotkey ownership changes and native work still
+open after this package audit.

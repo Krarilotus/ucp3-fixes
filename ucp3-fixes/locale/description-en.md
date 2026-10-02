@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Select this bundle to enable the worker delivery, gatehouse capture and hunter targeting fixes together. Each fix has its own switch under Bugfixes.
+Corrects worker deliveries, hunters, gatehouses, siege crews and AI hop-farm counting. Each fix can be switched off.

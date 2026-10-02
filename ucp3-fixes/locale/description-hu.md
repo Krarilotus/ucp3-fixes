@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Ez a csomag együtt kapcsolja be az áruszállítás, a kapuház elfoglalása és a vadászok javításait. Minden javításnak külön kapcsolója van a hibajavítások között.
+Javítja az áruszállítást, a vadászokat, a kapukat, az ostromgépek legénységét és az MI komlófarmjainak számlálását. Minden javítás kikapcsolható.

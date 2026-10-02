@@ -2,7 +2,9 @@
 
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as six
 independently selectable UCP3 modules. An optional UCP3 Fixes bundle selects
-Worker Delivery, Gatehouse Capture and Hunter Targeting together. The hop farm
+Worker Delivery, Gatehouse Capture, Hunter Targeting, Fixed Engineers, AI Hop Farm
+Counting and the external Gatehouse Fixes module together. This expanded bundle is an integration test candidate,
+pending Gatehouse Fixes' upstream review and composition acceptance. The hop farm
 and AIV troop modules were created by Samurai (Discord: D. Daniel); Fixed
 Engineers is maintained by UCP
 contributors. Worker Delivery Fix is a code-reviewed preview awaiting in-game
@@ -26,19 +28,22 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
 
 The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
-descriptions, not copies of the fixes. Its three member modules still own their
-native code and independent Bugfixes switches. UCP 3.0.7 shows the packages
+descriptions, not copies of the fixes. Its six dependencies still own their
+native code and independent settings. Gatehouse Fixes' corrections default ON
+under Bugfixes; its optional stairs rules default OFF under Balance Changes.
+The original package ID `smarter-gatehouses` is preserved. UCP 3.0.7 shows the packages
 separately. Compatible fixes should remain independently selectable; the
 [family-metadata correction](https://github.com/Krarilotus/ucp3-fixes/pull/9)
 keeps them outside configuration families.
-Selecting the bundle activates all three. Selecting a member alone activates
+Selecting the bundle activates all six. Selecting a member alone activates
 only that fix.
 
 The [extension ownership review](docs/extension-ownership.md) maps related
 gatehouse, tunneler, stable, building, projectile, texture and AI work to its
-existing owner. Improved Tunnelers remains its own module. Smarter Gatehouses
-can be selected alongside the capture fix after composition checks; its hooks
-are not copied into this repository or automatically added to the bundle.
+existing owner. Improved Tunnelers remains its own module. Gatehouse Fixes is
+selected through its existing package dependency; its hooks and controls are
+not copied into this repository. Stables work remains outside the bundle until
+its complete implementation is published and reviewed.
 
 ## Installation and configuration
 

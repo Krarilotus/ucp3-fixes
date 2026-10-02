@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Este paquete activa juntos los arreglos de entregas, control de puertas y cazadores. Cada arreglo tiene su propio interruptor en Correcciones.
+Corrige las entregas, los cazadores, las puertas, las tripulaciones de asedio y el recuento de granjas de lúpulo de la IA. Cada arreglo se puede desactivar.

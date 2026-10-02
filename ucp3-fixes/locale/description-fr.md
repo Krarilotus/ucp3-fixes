@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Ce pack active ensemble les corrections des livraisons, du contrôle des portes et des chasseurs. Chaque correction possède son propre interrupteur dans les correctifs.
+Corrige les livraisons, les chasseurs, les corps de garde, les équipages de siège et le comptage des houblonnières de l’IA. Chaque correction peut être désactivée.
