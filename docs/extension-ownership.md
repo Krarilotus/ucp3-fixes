@@ -56,7 +56,7 @@ provider or preset merely to make a family header appear.
 | [Autosave](https://github.com/Monsterfisch/Stronghold_Crusader_Autosave) | Separate save-management extension, including its delete/restore UI and file handling |
 | [Exe Value Patcher](https://github.com/Monsterfisch/exe-value-patcher-1.0.0) | General executable-value editing tool; outside the Fixes bundle and subject to its own binding review |
 | [Build over Workers](https://github.com/Monsterfisch/Build-over-Workers) | Repository exists but has no published files; review the complete implementation when published |
-| [Production fixes and features](https://github.com/Monsterfisch/Stronghold-crusader-various-production-fixes-and-features) | Repository exists but has no published files; stable behavior and entrance changes cannot yet be reviewed there |
+| [Smarter Buildings](https://github.com/Monsterfisch/smarter-buildings) | Repository exists but has no published files; stable behavior and entrance changes cannot yet be reviewed there |
 | [Conquering Arabia](https://github.com/Monsterfisch/ConqueringArabia_-fixed_updated_StrongholdCrusader_texture-) | Existing texture extension, using the existing files owner |
 | [Conquering Europe](https://github.com/Monsterfisch/ConqueringEurope_-Stronghold1_textures-) | Existing texture extension, using the existing files owner |
 | [Conquering Christmas](https://github.com/Monsterfisch/ConqueringChristmas_-Stronghold1_textures-with-snow-) | Existing texture extension, using the existing files owner |
@@ -71,12 +71,12 @@ composition is introduced, implement it through the existing texture/files owner
 not through Fixes or a new private resource loader.
 
 The 2 October evening inventory has 16 public repositories. Build over Workers
-and the production fixes repository are now public but empty. No stable source has
+and Smarter Buildings are now public but empty. No stable source has
 been published there. The chat's additional changes remain review candidates
 until their complete sources are available; the supplied worker `init.lua` alone
 cannot establish assembly, packaging or lifecycle safety.
 
-The six newly populated gameplay/tool repositories are source-review candidates,
+At the inspected upstream baseline, the six newly populated gameplay/tool repositories are source-review candidates,
 not new Fixes dependencies. Their current manifests expose only English locale
 files and declare no framework, frontend or subsystem dependencies. `AttackMove`
 and `smarter-recruits` put their package versions (`1.0.1` and `1.0.10`) in
@@ -152,3 +152,7 @@ Before adding an external package to the bundle:
 
 Multiplayer testing remains player-owned. Acceptance gaps stay open; a bundle
 dependency or installable ZIP does not turn an untested module into a release.
+
+The full [module review and corrective PR list](monsterfisch-module-review.md) records
+the new descriptions/locales, Zoom hotkey ownership changes and native work still
+open after this package audit.
