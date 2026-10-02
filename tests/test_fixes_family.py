@@ -12,11 +12,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 FAMILY = 'ucp3-fixes'
 MEMBERS = ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix')
+EXTERNAL_DEPENDENCIES = {'smarter-gatehouses': '^1.0.3'}
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
 
 
 class FixesFamilyTests(unittest.TestCase):
-    def test_root_selects_all_three_independent_fixes(self):
+    def test_root_selects_internal_and_external_fixes_without_copying_code(self):
         definitions = {
             name: yaml.safe_load((ROOT / name / 'definition.yml').read_text(encoding='utf-8'))
             for name in (FAMILY, *MEMBERS)
@@ -24,7 +25,10 @@ class FixesFamilyTests(unittest.TestCase):
         root = definitions[FAMILY]
         self.assertEqual(root['type'], 'module')
         self.assertNotIn('family', root)
-        self.assertEqual(set(root['dependencies']) - {'frontend', 'framework'}, set(MEMBERS))
+        self.assertEqual(set(root['dependencies']) - {'frontend', 'framework'},
+                         set(MEMBERS) | set(EXTERNAL_DEPENDENCIES))
+        for name, version in EXTERNAL_DEPENDENCIES.items():
+            self.assertEqual(root['dependencies'][name], version)
         self.assertFalse((ROOT / FAMILY / 'config.yml').exists())
         for name in MEMBERS:
             member = definitions[name]

@@ -6,14 +6,16 @@ module: selecting Fixes must not silently enable extra tunneler abilities.
 
 This is an ownership review of the public Monsterfisch repositories on 2 October
 2026, not a claim that their gameplay or cross-module composition has passed.
-No new bundle dependencies are added by this review.
+The 0.1.1 integration candidate adds Gatehouse Fixes through its existing
+`smarter-gatehouses: ^1.0.3` dependency. It remains a test candidate pending
+upstream review and composition acceptance; no external native code is copied.
 
 ## Where the code belongs
 
 | Change | Implementation owner | Selection and integration |
 | --- | --- | --- |
 | Dead troops affecting gate capture/defense | `gatehouse-capture-fix` in this repository | Existing default-on Fixes bundle member |
-| Gate closing, enemy-gate routes, optional gate stairs | [Smarter Gatehouses](https://github.com/Monsterfisch/SmarterGatehouses) | Keep its existing module. Consider a reviewed dependency after acceptance; stairs stay opt-in |
+| Gate closing, enemy-gate routes, optional gate stairs | [Gatehouse Fixes](https://github.com/Monsterfisch/SmarterGatehouses), package ID `smarter-gatehouses` | Existing module dependency in the 0.1.1 test candidate; each switch remains configurable and stairs stay opt-in |
 | Tunneler digging, target selection, collapse, terrain cleanup and raid participation | [Improved Tunnelers](https://github.com/Monsterfisch/ImprovedTunnelers) | Keep its own module and test package; no mandatory Fixes dependency |
 | AI starting troop counts and initial acquisition/assignment | [AI Swapper](https://github.com/UnofficialCrusaderPatch/extension-aiSwapper) | AI Swapper owns the native initialization consumer, including tunnelers |
 | Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module; candidate for the bundle after its acceptance |
@@ -47,6 +49,7 @@ provider or preset merely to make a family header appear.
 | --- | --- |
 | `SmarterGatehouses` (created 1 October 2026) | Independent gatehouse module; related to Fixes, with optional balance controls |
 | `ImprovedTunnelers` (created 24 September 2026) | Independent tunneler module; no ownership transfer to Fixes |
+| [Attack Move](https://github.com/Monsterfisch/AttackMove) (created 2 October 2026) | Independent troop-command extension. Keep optional Alt behavior outside the basic Fixes bundle; input/command composition needs its own review |
 | [Conquering Arabia](https://github.com/Monsterfisch/ConqueringArabia_-fixed_updated_StrongholdCrusader_texture-) | Existing texture extension, using the existing files owner |
 | [Conquering Europe](https://github.com/Monsterfisch/ConqueringEurope_-Stronghold1_textures-) | Existing texture extension, using the existing files owner |
 | [Conquering Christmas](https://github.com/Monsterfisch/ConqueringChristmas_-Stronghold1_textures-with-snow-) | Existing texture extension, using the existing files owner |
@@ -61,9 +64,17 @@ composition is introduced, implement it through the existing texture/files owner
 not through Fixes or a new private resource loader.
 
 No public Build Over Workers or stable repository was found in the eight public
-repositories returned for Monsterfisch. The chat's additional changes remain
+repositories initially returned for Monsterfisch; the later inventory also includes
+AttackMove. The stables implementation has not yet been published, as confirmed
+by the user. The chat's additional changes remain
 review candidates until their complete sources are available; the supplied worker
 `init.lua` alone cannot establish assembly, packaging or lifecycle safety.
+
+For the reported optional horse-refill timing and progress display, **Stable
+Production** is a descriptive name. Any verified native horse-cap/lifecycle fix
+should be separately configurable under Bugfixes; production slowdown, delay caps
+and added behavior belong under Balance Changes and remain opt-in. Exact source,
+ownership and defaults cannot be finalized from the chat summary alone.
 
 ## Gatehouse composition evidence and remaining checks
 

@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Dieses Paket aktiviert die Korrekturen für Warenlieferungen, Torhauskontrolle und Jäger gemeinsam. Jede Korrektur hat einen eigenen Schalter unter Fehlerbehebungen.
+Dieses Paket aktiviert Korrekturen für Warenlieferungen, Jäger, die Eroberung von Torhäusern und ihr Verhalten. Jede Korrektur hat eigene Einstellungen. Optionale Treppenregeln für Torhäuser sind standardmäßig aus.

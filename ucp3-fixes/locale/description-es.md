@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Este paquete activa juntos los arreglos de entregas, control de puertas y cazadores. Cada arreglo tiene su propio interruptor en Correcciones.
+Este paquete activa correcciones de entregas, cazadores, captura y comportamiento de las puertas. Cada corrección tiene sus propios ajustes. Las reglas opcionales de escaleras están desactivadas por defecto.

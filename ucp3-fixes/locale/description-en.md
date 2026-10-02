@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Select this bundle to enable the worker delivery, gatehouse capture and hunter targeting fixes together. Each fix has its own switch under Bugfixes.
+Select this bundle for worker delivery, hunter targeting, gatehouse capture and gatehouse behavior fixes. Each fix has its own settings. Optional gatehouse stairs rules remain off by default.
