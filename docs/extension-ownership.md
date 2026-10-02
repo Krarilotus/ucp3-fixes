@@ -76,29 +76,10 @@ been published there. The chat's additional changes remain review candidates
 until their complete sources are available; the supplied worker `init.lua` alone
 cannot establish assembly, packaging or lifecycle safety.
 
-At the inspected upstream baseline, the six newly populated gameplay/tool repositories are source-review candidates,
-not new Fixes dependencies. Their current manifests expose only English locale
-files and declare no framework, frontend or subsystem dependencies. `AttackMove`
-and `smarter-recruits` put their package versions (`1.0.1` and `1.0.10`) in
-`meta.version`, where existing UCP manifests use schema version `1.0.0`.
-These are packaging issues to resolve before store submission; they do not prove
-the native changes fail. `Smarter Recruits` also enables diagnostic logging by
-default and mixes corrections with new troop behavior under its own category.
-
-Source inspection found two specific native integration concerns. `Exe Value
-Patcher` uses address entries from `config.yml`; its `skip_mismatched: false`
-default writes even when the expected original bytes do not match. A range check
-against the executable image does not establish the intended binding or hook
-ownership across supported builds. `Resource Grid Overlay` patches the native
-window-message arm directly and documents a shared screen-change hook collision
-with Resolution Based Zoom; the available `winProcHandler` API already provides
-registered priority and `CallNextProc` for Windows messages. The render hook is
-a separate ownership decision. Autosave calls the game's own save command, which
-is promising for save format compatibility, but its private settings file,
-custom dialog hooks and direct Windows file operations need owner/API, deletion,
-save/replay and lifecycle review. Zoom's default `E` key also retains the vanilla
-aggressive-stance action, as its README explicitly states. These findings are
-source review only, not cross-module or gameplay acceptance.
+The six newly populated gameplay/tool modules now have focused upstream package
+PRs. The [full review](monsterfisch-module-review.md) records corrected descriptions,
+locales, controls and ownership, along with the native gaps that remain. These
+PRs do not add the modules as new Fixes dependencies or establish acceptance.
 
 For the reported optional horse-refill timing and progress display, **Stable
 Production** is a descriptive name. Any verified native horse-cap/lifecycle fix
