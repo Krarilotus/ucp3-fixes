@@ -89,8 +89,9 @@ path calls and with other consumers such as Improved Tunnelers.
 Smarter Gatehouses still needs native binding ambiguity checks, complete preflight
 for its optional stairs hooks, safe unload ownership, bounded gate/link restoration
 and performance acceptance. Its machine-specific bench and non-failing failure
-reports are not a release gate. See the upstream integration contribution for
-packaging/localization and concrete pending checks.
+reports are not a release gate. [Upstream PR #2](https://github.com/Monsterfisch/SmarterGatehouses/pull/2)
+provides packaging/localization and concrete pending checks without changing its
+native implementation.
 
 Improved Tunnelers [PR #1](https://github.com/Monsterfisch/ImprovedTunnelers/pull/1)
 already owns its packaging, translations, native terrain correction and saved
