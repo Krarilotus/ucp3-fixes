@@ -8,3 +8,4 @@ files:
 - src: README.md
 - src: locale
 - src: behavior
+- src: CREDITS.md

@@ -3,3 +3,6 @@ fixes: Javítások
 title: 'MI: Komlófarmok számlálásának javítása'
 description: A komlófarmokat is beleszámítja az MI farmkorlátjába. A korlát változatlan. Módosítás után
   indítsd újra a játékot.
+tags.ai: MI
+tags.economy: Gazdaság
+tags.bugfixes: Hibajavítások

@@ -1,3 +1,4 @@
 bugfixes: Fehlerkorrekturen
 reachable_delivery: Lieferung an Kornspeicher und Waffenkammern
 reachable_delivery_descr: Arbeiter erreichen Kornspeicher und Waffenkammern über ihren eigenen Weg. Die KI behält diese Lager auch bei blockiertem Bergfriedweg. Nach einer Änderung neu starten.
+tags.bugfixes: Fehlerkorrekturen

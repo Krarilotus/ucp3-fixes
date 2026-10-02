@@ -3,3 +3,6 @@ fixes: Correctifs
 title: 'IA : Correction du comptage des houblonnières'
 description: Compte les houblonnières dans la limite de fermes de l’IA. La limite reste inchangée. Redémarrez
   le jeu après modification.
+tags.ai: IA
+tags.economy: Économie
+tags.bugfixes: Corrections

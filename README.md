@@ -6,8 +6,8 @@ Worker Delivery, Gatehouse Capture, Hunter Targeting, Fixed Engineers, AI Hop Fa
 Counting and the external Gatehouse Fixes module together. This expanded bundle is an integration test candidate,
 pending Gatehouse Fixes' upstream review and composition acceptance. The hop farm
 and AIV troop modules were created by Samurai (Discord: D. Daniel); Fixed
-Engineers is maintained by UCP
-contributors. Worker Delivery Fix is a code-reviewed preview awaiting in-game
+Engineers is maintained by UCP contributors. Each packaged module includes
+`CREDITS.md`; original authorship and licenses stay with their owners. Worker Delivery Fix is a code-reviewed preview awaiting in-game
 acceptance.
 
 Fixed Engineers 0.2.0 is merged into this repository. Its signed
@@ -104,3 +104,7 @@ Use Disable Security for local testing, then select the modules in Content.
 See [the review and test matrix](docs/validation.md). Run the portable regression
 suite with `python -m unittest discover -s tests -v` after installing
 `tests/requirements.txt`. No game binaries are distributed with the tests.
+
+[Package authorship, translated tags and family boundaries](docs/package-metadata.md)
+are documented separately. Bundle 0.1.3 refreshes metadata and credits without
+changing simulation code or customization values.

@@ -1,11 +1,17 @@
 name: hopfarm-limit-fix
 display-name: 'AI: Hop Farm Counting Fix'
 author: Samurai
-version: 0.1.2
+version: 0.1.3
 type: module
-game: [SHC==1.41, SHCE==1.41]
+game:
+- SHC==1.41
+- SHCE==1.41
 meta:
   version: 1.0.0
 dependencies:
   framework: ^3.0.0
   frontend: ^1.0.0
+tags:
+- ai
+- economy
+- bugfixes

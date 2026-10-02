@@ -1,10 +1,13 @@
 name: worker-delivery-fix
 display-name: Worker Delivery Fix
 author: UCP contributors
-version: 0.1.1
+version: 0.1.2
 type: module
-game: [SHC==1.41, SHCE==1.41]
-tags: [bugfixes]
+game:
+- SHC==1.41
+- SHCE==1.41
+tags:
+- bugfixes
 meta:
   version: 1.0.0
 dependencies:

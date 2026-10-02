@@ -10,3 +10,4 @@ files:
 - src: unit-handlers.lua
 - src: description.md
 - src: locale
+- src: CREDITS.md

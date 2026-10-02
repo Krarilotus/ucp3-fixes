@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FAMILY = 'ucp3-fixes'
 MEMBERS = ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix',
            'fixed-engineers', 'hopfarm-limit-fix')
-EXTERNAL_DEPENDENCIES = {'smarter-gatehouses': '^1.0.3'}
+EXTERNAL_DEPENDENCIES = {'smarter-gatehouses': '^1.0.4'}
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
 
 

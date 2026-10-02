@@ -1,3 +1,4 @@
 bugfixes: Hibajavítások
 reachable_delivery: Szállítás magtárba és fegyvertárba
 reachable_delivery_descr: A munkások a saját útjukon jutnak el a magtárba és a fegyvertárba. Az MI megtartja ezeket, ha a vártoronytól vezető út elzáródik. Módosítás után indítsd újra a játékot.
+tags.bugfixes: Hibajavítások

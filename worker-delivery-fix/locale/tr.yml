@@ -1,3 +1,4 @@
 bugfixes: Hata düzeltmeleri
 reachable_delivery: Ambar ve cephaneliğe teslimat
 reachable_delivery_descr: İşçiler ambar ve cephaneliğe kendi yollarını kullanır. İç kaleden gelen yol kapalıysa yapay zekâ bu binaları korur. Değişiklikten sonra oyunu yeniden başlatın.
+tags.bugfixes: Hata düzeltmeleri

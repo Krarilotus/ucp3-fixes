@@ -7,3 +7,4 @@ files:
 - src: capture.lua
 - src: description.md
 - src: locale
+- src: CREDITS.md

@@ -1,12 +1,15 @@
 name: fixed-engineers
 display-name: Fixed Engineers
 author: UCP contributors
-version: 0.2.1
+version: 0.2.2
 type: module
-game: [SHC==1.41, SHCE==1.41]
+game:
+- SHC==1.41
+- SHCE==1.41
 meta:
   version: 1.0.0
 dependencies:
   framework: ^3.0.7
   frontend: ^1.0.0
-tags: [bugfixes]
+tags:
+- bugfixes

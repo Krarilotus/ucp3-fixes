@@ -5,3 +5,4 @@ files:
 - src: init.lua
 - src: description.md
 - src: locale
+- src: CREDITS.md

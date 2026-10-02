@@ -1,3 +1,4 @@
 bugfixes: 错误修复
 reachable_delivery: 向粮仓和军械库送货
 reachable_delivery_descr: 工人按自己的路线前往粮仓和军械库。主堡道路受阻时，电脑玩家仍会保留这些建筑。更改设置后请重启游戏。
+tags.bugfixes: 错误修复

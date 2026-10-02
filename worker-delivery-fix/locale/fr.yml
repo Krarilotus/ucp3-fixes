@@ -1,3 +1,4 @@
 bugfixes: Corrections
 reachable_delivery: Livraison aux greniers et armureries
 reachable_delivery_descr: Les ouvriers empruntent leur propre chemin vers les greniers et armureries. L'IA les conserve si le chemin depuis le donjon est bloqué. Redémarrez après tout changement.
+tags.bugfixes: Corrections

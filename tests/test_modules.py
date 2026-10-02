@@ -190,7 +190,7 @@ class ModuleTests(unittest.TestCase):
                     self.assertTrue((folder / 'locale' / ('description-' + lang + '.md')).is_file())
                 self.assertEqual((folder / 'description.md').read_bytes(), (folder / 'locale/description-en.md').read_bytes())
                 files = yaml.safe_load((folder / 'files.yml').read_text(encoding='utf-8'))['files']
-                expected = {'definition.yml', 'init.lua', 'options.yml', 'description.md', 'README.md', 'locale'}
+                expected = {'definition.yml', 'init.lua', 'options.yml', 'description.md', 'README.md', 'locale', 'CREDITS.md'}
                 if name == AIV: expected.add('behavior')
                 self.assertEqual({x['src'] for x in files}, expected)
                 self.assertTrue(all((folder / x['src']).exists() for x in files))

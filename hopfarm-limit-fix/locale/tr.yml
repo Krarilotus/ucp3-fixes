@@ -3,3 +3,6 @@ fixes: Düzeltmeler
 title: 'Yapay zekâ: Şerbetçiotu çiftliği sayım düzeltmesi'
 description: Şerbetçiotu çiftliklerini yapay zekânın çiftlik sınırına dâhil eder. Sınır değişmez. Ayarı
   değiştirdikten sonra oyunu yeniden başlatın.
+tags.ai: Yapay zekâ
+tags.economy: Ekonomi
+tags.bugfixes: Hata düzeltmeleri
