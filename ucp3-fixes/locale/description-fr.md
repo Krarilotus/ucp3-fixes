@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Ce pack active les corrections des livraisons, des chasseurs, de la capture et du comportement des portes. Chaque correction a ses propres réglages. Les règles facultatives d’escaliers restent désactivées par défaut.
+Corrige les livraisons, les chasseurs, les corps de garde, les équipages de siège et le comptage des houblonnières de l’IA. Chaque correction peut être désactivée.

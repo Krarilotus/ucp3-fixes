@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Ez a csomag javítja az áruszállítást, a vadászok célválasztását, a kapuk elfoglalását és működését. Minden javítás külön állítható. A választható lépcsőszabályok alapból ki vannak kapcsolva.
+Javítja az áruszállítást, a vadászokat, a kapukat, az ostromgépek legénységét és az MI komlófarmjainak számlálását. Minden javítás kikapcsolható.

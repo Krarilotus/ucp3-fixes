@@ -6,7 +6,8 @@ module: selecting Fixes must not silently enable extra tunneler abilities.
 
 This is an ownership review of the public Monsterfisch repositories on 2 October
 2026, not a claim that their gameplay or cross-module composition has passed.
-The 0.1.1 integration candidate adds Gatehouse Fixes through its existing
+The 0.1.2 integration candidate selects Gatehouse Fixes, Fixed Engineers and AI
+Hop Farm Counting through their existing modules. Gatehouse Fixes uses the external
 `smarter-gatehouses: ^1.0.3` dependency. It remains a test candidate pending
 upstream review and composition acceptance; no external native code is copied.
 
@@ -18,11 +19,11 @@ upstream review and composition acceptance; no external native code is copied.
 | Gate closing, enemy-gate routes, optional gate stairs | [Gatehouse Fixes](https://github.com/Monsterfisch/SmarterGatehouses), package ID `smarter-gatehouses` | Existing module dependency in the 0.1.1 test candidate; each switch remains configurable and stairs stay opt-in |
 | Tunneler digging, target selection, collapse, terrain cleanup and raid participation | [Improved Tunnelers](https://github.com/Monsterfisch/ImprovedTunnelers) | Keep its own module and test package; no mandatory Fixes dependency |
 | AI starting troop counts and initial acquisition/assignment | [AI Swapper](https://github.com/UnofficialCrusaderPatch/extension-aiSwapper) | AI Swapper owns the native initialization consumer, including tunnelers |
-| Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module; candidate for the bundle after its acceptance |
+| Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module selected by the unreleased bundle; Store acceptance remains pending |
 | AI recruitment roles, siege placement, harassment and resource payment | [AIC Tactics](https://github.com/UnofficialCrusaderPatch/extension-aic-tactics) | AI policy and per-AI AIC overrides stay with that owner |
 | Delivery to granary/armory with a blocked keep route | `worker-delivery-fix` in this repository | Already a bundle member. Compare any new implementation here before adding another hook |
 | Hunter deer targeting and approach | `hunter-targeting-fix` in this repository | Already a bundle member; unrelated new hunter combat rules need separate scope |
-| Hop farms counted against the existing farm limit | `hopfarm-limit-fix` in this repository | Existing independent module; candidate after gameplay acceptance |
+| Hop farms counted against the existing farm limit | `hopfarm-limit-fix` in this repository | Existing independent module selected by the unreleased bundle; gameplay acceptance remains pending |
 | AIV troop behavior and per-AI assignments | `aiv-troops-behaviour` in this repository | Keep its independent selection and AIC controls; do not force optional AI behavior through Fixes |
 | Building entrances not refreshed when blocked | Building entrance/pathing owner, after tracing the trigger | New fix candidate; distinct from delivery's choice of route origin |
 | Building over workers and safe relocation | Existing Build Over Workers implementation, after lifecycle review | Optional placement capability. Do not copy its work into delivery or gatehouse code |

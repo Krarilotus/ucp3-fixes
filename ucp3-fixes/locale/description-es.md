@@ -1,3 +1,3 @@
 # UCP3 Fixes
 
-Este paquete activa correcciones de entregas, cazadores, captura y comportamiento de las puertas. Cada corrección tiene sus propios ajustes. Las reglas opcionales de escaleras están desactivadas por defecto.
+Corrige las entregas, los cazadores, las puertas, las tripulaciones de asedio y el recuento de granjas de lúpulo de la IA. Cada arreglo se puede desactivar.

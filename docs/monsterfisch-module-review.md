@@ -7,6 +7,23 @@ not native gameplay, editor, performance or replay acceptance.
 The small package corrections have upstream PRs. Native integration gaps below
 remain unfinished. No new module was silently added to the Fixes bundle.
 
+On 3 October the user authorized merging fitting source changes into the
+unreleased Fixes repository. Bundle 0.1.2 selects Worker Delivery, Hunter
+Targeting, Gatehouse Capture, Gatehouse Fixes, Fixed Engineers and AI Hop Farm
+Counting. Implementation and controls stay with their existing owners.
+AI troop behavior, tunnelers, input/graphics tools, save management and content
+themes remain standalone Store packages. Attack Move and Smarter Recruits also
+remain standalone: their mixed features and state/command concerns need separate
+acceptance before any small correction joins the bundle.
+
+The Gatehouse, Attack Move and Recruit PRs now flatten one-switch groups, remove
+repeated explanations and prune unused locale keys. Config paths, defaults and
+independent switches are unchanged. Recruit diagnostics belongs to Miscellaneous;
+corrections use Bugfixes, AI counting uses AI > Fixes, optional conveniences use
+Quality of Life, and gatehouse stairs use Balance Changes. These are the current
+Legacy category identities, not new categories or changes to Legacy itself.
+Source integration is not Store approval or native gameplay acceptance.
+
 ## Placement and ownership
 
 | Repository | Home and boundaries | Review outcome |

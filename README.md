@@ -2,8 +2,8 @@
 
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as six
 independently selectable UCP3 modules. An optional UCP3 Fixes bundle selects
-Worker Delivery, Gatehouse Capture, Hunter Targeting and the external Gatehouse
-Fixes module together. This expanded bundle is an integration test candidate,
+Worker Delivery, Gatehouse Capture, Hunter Targeting, Fixed Engineers, AI Hop Farm
+Counting and the external Gatehouse Fixes module together. This expanded bundle is an integration test candidate,
 pending Gatehouse Fixes' upstream review and composition acceptance. The hop farm
 and AIV troop modules were created by Samurai (Discord: D. Daniel); Fixed
 Engineers is maintained by UCP
@@ -28,14 +28,14 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
 
 The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
-descriptions, not copies of the fixes. Its four dependencies still own their
+descriptions, not copies of the fixes. Its six dependencies still own their
 native code and independent settings. Gatehouse Fixes' corrections default ON
 under Bugfixes; its optional stairs rules default OFF under Balance Changes.
 The original package ID `smarter-gatehouses` is preserved. UCP 3.0.7 shows the packages
 separately. Compatible fixes should remain independently selectable; the
 [family-metadata correction](https://github.com/Krarilotus/ucp3-fixes/pull/9)
 keeps them outside configuration families.
-Selecting the bundle activates all four. Selecting a member alone activates
+Selecting the bundle activates all six. Selecting a member alone activates
 only that fix.
 
 The [extension ownership review](docs/extension-ownership.md) maps related

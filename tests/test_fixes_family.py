@@ -11,7 +11,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 FAMILY = 'ucp3-fixes'
-MEMBERS = ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix')
+MEMBERS = ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix',
+           'fixed-engineers', 'hopfarm-limit-fix')
 EXTERNAL_DEPENDENCIES = {'smarter-gatehouses': '^1.0.3'}
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
 
@@ -33,11 +34,13 @@ class FixesFamilyTests(unittest.TestCase):
         for name in MEMBERS:
             member = definitions[name]
             self.assertNotIn('family', member)
-            self.assertIn('bugfixes', member['tags'])
+            if name in ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix'):
+                self.assertIn('bugfixes', member['tags'])
             self.assertEqual(root['dependencies'][name], f"^{member['version']}")
             option = yaml.safe_load((ROOT / name / 'options.yml').read_text(encoding='utf-8'))['options'][0]
             self.assertIs(option['contents']['value'], True)
-            self.assertEqual(option['category'], ['{{bugfixes}}'])
+            self.assertEqual(option['category'], ['{{ai}}', '{{fixes}}']
+                             if name == 'hopfarm-limit-fix' else ['{{bugfixes}}'])
 
     def test_root_package_has_localized_description_and_no_fix_code(self):
         spec = importlib.util.spec_from_file_location('build_modules', ROOT / 'tools/build_modules.py')
