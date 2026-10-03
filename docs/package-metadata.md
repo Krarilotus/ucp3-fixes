@@ -3,8 +3,9 @@
 The runtime manifest is `definition.yml` (singular). Keep original author names
 and licenses. Packaged `CREDITS.md` files distinguish original work, UCP
 integration, assets and reference research; they do not assign a new license.
-Samurai's Hop Farm/AIV modules and Monsterfish's Gatehouse module retain their
-authorship. Fixed Engineers retains its collective author and credits its actual
+Daniel Fleger's (Samurai's) Hop Farm module and Monsterfish's Gatehouse module
+retain their authorship. AIV Troop Behaviour lists Krarilotus as main author and
+Daniel Fleger as original author. Fixed Engineers retains its collective author and credits its actual
 implementation; np123's historical patch is research, not copied production code.
 
 Tags use the existing launcher topic IDs and flat `tags.<id>` locale keys in all
