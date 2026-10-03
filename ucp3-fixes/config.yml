@@ -1,0 +1,55 @@
+# Recommended UCP3 Fixes setup: every correction on, optional gatehouse stairs
+# rules off. Suggested values stay editable in Customizations.
+meta:
+  version: 1.0.0
+config-sparse:
+  modules:
+    worker-delivery-fix:
+      config:
+        reachable_delivery:
+          contents:
+            suggested-value: true
+    gatehouse-capture-fix:
+      config:
+        living_gatehouse_occupants:
+          contents:
+            suggested-value: true
+    hunter-targeting-fix:
+      config:
+        hunter_targeting:
+          contents:
+            suggested-value: true
+    fixed-engineers:
+      config:
+        siege_target_stop:
+          contents:
+            suggested-value: true
+        crew_lifecycle:
+          contents:
+            suggested-value: true
+    hopfarm-limit-fix:
+      config:
+        enabled:
+          contents:
+            suggested-value: true
+    smarter-gatehouses:
+      config:
+        pathing:
+          enemy_gates_closed:
+            contents:
+              suggested-value: true
+        detection:
+          centred:
+            contents:
+              suggested-value: true
+          reachable_only:
+            contents:
+              suggested-value: true
+        walls:
+          stairs_needed:
+            contents:
+              suggested-value: false
+          stairs_needed_ai:
+            contents:
+              suggested-value: false
+  plugins: {}

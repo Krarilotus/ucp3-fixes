@@ -1,7 +1,7 @@
 name: hopfarm-limit-fix
 display-name: 'AI: Hop Farm Counting Fix'
 author: Daniel Fleger (Samurai)
-version: 0.1.3
+version: 0.1.4
 type: module
 game:
 - SHC==1.41

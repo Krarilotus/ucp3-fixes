@@ -1,11 +1,14 @@
 name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
-version: 0.1.3
+version: 0.1.4
 type: module
 game:
 - SHC==1.41
 - SHCE==1.41
+family:
+- name: ucp3-fixes
+  root: true
 tags:
 - bugfixes
 meta:
@@ -18,4 +21,4 @@ dependencies:
   hunter-targeting-fix: ^0.1.2
   smarter-gatehouses: ^1.0.4
   fixed-engineers: ^0.2.2
-  hopfarm-limit-fix: ^0.1.3
+  hopfarm-limit-fix: ^0.1.4
