@@ -5,7 +5,8 @@ independently selectable UCP3 modules. An optional UCP3 Fixes bundle selects
 Worker Delivery, Gatehouse Capture, Hunter Targeting, Fixed Engineers, AI Hop Farm
 Counting and the external Gatehouse Fixes module together. This expanded bundle is an integration test candidate,
 pending Gatehouse Fixes' upstream review and composition acceptance. The hop farm
-and AIV troop modules were created by Samurai (Discord: D. Daniel); Fixed
+fix was created by Daniel Fleger (Samurai, Discord: D. Daniel). AIV Troop
+Behaviour builds on his original module and is mainly authored by Krarilotus. Fixed
 Engineers is maintained by UCP contributors. Each packaged module includes
 `CREDITS.md`; original authorship and licenses stay with their owners. Worker Delivery Fix is a code-reviewed preview awaiting in-game
 acceptance.

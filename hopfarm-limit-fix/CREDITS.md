@@ -1,6 +1,6 @@
 # Credits
 
-Original module: Samurai (Discord: D. Daniel; GitHub: DanielFleger).
+Original author: Daniel Fleger (Samurai; Discord: D. Daniel; GitHub: DanielFleger).
 UCP integration, expanded controls and localization: Krarilotus.
 
 Stronghold Crusader and its original game assets/code: Firefly Studios.
