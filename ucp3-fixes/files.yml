@@ -3,6 +3,7 @@ meta:
 files:
 - src: definition.yml
 - src: init.lua
+- src: config.yml
 - src: description.md
 - src: locale
 - src: CREDITS.md

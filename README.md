@@ -36,8 +36,10 @@ The original package ID `smarter-gatehouses` is preserved. UCP 3.0.7 shows the p
 separately. Compatible fixes should remain independently selectable; the
 [family-metadata correction](https://github.com/Krarilotus/ucp3-fixes/pull/9)
 keeps them outside configuration families.
-Selecting the bundle activates all six. Selecting a member alone activates
-only that fix.
+Selecting the bundle activates all six with its recommended setup: every
+correction ON, optional stairs rules OFF. The bundle is the root of the
+`ucp3-fixes` family, ready for alternative configurations later. Selecting a
+member alone activates only that fix.
 
 The [extension ownership review](docs/extension-ownership.md) maps related
 gatehouse, tunneler, stable, building, projectile, texture and AI work to its
