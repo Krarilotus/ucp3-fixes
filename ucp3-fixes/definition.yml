@@ -1,14 +1,11 @@
 name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
-version: 0.1.4
+version: 0.1.5
 type: module
 game:
 - SHC==1.41
 - SHCE==1.41
-family:
-- name: ucp3-fixes
-  root: true
 tags:
 - bugfixes
 meta:
