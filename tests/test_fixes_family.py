@@ -18,14 +18,14 @@ LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
 
 
 class FixesFamilyTests(unittest.TestCase):
-    def test_root_selects_internal_and_external_fixes_without_copying_code(self):
+    def test_bundle_selects_independent_fixes_without_claiming_a_configuration_family(self):
         definitions = {
             name: yaml.safe_load((ROOT / name / 'definition.yml').read_text(encoding='utf-8'))
             for name in (FAMILY, *MEMBERS)
         }
         root = definitions[FAMILY]
         self.assertEqual(root['type'], 'module')
-        self.assertEqual(root['family'], [{'name': FAMILY, 'root': True}])
+        self.assertNotIn('family', root)
         self.assertEqual(set(root['dependencies']) - {'frontend', 'framework'},
                          set(MEMBERS) | set(EXTERNAL_DEPENDENCIES))
         for name, version in EXTERNAL_DEPENDENCIES.items():
