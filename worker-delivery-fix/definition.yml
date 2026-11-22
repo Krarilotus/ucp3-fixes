@@ -1,7 +1,7 @@
 name: worker-delivery-fix
 display-name: Worker Delivery Fix
 author: UCP contributors
-version: 0.1.2
+version: 0.2.0
 type: module
 game:
 - SHC==1.41

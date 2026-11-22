@@ -6,8 +6,8 @@ native path and try shooting again from a closer position. The hunter stops
 approaching if the path ends or it gets within three tiles without a clear shot.
 No new pathfinder, target list or saved state is introduced.
 
-The **Bugfixes → Hunter targeting** switch defaults to on and needs a restart
-when changed. Maps and saves keep their original format and remain usable
+The **Bugfixes → Hunter targeting** switch is off by default (0.2.0 and later);
+the UCP3 Fixes plugin turns it on. It needs a restart when changed. Maps and saves keep their original format and remain usable
 without this optional module.
 
 Read-only signatures and isolated x86 branch execution passed on the local
@@ -22,3 +22,7 @@ Suggested single-player test:
 - [ ] Block the first shot with terrain or a wall; the hunter should approach, then shoot when clear.
 - [ ] Give the hunter no usable path or no clear shot within three tiles; it should give up cleanly.
 - [ ] Save/load and replay a hunt; compare behavior with the switch off.
+
+## Release notes
+
+- **0.2.0:** The fix is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.

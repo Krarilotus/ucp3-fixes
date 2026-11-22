@@ -12,9 +12,9 @@ the native repair/removal path.
 Stockpiles already bypass this particular keep-region check in the original
 game, so this module does not change their delivery logic.
 
-The **Granary and armory delivery** switch is under **Bugfixes** and defaults
-to ON when the module is selected. Turn it OFF to compare original behavior,
-then restart the game. The package provides option text and descriptions in
+The **Granary and armory delivery** switch is under **Bugfixes**. It is off by
+default (0.2.0 and later); the UCP3 Fixes plugin turns it on. Turn it off to
+compare original behavior, then restart the game. The package provides option text and descriptions in
 all nine currently supported UCP frontend languages. It adds no saved state or
 map-format section.
 
@@ -71,3 +71,7 @@ ON. Do not use it as a release package yet.
 Multiplayer testing is left to players. A save renamed to `.map` should remain
 editable without this module because the module adds no map or save data; that
 editor check has not yet been run.
+
+## Release notes
+
+- **0.2.0:** The fix is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.

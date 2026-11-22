@@ -54,7 +54,9 @@ local SKIP_OFFSETS = {
 
 return {
   enable = function(self, config)
-    if config.enabled == false or self.applied then
+    -- Off unless configured on (since 0.3.0): the module keeps the game's
+    -- behaviour by default. The UCP3 Fixes plugin switches it on.
+    if self.applied or not config or config.enabled ~= true then
       return
     end
     -- Troop behaviour controls are opt-in. Resolve every behavior site before

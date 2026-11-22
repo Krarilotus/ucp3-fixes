@@ -63,7 +63,7 @@ class AllTroopPathsTests(unittest.TestCase):
 
     def test_native_and_disabled_controls_preserve_original_paths(self):
         h = BehaviorHarness()
-        h.enable({'behavior': h.lua.table_from({'enabled': False})})
+        h.enable({'enabled': True, 'behavior': h.lua.table_from({'enabled': False})})
         self.assertEqual(len(h.writes), 3)
         self.assertFalse(h.hooks or h.callbacks or h.aic)
         h = BehaviorHarness()

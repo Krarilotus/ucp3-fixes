@@ -17,6 +17,8 @@ FIXTURES = {
     HOP: bytes.fromhex('0F B7 0A 66 83 F9 1E 74 0C 66 83 F9 20 74 06 66 83 F9 21 75 11 85 FF'),
     AIV: bytes.fromhex('83 7C 24 1C 09 8B 44 24 38 C7 00 00 00 00 00 0F 84 32 03 00 00 83 7C 24 1C 0B 0F 84 27 03 00 00 83 7C 24 1C 12 0F 84 1C 03 00 00'),
 }
+# The modules default to off; tests that check the patch switch them on explicitly.
+ON = {'enabled': True}
 
 
 class ModuleHarness:
@@ -86,18 +88,31 @@ class ModuleTests(unittest.TestCase):
                 self.assertEqual(len(h.scans), 1)
                 self.assertEqual(h.scans[0][1], 0, 'use the framework AOB cache')
 
-    def test_old_empty_config_still_enables(self):
+    def test_unconfigured_module_keeps_game_behaviour(self):
+        # Since 0.2.0/0.3.0 the fixes are off unless a configuration turns them on.
+        for name, fixture in FIXTURES.items():
+            for config in ({}, {'enabled': None}):
+                with self.subTest(module=name, config=config):
+                    h = ModuleHarness(name, fixture)
+                    h.enable(config)
+                    self.assertEqual((h.scans, h.writes), ([], []))
+                    self.assertFalse(h.module.applied)
+            h = ModuleHarness(name, fixture)
+            h.module.enable(h.module, None)
+            self.assertEqual((h.scans, h.writes), ([], []))
+
+    def test_configured_on_applies_the_fix(self):
         for name, fixture in FIXTURES.items():
             with self.subTest(module=name):
                 h = ModuleHarness(name, fixture)
-                h.enable()
+                h.enable(ON)
                 self.assertTrue(h.writes)
 
     def test_runtime_disable_reports_restart_and_preserves_patch(self):
         for name, fixture in FIXTURES.items():
             with self.subTest(module=name):
                 h = ModuleHarness(name, fixture)
-                h.enable()
+                h.enable(ON)
                 before = bytes(h.memory)
                 ok, reason = h.module.disable(h.module, h.lua.table())
                 self.assertFalse(ok)
@@ -109,7 +124,7 @@ class ModuleTests(unittest.TestCase):
         memory[1] = 0xBF  # movsx instead of movzx: range check's assumption changed
         h = ModuleHarness(HOP, memory)
         with self.assertRaises(LuaError):
-            h.enable()
+            h.enable(ON)
         self.assertEqual(h.writes, [])
 
     def test_aiv_preflights_all_three_branches(self):
@@ -117,12 +132,12 @@ class ModuleTests(unittest.TestCase):
         memory[37] = 0x90  # another patch has modified the last jump
         h = ModuleHarness(AIV, memory)
         with self.assertRaises(LuaError):
-            h.enable()
+            h.enable(ON)
         self.assertEqual(h.writes, [])
 
     def test_hop_machine_code_accepts_exactly_four_farm_types(self):
         h = ModuleHarness(HOP, FIXTURES[HOP])
-        h.enable()
+        h.enable(ON)
         self.assertEqual(len(h.writes), 1)
         address, patch = h.writes[0]
         self.assertEqual((address, len(patch)), (BASE + 3, 18))
@@ -143,7 +158,7 @@ class ModuleTests(unittest.TestCase):
 
     def test_aiv_machine_code_changes_only_rows_9_11_18(self):
         h = ModuleHarness(AIV, FIXTURES[AIV])
-        h.enable()
+        h.enable(ON)
         self.assertEqual([(a - BASE, len(b)) for a, b in h.writes], [(15, 6), (26, 6), (37, 6)])
         changed = {i for i, (a, b) in enumerate(zip(FIXTURES[AIV], h.memory)) if a != b}
         self.assertEqual(changed, set(range(15, 21)) | set(range(26, 32)) | set(range(37, 43)))
@@ -181,7 +196,7 @@ class ModuleTests(unittest.TestCase):
                 options_text = (folder / 'options.yml').read_text(encoding='utf-8')
                 option = yaml.safe_load(options_text)['options'][0]
                 self.assertEqual(option['url'], name + '.enabled')
-                self.assertIs(option['contents']['value'], True)
+                self.assertIs(option['contents']['value'], False, 'vanilla default: off unless configured')
                 keys = set(re.findall(r'{{(.*?)}}', options_text))
                 for lang in ('en', 'de'):
                     locale = yaml.safe_load((folder / 'locale' / (lang + '.yml')).read_text(encoding='utf-8'))

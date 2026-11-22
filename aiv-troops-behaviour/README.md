@@ -43,10 +43,10 @@ the new review independently checks instructions, not that gameplay observation.
 
 ## Customizations: defaults for every AI
 
-Select the module and open **AI → AIV Troop Behaviour**. The base fix is enabled by default for
-a selected module. **Troop settings** is off by
-default; enable it to activate the additional controls. Missing configuration
-keeps the base-only behaviour of 0.1.x.
+Select the module and open **AI → AIV Troop Behaviour**. Since 0.3.0 the base fix
+(the module's main switch) is off by default, also for a missing configuration;
+the UCP3 Fixes plugin turns it on. **Troop settings** is off by default too;
+enable the main switch and then Troop settings to activate the additional controls.
 
 The table provides separate choices for all 15 supported troop types.
 No AIC file or AI replacement is needed to use them.
@@ -201,3 +201,7 @@ the read-only signature and instruction-boundary audit. Portable tests cover
 policy, callbacks, menu/locale consistency, ABI arguments and x86 branch routing.
 **This feature still needs live UCP 3.0.7 gameplay validation before release.**
 See the source repository's `docs/validation.md` for the complete checklist.
+
+## Release notes
+
+- **0.3.0:** The AIV position fix (the module's main switch) is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.

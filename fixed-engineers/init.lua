@@ -1,8 +1,9 @@
 return {
   enable = function(self, config)
     if self.applied then return end
-    local crewEnabled = not config or config.crew_lifecycle ~= false
-    local stopEnabled = not config or config.siege_target_stop ~= false
+    -- Each fix is off unless configured on, matching the game's behaviour.
+    local crewEnabled = config ~= nil and config.crew_lifecycle == true
+    local stopEnabled = config ~= nil and config.siege_target_stop == true
     if not crewEnabled and not stopEnabled then return end
     local native = crewEnabled and require("unit-handlers").resolve()
     local crew = crewEnabled and require("crew").prepare(native)

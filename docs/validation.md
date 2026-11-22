@@ -24,7 +24,10 @@ The 3.0.7 extension-store branch was checked at
   before writing. They now use the same `UCP2Switch` / AI / Fixes presentation.
 - Module selection already makes the fixes independently optional. The new
   boolean options additionally allow configuration plugins to disable them.
-  Defaults preserve the behaviour of existing module selections. Per-AI caps and
+  Defaults preserved the behaviour of existing module selections at this review;
+  since Worker Delivery, Gatehouse Capture, Hunter Targeting and Hop Farm Counting
+  0.2.0 and Fixed Engineers and AIV Troop Behaviour 0.3.0 every fix is off by
+  default and the UCP3 Fixes plugin turns it on. Per-AI caps and
   per-row controls would change the scope and are not necessary for these fixes.
 - Keeping the modules self-contained is preferable to a shared runtime helper
   dependency for two short entry points. AIV offsets are now a named list.

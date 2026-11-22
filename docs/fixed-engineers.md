@@ -48,8 +48,9 @@ from the same framework version. PR #3's separate branch remains untouched.
 ## Setting, migration and testing
 
 `fixed-engineers.crew_lifecycle` and `fixed-engineers.siege_target_stop` both
-default to true in runtime and options, with independent OFF controls under
-the established localized **Bugfixes** category. All nine frontend option and
+default to false in runtime and options (0.3.0 and later), with independent
+controls under the established localized **Bugfixes** category. The UCP3 Fixes
+plugin turns both on. All nine frontend option and
 description catalogs are included; root description equals English. Human
 translation review and installed-GUI checks are pending.
 
@@ -81,3 +82,7 @@ added a one-line ghost-engineer byte patch and described incomplete AI coverage;
 reverted it after reports of disappearing AI lords. Current [issue #79](https://github.com/UnofficialCrusaderPatch/UnofficialCrusaderPatch/issues/79)
 records its unsafe index/address/record-clearing concerns. None of those bytes
 are reused as a production binding here.
+
+## Release notes
+
+- **0.3.0:** Both fixes are off by default, so the module keeps the game's behaviour until you turn them on. The **UCP3 Fixes** plugin turns them on. Players who added the module on its own will see both switched off after updating; switch them on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.

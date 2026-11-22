@@ -9,4 +9,4 @@ options:
   url: worker-delivery-fix.reachable_delivery
   contents:
     type: boolean
-    value: true
+    value: false

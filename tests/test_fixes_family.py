@@ -14,6 +14,11 @@ FAMILY = 'ucp3-fixes'
 MEMBERS = ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix',
            'fixed-engineers', 'hopfarm-limit-fix')
 EXTERNAL_DEPENDENCIES = {'smarter-gatehouses': '^1.0.4'}
+# Bundle 0.1.4 keeps selecting the released default-on modules; the off-by-default
+# modules got new minor versions, which its caret ranges do not accept.
+RELEASED = {'worker-delivery-fix': ('^0.1.2', '0.1.'), 'gatehouse-capture-fix': ('^0.1.2', '0.1.'),
+            'hunter-targeting-fix': ('^0.1.2', '0.1.'), 'fixed-engineers': ('^0.2.2', '0.2.'),
+            'hopfarm-limit-fix': ('^0.1.4', '0.1.')}
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
 
 
@@ -35,9 +40,11 @@ class FixesFamilyTests(unittest.TestCase):
             self.assertNotIn('family', member)
             if name in ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix'):
                 self.assertIn('bugfixes', member['tags'])
-            self.assertEqual(root['dependencies'][name], f"^{member['version']}")
+            pinned, released_prefix = RELEASED[name]
+            self.assertEqual(root['dependencies'][name], pinned)
+            self.assertFalse(member['version'].startswith(released_prefix), name)
             option = yaml.safe_load((ROOT / name / 'options.yml').read_text(encoding='utf-8'))['options'][0]
-            self.assertIs(option['contents']['value'], True)
+            self.assertIs(option['contents']['value'], False)
             self.assertEqual(option['category'], ['{{ai}}', '{{fixes}}']
                              if name == 'hopfarm-limit-fix' else ['{{bugfixes}}'])
 
@@ -56,10 +63,11 @@ class FixesFamilyTests(unittest.TestCase):
 
         for name in MEMBERS:
             options = yaml.safe_load((ROOT / name / 'options.yml').read_text(encoding='utf-8'))['options']
-            defaults = {option['url'].split('.', 1)[1]: option['contents']['value'] for option in options}
+            urls = [option['url'].split('.', 1)[1] for option in options]
+            # The modules default to off; the bundle suggests every fix on.
             self.assertEqual(dict(suggested(sparse['modules'][name]['config'])),
-                             {url: {'suggested-value': value} for url, value in defaults.items()})
-            self.assertTrue(all(value is True for value in defaults.values()))
+                             {url: {'suggested-value': True} for url in urls})
+            self.assertTrue(all(option['contents']['value'] is False for option in options))
         gatehouses = dict(suggested(sparse['modules']['smarter-gatehouses']['config']))
         self.assertEqual(gatehouses, {
             'pathing.enemy_gates_closed': {'suggested-value': True},
