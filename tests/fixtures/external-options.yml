@@ -1,0 +1,18 @@
+# Option URLs of dependencies outside this repository, copied from their options.yml
+# at the named commit. Regenerate when those modules add or rename options.
+audio-fixes:
+  source: https://github.com/Krarilotus/extension-audio-fixes 3ace6867e8e15ab4c358d3fc0ac1a68d564ae46f options.yml
+  urls:
+  - audio-fixes.positional-audio
+  - audio-fixes.startup-sfx-volume
+  - audio-fixes.video-fx-volume
+interface-visual-fixes:
+  source: https://github.com/Krarilotus/extension-interface-visual-fixes 99d09b7f914e6cc5b209a3dc8c59d47c8595a07f options.yml
+  urls:
+  - interface-visual-fixes.building-preview-during-camera-movement
+  - interface-visual-fixes.clear-unique-building-preview
+  - interface-visual-fixes.cliff-texture-direction
+  - interface-visual-fixes.distinct-dead-tree-sprites
+  - interface-visual-fixes.lobby-load
+  - interface-visual-fixes.lobby-map-descriptions
+  - interface-visual-fixes.tower-door-height

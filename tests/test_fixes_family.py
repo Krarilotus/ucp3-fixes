@@ -1,4 +1,4 @@
-"""The optional bundle selects existing fixes without copying their code."""
+"""UCP3 Fixes and the UCP3 setup family are plugins: dependencies and suggested settings only."""
 
 from pathlib import Path
 import importlib.util
@@ -10,87 +10,213 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FAMILY = 'ucp3-fixes'
-MEMBERS = ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix',
-           'fixed-engineers', 'hopfarm-limit-fix')
-EXTERNAL_DEPENDENCIES = {'smarter-gatehouses': '^1.0.4'}
-# Bundle 0.1.4 keeps selecting the released default-on modules; the off-by-default
-# modules got new minor versions, which its caret ranges do not accept.
-RELEASED = {'worker-delivery-fix': ('^0.1.2', '0.1.'), 'gatehouse-capture-fix': ('^0.1.2', '0.1.'),
-            'hunter-targeting-fix': ('^0.1.2', '0.1.'), 'fixed-engineers': ('^0.2.2', '0.2.'),
-            'hopfarm-limit-fix': ('^0.1.4', '0.1.')}
+FIXTURE = Path(__file__).resolve().parent / 'fixtures' / 'external-options.yml'
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
+FAMILY = 'ucp3'
+FAMILY_FRONTEND = '>=1.0.17 <2.0.0'
+
+FIXES = 'ucp3-fixes'
+FIXES_DEPENDENCIES = {
+    'framework': '^3.0.7', 'frontend': '^1.0.2',
+    'worker-delivery-fix': '^0.2.0', 'gatehouse-capture-fix': '^0.2.0',
+    'hunter-targeting-fix': '^0.2.0', 'fixed-engineers': '^0.3.0',
+    'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.0',
+    'interface-visual-fixes': '^0.2.0', 'audio-fixes': '^0.2.0',
+}
+# Every option URL UCP3 Fixes turns on (W2 proposal 2.1). Interface & Visual's two
+# interface features and its Ghost Objects repair are deliberately absent.
+FIXES_SUGGESTED = {
+    'worker-delivery-fix.reachable_delivery', 'gatehouse-capture-fix.living_gatehouse_occupants',
+    'hunter-targeting-fix.hunter_targeting', 'fixed-engineers.siege_target_stop',
+    'fixed-engineers.crew_lifecycle', 'hopfarm-limit-fix.enabled', 'aiv-troops-behaviour.enabled',
+    'interface-visual-fixes.clear-unique-building-preview',
+    'interface-visual-fixes.building-preview-during-camera-movement',
+    'interface-visual-fixes.distinct-dead-tree-sprites', 'interface-visual-fixes.tower-door-height',
+    'interface-visual-fixes.cliff-texture-direction',
+    'audio-fixes.startup-sfx-volume', 'audio-fixes.video-fx-volume', 'audio-fixes.positional-audio',
+}
+MEMBERS = {
+    'ucp3-basics': dict(
+        display='UCP3 Basics', label='Basics', root=True, tags=['modpack'], suggested=None,
+        dependencies={'ucp2-legacy-defaults': '^2.15.1', 'graphicsApiReplacer': '^1.3.0'}),
+    'ucp3-basics-fixes': dict(
+        display='UCP3 Basics + Fixes', label='Basics + Fixes', root=False, tags=['modpack', 'bugfixes'],
+        suggested=None, dependencies={'ucp3-basics': '^1.0.0', 'ucp3-fixes': '^0.2.0'}),
+    'ucp3-recommended': dict(
+        display='UCP3 Recommended', label='Recommended', root=False,
+        tags=['modpack', 'bugfixes', 'textures', 'interface'],
+        dependencies={'ucp3-basics': '^1.0.0', 'ucp3-fixes': '^0.2.0', 'ConqueringArabia': '^1.0.3',
+                      'build-over-workers': '^1.1.0', 'interface-visual-fixes': '^0.2.0'},
+        # Build Over Workers as its author shipped 1.0.3 (all on) and the two interface features.
+        suggested={'interface-visual-fixes.lobby-map-descriptions', 'interface-visual-fixes.lobby-load',
+                   'build-over-workers.buildings', 'build-over-workers.walls',
+                   'build-over-workers.keepOnWalls', 'build-over-workers.allies'}),
+}
+PLUGINS = (FIXES, *MEMBERS)
 
 
-class FixesFamilyTests(unittest.TestCase):
-    def test_root_selects_internal_and_external_fixes_without_copying_code(self):
-        definitions = {
-            name: yaml.safe_load((ROOT / name / 'definition.yml').read_text(encoding='utf-8'))
-            for name in (FAMILY, *MEMBERS)
-        }
-        root = definitions[FAMILY]
-        self.assertEqual(root['type'], 'module')
-        self.assertEqual(root['family'], [{'name': FAMILY, 'root': True}])
-        self.assertEqual(set(root['dependencies']) - {'frontend', 'framework'},
-                         set(MEMBERS) | set(EXTERNAL_DEPENDENCIES))
-        for name, version in EXTERNAL_DEPENDENCIES.items():
-            self.assertEqual(root['dependencies'][name], version)
-        for name in MEMBERS:
-            member = definitions[name]
-            self.assertNotIn('family', member)
-            if name in ('worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix'):
-                self.assertIn('bugfixes', member['tags'])
-            pinned, released_prefix = RELEASED[name]
-            self.assertEqual(root['dependencies'][name], pinned)
-            self.assertFalse(member['version'].startswith(released_prefix), name)
-            option = yaml.safe_load((ROOT / name / 'options.yml').read_text(encoding='utf-8'))['options'][0]
-            self.assertIs(option['contents']['value'], False)
-            self.assertEqual(option['category'], ['{{ai}}', '{{fixes}}']
-                             if name == 'hopfarm-limit-fix' else ['{{bugfixes}}'])
+def load(path):
+    return yaml.safe_load(path.read_text(encoding='utf-8'))
 
-    def test_recommended_preset_suggests_every_member_option_default(self):
-        preset = yaml.safe_load((ROOT / FAMILY / 'config.yml').read_text(encoding='utf-8'))
-        sparse = preset['config-sparse']
-        self.assertEqual(sparse['plugins'], {})
-        self.assertEqual(set(sparse['modules']), set(MEMBERS) | set(EXTERNAL_DEPENDENCIES))
 
-        def suggested(node, path=()):
-            if 'contents' in node:
-                yield '.'.join(path), node['contents']
-                return
-            for key, child in node.items():
-                yield from suggested(child, (*path, key))
+def definition(name):
+    return load(ROOT / name / 'definition.yml')
 
-        for name in MEMBERS:
-            options = yaml.safe_load((ROOT / name / 'options.yml').read_text(encoding='utf-8'))['options']
-            urls = [option['url'].split('.', 1)[1] for option in options]
-            # The modules default to off; the bundle suggests every fix on.
-            self.assertEqual(dict(suggested(sparse['modules'][name]['config'])),
-                             {url: {'suggested-value': True} for url in urls})
-            self.assertTrue(all(option['contents']['value'] is False for option in options))
-        gatehouses = dict(suggested(sparse['modules']['smarter-gatehouses']['config']))
-        self.assertEqual(gatehouses, {
-            'pathing.enemy_gates_closed': {'suggested-value': True},
-            'detection.centred': {'suggested-value': True},
-            'detection.reachable_only': {'suggested-value': True},
-            'walls.stairs_needed': {'suggested-value': False},
-            'walls.stairs_needed_ai': {'suggested-value': False},
-        })
 
-    def test_root_package_has_localized_description_and_no_fix_code(self):
+def option_urls(module):
+    """Option URLs of a dependency: from this repository, or from the checked-in fixture."""
+    if (ROOT / module / 'options.yml').is_file():
+        found = set()
+
+        def walk(items):
+            for item in items:
+                if 'url' in item:
+                    found.add(item['url'])
+                walk(item.get('children', []))
+
+        walk(load(ROOT / module / 'options.yml')['options'])
+        return found
+    return set(load(FIXTURE)[module]['urls'])
+
+
+def suggestions(name):
+    """{url: contents} for a plugin's config.yml, or None when it has none."""
+    path = ROOT / name / 'config.yml'
+    if not path.exists():
+        return None
+    sparse = load(path)['config-sparse']
+    found = {}
+
+    def walk(node, path):
+        if 'contents' in node:
+            found['.'.join(path)] = node['contents']
+            return
+        for key, child in node.items():
+            walk(child, (*path, key))
+
+    for module, entry in sparse['modules'].items():
+        walk(entry['config'], (module,))
+    for plugin, entry in sparse.get('plugins', {}).items():
+        walk(entry['config'], (plugin,))
+    return found
+
+
+class FixesPluginTests(unittest.TestCase):
+    def test_plugin_depends_on_the_neutral_fix_modules(self):
+        fixes = definition(FIXES)
+        self.assertEqual((fixes['type'], fixes['version'], fixes['display-name']),
+                         ('plugin', '0.2.0', 'UCP3 Fixes'))
+        self.assertNotIn('family', fixes)
+        self.assertEqual(fixes['dependencies'], FIXES_DEPENDENCIES)
+        self.assertNotIn('smarter-gatehouses', fixes['dependencies'])
+        self.assertFalse((ROOT / FIXES / 'init.lua').exists())
+        for name in FIXES_DEPENDENCIES:
+            if (ROOT / name / 'definition.yml').is_file():
+                member = definition(name)
+                self.assertEqual(f"^{member['version']}", FIXES_DEPENDENCIES[name], name)
+                self.assertNotIn('family', member)
+
+    def test_plugin_turns_on_exactly_the_listed_fixes(self):
+        found = suggestions(FIXES)
+        self.assertEqual(set(found), FIXES_SUGGESTED)
+        self.assertTrue(all(contents == {'suggested-value': True} for contents in found.values()))
+
+
+class SetupFamilyTests(unittest.TestCase):
+    def test_exactly_one_family_root(self):
+        roots, members = [], []
+        for path in sorted(ROOT.glob('*/definition.yml')):
+            for entry in load(path).get('family', []):
+                self.assertEqual(entry['name'], FAMILY, path)
+                self.assertIn(entry.get('root', False), (True, False), path)
+                members.append(path.parent.name)
+                if entry.get('root') is True:
+                    roots.append(path.parent.name)
+        self.assertEqual(roots, ['ucp3-basics'])
+        self.assertEqual(sorted(members), sorted(MEMBERS))
+
+    def test_members(self):
+        for name, expected in MEMBERS.items():
+            with self.subTest(member=name):
+                member = definition(name)
+                self.assertEqual((member['name'], member['type'], member['version'], member['author'],
+                                  member['display-name']),
+                                 (name, 'plugin', '1.0.0', 'UCP contributors', expected['display']))
+                self.assertEqual(member['family'], [{'name': FAMILY, 'root': True}] if expected['root']
+                                 else [{'name': FAMILY}])
+                self.assertEqual(member['tags'], expected['tags'])
+                self.assertEqual(member['dependencies'],
+                                 {'framework': '^3.0.7', 'frontend': FAMILY_FRONTEND, **expected['dependencies']})
+                self.assertFalse((ROOT / name / 'init.lua').exists())
+
+    def test_root_and_fixes_member_have_no_configuration_demands(self):
+        # A dependency-only root never claims the family slot of a member that depends on it.
+        self.assertIsNone(suggestions('ucp3-basics'))
+        self.assertIsNone(suggestions('ucp3-basics-fixes'))
+        self.assertFalse((ROOT / 'ucp3-basics' / 'options.yml').exists())
+
+    def test_recommended_suggestions(self):
+        found = suggestions('ucp3-recommended')
+        self.assertEqual(set(found), MEMBERS['ucp3-recommended']['suggested'])
+        self.assertTrue(all(contents == {'suggested-value': True} for contents in found.values()))
+
+
+class PluginPackageTests(unittest.TestCase):
+    def test_every_suggested_key_is_an_option_of_a_dependency(self):
+        for name in PLUGINS:
+            found = suggestions(name) or {}
+            dependencies = definition(name)['dependencies']
+            for url in found:
+                module = url.split('.', 1)[0]
+                with self.subTest(plugin=name, url=url):
+                    self.assertIn(module, dependencies)
+                    self.assertIn(url, option_urls(module))
+
+    def test_fixture_names_its_source(self):
+        for module, entry in load(FIXTURE).items():
+            self.assertRegex(entry['source'], r'^https://github\.com/\S+ [0-9a-f]{40} options\.yml$', module)
+
+    def test_locales_and_descriptions_in_all_languages(self):
+        for name in PLUGINS:
+            with self.subTest(plugin=name):
+                folder = ROOT / name
+                locales = {language: load(folder / 'locale' / f'{language}.yml') for language in LANGUAGES}
+                keys = set(locales['en'])
+                for language, locale in locales.items():
+                    self.assertEqual(set(locale), keys, language)
+                    self.assertTrue(all(isinstance(v, str) and v.strip() for v in locale.values()), language)
+                    self.assertTrue((folder / 'locale' / f'description-{language}.md').read_text(encoding='utf-8')
+                                    .startswith('# '), language)
+                self.assertEqual((folder / 'description.md').read_bytes(),
+                                 (folder / 'locale' / 'description-en.md').read_bytes())
+                tags = definition(name).get('tags', [])
+                self.assertEqual({k for k in keys if k.startswith('tags.')}, {f'tags.{t}' for t in tags})
+                if name in MEMBERS:
+                    self.assertEqual(locales['en']['family.ucp3'], 'UCP3')
+                    self.assertEqual(locales['en']['family.ucp3.configuration'], MEMBERS[name]['label'])
+                    self.assertTrue(all(locale['family.ucp3'] == 'UCP3' for locale in locales.values()))
+                    self.assertEqual(keys, {'family.ucp3', 'family.ucp3.configuration', *(f'tags.{t}' for t in tags)})
+
+    def test_packages_contain_metadata_and_no_code(self):
         spec = importlib.util.spec_from_file_location('build_modules', ROOT / 'tools/build_modules.py')
         builder = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(builder)
         with tempfile.TemporaryDirectory() as output:
-            with zipfile.ZipFile(builder.build_module(ROOT / FAMILY, output)) as archive:
-                self.assertIsNone(archive.testzip())
-                self.assertIn('locale/', archive.namelist())
-                self.assertEqual(archive.read('description.md'), archive.read('locale/description-en.md'))
-                self.assertEqual([name for name in archive.namelist() if name.endswith('.lua')], ['init.lua'])
-                self.assertEqual(yaml.safe_load(archive.read('config.yml')),
-                                 yaml.safe_load((ROOT / FAMILY / 'config.yml').read_text(encoding='utf-8')))
-                for language in LANGUAGES:
-                    self.assertTrue(archive.read(f'locale/description-{language}.md').decode('utf-8').strip())
+            for name in PLUGINS:
+                with self.subTest(plugin=name):
+                    folder = ROOT / name
+                    self.assertTrue(builder.is_package(folder))
+                    with zipfile.ZipFile(builder.build_module(folder, output)) as archive:
+                        self.assertIsNone(archive.testzip())
+                        self.assertIn('locale/', archive.namelist())
+                        files = {n for n in archive.namelist() if not n.endswith('/')}
+                        expected = {'definition.yml', 'description.md', 'CREDITS.md',
+                                    *(f'locale/{l}.yml' for l in LANGUAGES),
+                                    *(f'locale/description-{l}.md' for l in LANGUAGES)}
+                        if (folder / 'config.yml').exists():
+                            expected.add('config.yml')
+                        self.assertEqual(files, expected)
+                        self.assertEqual(load(folder / 'definition.yml'), yaml.safe_load(archive.read('definition.yml')))
 
 
 if __name__ == '__main__':

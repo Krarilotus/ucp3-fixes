@@ -1,5 +1,6 @@
-# Recommended UCP3 Fixes setup: every correction on, optional gatehouse stairs
-# rules off. Suggested values stay editable in Customizations.
+# UCP3 Fixes: turns on the bug fixes of its dependencies, which are off by
+# default. Suggested values stay editable in Customizations. Interface & Visual
+# Fixes' two interface features and its Ghost Objects repair are not set here.
 meta:
   version: 1.0.0
 config-sparse:
@@ -32,24 +33,37 @@ config-sparse:
         enabled:
           contents:
             suggested-value: true
-    smarter-gatehouses:
+    aiv-troops-behaviour:
       config:
-        pathing:
-          enemy_gates_closed:
-            contents:
-              suggested-value: true
-        detection:
-          centred:
-            contents:
-              suggested-value: true
-          reachable_only:
-            contents:
-              suggested-value: true
-        walls:
-          stairs_needed:
-            contents:
-              suggested-value: false
-          stairs_needed_ai:
-            contents:
-              suggested-value: false
+        enabled:
+          contents:
+            suggested-value: true
+    interface-visual-fixes:
+      config:
+        clear-unique-building-preview:
+          contents:
+            suggested-value: true
+        building-preview-during-camera-movement:
+          contents:
+            suggested-value: true
+        distinct-dead-tree-sprites:
+          contents:
+            suggested-value: true
+        tower-door-height:
+          contents:
+            suggested-value: true
+        cliff-texture-direction:
+          contents:
+            suggested-value: true
+    audio-fixes:
+      config:
+        startup-sfx-volume:
+          contents:
+            suggested-value: true
+        video-fx-volume:
+          contents:
+            suggested-value: true
+        positional-audio:
+          contents:
+            suggested-value: true
   plugins: {}

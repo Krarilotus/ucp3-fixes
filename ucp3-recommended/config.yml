@@ -1,0 +1,30 @@
+# UCP3 Recommended: the two interface features of Interface and Visual Fixes,
+# and Build Over Workers as its author shipped it (every switch on). The bug
+# fixes come from UCP3 Fixes. Suggested values stay editable in Customizations.
+meta:
+  version: 1.0.0
+config-sparse:
+  modules:
+    interface-visual-fixes:
+      config:
+        lobby-map-descriptions:
+          contents:
+            suggested-value: true
+        lobby-load:
+          contents:
+            suggested-value: true
+    build-over-workers:
+      config:
+        buildings:
+          contents:
+            suggested-value: true
+        walls:
+          contents:
+            suggested-value: true
+        keepOnWalls:
+          contents:
+            suggested-value: true
+        allies:
+          contents:
+            suggested-value: true
+  plugins: {}

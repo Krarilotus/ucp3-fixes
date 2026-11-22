@@ -1,9 +1,0 @@
-meta:
-  version: 1.0.0
-files:
-- src: definition.yml
-- src: init.lua
-- src: config.yml
-- src: description.md
-- src: locale
-- src: CREDITS.md

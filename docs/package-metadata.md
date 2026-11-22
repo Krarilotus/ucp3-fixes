@@ -13,13 +13,21 @@ nine registered languages. The Hotkeys and Fixed Engineers metadata reuse their
 existing reviewed discovery branches. Derived capabilities are generated from
 package contents by the Store owner; they are not hand-written into manifests.
 
-UCP3 Fixes 0.1.4 is a dependency bundle and the root of the `ucp3-fixes` family.
-Its `config.yml` is the recommended setup: every correction is suggested ON and
-Gatehouse Fixes' optional stairs rules OFF. Suggested values stay editable. The
-fixes themselves remain individually selectable and have no `family` membership.
-Families describe alternative configurations of one extension, not independent
-fixes, tools or shared file dependencies. Improved Tunnelers, AI behavior, interface tools and themes stay
-separate. No new provider/family is invented just to group related names.
+UCP3 Fixes 0.2.0 is a plugin with dependencies and suggested values only, and no
+`family` membership. The fix modules ship vanilla defaults (off); the plugin
+turns their fixes on. The fixes themselves remain individually selectable and
+have no `family` membership either.
+
+The `ucp3` family consists of three plugins owned by this repository: UCP3 Basics
+(root, the previous default setup, no configuration demands), UCP3 Basics + Fixes
+and UCP3 Recommended. They are alternative configurations of one setup, so a
+family fits; their members may differ only in modules without save data. Each
+member's locale files carry `family.ucp3: UCP3`, its configuration label
+(`family.ucp3.configuration`) and its `tags.<id>` labels in all nine languages.
+Tags come from the established vocabulary (modpack, bugfixes, textures,
+interface). Families describe alternative configurations, not independent fixes,
+tools or shared file dependencies. Improved Tunnelers, AI behavior, interface
+tools and themes stay separate.
 
 Store PR #55 reuses the existing PR #33 discovery exporter, including verified
 cached-archive metadata. It does not change that owner's branch or publish the

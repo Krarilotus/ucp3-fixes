@@ -1,0 +1,25 @@
+name: ucp3-recommended
+display-name: UCP3 Recommended
+author: UCP contributors
+version: 1.0.0
+type: plugin
+game:
+- SHC==1.41
+- SHCE==1.41
+family:
+- name: ucp3
+tags:
+- modpack
+- bugfixes
+- textures
+- interface
+meta:
+  version: 1.0.0
+dependencies:
+  framework: ^3.0.7
+  frontend: '>=1.0.17 <2.0.0'
+  ucp3-basics: ^1.0.0
+  ucp3-fixes: ^0.2.0
+  ConqueringArabia: ^1.0.3
+  build-over-workers: ^1.1.0
+  interface-visual-fixes: ^0.2.0
