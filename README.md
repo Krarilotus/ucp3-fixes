@@ -28,6 +28,12 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
 | [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 
+[Route Search](route-search/) is an owner module, not a fix: it owns a unit's route search
+and runs the route policies of other modules in a fixed order. Smarter Pathing's assassin
+shortcut and Gatehouse Fixes' gate route rules use it, so both can be on together.
+Installed alone it changes nothing. It has no settings and is not part of the plugin; the
+modules that need it depend on it. Its README documents the contract. License: GPL-3.0.
+
 ## UCP3 Fixes plugin
 
 [UCP3 Fixes](ucp3-fixes/) is a plugin: dependencies and suggested values, no code.
