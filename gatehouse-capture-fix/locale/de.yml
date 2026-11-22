@@ -1,4 +1,4 @@
 bugfixes: Fehlerkorrekturen
 living_gatehouse_occupants: Lebende Torhausbesatzung
-living_gatehouse_occupants_descr: Gefallene Truppen erobern oder verteidigen keine Torhäuser mehr. Nach Änderung neu starten.
+living_gatehouse_occupants_descr: Gefallene Truppen erobern oder verteidigen keine Torhäuser mehr. Standardmäßig deaktiviert; das Plugin UCP3 Fixes aktiviert diese Korrektur. Nach Änderung neu starten.
 tags.bugfixes: Fehlerkorrekturen

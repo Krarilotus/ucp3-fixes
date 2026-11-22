@@ -1,7 +1,7 @@
 ai: IA
 fixes: Correctifs
 title: 'IA : Comportement des troupes AIV'
-description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes.
+description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes. Désactivé par défaut ; le plugin UCP3 Fixes l'active.
 behavior_title: Réglages des troupes
 aic_overrides: Utiliser les remplacements AIC
 initial_role: Rôle des troupes de départ

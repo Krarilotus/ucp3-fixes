@@ -1,3 +1,5 @@
 # Correcciones de ingenieros
 
 Corrige las dotaciones de asedio, protege a los ingenieros al bajar de una máquina y detiene las catapultas y los trabuquetes en movimiento al apuntar a una unidad. Reinicia el juego tras cambiar estas opciones.
+
+Ambas correcciones están desactivadas por defecto: seleccionar solo este módulo no cambia el juego. Actívalas en **Correcciones**, o selecciona el plugin **UCP3 Fixes**, que las activa.

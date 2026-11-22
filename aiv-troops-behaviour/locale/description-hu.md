@@ -8,4 +8,4 @@ MI-nként: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) és `AIVTroops
 
 Példa: `AIVTroops_InitialRole_Slave: "dig"` ásásra osztja be a rabszolgákat. Az egységnevek és részletek az [AIC-mezők leírásában](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) találhatók.
 
-Az egységbeállítások kezdetben ki vannak kapcsolva. Módosítás után indítsd újra a játékot és kezdj új meccset.
+A pozíciójavítás és az egységbeállítások alapértelmezés szerint ki vannak kapcsolva: önmagában ennek a modulnak a kiválasztása nem változtatja meg a játékot. Kapcsold be a pozíciójavítást az **MI → AIV-csapatviselkedés** alatt, vagy válaszd az **UCP3 Fixes** bővítményt, amely bekapcsolja. Az egységbeállítások kikapcsolva maradnak, amíg be nem kapcsolod őket. Módosítás után indítsd újra a játékot és kezdj új meccset.

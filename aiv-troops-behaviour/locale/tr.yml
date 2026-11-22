@@ -1,7 +1,7 @@
 ai: Yapay zekâ
 fixes: Düzeltmeler
 title: 'Yapay zekâ: AIV birlik davranışı'
-description: Kargıcıların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
+description: Kargıcıların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir. Varsayılan olarak kapalıdır; UCP3 Fixes eklentisi bunu açar.
 behavior_title: Birlik ayarları
 aic_overrides: AIC geçersiz kılmalarını kullan
 initial_role: Başlangıç birliklerinin görevi
