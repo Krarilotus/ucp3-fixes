@@ -69,8 +69,12 @@ recipe's `location` requires. All are version 1.0.0, need frontend
 | [ucp3-basics-fixes](ucp3-basics-fixes/) | Basics + Fixes | `ucp3-basics` ^1.0.0, `ucp3-fixes` ^0.2.0 | none (UCP3 Fixes brings its own) |
 | [ucp3-recommended](ucp3-recommended/) | Recommended | `ucp3-basics` ^1.0.0, `ucp3-fixes` ^0.2.0, `ConqueringArabia` ^1.0.3, `build-over-workers` ^1.1.0, `interface-visual-fixes` ^0.2.0 | Interface and Visual Fixes' lobby map descriptions and Load in skirmish lobby; Build Over Workers fully on, as its author shipped 1.0.3 |
 
-UCP3 Basics is exactly the previous default of a new installation
-(`ucp2-legacy-defaults` and `graphicsApiReplacer`). It has no configuration
+UCP3 Basics selects the same two packages as the previous first-install default
+(`ucp2-legacy-defaults` and `graphicsApiReplacer`). Their dependencies resolve to
+compatible Store versions, so they need not be byte-identical to an older install
+(today `ucp2-legacy` 2.15.2, which also brings Map Extensions 1.0.0 to every member).
+The family members need launcher 1.0.17; launcher 1.0.16 lists them in the Store
+but rejects them at install. Basics has no configuration
 demands, so it never claims the family slot when another member depends on it.
 The members differ only in modules that write no save data (the fixes, Interface
 and Visual Fixes, Audio Fixes, Build Over Workers, ConqueringArabia's textures),

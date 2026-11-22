@@ -19,7 +19,8 @@ turns their fixes on. The fixes themselves remain individually selectable and
 have no `family` membership either.
 
 The `ucp3` family consists of three plugins owned by this repository: UCP3 Basics
-(root, the previous default setup, no configuration demands), UCP3 Basics + Fixes
+(root, the same two packages as the previous first-install default, no
+configuration demands), UCP3 Basics + Fixes
 and UCP3 Recommended. They are alternative configurations of one setup, so a
 family fits; their members may differ only in modules without save data. Each
 member's locale files carry `family.ucp3: UCP3`, its configuration label
