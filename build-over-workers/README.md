@@ -23,18 +23,22 @@ and wall switches really turn the behaviour off, including AI walls"). See `CRED
 | --- | --- | --- |
 | `build-over-workers.buildings` | Bugfixes | off |
 | `build-over-workers.walls` | Bugfixes | off |
-| `build-over-workers.keepOnWalls` (under walls) | Bugfixes | off |
+| `build-over-workers.keepOnWalls` (under walls) | Bugfixes | on |
 | `build-over-workers.allies` | Balance Changes | off |
 
-Every switch is off by default, so selecting the module alone keeps the game's placement
-rules. The **UCP3 Recommended** setup turns all four on, which is the 1.0.3 behaviour.
+Placement over workers is off by default (`buildings`, `walls`, `allies`), so selecting the
+module alone keeps the game's placement rules. `keepOnWalls` stays on: it is the 1.0.2
+protection that keeps people standing on a wall or stairs in place when the wall is
+repaired, and it does nothing while `walls` is off. The **UCP3 Recommended** setup turns
+everything on, which is the 1.0.3 behaviour.
 With both `buildings` and `walls` off the module scans and patches nothing. The option
 URLs are unchanged from 1.0.3, so saved profiles keep their values.
 
 ## Release notes
 
-- **1.1.0:** Merged into ucp3-fixes under GPL-3.0. Every switch is off by default; the
-  UCP3 Recommended setup turns them on. Players who added the module on its own will
+- **1.1.0:** Merged into ucp3-fixes under GPL-3.0. Placement over workers is off by
+  default (`keepOnWalls` stays on); the UCP3 Recommended setup turns it on. Signatures
+  that match more than once are refused before any change. Players who added the module on its own will
   see it switched off after updating; switch the parts on again in Customizations or
   select UCP3 Recommended. Settings you saved explicitly stay as they are. Includes
   Monsterfisch/Build-over-Workers#1 (the switches really turn the behaviour off,

@@ -8,7 +8,7 @@ Krarilotus/Build-over-Workers@b6caee5 (Monsterfisch/Build-over-Workers#1).
 
 License: GNU General Public License, version 3 (GPL-3.0).
 
-UCP packaging, vanilla defaults (every switch off unless configured) and the
+UCP packaging, vanilla defaults (placement over workers off unless configured) and the
 bench's local configuration: Krarilotus / UCP contributors.
 
 Stronghold Crusader and its original game assets/code: Firefly Studios.

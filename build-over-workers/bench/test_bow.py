@@ -243,7 +243,7 @@ def suite(ext, config=None):
     return H
 
 
-# Since 1.1.0 every switch is off unless configured; ALL_ON is the 1.0.3 default setup.
+# Since 1.1.0 placement over workers is off unless configured; ALL_ON is the 1.0.3 setup.
 ALL_ON = {'buildings': True, 'walls': True, 'allies': True, 'keepOnWalls': True}
 for ext in (False, True):
     suite(ext, ALL_ON)
