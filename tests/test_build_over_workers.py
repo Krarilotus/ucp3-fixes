@@ -21,7 +21,10 @@ LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
 # existing profiles keep their values.
 URLS = ('build-over-workers.buildings', 'build-over-workers.walls',
         'build-over-workers.keepOnWalls', 'build-over-workers.allies')
-SWITCHES = {'buildings': True, 'walls': True, 'allies': True, 'keepOnWalls': True}
+# Placement over workers is off by default; keepOnWalls is the 1.0.2 protection for people
+# on a repaired wall and stays on (it does nothing while walls is off).
+DEFAULTS = {'build-over-workers.buildings': False, 'build-over-workers.walls': False,
+            'build-over-workers.keepOnWalls': True, 'build-over-workers.allies': False}
 
 
 def options():
@@ -37,15 +40,24 @@ def options():
     return found
 
 
-def entry():
-    """Load init.lua with a core whose every access is recorded."""
+def entry(aob=None, duplicate=None):
+    """Load init.lua with a core whose every access is recorded.
+
+    AOBScan fails unless `aob` gives an address; scanForAOB returns `duplicate` (or 0).
+    """
     lua = LuaRuntime(unpack_returned_tuples=True)
+    lua.globals().first_hit = aob
+    lua.globals().second_hit = duplicate or 0
     lua.execute('''
       calls = {}
       core = setmetatable({}, {__index = function(_, name)
         return function(...)
           calls[#calls + 1] = name
-          if name == "AOBScan" then error("AOB not found") end
+          if name == "AOBScan" then
+            if first_hit then return first_hit end
+            error("AOB not found")
+          end
+          if name == "scanForAOB" then return second_hit end
           error("unexpected core." .. name)
         end
       end})
@@ -63,10 +75,11 @@ class BuildOverWorkersTests(unittest.TestCase):
         self.assertEqual(definition['game'], ['SHC==1.41', 'SHCE==1.41'])
         self.assertNotIn('family', definition)
 
-    def test_every_switch_defaults_off_with_unchanged_urls(self):
-        self.assertEqual(options(), {url: False for url in URLS})
+    def test_defaults_with_unchanged_urls(self):
+        self.assertEqual(set(options()), set(URLS))
+        self.assertEqual(options(), DEFAULTS)
         source = (FOLDER / 'init.lua').read_text(encoding='utf-8')
-        self.assertIn('local DEFAULTS = { buildings = false, walls = false, allies = false, keepOnWalls = false }',
+        self.assertIn('local DEFAULTS = { buildings = false, walls = false, allies = false, keepOnWalls = true }',
                       source)
 
     def test_unconfigured_or_switched_off_module_touches_nothing(self):
@@ -84,6 +97,18 @@ class BuildOverWorkersTests(unittest.TestCase):
                 with self.assertRaisesRegex(LuaError, NAME + ': could not find'):
                     module.enable(module, lua.table_from({part: True}))
                 self.assertEqual(list(lua.globals().calls.values()), ['AOBScan'])
+
+    def test_ambiguous_signature_is_refused_before_writing(self):
+        lua, module = entry(aob=0x401000, duplicate=0x402000)
+        with self.assertRaisesRegex(LuaError, NAME + ': the signature for .* matches more than once'):
+            module.enable(module, lua.table_from({'buildings': True}))
+        self.assertEqual(list(lua.globals().calls.values()), ['AOBScan', 'scanForAOB'])
+
+    def test_runtime_disable_reports_restart(self):
+        lua, module = entry()
+        ok, reason = module.disable(module, lua.table())
+        self.assertIs(ok, False)
+        self.assertEqual(reason, 'build-over-workers: restart the game to turn it off')
 
     def test_writes_no_save_data(self):
         # No map-extensions section or other persisted state: members of a setup

@@ -85,7 +85,7 @@ class Host:
             '%s: %s' % (level.decode(), message.decode('latin-1')))
         c = lua.table()
         c[b'AOBScan'] = self.scan
-        c[b'scanForAOB'] = self.scan
+        c[b'scanForAOB'] = self.scan_for_aob
         c[b'readInteger'] = lambda a: self.m.s32(int(a))
         c[b'readByte'] = lambda a: struct.unpack('<b', self.m.read(int(a), 1))[0]
         c[b'readSmallInteger'] = lambda a: struct.unpack('<h', self.m.read(int(a), 2))[0]
@@ -179,7 +179,17 @@ class Host:
                 good.append(h)
         if not good:
             raise lupa.LuaError('AOBScan: no match ' + pattern)
+        if not rest or rest[0] is None:
+            # An unbounded signature must identify one site in the image.
+            assert len(good) == 1, 'AOB matches %d times: %s' % (len(good), pattern)
         return good[0]
+
+    def scan_for_aob(self, pattern, *rest):
+        """core.scanForAOB: like AOBScan, but 0 instead of an error when nothing matches."""
+        try:
+            return self.scan(pattern, *(rest or (0x400000,)))
+        except lupa.LuaError:
+            return 0
 
     def flatten(self, table):
         out = []

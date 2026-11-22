@@ -25,7 +25,7 @@ options:
     display: UCP2Switch
     contents:
       type: boolean
-      value: false
+      value: true
     header: '{{keep_on_walls}}'
     text: '{{keep_on_walls_tooltip}}'
 - url: build-over-workers.allies

@@ -27,8 +27,10 @@ local templates = require("templates")
 
 local MODULE_NAME = "build-over-workers"
 
--- Vanilla by default (since 1.1.0): every switch is off unless configured on.
-local DEFAULTS = { buildings = false, walls = false, allies = false, keepOnWalls = false }
+-- Vanilla by default (since 1.1.0): placement over workers is off unless configured on.
+-- keepOnWalls stays on: it is the 1.0.2 protection for people standing on a wall that is
+-- repaired, and nothing runs while both buildings and walls are off.
+local DEFAULTS = { buildings = false, walls = false, allies = false, keepOnWalls = true }
 
 ---------------------------------------------------------------------------------------
 -- What the game's code looks like where this module touches it
@@ -123,6 +125,11 @@ local function scan(pattern, purpose)
   local ok, address = pcall(core.AOBScan, pattern)
   if not ok or address == nil then
     error(MODULE_NAME .. ": could not find " .. purpose)
+  end
+  -- Refuse an ambiguous signature instead of patching the first of several matches.
+  local duplicate = core.scanForAOB(pattern, address + 1)
+  if duplicate and duplicate ~= 0 then
+    error(MODULE_NAME .. ": the signature for " .. purpose .. " matches more than once")
   end
   return address
 end
@@ -418,5 +425,7 @@ end
 
 return {
   enable = enable,
-  disable = function(self, config) end,
+  disable = function(self, config)
+    return false, "build-over-workers: restart the game to turn it off"
+  end,
 }
