@@ -110,6 +110,12 @@ class ResolutionTests(unittest.TestCase):
         with self.assertRaisesRegex(LuaError, 'already goes to'):
             rs.add('b', 200)
 
+    def test_call_target_is_decoded_modulo_2_32(self):
+        # rel32 wraps: a target at or above 0x80000000 (large-address-aware game) reads as itself.
+        rs = module(image(target=0x90000000))
+        with self.assertRaisesRegex(LuaError, 'already goes to 0x90000000 instead'):
+            rs.add('a', 100)
+
     def test_call_changed_between_registration_and_enable_is_refused(self):
         rs = module()
         rs.add('a', 100)

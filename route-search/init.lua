@@ -69,12 +69,12 @@ local function sectionOf(address)
   if core.readInteger(pe) ~= 0x00004550 then return nil end
   local sections = core.readSmallInteger(pe + 6)
   local optional = core.readSmallInteger(pe + 0x14)
-  if sections < 1 or sections > 96 then return nil end
+  if sections < 1 or sections > 96 or optional < 0 or optional > 0x1000 then return nil end
   for index = 0, sections - 1 do
     local entry = pe + 0x18 + optional + index * 40
     local size, start = core.readInteger(entry + 8), core.readInteger(entry + 12)
     local low = IMAGE_BASE + start
-    if address >= low and address < low + size then
+    if start >= 0 and size > 0 and address >= low and address < low + size then
       return low, low + size
     end
   end
@@ -124,7 +124,7 @@ local function resolve()
     end
   end
   if not why then
-    local target = call + 5 + core.readInteger(call + 1)
+    local target = (call + 5 + core.readInteger(call + 1)) & 0xFFFFFFFF
     if target ~= searchAt then
       why = string.format("setDestinationForUnit's route search call at 0x%X already goes to "
         .. "0x%X instead of the game's search at 0x%X. Another module has changed it; update "
@@ -134,7 +134,7 @@ local function resolve()
   end
   if why then
     problem = why
-    log(WARNING, NAME .. ": route policies are unavailable: " .. why)
+    log(WARNING, "route policies are unavailable: " .. why)
     return
   end
   site = { call = call, search = searchAt }
@@ -183,12 +183,13 @@ local function relink()
     core.writeInteger(policy.next, inner and inner.entry or site.search)
   end
   core.writeInteger(firstSlot, enabled[1] and enabled[1].entry or site.search)
-  log(INFO, NAME .. ": unit route search: " .. describe(enabled))
+  log(INFO, "unit route search: " .. describe(enabled))
 end
 
 -- The call must still be what route-search found (or redirected) before anything is written.
 local function isCallTo(target)
-  return core.readByte(site.call) == 0xE8 and site.call + 5 + core.readInteger(site.call + 1) == target
+  return core.readByte(site.call) == 0xE8
+    and (site.call + 5 + core.readInteger(site.call + 1)) & 0xFFFFFFFF == target
 end
 
 local function checkCall()
@@ -288,10 +289,10 @@ end
 local function afterInit()
   open, closed = false, true
   if head and not isCallTo(head) then
-    log(ERROR, string.format("%s: setDestinationForUnit's route search call at 0x%X no longer "
+    log(ERROR, string.format("setDestinationForUnit's route search call at 0x%X no longer "
       .. "goes to route-search (it goes to 0x%X): a module loaded later changed it. The game "
-      .. "runs, but the route policies %s may see the wrong unit or not run.", NAME, site.call,
-      site.call + 5 + core.readInteger(site.call + 1), describe(chain())))
+      .. "runs, but the route policies %s may see the wrong unit or not run.", site.call,
+      (site.call + 5 + core.readInteger(site.call + 1)) & 0xFFFFFFFF, describe(chain())))
   end
 end
 

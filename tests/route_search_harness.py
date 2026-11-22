@@ -144,7 +144,7 @@ class RouteSearch:
         # RPS pushes *(BYTE*) for readByte (unsigned) and *(short*) for readSmallInteger.
         core.readByte = lambda address: space.read(int(address), 1)[0]
         core.readSmallInteger = lambda address: struct.unpack('<h', space.read(int(address), 2))[0]
-        core.writeCodeBytes = self.write_code
+        core.writeCodeBytes = self.write_code_bytes
         core.writeCode = self.write_code
         core.writeInteger = self.write_integer
         core.allocate = self.allocate
@@ -187,6 +187,16 @@ class RouteSearch:
             out.extend(self.flatten(item) if self.lua.eval('type')(item) == 'table' else [int(item) & 0xFF])
         return out
 
+    def flat(self, values):
+        """core.writeCodeBytes and core.allocateCode(table) do not compile: bytes only."""
+        for i in range(1, len(values) + 1):
+            if self.lua.eval('type')(values[i]) == 'table':
+                raise AssertionError('nested table where 3.0.7 takes plain bytes')
+        return values
+
+    def write_code_bytes(self, address, values):
+        self.write_code(address, self.flat(values))
+
     def write_code(self, address, values):
         data = bytes(self.flatten(values))
         address = int(address)
@@ -215,7 +225,7 @@ class RouteSearch:
             address = self.space.allocate(values)
             self.allocations.append(('code', address, values))
             return address
-        data = bytes(self.flatten(values))
+        data = bytes(self.flatten(self.flat(values)))
         address = self.space.allocate(len(data))
         self.space.write(address, data)
         self.allocations.append(('code', address, len(data)))
