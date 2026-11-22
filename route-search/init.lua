@@ -168,13 +168,17 @@ local function relink()
 end
 
 -- The call must still be what route-search found (or redirected) before anything is written.
+local function isCallTo(target)
+  return core.readByte(site.call) & 0xFF == 0xE8 and callTarget(site.call) == target
+end
+
 local function checkCall()
   if head then
-    if callTarget(site.call) ~= head then
+    if not isCallTo(head) then
       fail("setDestinationForUnit's route search call at 0x%X was changed by another module "
         .. "after route-search redirected it", site.call)
     end
-  elseif core.readByte(site.call) & 0xFF ~= 0xE8 or callTarget(site.call) ~= site.search then
+  elseif not isCallTo(site.search) then
     fail("setDestinationForUnit's route search call at 0x%X was changed by another module "
       .. "before the first route policy was enabled; update that module to a route-search "
       .. "policy or turn its route feature off", site.call)
@@ -263,10 +267,10 @@ end
 -- again behind this module's back.
 local function afterInit()
   open, closed = false, true
-  if head and callTarget(site.call) ~= head then
+  if head and not isCallTo(head) then
     log(ERROR, string.format("%s: setDestinationForUnit's route search call at 0x%X no longer "
-      .. "goes to route-search (it goes to 0x%X): a module loaded later changed it. The route "
-      .. "policies %s may see the wrong unit or not run.", NAME, site.call,
+      .. "goes to route-search (it goes to 0x%X): a module loaded later changed it. The game "
+      .. "runs, but the route policies %s may see the wrong unit or not run.", NAME, site.call,
       callTarget(site.call), describe(chain())))
   end
 end

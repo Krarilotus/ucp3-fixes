@@ -97,7 +97,8 @@ when it was entered, in case an earlier or later candidate failed.
 - At `afterInit`, route-search checks that the call still goes to its stub. If a module loaded
   later redirected it again, an error in the log names the policies affected.
 
-`routes:policies()` lists the enabled policies in order (`id`, `order`, `entry`, `next`).
+`routes:policies()` lists the enabled policies in order (`id`, `order`, `entry`, `next`). Through the
+framework's proxy, iterate it with `ipairs`; `#` does not see its length.
 
 ## Compatibility
 
@@ -105,7 +106,7 @@ when it was entered, in case an earlier or later candidate failed.
 | --- | --- |
 | Smarter Pathing, `assassinsShortcut` | uses route-search (order 100) from the version that depends on it |
 | Gatehouse Fixes, `pathing.enemy_gates_closed`, `walls.stairs_needed`, `walls.stairs_needed_ai` | uses route-search (order 200) from the version that depends on it |
-| Older Smarter Pathing / Gatehouse Fixes | redirect the call themselves. Loaded before a route policy, route-search refuses. Loaded after, the `afterInit` check logs an error. Update them. |
+| Released Smarter Pathing 1.0.3–1.0.4 / Gatehouse Fixes 1.0.4–1.0.7 | redirect the call themselves. Loaded before the first route policy, route-search refuses. Loaded after, the `afterInit` check logs an error and the game runs with the route policies bypassed. Update them. Their unreleased guard versions (before route-search) refuse the combination themselves. |
 | Legacy ladder climb, Smarter Walls, Build over Workers, Smarter Buildings, Improved Tunnelers, Outpost Control, Improved Siege Engines | patch other places of `setDestinationForUnit` or call it; none patches this call or the search |
 
 Not covered by contract 1: `setDestinationForUnit`'s other search, used when its last
