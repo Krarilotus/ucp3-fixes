@@ -20,13 +20,14 @@ class PackagingTests(unittest.TestCase):
             labels = {
                 yaml.safe_load((ROOT / name / 'locale' / f'{language}.yml').read_text(encoding='utf-8'))['bugfixes']
                 for name in ('fixed-engineers', 'worker-delivery-fix',
-                             'gatehouse-capture-fix', 'hunter-targeting-fix')
+                             'gatehouse-capture-fix', 'hunter-targeting-fix', 'build-over-workers')
             }
             self.assertEqual(len(labels), 1, language)
 
     def test_all_frontend_languages_are_discoverable_inside_zip(self):
         with tempfile.TemporaryDirectory() as output:
-            for name in (*FIXTURES, 'fixed-engineers', 'worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix'):
+            for name in (*FIXTURES, 'fixed-engineers', 'worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix',
+                         'build-over-workers'):
                 with self.subTest(module=name), zipfile.ZipFile(builder.build_module(ROOT / name, output)) as archive:
                     self.assertIsNone(archive.testzip())
                     # readLocales checks this exact entry before loading any .yml.
@@ -42,7 +43,8 @@ class PackagingTests(unittest.TestCase):
 
     def test_package_preserves_source_files_and_release_name(self):
         with tempfile.TemporaryDirectory() as output:
-            for name in (*FIXTURES, 'fixed-engineers', 'worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix'):
+            for name in (*FIXTURES, 'fixed-engineers', 'worker-delivery-fix', 'gatehouse-capture-fix', 'hunter-targeting-fix',
+                         'build-over-workers'):
                 folder = ROOT / name
                 with zipfile.ZipFile(builder.build_module(folder, output)) as archive:
                     original = yaml.safe_load((folder / 'definition.yml').read_text(encoding='utf-8'))

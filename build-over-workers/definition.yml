@@ -1,0 +1,16 @@
+name: build-over-workers
+display-name: Build Over Workers
+type: module
+version: 1.1.0
+author: Monsterfish
+meta:
+  version: 1.0.0
+game:
+- SHC==1.41
+- SHCE==1.41
+tags:
+- behavior
+- bugfixes
+dependencies:
+  framework: ^3.0.7
+  frontend: ^1.0.2
