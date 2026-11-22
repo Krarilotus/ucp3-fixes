@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+开启适用于 Stronghold Crusader 与 Crusader Extreme 1.41 的经审核错误修复：
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- 主堡道路受阻时，工人仍可向能够到达的粮仓和军械库送货；
+- 阵亡士兵不再占领或防守城门；
+- 猎人会瞄准近处的鹿，并在射线受阻时靠近；
+- 攻城器械乘员会被正确清理，投石车和重型投石机在收到攻击单位的命令后会停止移动；
+- AI 的啤酒花农场会计入其农场上限；
+- AI 城堡补齐长戟兵、剑士和阿拉伯剑士缺失的位置；
+- 界面与视觉修复：唯一建筑的预览在放置后会清除，滚动地图时建筑预览保持可见，枯死树木会显示直立阶段，塔楼门与相连城墙对齐，旋转地图后悬崖纹理保持连续；
+- 音频修复：已保存的音效音量从启动时即生效，过场视频遵循音效音量与静音设置，高分辨率或拉远视角下附近的声音不再中断。
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+这些修复位于各自的模块中且默认关闭；此插件会选中这些模块并开启修复。每项修复仍可在“自定义”中单独关闭。它不会更改纹理或游戏平衡性。

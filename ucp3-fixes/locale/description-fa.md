@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+اصلاح‌های بررسی‌شدهٔ خطاها را برای Stronghold Crusader و Crusader Extreme 1.41 روشن می‌کند:
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- کارگران هنگام بسته بودن مسیر قلعه، کالا را به انبارهای غله و اسلحه‌خانه‌های در دسترس می‌رسانند؛
+- سربازان کشته‌شده دیگر دروازه‌ها را تصرف یا دفاع نمی‌کنند؛
+- شکارچیان گوزن‌های نزدیک را هدف می‌گیرند و اگر مسیر تیر بسته باشد نزدیک‌تر می‌روند؛
+- خدمهٔ محاصره به‌درستی پاک‌سازی می‌شوند و منجنیق‌ها و تریبوشت‌ها هنگام دریافت فرمان حمله به یک واحد، حرکت را متوقف می‌کنند؛
+- مزارع رازک هوش مصنوعی در سقف تعداد مزارع آن حساب می‌شوند؛
+- قلعه‌های هوش مصنوعی موقعیت‌های گم‌شدهٔ نیزه‌داران زره‌پوش، شمشیرزنان و شمشیرزنان عرب را به دست می‌آورند؛
+- اصلاح‌های رابط کاربری و بصری: پیش‌نمایش ساختمان‌های منحصربه‌فرد پس از قرارگیری پاک می‌شود، پیش‌نمایش ساختمان‌ها هنگام پیمایش نقشه نمایان می‌ماند، درختان خشک‌شده مرحلهٔ ایستادهٔ خود را نشان می‌دهند، درِ برج‌ها با دیوارهای متصل هم‌تراز می‌شود و بافت صخره‌ها پس از چرخش نقشه پیوسته می‌ماند؛
+- اصلاح‌های صوتی: بلندی ذخیره‌شدهٔ صدای جلوه‌ها از همان آغاز اعمال می‌شود، ویدئوها از بلندی صدای جلوه‌ها و بی‌صدا کردن پیروی می‌کنند و صداهای نزدیک در وضوح‌های بالا یا هنگام دورنمایی دیگر قطع نمی‌شوند.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+این اصلاح‌ها در ماژول‌های جداگانهٔ خود قرار دارند که به‌صورت پیش‌فرض خاموش‌اند؛ این افزونه آن‌ها را انتخاب و اصلاح‌ها را روشن می‌کند. هر اصلاح همچنان در شخصی‌سازی‌ها قابل خاموش کردن است. این افزونه بافت‌ها یا توازن بازی را تغییر نمی‌دهد.

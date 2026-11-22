@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+Active des correctifs vérifiés pour Stronghold Crusader et Crusader Extreme 1.41 :
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- les ouvriers livrent aux greniers et armureries accessibles lorsque le chemin depuis le donjon est bloqué ;
+- les troupes tombées ne capturent ni ne défendent plus les portes ;
+- les chasseurs visent le gibier proche et avancent si le tir est bloqué ;
+- les équipages de siège sont correctement nettoyés, et les catapultes et trébuchets s'arrêtent lorsqu'ils reçoivent l'ordre d'attaquer une unité ;
+- les houblonnières de l'IA comptent dans sa limite de fermes ;
+- les châteaux de l'IA retrouvent leurs positions manquantes pour les piquiers, les épéistes et les épéistes arabes ;
+- correctifs d'interface et visuels : les aperçus de bâtiments uniques disparaissent après le placement, les aperçus de bâtiments restent visibles lors du défilement, les arbres morts affichent leur stade debout, les portes de tours s'alignent avec les murs adjacents et les textures de falaises restent continues après rotation ;
+- correctifs audio : le volume des effets enregistré s'applique dès le démarrage, les vidéos suivent le volume des effets et la mise en sourdine, et les sons proches ne se coupent plus en haute résolution ou en vue dézoomée.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+Les correctifs se trouvent dans leurs propres modules, désactivés par défaut ; ce plugin les sélectionne et active les correctifs. Chaque correctif peut toujours être désactivé dans Personnalisations. Il ne modifie ni les textures ni l'équilibrage du jeu.

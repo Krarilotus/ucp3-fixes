@@ -1,7 +1,7 @@
 # UCP3 Basics + Fixes
 
-UCP3 Basics plus **UCP3 Fixes**: the standard setup with the reviewed bug fixes switched on (worker deliveries, gatehouse capture, hunters, siege crews, AI hop-farm counting, AI castle troop positions, and interface, visual and audio fixes).
+UCP3 Basics 加上 **UCP3 Fixes**：在标准配置的基础上开启经审核的错误修复（工人送货、城门占领、猎人、攻城器械乘员、AI 啤酒花农场计数、AI 城堡部队位置，以及界面、视觉和音频修复）。
 
-The game still looks and plays as before: no new textures, no snow textures, no gameplay rebalancing. Each fix can be switched off in Customizations. Choose **Basics** for the standard setup without the fixes, or **Recommended** for more.
+游戏画面与玩法仍与之前相同：没有新纹理、没有雪地纹理、没有游戏平衡性改动。每项修复都可在“自定义”中关闭。如需不含修复的标准配置请选择 **基础**，如需更多内容请选择 **推荐**。
 
-Requires launcher 1.0.17 or later.
+需要启动器 1.0.17 或更高版本。

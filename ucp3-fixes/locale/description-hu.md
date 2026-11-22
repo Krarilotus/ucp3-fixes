@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+Bekapcsolja a Stronghold Crusader és a Crusader Extreme 1.41 ellenőrzött hibajavításait:
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- a munkások elérik a megközelíthető magtárakat és fegyvertárakat akkor is, ha a vártoronytól vezető út el van zárva;
+- az elesett katonák többé nem foglalják el és nem védik a kapukat;
+- a vadászok a közeli szarvasokat célozzák meg, és közelebb mennek, ha a lövés akadályba ütközik;
+- az ostromgépek legénységének eltávolítása megfelelően működik, a katapultok és hajítógépek pedig megállnak, ha egység megtámadására kapnak parancsot;
+- az MI komlófarmjai beleszámítanak az MI farmkorlátjába;
+- az MI várai megkapják a pikások, kardforgatók és arab kardforgatók hiányzó pozícióit;
+- felületi és vizuális javítások: az egyedi épületek előnézete elhelyezés után eltűnik, az épületek előnézete görgetés közben is látható marad, az elhalt fák az álló állapotukat mutatják, a tornyok ajtajai illeszkednek a csatlakozó falakhoz, és a sziklatextúrák elforgatás után is folytonosak maradnak;
+- hangjavítások: a mentett hangeffekt-hangerő már induláskor érvényesül, a videók követik a hangeffektek hangerejét és némítását, a közeli hangok pedig nem szakadnak meg nagy felbontáson vagy kizoomolva.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+A javítások saját moduljaikban találhatók, amelyek alapértelmezés szerint ki vannak kapcsolva; ez a bővítmény kiválasztja őket és bekapcsolja a javításokat. Minden javítás továbbra is kikapcsolható a Testreszabások lapon. Nem módosítja a textúrákat és a játékegyensúlyt.

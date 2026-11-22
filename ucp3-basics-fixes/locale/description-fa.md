@@ -1,7 +1,7 @@
 # UCP3 Basics + Fixes
 
-UCP3 Basics plus **UCP3 Fixes**: the standard setup with the reviewed bug fixes switched on (worker deliveries, gatehouse capture, hunters, siege crews, AI hop-farm counting, AI castle troop positions, and interface, visual and audio fixes).
+بستهٔ UCP3 Basics به همراه **UCP3 Fixes**: پیکربندی استاندارد با اصلاح‌های بررسی‌شدهٔ خطاها در حالت روشن (تحویل کالا توسط کارگران، تصرف دروازه، شکارچیان، خدمهٔ محاصره، شمارش مزارع رازک هوش مصنوعی، موقعیت نیروهای قلعه‌های هوش مصنوعی و اصلاح‌های رابط کاربری، بصری و صوتی).
 
-The game still looks and plays as before: no new textures, no snow textures, no gameplay rebalancing. Each fix can be switched off in Customizations. Choose **Basics** for the standard setup without the fixes, or **Recommended** for more.
+ظاهر و روند بازی همچنان مانند قبل است: بدون بافت جدید، بدون بافت برفی و بدون تغییر توازن بازی. هر اصلاح را می‌توان در شخصی‌سازی‌ها خاموش کرد. برای پیکربندی استاندارد بدون اصلاح‌ها **پایه** و برای امکانات بیشتر **پیشنهادی** را انتخاب کنید.
 
-Requires launcher 1.0.17 or later.
+نیازمند لانچر 1.0.17 یا جدیدتر است.

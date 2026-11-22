@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+Stronghold Crusader ve Crusader Extreme 1.41 için incelenmiş hata düzeltmelerini açar:
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- iç kaleden gelen yol kapalıyken işçiler ulaşabildikleri ambar ve cephaneliklere teslimat yapar;
+- ölen askerler artık kapıları ele geçirmez veya savunmaz;
+- avcılar yakındaki geyikleri hedef alır ve atış engellenirse yaklaşır;
+- kuşatma mürettebatı düzgün biçimde temizlenir, mancınıklar ve trebuşeler bir birime saldırı emri alınca durur;
+- yapay zekânın şerbetçiotu çiftlikleri çiftlik sınırına dâhil edilir;
+- yapay zekâ kaleleri kargıcılar, kılıçlılar ve Arap kılıçlılar için eksik konumlarına kavuşur;
+- arayüz ve görsel düzeltmeler: benzersiz bina önizlemeleri yerleştirmeden sonra temizlenir, bina önizlemeleri haritayı kaydırırken görünür kalır, kurumuş ağaçlar ayakta duran aşamalarını gösterir, kule kapıları bitişik surlarla hizalanır ve kayalık dokuları döndürme sonrasında kesintisiz devam eder;
+- ses düzeltmeleri: kayıtlı efekt ses düzeyi başlangıçtan itibaren uygulanır, videolar efekt ses düzeyini ve sessize alma ayarını izler, yakındaki sesler yüksek çözünürlüklerde veya uzaklaştırılmış görünümde artık kesilmez.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+Düzeltmeler, varsayılan olarak kapalı olan kendi modüllerinde yer alır; bu eklenti onları seçer ve düzeltmeleri açar. Her düzeltme Özelleştirmeler bölümünden yine kapatılabilir. Dokuları veya oyun dengesini değiştirmez.

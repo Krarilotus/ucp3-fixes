@@ -1,12 +1,12 @@
 # UCP3 Basics
 
-The standard UCP3 setup. It selects the same two packages that a new UCP3 installation turned on by default until now:
+پیکربندی استاندارد UCP3. دقیقاً همان دو بسته را انتخاب می‌کند که نصب جدید UCP3 تاکنون به‌صورت پیش‌فرض روشن می‌کرد:
 
-- **UCP2 Legacy Defaults**: UCP2 Legacy with its default settings, together with the AI files, the AIC patch and the fixed vanilla AI castles (AIV) it brings along;
+- **UCP2 Legacy Defaults**: بستهٔ UCP2 Legacy با تنظیمات پیش‌فرض آن، همراه با فایل‌های هوش مصنوعی، وصلهٔ AIC و قلعه‌های اصلاح‌شدهٔ هوش مصنوعی اصلی بازی (AIV) که با خود می‌آورد؛
 - **Graphics API Replacer**.
 
-Their dependencies are installed in compatible versions from the Store, which can be newer than on an older installation. At the moment that is UCP2 Legacy 2.15.2, which also brings Map Extensions 1.0.0.
+وابستگی‌های آن‌ها در نسخه‌های سازگار از فروشگاه نصب می‌شوند که ممکن است از نسخه‌های نصب قدیمی‌تر جدیدتر باشند. در حال حاضر این نسخه UCP2 Legacy 2.15.2 است که Map Extensions 1.0.0 را نیز همراه خود می‌آورد.
 
-Nothing else: no extra fixes, no new textures, no gameplay rebalancing. In the UCP3 family you can switch to **Basics + Fixes** or **Recommended** for more.
+هیچ چیز دیگری نیست: بدون اصلاح‌های اضافه، بدون بافت جدید و بدون تغییر توازن بازی. در خانوادهٔ UCP3 می‌توانید برای امکانات بیشتر به **پایه + رفع اشکال** یا **پیشنهادی** تغییر دهید.
 
-Requires launcher 1.0.17 or later.
+نیازمند لانچر 1.0.17 یا جدیدتر است.

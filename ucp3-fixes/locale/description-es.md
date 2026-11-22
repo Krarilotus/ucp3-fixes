@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+Activa correcciones de errores revisadas para Stronghold Crusader y Crusader Extreme 1.41:
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- los trabajadores entregan mercancías a graneros y arsenales accesibles cuando la ruta desde la fortaleza está bloqueada;
+- las tropas caídas ya no capturan ni defienden las puertas;
+- los cazadores apuntan a ciervos cercanos y se acercan si el disparo está bloqueado;
+- las dotaciones de asedio se limpian correctamente, y las catapultas y trabuquetes se detienen al recibir la orden de atacar una unidad;
+- las granjas de lúpulo de la IA cuentan para su límite de granjas;
+- los castillos de la IA recuperan sus posiciones ausentes para piqueros, espadachines y espadachines árabes;
+- correcciones de interfaz y visuales: la vista previa de edificios únicos desaparece tras colocarlos, las vistas previas de edificios siguen visibles al desplazarse, los árboles muertos muestran su fase en pie, las puertas de las torres se alinean con los muros contiguos y las texturas de los acantilados continúan tras rotar el mapa;
+- correcciones de audio: el volumen de efectos guardado se aplica desde el inicio, los vídeos siguen el volumen de efectos y el silencio, y los sonidos cercanos ya no se cortan a resoluciones altas o al alejar la cámara.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+Las correcciones viven en sus propios módulos, que están desactivados por defecto; este plugin los selecciona y activa las correcciones. Cada corrección sigue pudiendo desactivarse en Personalizaciones. No cambia las texturas ni el equilibrio del juego.

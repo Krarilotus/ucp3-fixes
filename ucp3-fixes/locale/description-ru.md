@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+Включает проверенные исправления ошибок для Stronghold Crusader и Crusader Extreme 1.41:
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- рабочие доставляют товары в доступные амбары и оружейные, если путь от цитадели перекрыт;
+- павшие воины больше не захватывают и не защищают ворота;
+- охотники выбирают близких оленей и подходят ближе, если выстрелу что-то мешает;
+- осадные экипажи корректно удаляются, а катапульты и требюше останавливаются при приказе атаковать отряд;
+- хмелевые фермы ИИ учитываются в лимите ферм ИИ;
+- замки ИИ получают недостающие позиции для пикинёров, мечников и арабских мечников;
+- исправления интерфейса и графики: предпросмотр уникальных зданий исчезает после постройки, предпросмотр зданий остаётся видимым при прокрутке, мёртвые деревья отображают стоячую стадию, двери башен выравниваются по примыкающим стенам, а текстуры скал не обрываются после поворота карты;
+- исправления звука: сохранённая громкость эффектов применяется с самого запуска, видеоролики учитывают громкость эффектов и отключение звука, а близкие звуки больше не пропадают на больших разрешениях или при отдалении камеры.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+Исправления находятся в отдельных модулях, которые по умолчанию отключены; этот плагин выбирает их и включает исправления. Каждое исправление по-прежнему можно отключить в разделе Настройки. Он не меняет текстуры и баланс игры.

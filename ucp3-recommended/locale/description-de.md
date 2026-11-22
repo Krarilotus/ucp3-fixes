@@ -2,10 +2,10 @@
 
 UCP3 Basics + Fixes, plus:
 
-- **ConqueringArabia**: Monsterfish's edit of the original Crusader textures, with various texture fixes (no snow);
-- **Interface and Visual Fixes** interface features: the selected map's description stays visible in the lobby, and the Load button is shown in the skirmish lobby;
-- **Build Over Workers**: place buildings and walls on tiles where your own or your allies' workers stand; they step aside to a free tile instead of being removed.
+- **ConqueringArabia**: Monsterfishs Bearbeitung der ursprünglichen Crusader-Texturen mit verschiedenen Texturkorrekturen (kein Schnee);
+- Oberflächenfunktionen von **Interface and Visual Fixes**: Die Beschreibung der ausgewählten Karte bleibt in der Lobby sichtbar, und in der Gefechtslobby wird die Schaltfläche „Laden“ angezeigt;
+- **Build Over Workers**: Platziere Gebäude und Mauern auf Feldern, auf denen eigene oder verbündete Arbeiter stehen; sie weichen auf ein freies Feld aus, statt entfernt zu werden.
 
-Apart from Build Over Workers' placement rule, there is no gameplay rebalancing, no AI change and no snow texture. The fixes, the interface features and worker placement can be switched off in Customizations. ConqueringArabia has no switch: choose **Basics** or **Basics + Fixes** to keep the original textures. **Basics** selects the same packages as the previous default.
+Abgesehen von der Platzierungsregel von Build Over Workers gibt es keine Balance-Änderungen, keine KI-Änderungen und keine Schneetexturen. Die Korrekturen, die Oberflächenfunktionen und die Arbeiterplatzierung lassen sich unter Anpassungen ausschalten. ConqueringArabia hat keinen Schalter: Wähle **Basis** oder **Basis + Fehlerbehebungen**, um die ursprünglichen Texturen zu behalten. **Basis** wählt dieselben Pakete wie der bisherige Standard aus.
 
-Requires launcher 1.0.17 or later.
+Erfordert Launcher 1.0.17 oder neuer.

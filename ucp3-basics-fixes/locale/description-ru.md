@@ -1,7 +1,7 @@
 # UCP3 Basics + Fixes
 
-UCP3 Basics plus **UCP3 Fixes**: the standard setup with the reviewed bug fixes switched on (worker deliveries, gatehouse capture, hunters, siege crews, AI hop-farm counting, AI castle troop positions, and interface, visual and audio fixes).
+UCP3 Basics плюс **UCP3 Fixes**: стандартная сборка с включёнными проверенными исправлениями ошибок (доставка товаров рабочими, захват ворот, охотники, осадные экипажи, подсчёт хмелевых ферм ИИ, позиции войск в замках ИИ, а также исправления интерфейса, графики и звука).
 
-The game still looks and plays as before: no new textures, no snow textures, no gameplay rebalancing. Each fix can be switched off in Customizations. Choose **Basics** for the standard setup without the fixes, or **Recommended** for more.
+Игра по-прежнему выглядит и играется как раньше: без новых текстур, без снежных текстур, без изменений баланса. Каждое исправление можно отключить в разделе Настройки. Выберите **Базовая**, чтобы получить стандартную сборку без исправлений, или **Рекомендуемая**, чтобы получить больше.
 
-Requires launcher 1.0.17 or later.
+Требуется лаунчер 1.0.17 или новее.

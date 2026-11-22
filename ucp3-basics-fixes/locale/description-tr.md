@@ -1,7 +1,7 @@
 # UCP3 Basics + Fixes
 
-UCP3 Basics plus **UCP3 Fixes**: the standard setup with the reviewed bug fixes switched on (worker deliveries, gatehouse capture, hunters, siege crews, AI hop-farm counting, AI castle troop positions, and interface, visual and audio fixes).
+UCP3 Basics artı **UCP3 Fixes**: incelenmiş hata düzeltmeleri açık hâlde standart kurulum (işçi teslimatları, kapı ele geçirme, avcılar, kuşatma mürettebatı, yapay zekânın şerbetçiotu çiftliği sayımı, yapay zekâ kale birlik konumları ile arayüz, görsel ve ses düzeltmeleri).
 
-The game still looks and plays as before: no new textures, no snow textures, no gameplay rebalancing. Each fix can be switched off in Customizations. Choose **Basics** for the standard setup without the fixes, or **Recommended** for more.
+Oyun yine eskisi gibi görünür ve oynanır: yeni doku yok, kar dokusu yok, oynanış dengelemesi yok. Her düzeltme Özelleştirmeler bölümünden kapatılabilir. Düzeltmeler olmadan standart kurulum için **Temel**, daha fazlası için **Önerilen** seçeneğini seçin.
 
-Requires launcher 1.0.17 or later.
+Başlatıcı 1.0.17 veya daha yeni bir sürüm gerektirir.

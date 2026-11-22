@@ -1,14 +1,14 @@
 # UCP3 Fixes
 
-Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
+Aktiviert geprüfte Fehlerkorrekturen für Stronghold Crusader und Crusader Extreme 1.41:
 
-- workers deliver to granaries and armories they can reach when the keep route is blocked;
-- fallen troops no longer capture or defend gatehouses;
-- hunters target nearby deer and move closer when a shot is blocked;
-- siege crews are cleaned up correctly, and catapults and trebuchets stop moving when ordered to attack a unit;
-- AI hop farms count towards the AI's farm limit;
-- AI castles get their missing positions for pikemen, swordsmen and Arabian swordsmen;
-- interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
-- audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
+- Arbeiter beliefern erreichbare Kornspeicher und Waffenkammern, auch wenn der Weg vom Bergfried blockiert ist;
+- gefallene Truppen erobern oder verteidigen keine Torhäuser mehr;
+- Jäger wählen nahe Hirsche und gehen bei versperrter Schussbahn näher heran;
+- Belagerungsbesatzungen werden korrekt entfernt, und Katapulte sowie Triboke halten an, wenn sie eine Einheit angreifen sollen;
+- Hopfenfarmen der KI zählen beim Farmlimit der KI mit;
+- KI-Burgen erhalten ihre fehlenden Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer;
+- Oberflächen- und Grafikkorrekturen: Vorschauen einzigartiger Gebäude verschwinden nach dem Platzieren, Gebäudevorschauen bleiben beim Scrollen sichtbar, abgestorbene Bäume zeigen ihre stehende Phase, Turmtüren fluchten mit angrenzenden Mauern und Klippentexturen setzen sich nach dem Drehen fort;
+- Audiokorrekturen: Die gespeicherte Effektlautstärke gilt von Beginn an, Videos folgen der Effektlautstärke und Stummschaltung, und nahe Geräusche brechen bei hohen Auflösungen oder herausgezoomter Ansicht nicht mehr ab.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+Die Korrekturen befinden sich in eigenen Modulen, die standardmäßig deaktiviert sind; dieses Plugin wählt sie aus und schaltet die Korrekturen ein. Jede Korrektur lässt sich unter Anpassungen wieder ausschalten. Es ändert weder Texturen noch die Spielbalance.

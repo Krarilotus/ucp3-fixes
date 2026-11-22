@@ -1,7 +1,7 @@
 # UCP3 Basics + Fixes
 
-UCP3 Basics plus **UCP3 Fixes**: the standard setup with the reviewed bug fixes switched on (worker deliveries, gatehouse capture, hunters, siege crews, AI hop-farm counting, AI castle troop positions, and interface, visual and audio fixes).
+Az UCP3 Basics és az **UCP3 Fixes** együtt: a szabványos összeállítás bekapcsolt, ellenőrzött hibajavításokkal (munkások szállítása, kapufoglalás, vadászok, ostromgépek legénysége, MI komlófarmjainak számlálása, MI-várak csapatpozíciói, valamint felületi, vizuális és hangjavítások).
 
-The game still looks and plays as before: no new textures, no snow textures, no gameplay rebalancing. Each fix can be switched off in Customizations. Choose **Basics** for the standard setup without the fixes, or **Recommended** for more.
+A játék továbbra is úgy néz ki és úgy működik, mint korábban: nincsenek új textúrák, havas textúrák vagy egyensúly-módosítások. Minden javítás kikapcsolható a Testreszabások lapon. Válaszd az **Alap** konfigurációt a javítások nélküli szabványos összeállításhoz, vagy az **Ajánlott** konfigurációt több elemhez.
 
-Requires launcher 1.0.17 or later.
+A launcher 1.0.17 vagy újabb verziója szükséges.

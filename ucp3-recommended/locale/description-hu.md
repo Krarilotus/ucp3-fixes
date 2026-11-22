@@ -1,11 +1,11 @@
 # UCP3 Recommended
 
-UCP3 Basics + Fixes, plus:
+UCP3 Basics + Fixes, valamint:
 
-- **ConqueringArabia**: Monsterfish's edit of the original Crusader textures, with various texture fixes (no snow);
-- **Interface and Visual Fixes** interface features: the selected map's description stays visible in the lobby, and the Load button is shown in the skirmish lobby;
-- **Build Over Workers**: place buildings and walls on tiles where your own or your allies' workers stand; they step aside to a free tile instead of being removed.
+- **ConqueringArabia**: az eredeti Crusader-textúrák Monsterfish-féle átdolgozása különféle textúrajavításokkal (hó nélkül);
+- az **Interface and Visual Fixes** felületi funkciói: a kiválasztott térkép leírása látható marad az előszobában, és a csetepaté előszobájában megjelenik a Betöltés gomb;
+- **Build Over Workers**: épületek és falak elhelyezése olyan mezőkön, ahol saját vagy szövetséges munkások állnak; eltávolítás helyett egy szabad mezőre lépnek félre.
 
-Apart from Build Over Workers' placement rule, there is no gameplay rebalancing, no AI change and no snow texture. The fixes, the interface features and worker placement can be switched off in Customizations. ConqueringArabia has no switch: choose **Basics** or **Basics + Fixes** to keep the original textures. **Basics** selects the same packages as the previous default.
+A Build Over Workers elhelyezési szabályán kívül nincs egyensúly-módosítás, MI-változtatás és havas textúra. A javítások, a felületi funkciók és a munkásokra való építés kikapcsolhatók a Testreszabások lapon. A ConqueringArabia nem rendelkezik kapcsolóval: válaszd az **Alap** vagy az **Alap + Javítások** konfigurációt az eredeti textúrák megtartásához. Az **Alap** ugyanazokat a csomagokat választja ki, mint a korábbi alapbeállítás.
 
-Requires launcher 1.0.17 or later.
+A launcher 1.0.17 vagy újabb verziója szükséges.

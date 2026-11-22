@@ -1,12 +1,12 @@
 # UCP3 Basics
 
-The standard UCP3 setup. It selects the same two packages that a new UCP3 installation turned on by default until now:
+A szabványos UCP3-összeállítás. Ugyanazt a két csomagot választja ki, amelyet egy új UCP3-telepítés eddig alapértelmezés szerint bekapcsolt:
 
-- **UCP2 Legacy Defaults**: UCP2 Legacy with its default settings, together with the AI files, the AIC patch and the fixed vanilla AI castles (AIV) it brings along;
+- **UCP2 Legacy Defaults**: az UCP2 Legacy alapértelmezett beállításaival, a hozzá tartozó MI-fájlokkal, az AIC-javítással és a javított eredeti MI-várakkal (AIV) együtt;
 - **Graphics API Replacer**.
 
-Their dependencies are installed in compatible versions from the Store, which can be newer than on an older installation. At the moment that is UCP2 Legacy 2.15.2, which also brings Map Extensions 1.0.0.
+A függőségeik kompatibilis verzióban települnek az Áruházból, amelyek újabbak lehetnek, mint egy régebbi telepítésben. Jelenleg ez az UCP2 Legacy 2.15.2, amely a Map Extensions 1.0.0 csomagot is magával hozza.
 
-Nothing else: no extra fixes, no new textures, no gameplay rebalancing. In the UCP3 family you can switch to **Basics + Fixes** or **Recommended** for more.
+Semmi más: nincsenek extra javítások, új textúrák vagy egyensúly-módosítások. Az UCP3 családon belül további elemekért válthatsz az **Alap + Javítások** vagy az **Ajánlott** konfigurációra.
 
-Requires launcher 1.0.17 or later.
+A launcher 1.0.17 vagy újabb verziója szükséges.

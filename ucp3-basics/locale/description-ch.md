@@ -1,12 +1,12 @@
 # UCP3 Basics
 
-The standard UCP3 setup. It selects the same two packages that a new UCP3 installation turned on by default until now:
+标准 UCP3 配置。它会选中此前全新安装 UCP3 时默认启用的相同两个扩展包：
 
-- **UCP2 Legacy Defaults**: UCP2 Legacy with its default settings, together with the AI files, the AIC patch and the fixed vanilla AI castles (AIV) it brings along;
-- **Graphics API Replacer**.
+- **UCP2 Legacy Defaults**：使用默认设置的 UCP2 Legacy，连同其附带的 AI 文件、AIC 补丁以及修复后的原版 AI 城堡（AIV）；
+- **Graphics API Replacer**。
 
-Their dependencies are installed in compatible versions from the Store, which can be newer than on an older installation. At the moment that is UCP2 Legacy 2.15.2, which also brings Map Extensions 1.0.0.
+它们的依赖项会从商店安装兼容版本，可能比旧安装中的版本更新。目前为 UCP2 Legacy 2.15.2，它也会同时带来 Map Extensions 1.0.0。
 
-Nothing else: no extra fixes, no new textures, no gameplay rebalancing. In the UCP3 family you can switch to **Basics + Fixes** or **Recommended** for more.
+不含其他内容：没有额外修复、没有新纹理、没有游戏平衡性改动。在 UCP3 扩展家族中，你可以切换至 **基础 + 修复** 或 **推荐** 以获得更多内容。
 
-Requires launcher 1.0.17 or later.
+需要启动器 1.0.17 或更高版本。

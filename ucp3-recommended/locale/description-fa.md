@@ -1,11 +1,11 @@
 # UCP3 Recommended
 
-UCP3 Basics + Fixes, plus:
+بستهٔ UCP3 Basics + Fixes، به اضافهٔ:
 
-- **ConqueringArabia**: Monsterfish's edit of the original Crusader textures, with various texture fixes (no snow);
-- **Interface and Visual Fixes** interface features: the selected map's description stays visible in the lobby, and the Load button is shown in the skirmish lobby;
-- **Build Over Workers**: place buildings and walls on tiles where your own or your allies' workers stand; they step aside to a free tile instead of being removed.
+- **ConqueringArabia**: ویرایش Monsterfish از بافت‌های اصلی Crusader همراه با اصلاح‌های گوناگون بافت (بدون برف)؛
+- قابلیت‌های رابط کاربری **Interface and Visual Fixes**: توضیحات نقشهٔ انتخاب‌شده در لابی نمایان می‌ماند و دکمهٔ بارگذاری در لابی نبرد آزاد نمایش داده می‌شود؛
+- **Build Over Workers**: ساخت ساختمان و دیوار روی خانه‌هایی که کارگران خودتان یا متحدانتان ایستاده‌اند؛ آن‌ها به‌جای حذف شدن، به یک خانهٔ خالی کنار می‌روند.
 
-Apart from Build Over Workers' placement rule, there is no gameplay rebalancing, no AI change and no snow texture. The fixes, the interface features and worker placement can be switched off in Customizations. ConqueringArabia has no switch: choose **Basics** or **Basics + Fixes** to keep the original textures. **Basics** selects the same packages as the previous default.
+به‌جز قانون ساخت‌وساز Build Over Workers، هیچ تغییر توازنی، تغییر هوش مصنوعی یا بافت برفی وجود ندارد. اصلاح‌ها، قابلیت‌های رابط کاربری و ساخت‌وساز روی کارگران را می‌توان در شخصی‌سازی‌ها خاموش کرد. ConqueringArabia کلید خاموش و روشن ندارد: برای حفظ بافت‌های اصلی، **پایه** یا **پایه + رفع اشکال** را انتخاب کنید. **پایه** همان بسته‌های پیش‌فرض قبلی را انتخاب می‌کند.
 
-Requires launcher 1.0.17 or later.
+نیازمند لانچر 1.0.17 یا جدیدتر است.

@@ -1,7 +1,7 @@
 # UCP3 Basics + Fixes
 
-UCP3 Basics plus **UCP3 Fixes**: the standard setup with the reviewed bug fixes switched on (worker deliveries, gatehouse capture, hunters, siege crews, AI hop-farm counting, AI castle troop positions, and interface, visual and audio fixes).
+UCP3 Basics plus **UCP3 Fixes** : la configuration standard avec les correctifs vérifiés activés (livraisons des ouvriers, capture des portes, chasseurs, équipages de siège, comptage des houblonnières de l'IA, positions des troupes dans les châteaux de l'IA, ainsi que les correctifs d'interface, visuels et audio).
 
-The game still looks and plays as before: no new textures, no snow textures, no gameplay rebalancing. Each fix can be switched off in Customizations. Choose **Basics** for the standard setup without the fixes, or **Recommended** for more.
+Le jeu conserve son apparence et son gameplay d'origine : pas de nouvelles textures, pas de textures de neige, pas de rééquilibrage. Chaque correctif peut être désactivé dans Personnalisations. Choisissez **Base** pour la configuration standard sans les correctifs, ou **Recommandé** pour en avoir davantage.
 
-Requires launcher 1.0.17 or later.
+Nécessite le lanceur 1.0.17 ou une version ultérieure.

@@ -1,12 +1,12 @@
 # UCP3 Basics
 
-The standard UCP3 setup. It selects the same two packages that a new UCP3 installation turned on by default until now:
+Die Standard-Konfiguration von UCP3. Sie wählt genau die zwei Pakete aus, die eine neue UCP3-Installation bisher standardmäßig aktiviert hat:
 
-- **UCP2 Legacy Defaults**: UCP2 Legacy with its default settings, together with the AI files, the AIC patch and the fixed vanilla AI castles (AIV) it brings along;
+- **UCP2 Legacy Defaults**: UCP2 Legacy mit seinen Standardeinstellungen samt den zugehörigen KI-Dateien, dem AIC-Patch und den korrigierten Vanilla-KI-Burgen (AIV);
 - **Graphics API Replacer**.
 
-Their dependencies are installed in compatible versions from the Store, which can be newer than on an older installation. At the moment that is UCP2 Legacy 2.15.2, which also brings Map Extensions 1.0.0.
+Ihre Abhängigkeiten werden in kompatiblen Versionen aus dem Store installiert, die neuer sein können als bei einer älteren Installation. Derzeit ist das UCP2 Legacy 2.15.2, das auch Map Extensions 1.0.0 mitbringt.
 
-Nothing else: no extra fixes, no new textures, no gameplay rebalancing. In the UCP3 family you can switch to **Basics + Fixes** or **Recommended** for more.
+Nichts weiter: keine zusätzlichen Korrekturen, keine neuen Texturen, keine Balance-Änderungen. In der UCP3-Familie kannst du für mehr zu **Basis + Fehlerbehebungen** oder **Empfohlen** wechseln.
 
-Requires launcher 1.0.17 or later.
+Erfordert Launcher 1.0.17 oder neuer.
