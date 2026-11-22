@@ -167,19 +167,23 @@ local function relink()
   log(INFO, NAME .. ": unit route search: " .. describe(enabled))
 end
 
-local function redirect()
+-- The call must still be what route-search found (or redirected) before anything is written.
+local function checkCall()
   if head then
     if callTarget(site.call) ~= head then
       fail("setDestinationForUnit's route search call at 0x%X was changed by another module "
         .. "after route-search redirected it", site.call)
     end
-    return
-  end
-  if core.readByte(site.call) & 0xFF ~= 0xE8 or callTarget(site.call) ~= site.search then
+  elseif core.readByte(site.call) & 0xFF ~= 0xE8 or callTarget(site.call) ~= site.search then
     fail("setDestinationForUnit's route search call at 0x%X was changed by another module "
       .. "before the first route policy was enabled; update that module to a route-search "
       .. "policy or turn its route feature off", site.call)
   end
+end
+
+-- Redirect the call once, after the chain it leads to is written.
+local function redirect()
+  if head then return end
   head = core.allocateCode(headCode())
   core.writeCodeBytes(site.call, relativeCall(site.call, head))
 end
@@ -240,9 +244,10 @@ local function enablePolicy(self, id, entry)
   if policy.entry then
     fail("the route policy '%s' is already enabled", id)
   end
-  redirect()
+  checkCall()
   policy.entry = u32(entry)
   relink()
+  redirect()
 end
 
 local function policyList(self)
