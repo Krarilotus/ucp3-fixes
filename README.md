@@ -51,7 +51,8 @@ and suggests their bug fixes on:
 Interface and Visual Fixes' two interface features (lobby map descriptions, Load
 in the skirmish lobby) and its Ghost Objects repair are not set by this plugin.
 Suggested values stay editable in Customizations. The plugin has no family
-membership and needs frontend 1.0.2 or later, so it also works on GUI 1.0.16.
+membership and itself declares frontend `^1.0.2`; its dependency set needs GUI
+1.0.16 or later, because AIV Troop Behaviour 0.3.0 requires frontend 1.0.16.
 Gatehouse Fixes (`smarter-gatehouses`) is no longer a dependency: it is not in
 the public Store and has no license yet. Bundle 0.1.x was a module and keeps
 selecting the earlier, default-on module releases through its `^0.1.x` ranges.

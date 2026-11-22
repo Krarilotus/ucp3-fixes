@@ -63,20 +63,30 @@ def definition(name):
     return load(ROOT / name / 'definition.yml')
 
 
-def option_urls(module):
-    """Option URLs of a dependency: from this repository, or from the checked-in fixture."""
+PYTHON_TYPES = {'boolean': bool, 'number': (int, float), 'string': str}
+
+
+def option_kind(contents):
+    """An option's value type: its declared contents.type, else the type of its default."""
+    if contents.get('type'):
+        return contents['type']
+    return {bool: 'boolean', int: 'number', float: 'number', str: 'string'}.get(type(contents.get('value')))
+
+
+def option_types(module):
+    """{url: value type} of a dependency: from this repository, or from the typed fixture."""
     if (ROOT / module / 'options.yml').is_file():
-        found = set()
+        found = {}
 
         def walk(items):
             for item in items:
                 if 'url' in item:
-                    found.add(item['url'])
+                    found[item['url']] = option_kind(item.get('contents', {}))
                 walk(item.get('children', []))
 
         walk(load(ROOT / module / 'options.yml')['options'])
         return found
-    return set(load(FIXTURE)[module]['urls'])
+    return dict(load(FIXTURE)[module]['options'])
 
 
 def suggestions(name):
@@ -119,7 +129,9 @@ class FixesPluginTests(unittest.TestCase):
     def test_plugin_turns_on_exactly_the_listed_fixes(self):
         found = suggestions(FIXES)
         self.assertEqual(set(found), FIXES_SUGGESTED)
-        self.assertTrue(all(contents == {'suggested-value': True} for contents in found.values()))
+        for url, contents in found.items():
+            self.assertEqual(set(contents), {'suggested-value'}, url)
+            self.assertIs(contents['suggested-value'], True, url)
 
 
 class SetupFamilyTests(unittest.TestCase):
@@ -158,19 +170,27 @@ class SetupFamilyTests(unittest.TestCase):
     def test_recommended_suggestions(self):
         found = suggestions('ucp3-recommended')
         self.assertEqual(set(found), MEMBERS['ucp3-recommended']['suggested'])
-        self.assertTrue(all(contents == {'suggested-value': True} for contents in found.values()))
+        for url, contents in found.items():
+            self.assertEqual(set(contents), {'suggested-value'}, url)
+            self.assertIs(contents['suggested-value'], True, url)
 
 
 class PluginPackageTests(unittest.TestCase):
-    def test_every_suggested_key_is_an_option_of_a_dependency(self):
+    def test_every_suggested_key_is_an_option_of_a_dependency_with_its_type(self):
         for name in PLUGINS:
             found = suggestions(name) or {}
             dependencies = definition(name)['dependencies']
-            for url in found:
+            for url, contents in found.items():
                 module = url.split('.', 1)[0]
                 with self.subTest(plugin=name, url=url):
                     self.assertIn(module, dependencies)
-                    self.assertIn(url, option_urls(module))
+                    types = option_types(module)
+                    self.assertIn(url, types)
+                    expected = PYTHON_TYPES[types[url]]
+                    for value in contents.values():
+                        self.assertIsInstance(value, expected)
+                        if expected is not bool:  # bool is an int subclass; keep numbers numeric
+                            self.assertNotIsInstance(value, bool)
 
     def test_fixture_names_its_source(self):
         for module, entry in load(FIXTURE).items():
