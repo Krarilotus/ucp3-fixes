@@ -10,7 +10,7 @@ from capstone import Cs, CS_ARCH_X86, CS_MODE_32
 from lupa.lua54 import LuaError
 import yaml
 
-from route_search_harness import (ROOT, MODULE, Space, RouteSearch, Emulator, d,
+from route_search_harness import (ROOT, MODULE, FRAMEWORK_PROXY, Space, RouteSearch, Emulator, d,
                                   recording_policy, comparing_policy, reentering_policy)
 
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
@@ -67,7 +67,7 @@ class ResolutionTests(unittest.TestCase):
         rs.fire_after_init()
         self.assertEqual((rs.scans, rs.code_writes, rs.data_writes, rs.allocations), ([], [], [], []))
         self.assertEqual(bytes(rs.space.memory), before)
-        self.assertEqual(rs.module.version, 1)
+        self.assertEqual((rs.module.version, rs.api.version), (1, 1))
 
     def test_registering_does_not_redirect_the_call(self):
         rs = module()
@@ -200,15 +200,15 @@ class OrderAndLifecycleTests(unittest.TestCase):
                      {'id': 'x', 'order': 1000}, {'id': 'x', 'order': 100.5},
                      {'id': 'x', 'order': '100'}, {'id': 'x'}):
             with self.subTest(spec=spec), self.assertRaises(LuaError):
-                rs.module.addPolicy(rs.module, rs.lua.table_from(spec))
+                rs.call('addPolicy', rs.lua.table_from(spec))
         with self.assertRaisesRegex(LuaError, 'expects'):
-            rs.module.addPolicy(rs.module, 'x')
+            rs.call('addPolicy', 'x')
         with self.assertRaisesRegex(LuaError, 'was not registered'):
             rs.enable_policy('unknown', 0x7000000)
         rs.add('x', 100)
         for entry in (0, 1.5, 'here'):
             with self.subTest(entry=entry), self.assertRaisesRegex(LuaError, 'address of its code'):
-                rs.module.enablePolicy(rs.module, 'x', entry)
+                rs.call('enablePolicy', 'x', entry)
         rs.enable_policy('x', 0x7000000)
         with self.assertRaisesRegex(LuaError, 'already enabled'):
             rs.enable_policy('x', 0x7000000)
@@ -231,6 +231,20 @@ class OrderAndLifecycleTests(unittest.TestCase):
         rs.add('a', 100)
         rs.enable_policy('a', 0x7000000)
         self.assertEqual(len(rs.code_writes), 1)
+
+    def test_framework_proxy_needs_the_declared_options(self):
+        # UCP 3.0.7 stops the launch when a proxied method returns a table and the module
+        # declared no proxy options (W4dT3 saw this with route-search before the fix).
+        rs = module()
+        bare = rs.lua.execute(FRAMEWORK_PROXY)(rs.module, None)
+        with self.assertRaisesRegex(LuaError, 'table expected, got nil'):
+            bare.addPolicy(bare, rs.lua.table_from({'id': 'a', 'order': 100}))
+        self.assertEqual(set(rs.options['proxy']['ignored'].values()), {'addPolicy', 'policies'})
+        slots = rs.call('addPolicy', rs.lua.table_from({'id': 'b', 'order': 200}))
+        self.assertEqual(rs.lua.eval('type')(slots), 'table')
+        rs.enable_policy('b', 0x7000000)
+        self.assertEqual([p['id'] for p in rs.policies()], ['b'])
+        self.assertIsNone(rs.api.enable, 'the framework hides enable from other modules')
 
     def test_runtime_disable_reports_restart(self):
         rs = module()

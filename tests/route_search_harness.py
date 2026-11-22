@@ -14,6 +14,49 @@ from unicorn.x86_const import (UC_X86_REG_EAX, UC_X86_REG_EBX, UC_X86_REG_ECX, U
 ROOT = Path(__file__).resolve().parents[1]
 MODULE = ROOT / 'route-search'
 MASK = 0xFFFFFFFF
+
+# How UCP 3.0.7 hands one module to another (content/ucp/code/main.lua: `p = p or { public
+# = {}, proxy = {} }`, then extensions/proxies.lua ExtensionProxy): calls are made on the
+# module itself, enable/disable/init are hidden, and a method returning a table is wrapped
+# read-only unless its name is in the module's proxy `ignored` list. Without that list the
+# framework iterates nil and the launch stops. Written from that behaviour for these tests.
+FRAMEWORK_PROXY = '''
+local function contains(list, value)
+  for _, item in pairs(list) do
+    if item == value then return true end
+  end
+  return false
+end
+local function readOnly(object)
+  if type(object) ~= "table" then return object end
+  return setmetatable({}, {
+    __index = function(_, key) return readOnly(object[key]) end,
+    __newindex = function(_, key) error("Setting a value on this table is not allowed. Key: " .. tostring(key)) end,
+  })
+end
+return function(module, second)
+  local p = second or { public = {}, proxy = {} }
+  local options = p.proxy or { ignored = {} }
+  return setmetatable({}, {
+    __index = function(_, key)
+      if key == "enable" or key == "disable" or key == "init" then return nil end
+      local value = module[key]
+      if type(value) == "table" then return readOnly(value) end
+      if type(value) == "function" then
+        return function(_, ...)
+          local result = value(module, ...)
+          if type(result) == "table" and contains(options.ignored, key) == false then
+            return readOnly(result)
+          end
+          return result
+        end
+      end
+      return value
+    end,
+    __newindex = function(_, key) error("Setting a value on this extension is not allowed. Key: " .. tostring(key)) end,
+  })
+end
+'''
 REGS = {'eax': UC_X86_REG_EAX, 'ebx': UC_X86_REG_EBX, 'ecx': UC_X86_REG_ECX,
         'edx': UC_X86_REG_EDX, 'esi': UC_X86_REG_ESI, 'edi': UC_X86_REG_EDI,
         'ebp': UC_X86_REG_EBP, 'esp': UC_X86_REG_ESP}
@@ -89,7 +132,11 @@ class RouteSearch:
         core.allocate = self.allocate
         core.allocateCode = self.allocate_code
         g.core = core
-        self.module = lua.execute((MODULE / 'init.lua').read_text(encoding='utf-8'))
+        loaded = lua.execute((MODULE / 'init.lua').read_text(encoding='utf-8'))
+        self.module, self.options = loaded if isinstance(loaded, tuple) else (loaded, None)
+        # Other modules reach it as the framework does: main.lua defaults the second return
+        # value to { public = {}, proxy = {} } and wraps the module in its ExtensionProxy.
+        self.api = lua.execute(FRAMEWORK_PROXY)(self.module, self.options)
 
     # core
     def find_all(self, pattern):
@@ -133,21 +180,26 @@ class RouteSearch:
         self.allocations.append(('code', address, len(data)))
         return address
 
-    # the module's interface, called the way modules call it through the framework proxy
+    # enable() is called by the framework on the module itself; everything else the way other
+    # modules call it, through the framework proxy (colon calls on modules["route-search"]).
     def enable(self):
         self.module.enable(self.module, self.lua.table())
 
+    def call(self, method, *args):
+        return self.api[method](self.api, *args)
+
     def add(self, policy_id, order):
-        slots = self.module.addPolicy(self.module, self.lua.table_from({'id': policy_id, 'order': order}))
+        slots = self.call('addPolicy', self.lua.table_from({'id': policy_id, 'order': order}))
         return int(slots['next']), int(slots['unit'])
 
     def enable_policy(self, policy_id, entry):
-        self.module.enablePolicy(self.module, policy_id, entry)
+        self.call('enablePolicy', policy_id, entry)
 
     def policies(self):
-        listed = self.module.policies(self.module)
+        listed = self.call('policies')
+        count = self.lua.eval('function(t) return #t end')(listed)
         return [dict(id=listed[i]['id'], order=listed[i]['order'], entry=listed[i]['entry'],
-                     next=listed[i]['next']) for i in range(1, len(listed) + 1)]
+                     next=listed[i]['next']) for i in range(1, count + 1)]
 
     def fire_after_init(self):
         for name, fn in self.after_init:

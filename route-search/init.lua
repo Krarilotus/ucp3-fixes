@@ -275,7 +275,7 @@ local function afterInit()
   end
 end
 
-return {
+local api = {
   version = CONTRACT,
   addPolicy = addPolicy,
   enablePolicy = enablePolicy,
@@ -292,4 +292,13 @@ return {
   disable = function(self, config)
     return false, NAME .. ": restart the game to change route policies"
   end,
+}
+
+-- Other modules call this one through the framework's module proxy. In UCP 3.0.7 that proxy
+-- fails on any method that returns a table unless the module lists its proxy options; the
+-- two methods listed here return plain tables built for the caller.
+return api, {
+  proxy = {
+    ignored = { "addPolicy", "policies" },
+  },
 }
