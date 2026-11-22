@@ -278,7 +278,7 @@ class OrderAndLifecycleTests(unittest.TestCase):
 
     def test_framework_proxy_needs_the_declared_options(self):
         # UCP 3.0.7 stops the launch when a proxied method returns a table and the module
-        # declared no proxy options (W4dT3 saw this with route-search before the fix).
+        # declared no proxy options.
         rs = module()
         bare = rs.lua.execute(FRAMEWORK_PROXY)(rs.module, None)
         with self.assertRaisesRegex(LuaError, 'table expected, got nil'):

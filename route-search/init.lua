@@ -49,36 +49,30 @@ local function fail(message, ...)
   error(NAME .. ": " .. string.format(message, ...), 0)
 end
 
-local function u32(value)
-  return value & 0xFFFFFFFF
-end
-
 local function found(address)
   return address ~= nil and address ~= 0
 end
 
-local function callTarget(call)
-  return u32(call + 5 + core.readInteger(call + 1))
-end
-
+-- UCP 3.0.7 has no unique-match or code-section scan API (owner gap: a framework
+-- core.scanForAOBUnique with code-section bounds), so this is the module's one local helper.
 -- The executable's section that holds address, read from the PE headers at the image base
 -- where core.scanForAOB starts by default. nil when they don't look like PE headers; the
 -- caller then scans the framework's whole default range.
 local IMAGE_BASE = 0x400000
 local function sectionOf(address)
-  if core.readByte(IMAGE_BASE) & 0xFF ~= 0x4D or core.readByte(IMAGE_BASE + 1) & 0xFF ~= 0x5A then
+  if core.readByte(IMAGE_BASE) ~= 0x4D or core.readByte(IMAGE_BASE + 1) ~= 0x5A then
     return nil
   end
-  local header = u32(core.readInteger(IMAGE_BASE + 0x3C))
+  local header = core.readInteger(IMAGE_BASE + 0x3C)
   if header < 0x40 or header > 0x1000 then return nil end
   local pe = IMAGE_BASE + header
-  if u32(core.readInteger(pe)) ~= 0x00004550 then return nil end
-  local sections = core.readInteger(pe + 6) & 0xFFFF
-  local optional = core.readInteger(pe + 0x14) & 0xFFFF
+  if core.readInteger(pe) ~= 0x00004550 then return nil end
+  local sections = core.readSmallInteger(pe + 6)
+  local optional = core.readSmallInteger(pe + 0x14)
   if sections < 1 or sections > 96 then return nil end
   for index = 0, sections - 1 do
     local entry = pe + 0x18 + optional + index * 40
-    local size, start = u32(core.readInteger(entry + 8)), u32(core.readInteger(entry + 12))
+    local size, start = core.readInteger(entry + 8), core.readInteger(entry + 12)
     local low = IMAGE_BASE + start
     if address >= low and address < low + size then
       return low, low + size
@@ -124,13 +118,13 @@ local function resolve()
   end
   if searchAt then
     for _, pair in ipairs(SEARCH_SAME_OPERANDS) do
-      if u32(core.readInteger(searchAt + pair[1])) ~= u32(core.readInteger(searchAt + pair[2])) then
+      if core.readInteger(searchAt + pair[1]) ~= core.readInteger(searchAt + pair[2]) then
         why = "the game's route search does not read its tables the way this module knows"
       end
     end
   end
   if not why then
-    local target = callTarget(call)
+    local target = call + 5 + core.readInteger(call + 1)
     if target ~= searchAt then
       why = string.format("setDestinationForUnit's route search call at 0x%X already goes to "
         .. "0x%X instead of the game's search at 0x%X. Another module has changed it; update "
@@ -146,33 +140,19 @@ local function resolve()
   site = { call = call, search = searchAt }
 end
 
-local function dword(value)
-  value = u32(value)
-  return value & 0xFF, (value >> 8) & 0xFF, (value >> 16) & 0xFF, (value >> 24) & 0xFF
-end
-
-local function append(code, ...)
-  for _, byte in ipairs({ ... }) do
-    code[#code + 1] = byte
-  end
-end
-
 -- What the redirected call runs: the same arguments, ecx untouched, handed to the outermost
 -- policy; the unit is kept in [unit] for the policies, the previous value put back after.
+local STUB_SIZE = 35
 local function headCode()
-  local code = {}
-  append(code, 0xFF, 0x35, dword(unitSlot))   -- push dword [unit]
-  append(code, 0x89, 0x35, dword(unitSlot))   -- mov [unit], esi
-  append(code, 0xFF, 0x74, 0x24, 0x0C)        -- push dword [esp + 0x0C]   canClimb
-  append(code, 0xFF, 0x74, 0x24, 0x0C)        -- push dword [esp + 0x0C]   owner
-  append(code, 0xFF, 0x15, dword(firstSlot))  -- call dword [first]
-  append(code, 0x8F, 0x05, dword(unitSlot))   -- pop dword [unit]
-  append(code, 0xC2, 0x08, 0x00)              -- ret 8
-  return code
-end
-
-local function relativeCall(from, to)
-  return { 0xE8, dword(to - (from + 5)) }
+  return {
+    0xFF, 0x35, core.itob(unitSlot),    -- push dword [unit]
+    0x89, 0x35, core.itob(unitSlot),    -- mov [unit], esi
+    0xFF, 0x74, 0x24, 0x0C,             -- push dword [esp + 0x0C]   canClimb
+    0xFF, 0x74, 0x24, 0x0C,             -- push dword [esp + 0x0C]   owner
+    0xFF, 0x15, core.itob(firstSlot),   -- call dword [first]
+    0x8F, 0x05, core.itob(unitSlot),    -- pop dword [unit]
+    0xC2, 0x08, 0x00,                   -- ret 8
+  }
 end
 
 local function chain()
@@ -208,7 +188,7 @@ end
 
 -- The call must still be what route-search found (or redirected) before anything is written.
 local function isCallTo(target)
-  return core.readByte(site.call) & 0xFF == 0xE8 and callTarget(site.call) == target
+  return core.readByte(site.call) == 0xE8 and site.call + 5 + core.readInteger(site.call + 1) == target
 end
 
 local function checkCall()
@@ -227,8 +207,9 @@ end
 -- Redirect the call once, after the chain it leads to is written.
 local function redirect()
   if head then return end
-  head = core.allocateCode(headCode())
-  core.writeCodeBytes(site.call, relativeCall(site.call, head))
+  head = core.allocateCode(STUB_SIZE)
+  core.writeCode(head, headCode())
+  core.writeCode(site.call, { 0xE8, core.itob(head - (site.call + 5)) })
 end
 
 local function checkOpen(what)
@@ -288,7 +269,7 @@ local function enablePolicy(self, id, entry)
     fail("the route policy '%s' is already enabled", id)
   end
   checkCall()
-  policy.entry = u32(entry)
+  policy.entry = entry
   relink()
   redirect()
 end
@@ -310,7 +291,7 @@ local function afterInit()
     log(ERROR, string.format("%s: setDestinationForUnit's route search call at 0x%X no longer "
       .. "goes to route-search (it goes to 0x%X): a module loaded later changed it. The game "
       .. "runs, but the route policies %s may see the wrong unit or not run.", NAME, site.call,
-      callTarget(site.call), describe(chain())))
+      site.call + 5 + core.readInteger(site.call + 1), describe(chain())))
   end
 end
 

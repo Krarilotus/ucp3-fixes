@@ -127,6 +127,7 @@ class RouteSearch:
         self.space = space
         self.scans, self.code_writes, self.data_writes, self.allocations = [], [], [], []
         self.scan_ranges = []
+        self.stub_writes = []
         self.logs, self.after_init = [], []
         lua = self.lua = LuaRuntime(unpack_returned_tuples=True)
         g = lua.globals()
@@ -140,12 +141,18 @@ class RouteSearch:
         core.AOBScan = self.aob_scan
         core.scanForAOB = self.scan_for_aob
         core.readInteger = lambda address: struct.unpack('<i', space.read(int(address), 4))[0]
-        core.readByte = lambda address: struct.unpack('<b', space.read(int(address), 1))[0]
+        # RPS pushes *(BYTE*) for readByte (unsigned) and *(short*) for readSmallInteger.
+        core.readByte = lambda address: space.read(int(address), 1)[0]
+        core.readSmallInteger = lambda address: struct.unpack('<h', space.read(int(address), 2))[0]
         core.writeCodeBytes = self.write_code
+        core.writeCode = self.write_code
         core.writeInteger = self.write_integer
         core.allocate = self.allocate
         core.allocateCode = self.allocate_code
         g.core = core
+        # core.itob as in framework 3.0.7 core.lua.
+        lua.execute('function core.itob(value) return { (value >> 0) & 0xFF, (value >> 8) & 0xFF, '
+                    '(value >> 16) & 0xFF, (value >> 24) & 0xFF } end')
         loaded = lua.execute((MODULE / 'init.lua').read_text(encoding='utf-8'))
         self.module, self.options = loaded if isinstance(loaded, tuple) else (loaded, None)
         # Other modules reach it as the framework does: main.lua defaults the second return
@@ -172,10 +179,23 @@ class RouteSearch:
         return next((hit for hit in self.find_all(pattern)
                      if hit >= low and (high is None or hit < high)), None)
 
+    def flatten(self, values):
+        """Bytes of a code table as core.compile reads it: numbers and nested tables."""
+        out = []
+        for i in range(1, len(values) + 1):
+            item = values[i]
+            out.extend(self.flatten(item) if self.lua.eval('type')(item) == 'table' else [int(item) & 0xFF])
+        return out
+
     def write_code(self, address, values):
-        data = bytes(int(values[i]) & 0xFF for i in range(1, len(values) + 1))
-        self.code_writes.append((int(address), data))
-        self.space.write(int(address), data)
+        data = bytes(self.flatten(values))
+        address = int(address)
+        # Only writes into the executable image count as patches; the stub lives in allocated code.
+        if address < self.space.image_end:
+            self.code_writes.append((address, data))
+        else:
+            self.stub_writes.append((address, data))
+        self.space.write(address, data)
 
     def write_integer(self, address, value):
         address = int(address)
@@ -191,7 +211,11 @@ class RouteSearch:
         return address
 
     def allocate_code(self, values):
-        data = bytes(int(values[i]) & 0xFF for i in range(1, len(values) + 1))
+        if isinstance(values, int):
+            address = self.space.allocate(values)
+            self.allocations.append(('code', address, values))
+            return address
+        data = bytes(self.flatten(values))
         address = self.space.allocate(len(data))
         self.space.write(address, data)
         self.allocations.append(('code', address, len(data)))
