@@ -1,11 +1,11 @@
 buildings: Épületek elhelyezése munkásokon át
-buildings_tooltip: Saját munkásaid helyére is építhetsz épületet. Az új épület melletti legközelebbi szabad mezőre lépnek, és folytatják a munkájukat. A katonák és az ellenséges egységek továbbra is blokkolják a helyet. Kikapcsolása visszaállítja az eredeti épületelhelyezést.
+buildings_tooltip: Saját munkásaid helyére is építhetsz épületet. Az új épület melletti legközelebbi szabad mezőre lépnek, és folytatják a munkájukat. A katonák és az ellenséges egységek továbbra is blokkolják a helyet. Alapértelmezés szerint ki van kapcsolva; az UCP3 Recommended konfiguráció kapcsolja be. Kikapcsolása visszaállítja az eredeti épületelhelyezést.
 walls: Falak elhelyezése munkásokon át
-walls_tooltip: 'Ugyanez falaknál: az útban álló munkások a fal mellé lépnek, lehetőség szerint arra az oldalra, amelyiken álltak. Kikapcsolása visszaállítja az eredeti emberi és MI falelhelyezést.'
+walls_tooltip: 'Ugyanez falaknál: az útban álló munkások a fal mellé lépnek, lehetőség szerint arra az oldalra, amelyiken álltak. Alapértelmezés szerint ki van kapcsolva; az UCP3 Recommended konfiguráció kapcsolja be. Kikapcsolása visszaállítja az eredeti emberi és MI falelhelyezést.'
 keep_on_walls: Faljavításkor a rajta állók helyben maradnak
-keep_on_walls_tooltip: A falon vagy lépcsőn álló katonák és emberek a helyükön maradnak, amikor megjavítod a falat. Csak az új fal alatt, a földön állók kerülnek félre.
+keep_on_walls_tooltip: A falon vagy lépcsőn álló katonák és emberek a helyükön maradnak, amikor megjavítod a falat. Csak az új fal alatt, a földön állók kerülnek félre. Alapértelmezés szerint be van kapcsolva; csak akkor számít, ha a falak munkások helyére is építhetők.
 allies: A szövetségesek munkásai is barátságosnak számítanak
-allies_tooltip: A csapatodhoz tartozó játékosok munkásaira is építhetsz. Kikapcsolva ez csak a saját munkásaidra érvényes.
+allies_tooltip: A csapatodhoz tartozó játékosok munkásaira is építhetsz. Kikapcsolva ez csak a saját munkásaidra érvényes. Alapértelmezés szerint ki van kapcsolva; az UCP3 Recommended konfiguráció kapcsolja be.
 balance_changes: Egyensúly-módosítások
 bugfixes: Hibajavítások
 tags.behavior: Viselkedés
