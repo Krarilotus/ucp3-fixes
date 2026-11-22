@@ -32,6 +32,19 @@ local function readOnly(object)
   return setmetatable({}, {
     __index = function(_, key) return readOnly(object[key]) end,
     __newindex = function(_, key) error("Setting a value on this table is not allowed. Key: " .. tostring(key)) end,
+    __pairs = function()
+      return function(_, key)
+        local nextKey, value = next(object, key)
+        if value ~= nil then return nextKey, readOnly(value) end
+      end, nil, nil
+    end,
+    __ipairs = function()
+      return function(_, index)
+        index = index + 1
+        local value = object[index]
+        if value ~= nil then return index, readOnly(value) end
+      end, nil, 0
+    end,
   })
 end
 return function(module, second)

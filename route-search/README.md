@@ -97,8 +97,13 @@ when it was entered, in case an earlier or later candidate failed.
 - At `afterInit`, route-search checks that the call still goes to its stub. If a module loaded
   later redirected it again, an error in the log names the policies affected.
 
-`routes:policies()` lists the enabled policies in order (`id`, `order`, `entry`, `next`). Through the
-framework's proxy, iterate it with `ipairs`; `#` does not see its length.
+`routes:policies()` lists the enabled policies in order (`id`, `order`, `entry`, `next`).
+
+Other modules reach route-search through the framework's module proxy. In UCP 3.0.7 that proxy stops the
+launch when a method returns a table and the module lists no proxy options. route-search's `init.lua`
+therefore returns `{ proxy = { ignored = { "addPolicy", "policies" } } }`. Both methods return plain
+tables built fresh for each call, so `#`, `ipairs` and field access all work. A new method that returns a
+table must be added to that list. Plugins don't see route-search's API (`public` is empty).
 
 ## Compatibility
 
