@@ -61,15 +61,54 @@ local function callTarget(call)
   return u32(call + 5 + core.readInteger(call + 1))
 end
 
--- The one match of a pattern, or nil and why not.
+-- The executable's section that holds address, read from the PE headers at the image base
+-- where core.scanForAOB starts by default. nil when they don't look like PE headers; the
+-- caller then scans the framework's whole default range.
+local IMAGE_BASE = 0x400000
+local function sectionOf(address)
+  if core.readByte(IMAGE_BASE) & 0xFF ~= 0x4D or core.readByte(IMAGE_BASE + 1) & 0xFF ~= 0x5A then
+    return nil
+  end
+  local header = u32(core.readInteger(IMAGE_BASE + 0x3C))
+  if header < 0x40 or header > 0x1000 then return nil end
+  local pe = IMAGE_BASE + header
+  if u32(core.readInteger(pe)) ~= 0x00004550 then return nil end
+  local sections = core.readInteger(pe + 6) & 0xFFFF
+  local optional = core.readInteger(pe + 0x14) & 0xFFFF
+  if sections < 1 or sections > 96 then return nil end
+  for index = 0, sections - 1 do
+    local entry = pe + 0x18 + optional + index * 40
+    local size, start = u32(core.readInteger(entry + 8)), u32(core.readInteger(entry + 12))
+    local low = IMAGE_BASE + start
+    if address >= low and address < low + size then
+      return low, low + size
+    end
+  end
+  return nil
+end
+
+-- The one match of a pattern, or nil and why not. Uniqueness is proven inside the code
+-- section that holds the match (a few MB), not the whole address space with every heap:
+-- copies of these bytes elsewhere are not game code.
 local function unique(pattern, purpose)
   local ok, first = pcall(core.AOBScan, pattern)
   if not ok or not found(first) then
     return nil, string.format("%s was not found; this executable is not supported", purpose)
   end
-  local earliest = core.scanForAOB(pattern)
+  local low, high = sectionOf(first)
+  local earliest, again
+  if low then
+    earliest = core.scanForAOB(pattern, low, high)
+  else
+    earliest = core.scanForAOB(pattern)
+  end
   if found(earliest) then first = earliest end
-  if found(core.scanForAOB(pattern, first + 1)) then
+  if low then
+    again = core.scanForAOB(pattern, first + 1, high)
+  else
+    again = core.scanForAOB(pattern, first + 1)
+  end
+  if found(again) then
     return nil, string.format("%s matches more than once; refusing to guess", purpose)
   end
   return first

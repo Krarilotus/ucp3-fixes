@@ -126,6 +126,7 @@ class RouteSearch:
     def __init__(self, space, hooks=True):
         self.space = space
         self.scans, self.code_writes, self.data_writes, self.allocations = [], [], [], []
+        self.scan_ranges = []
         self.logs, self.after_init = [], []
         lua = self.lua = LuaRuntime(unpack_returned_tuples=True)
         g = lua.globals()
@@ -165,8 +166,11 @@ class RouteSearch:
 
     def scan_for_aob(self, pattern, start=None, stop=None):
         self.scans.append(('scanForAOB', pattern, start))
+        self.scan_ranges.append((start, stop))
         low = self.space.base if start is None else int(start)
-        return next((hit for hit in self.find_all(pattern) if hit >= low), None)
+        high = None if stop is None else int(stop)
+        return next((hit for hit in self.find_all(pattern)
+                     if hit >= low and (high is None or hit < high)), None)
 
     def write_code(self, address, values):
         data = bytes(int(values[i]) & 0xFF for i in range(1, len(values) + 1))
