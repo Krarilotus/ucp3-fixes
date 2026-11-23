@@ -27,7 +27,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Worker Delivery Fix](docs/worker-delivery.md) | Lets workers deliver to reachable granaries and armories when the keep route is blocked, and prevents AI from removing otherwise valid stores for that reason. Stockpiles use a different native check. In-game acceptance is pending. |
 | [Gatehouse Capture Fix](docs/gatehouse-capture.md) | Counts living troops, but not dying troops, for gatehouse capture and defense. In-game acceptance is pending. |
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
-| [Build Over Workers](build-over-workers/) | Monsterfish's module, merged under GPL-3.0: place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Off by default. Writes no save data. |
+| [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 
 The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
 descriptions, not copies of the fixes. Its six dependencies still own their
@@ -64,10 +64,6 @@ for the hop farm fix, or **Bugfixes** for Fixed Engineers, Worker Delivery Fix, 
 requires restarting the game. Every fix is off by default, so selecting a module
 alone keeps the game's behaviour until you switch its fix on; the AIV module's
 additional troop controls are opt-in too. The modules are not selected by default.
-
-Build Over Workers is by Monsterfish, relicensed by the author under GPL-3.0 for
-inclusion here (consent relayed by Krarilotus on 2026-11-22); its x86 emulator
-bench is a local tool documented in its [README](build-over-workers/README.md).
 
 Each module uses `core` and therefore has type `module`, not `plugin`. Their
 `UCP2Switch` controls follow the established AI or Bugfixes categories.

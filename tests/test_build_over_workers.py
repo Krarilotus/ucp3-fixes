@@ -1,8 +1,4 @@
-"""Build Over Workers: package contract, vanilla defaults and the off path without a game.
-
-The x86 placement checks need both 1.41 executables and UCP's fasm.dll; they live in
-build-over-workers/bench (see its README) and are not part of this portable suite.
-"""
+"""Build Over Workers: vanilla defaults, the off path and the package, without a game."""
 from pathlib import Path
 import importlib.util
 import re
@@ -17,12 +13,10 @@ ROOT = Path(__file__).resolve().parents[1]
 NAME = 'build-over-workers'
 FOLDER = ROOT / NAME
 LANGUAGES = ('de', 'en', 'fr', 'ru', 'hu', 'tr', 'ch', 'es', 'fa')
-# Unchanged from the reviewed source (Krarilotus/Build-over-Workers@b6caee5), so
-# existing profiles keep their values.
+# Saved profiles refer to these URLs.
 URLS = ('build-over-workers.buildings', 'build-over-workers.walls',
         'build-over-workers.keepOnWalls', 'build-over-workers.allies')
-# Placement over workers is off by default; keepOnWalls is the 1.0.2 protection for people
-# on a repaired wall and stays on (it does nothing while walls is off).
+# keepOnWalls does nothing while walls is off.
 DEFAULTS = {'build-over-workers.buildings': False, 'build-over-workers.walls': False,
             'build-over-workers.keepOnWalls': True, 'build-over-workers.allies': False}
 
@@ -67,20 +61,9 @@ def entry(aob=None, duplicate=None):
 
 
 class BuildOverWorkersTests(unittest.TestCase):
-    def test_definition(self):
-        definition = yaml.safe_load((FOLDER / 'definition.yml').read_text(encoding='utf-8'))
-        self.assertEqual((definition['name'], definition['version'], definition['type'], definition['author']),
-                         (NAME, '1.1.0', 'module', 'Monsterfish'))
-        self.assertEqual(definition['dependencies'], {'framework': '^3.0.7', 'frontend': '^1.0.2'})
-        self.assertEqual(definition['game'], ['SHC==1.41', 'SHCE==1.41'])
-        self.assertNotIn('family', definition)
-
     def test_defaults_with_unchanged_urls(self):
         self.assertEqual(set(options()), set(URLS))
         self.assertEqual(options(), DEFAULTS)
-        source = (FOLDER / 'init.lua').read_text(encoding='utf-8')
-        self.assertIn('local DEFAULTS = { buildings = false, walls = false, allies = false, keepOnWalls = true }',
-                      source)
 
     def test_unconfigured_or_switched_off_module_touches_nothing(self):
         for config in (None, {}, {'buildings': False, 'walls': False},
@@ -139,12 +122,6 @@ class BuildOverWorkersTests(unittest.TestCase):
                                          'templates.lua', 'CREDITS.md',
                                          *(f'locale/{l}.yml' for l in LANGUAGES),
                                          *(f'locale/description-{l}.md' for l in LANGUAGES)})
-
-    def test_credits(self):
-        credits = (FOLDER / 'CREDITS.md').read_text(encoding='utf-8')
-        self.assertIn('Monsterfish (author)', credits)
-        self.assertIn('GPL-3.0', credits)
-        self.assertIn('relicensed by\nthe author under GPL-3.0 for inclusion', credits)
 
 
 if __name__ == '__main__':

@@ -2,4 +2,3 @@ __pycache__/
 *.pyc
 .venv/
 local-packages/
-build-over-workers/bench/fasm_cache/
