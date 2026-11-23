@@ -427,7 +427,7 @@ class PackageTests(unittest.TestCase):
                 for entry in archive.infolist():
                     if not entry.is_dir():
                         self.assertEqual(archive.read(entry), (MODULE / entry.filename).read_bytes())
-        self.assertIn('GNU GENERAL PUBLIC LICENSE', (MODULE / 'LICENSE').read_text(encoding='utf-8'))
+        self.assertTrue((MODULE / 'LICENSE').read_text(encoding='utf-8').startswith('MIT License'))
 
 
 if __name__ == '__main__':

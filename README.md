@@ -32,7 +32,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 and runs the route policies of other modules in a fixed order. Smarter Pathing's assassin
 shortcut and Gatehouse Fixes' gate route rules use it, so both can be on together.
 Installed alone it changes nothing. It has no settings and is not part of the plugin; the
-modules that need it depend on it. Its README documents the contract. License: GPL-3.0.
+modules that need it depend on it. Its README documents the contract. License: MIT.
 
 ## UCP3 Fixes plugin
 

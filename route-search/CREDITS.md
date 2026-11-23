@@ -10,5 +10,5 @@ route-search; their policies stay in their own repositories.
 Stronghold Crusader and its original game assets/code: Firefly Studios.
 UCP framework and reused subsystem APIs: the Unofficial Crusader Patch contributors.
 
-route-search is licensed under the GNU General Public License v3.0 (see LICENSE).
+route-search is licensed under the MIT License (see LICENSE).
 These credits do not change any other module's license or grant additional rights.
