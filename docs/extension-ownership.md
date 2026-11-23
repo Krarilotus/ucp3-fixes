@@ -10,8 +10,8 @@ The 0.1.4 integration candidate selects Gatehouse Fixes, Fixed Engineers and AI
 Hop Farm Counting through their existing modules. Gatehouse Fixes uses the external
 `smarter-gatehouses: ^1.0.4` dependency. It remains a test candidate pending
 upstream review and composition acceptance; no external native code is copied.
-UCP3 Fixes 0.2.0 (a plugin) no longer depends on Gatehouse Fixes: it has no license
-yet and is not in the public Store. It can return in a later version once licensed.
+UCP3 Fixes 0.2.0 (a plugin) does not depend on Gatehouse Fixes, which has no license
+yet and is not in the public Store.
 
 ## Where the code belongs
 
@@ -119,8 +119,7 @@ but the keep can't reach it) still removes the building. Worker Delivery Fix onl
 reads that branch: it accepts the original `jne` or Legacy's `jmp` and refuses
 anything else. Its store query, in the keep check itself, turns result 2 into 1 for
 granaries and armories with a valid entrance, so the two changes add up in either
-load order. Worker Delivery 0.1.2 and the first 0.2.0 candidate required the
-original `jne` and stopped the game at startup next to ai_access.
+load order.
 
 Smarter Gatehouses still needs native binding ambiguity checks, complete preflight
 for its optional stairs hooks, safe unload ownership, bounded gate/link restoration

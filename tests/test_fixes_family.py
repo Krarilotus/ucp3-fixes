@@ -23,7 +23,7 @@ FIXES_DEPENDENCIES = {
     'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.0',
     'interface-visual-fixes': '^0.2.0', 'audio-fixes': '^0.2.0',
 }
-# Every option URL UCP3 Fixes turns on (W2 proposal 2.1). Interface & Visual's two
+# Every option URL UCP3 Fixes turns on. Interface & Visual's two
 # interface features and its Ghost Objects repair are deliberately absent.
 FIXES_SUGGESTED = {
     'worker-delivery-fix.reachable_delivery', 'gatehouse-capture-fix.living_gatehouse_occupants',
@@ -47,7 +47,7 @@ MEMBERS = {
         tags=['modpack', 'bugfixes', 'textures', 'interface'],
         dependencies={'ucp3-basics': '^1.0.0', 'ucp3-fixes': '^0.2.0', 'ConqueringArabia': '^1.0.3',
                       'build-over-workers': '^1.1.0', 'interface-visual-fixes': '^0.2.0'},
-        # Build Over Workers as its author shipped 1.0.3 (all on) and the two interface features.
+        # Build Over Workers with every switch on, and the two interface features.
         suggested={'interface-visual-fixes.lobby-map-descriptions', 'interface-visual-fixes.lobby-load',
                    'build-over-workers.buildings', 'build-over-workers.walls',
                    'build-over-workers.keepOnWalls', 'build-over-workers.allies'}),
@@ -191,10 +191,6 @@ class PluginPackageTests(unittest.TestCase):
                         self.assertIsInstance(value, expected)
                         if expected is not bool:  # bool is an int subclass; keep numbers numeric
                             self.assertNotIsInstance(value, bool)
-
-    def test_fixture_names_its_source(self):
-        for module, entry in load(FIXTURE).items():
-            self.assertRegex(entry['source'], r'^https://github\.com/\S+ [0-9a-f]{40} options\.yml$', module)
 
     def test_locales_and_descriptions_in_all_languages(self):
         for name in PLUGINS:

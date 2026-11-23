@@ -30,68 +30,41 @@ to Improved Tunnelers and starting troops to AI Swapper.
 
 ## UCP3 Fixes plugin
 
-[UCP3 Fixes](ucp3-fixes/) 0.2.0 is a plugin: a `definition.yml` with dependencies,
-a `config.yml` with suggested values, descriptions and credits; no code. It
-selects the six fix modules above plus
+[UCP3 Fixes](ucp3-fixes/) is a plugin: dependencies and suggested values, no code.
+It selects the six fix modules above plus
 [Interface and Visual Fixes](https://github.com/Krarilotus/extension-interface-visual-fixes)
-0.2.0 and [Audio Fixes](https://github.com/Krarilotus/extension-audio-fixes) 0.2.0,
-and suggests their bug fixes on:
-
-| Dependency | Version | Suggested on |
-| --- | --- | --- |
-| worker-delivery-fix | ^0.2.0 | `reachable_delivery` |
-| gatehouse-capture-fix | ^0.2.0 | `living_gatehouse_occupants` |
-| hunter-targeting-fix | ^0.2.0 | `hunter_targeting` |
-| fixed-engineers | ^0.3.0 | `siege_target_stop`, `crew_lifecycle` |
-| hopfarm-limit-fix | ^0.2.0 | `enabled` |
-| aiv-troops-behaviour | ^0.3.0 | `enabled` (restored AIV positions; troop settings stay native) |
-| interface-visual-fixes | ^0.2.0 | `clear-unique-building-preview`, `building-preview-during-camera-movement`, `distinct-dead-tree-sprites`, `tower-door-height`, `cliff-texture-direction` |
-| audio-fixes | ^0.2.0 | `startup-sfx-volume`, `video-fx-volume`, `positional-audio` |
-
-Interface and Visual Fixes' two interface features (lobby map descriptions, Load
-in the skirmish lobby) and its Ghost Objects repair are not set by this plugin.
-Suggested values stay editable in Customizations. The plugin has no family
-membership and itself declares frontend `^1.0.2`; its dependency set needs GUI
-1.0.16 or later, because AIV Troop Behaviour 0.3.0 requires frontend 1.0.16.
-Gatehouse Fixes (`smarter-gatehouses`) is no longer a dependency: it is not in
-the public Store and has no license yet. Bundle 0.1.x was a module and keeps
-selecting the earlier, default-on module releases through its `^0.1.x` ranges.
+and [Audio Fixes](https://github.com/Krarilotus/extension-audio-fixes) and suggests
+their bug fixes on. Interface and Visual Fixes' two interface features and its Ghost
+Objects repair are left as they are. Suggested values stay editable in Customizations.
+It needs launcher 1.0.16 or later, because AIV Troop Behaviour 0.3.0 does. Gatehouse
+Fixes (`smarter-gatehouses`) is not a dependency: it has no license yet and is not in
+the public Store.
 
 ## UCP3 setup family
 
-Three plugins form the `ucp3` family. Each is a top-level folder, as the Store
-recipe's `location` requires. All are version 1.0.0, need frontend
-`>=1.0.17 <2.0.0` (family support) and framework `^3.0.7`.
+Three plugins form the `ucp3` family, each in a top-level folder as the Store recipe's
+`location` requires. They need launcher 1.0.17 or later (family support); 1.0.16 lists
+them in the Store but rejects them at install.
 
-| Package | Family label | Depends on | Settings |
-| --- | --- | --- | --- |
-| [ucp3-basics](ucp3-basics/) (root) | Basics | `ucp2-legacy-defaults` ^2.15.1, `graphicsApiReplacer` ^1.3.0 | none |
-| [ucp3-basics-fixes](ucp3-basics-fixes/) | Basics + Fixes | `ucp3-basics` ^1.0.0, `ucp3-fixes` ^0.2.0 | none (UCP3 Fixes brings its own) |
-| [ucp3-recommended](ucp3-recommended/) | Recommended | `ucp3-basics` ^1.0.0, `ucp3-fixes` ^0.2.0, `ConqueringArabia` ^1.0.3, `build-over-workers` ^1.1.0, `interface-visual-fixes` ^0.2.0 | Interface and Visual Fixes' lobby map descriptions and Load in skirmish lobby; Build Over Workers fully on, as its author shipped 1.0.3 |
+| Package | Family label | Selects |
+| --- | --- | --- |
+| [ucp3-basics](ucp3-basics/) (root) | Basics | UCP2 Legacy Defaults and Graphics API Replacer; no settings |
+| [ucp3-basics-fixes](ucp3-basics-fixes/) | Basics + Fixes | UCP3 Basics and UCP3 Fixes |
+| [ucp3-recommended](ucp3-recommended/) | Recommended | UCP3 Basics, UCP3 Fixes, ConqueringArabia, Build Over Workers (all switches on) and Interface and Visual Fixes' lobby map descriptions and Load in the skirmish lobby |
 
-UCP3 Basics selects the same two packages as the previous first-install default
-(`ucp2-legacy-defaults` and `graphicsApiReplacer`). Their dependencies resolve to
-compatible Store versions, so they need not be byte-identical to an older install
-(today `ucp2-legacy` 2.15.2, which also brings Map Extensions 1.0.0 to every member).
-The family members need launcher 1.0.17; launcher 1.0.16 lists them in the Store
-but rejects them at install. Basics has no configuration
-demands, so it never claims the family slot when another member depends on it.
-The members differ only in modules that write no save data (the fixes, Interface
-and Visual Fixes, Audio Fixes, Build Over Workers, ConqueringArabia's textures),
-so switching members is meant to keep saves loadable (the in-game check is
-still pending). None of them adds snow
-textures or gameplay rebalancing; Build Over Workers' placement rule in
-Recommended is the only rule change and can be switched off. Family and tag
-labels use the flat `family.ucp3`, `family.ucp3.configuration` and `tags.<id>`
-keys in all nine locale files.
+Basics has no configuration demands, so it never claims the family slot when another
+member depends on it. The members differ only in modules that write no save data, so
+switching members is meant to keep saves loadable (the in-game check is still
+pending). None of them adds snow textures or gameplay rebalancing; Build Over
+Workers' placement rule in Recommended is the only rule change and can be switched
+off.
 
 The [extension ownership review](docs/extension-ownership.md) maps related
 gatehouse, tunneler, stable, building, projectile, texture and AI work to its
-existing owner. Improved Tunnelers remains its own module. Gatehouse Fixes stays
-its own module too; its hooks and controls are not copied into this repository,
-and UCP3 Fixes no longer selects it until it is licensed and published. Stables
-work remains outside UCP3 Fixes until its complete implementation is published
-and reviewed.
+existing owner. Improved Tunnelers remains its own module. Gatehouse Fixes is its
+own module too; its hooks and controls are not copied into this repository. Stables
+work remains outside UCP3 Fixes until its complete implementation is published and
+reviewed.
 
 ## Installation and configuration
 

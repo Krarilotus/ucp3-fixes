@@ -1,6 +1,6 @@
 # UCP3 Recommended: the two interface features of Interface and Visual Fixes,
-# and Build Over Workers as its author shipped it (every switch on). The bug
-# fixes come from UCP3 Fixes. Suggested values stay editable in Customizations.
+# and Build Over Workers with every switch on. The bug fixes come from UCP3
+# Fixes. Suggested values stay editable in Customizations.
 meta:
   version: 1.0.0
 config-sparse:
