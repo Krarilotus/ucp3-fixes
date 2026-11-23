@@ -1,10 +1,9 @@
 # ucp3-fixes
 
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as seven
-independently selectable UCP3 modules. An optional UCP3 Fixes bundle selects
-Worker Delivery, Gatehouse Capture, Hunter Targeting, Fixed Engineers, AI Hop Farm
-Counting and the external Gatehouse Fixes module together. This expanded bundle is an integration test candidate,
-pending Gatehouse Fixes' upstream review and composition acceptance. The hop farm
+independently selectable UCP3 modules, plus four configuration plugins: UCP3
+Fixes, which turns the fixes on, and the UCP3 setup family (UCP3 Basics, UCP3
+Basics + Fixes, UCP3 Recommended). Every module is off by default. The hop farm
 fix was created by Daniel Fleger (Samurai, Discord: D. Daniel). AIV Troop
 Behaviour builds on his original module and is mainly authored by Krarilotus. Fixed
 Engineers is maintained by UCP contributors. Each packaged module includes
@@ -29,25 +28,42 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
 | [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 
-The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
-descriptions, not copies of the fixes. Its six dependencies still own their
-native code and independent settings. Gatehouse Fixes' corrections default ON
-under Bugfixes; its optional stairs rules default OFF under Balance Changes.
-The original package ID `smarter-gatehouses` is preserved. UCP 3.0.7 shows the packages
-separately. Compatible fixes should remain independently selectable; the
-[family-metadata correction](https://github.com/Krarilotus/ucp3-fixes/pull/9)
-keeps them outside configuration families.
-Selecting the bundle activates all six with its recommended setup: every
-correction ON, optional stairs rules OFF. The bundle is the root of the
-`ucp3-fixes` family, ready for alternative configurations later. Selecting a
-member alone activates only that fix.
+## UCP3 Fixes plugin
+
+[UCP3 Fixes](ucp3-fixes/) is a plugin: dependencies and suggested values, no code.
+It selects the six fix modules above plus
+[Interface and Visual Fixes](https://github.com/Krarilotus/extension-interface-visual-fixes)
+and [Audio Fixes](https://github.com/Krarilotus/extension-audio-fixes) and suggests
+their bug fixes on. Interface and Visual Fixes' two interface features and its Ghost
+Objects repair are left as they are. Suggested values stay editable in Customizations.
+It needs launcher 1.0.16 or later, because AIV Troop Behaviour 0.3.0 does. Gatehouse
+Fixes (`smarter-gatehouses`) is not a dependency: it has no license yet and is not in
+the public Store.
+
+## UCP3 setup family
+
+Three plugins form the `ucp3` family, each in a top-level folder as the Store recipe's
+`location` requires. They need launcher 1.0.17 or later (family support); 1.0.16 lists
+them in the Store but rejects them at install.
+
+| Package | Family label | Selects |
+| --- | --- | --- |
+| [ucp3-basics](ucp3-basics/) (root) | Basics | UCP2 Legacy Defaults and Graphics API Replacer; no settings |
+| [ucp3-basics-fixes](ucp3-basics-fixes/) | Basics + Fixes | UCP3 Basics and UCP3 Fixes |
+| [ucp3-recommended](ucp3-recommended/) | Recommended | UCP3 Basics, UCP3 Fixes, ConqueringArabia, Build Over Workers (all switches on) and Interface and Visual Fixes' lobby map descriptions and Load in the skirmish lobby |
+
+Basics has no configuration demands, so it never claims the family slot when another
+member depends on it. The members differ only in modules that write no save data: a
+save made with one member loads and keeps playing under the others (tested on Crusader
+and Extreme 1.41). None of them adds snow textures or gameplay rebalancing;
+Recommended's Build Over Workers placement can be switched off.
 
 The [extension ownership review](docs/extension-ownership.md) maps related
 gatehouse, tunneler, stable, building, projectile, texture and AI work to its
-existing owner. Improved Tunnelers remains its own module. Gatehouse Fixes is
-selected through its existing package dependency; its hooks and controls are
-not copied into this repository. Stables work remains outside the bundle until
-its complete implementation is published and reviewed.
+existing owner. Improved Tunnelers remains its own module. Gatehouse Fixes is its
+own module too; its hooks and controls are not copied into this repository. Stables
+work remains outside UCP3 Fixes until its complete implementation is published and
+reviewed.
 
 ## Installation and configuration
 
@@ -57,8 +73,9 @@ zipping that module folder's contents. `definition.yml` must be at the ZIP root.
 GitHub's repository-level **Download ZIP** is a source archive, not an installable
 module package. There may be no published releases yet.
 
-Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages require
-the launch option **Disable Security**. Select the module in Content, then use its
+Place each module ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local modules require
+the launch option **Disable Security**. Plugins (UCP3 Fixes and the UCP3 family) go to
+`ucp/plugins/<name>-<version>.zip`, which the launcher unpacks, and need no signature. Select the module in Content, then use its
 settings under **AI → AIV Troop Behaviour** for troop controls, **AI → Fixes**
 for the hop farm fix, or **Bugfixes** for Fixed Engineers, Worker Delivery Fix, Gatehouse Capture Fix and Hunter Targeting Fix. Changing a switch
 requires restarting the game. Every fix is off by default, so selecting a module
@@ -84,9 +101,11 @@ these modules do not silently report success with a missing fix.
 
 ## Store integration
 
-The actual store recipe is named `recipe.yml`. Use one entry per module with a
-string `contents.source.location` pointing to its subfolder, for example
-`location: hopfarm-limit-fix`; `location.root` is not supported by the 3.0.7 builder.
+The actual store recipe is named `recipe.yml`. Use one entry per module or plugin
+with a string `contents.source.location` pointing to its top-level subfolder, for
+example `location: hopfarm-limit-fix` or `location: ucp3-recommended`;
+`location.root` is not supported by the 3.0.7 builder. Plugins are packaged as
+their whole folder (no `files.yml`) and need no signature.
 Pin `github-sha` to the reviewed commit and match the version in `definition.yml`.
 The 3.0.7 store recipe lists all nine supported languages. Installed
 Customizations load their translations from each package.
@@ -110,5 +129,5 @@ suite with `python -m unittest discover -s tests -v` after installing
 `tests/requirements.txt`. No game binaries are distributed with the tests.
 
 [Package authorship, translated tags and family boundaries](docs/package-metadata.md)
-are documented separately. Bundle 0.1.3 refreshes metadata and credits without
-changing simulation code or customization values.
+are documented separately. `tools/build_modules.py` also packages the four
+plugin folders.

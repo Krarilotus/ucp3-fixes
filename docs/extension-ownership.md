@@ -10,13 +10,15 @@ The 0.1.4 integration candidate selects Gatehouse Fixes, Fixed Engineers and AI
 Hop Farm Counting through their existing modules. Gatehouse Fixes uses the external
 `smarter-gatehouses: ^1.0.4` dependency. It remains a test candidate pending
 upstream review and composition acceptance; no external native code is copied.
+UCP3 Fixes 0.2.0 (a plugin) does not depend on Gatehouse Fixes, which has no license
+yet and is not in the public Store.
 
 ## Where the code belongs
 
 | Change | Implementation owner | Selection and integration |
 | --- | --- | --- |
-| Dead troops affecting gate capture/defense | `gatehouse-capture-fix` in this repository | Existing default-on Fixes bundle member |
-| Gate closing, enemy-gate routes, optional gate stairs | [Gatehouse Fixes](https://github.com/Monsterfisch/SmarterGatehouses), package ID `smarter-gatehouses` | Existing module dependency in the 0.1.4 test candidate; each switch remains configurable and stairs stay opt-in |
+| Dead troops affecting gate capture/defense | `gatehouse-capture-fix` in this repository | Fixes member; turned on by the UCP3 Fixes plugin |
+| Gate closing, enemy-gate routes, optional gate stairs | [Gatehouse Fixes](https://github.com/Monsterfisch/SmarterGatehouses), package ID `smarter-gatehouses` | Module dependency in the 0.1.4 test candidate only, not in UCP3 Fixes 0.2.0; each switch remains configurable and stairs stay opt-in |
 | Tunneler digging, target selection, collapse, terrain cleanup and raid participation | [Improved Tunnelers](https://github.com/Monsterfisch/ImprovedTunnelers) | Keep its own module and test package; no mandatory Fixes dependency |
 | AI starting troop counts and initial acquisition/assignment | [AI Swapper](https://github.com/UnofficialCrusaderPatch/extension-aiSwapper) | AI Swapper owns the native initialization consumer, including tunnelers |
 | Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module selected by the unreleased bundle; Store acceptance remains pending |
@@ -108,6 +110,11 @@ reads the range operand in place, so its centering calculation can use that sett
 without copying it. This source inspection is not a load-order/gameplay test.
 Ordinary route modifications must also compose with Worker Delivery's native
 path calls and with other consumers such as Improved Tunnelers.
+
+Legacy `port/ai_access.lua` ("Disable demolishing of inaccessible buildings", on
+in ucp2-legacy-defaults and therefore in every UCP3 setup) owns the branch after
+the AI heatmap's accessibility call. Worker Delivery Fix only reads that branch;
+[its documentation](worker-delivery.md) explains how the two changes add up.
 
 Smarter Gatehouses still needs native binding ambiguity checks, complete preflight
 for its optional stairs hooks, safe unload ownership, bounded gate/link restoration

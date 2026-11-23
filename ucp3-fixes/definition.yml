@@ -1,14 +1,11 @@
 name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
-version: 0.1.4
-type: module
+version: 0.2.0
+type: plugin
 game:
 - SHC==1.41
 - SHCE==1.41
-family:
-- name: ucp3-fixes
-  root: true
 tags:
 - bugfixes
 meta:
@@ -16,9 +13,11 @@ meta:
 dependencies:
   framework: ^3.0.7
   frontend: ^1.0.2
-  worker-delivery-fix: ^0.1.2
-  gatehouse-capture-fix: ^0.1.2
-  hunter-targeting-fix: ^0.1.2
-  smarter-gatehouses: ^1.0.4
-  fixed-engineers: ^0.2.2
-  hopfarm-limit-fix: ^0.1.4
+  worker-delivery-fix: ^0.2.0
+  gatehouse-capture-fix: ^0.2.0
+  hunter-targeting-fix: ^0.2.0
+  fixed-engineers: ^0.3.0
+  hopfarm-limit-fix: ^0.2.0
+  aiv-troops-behaviour: ^0.3.0
+  interface-visual-fixes: ^0.2.0
+  audio-fixes: ^0.2.0
