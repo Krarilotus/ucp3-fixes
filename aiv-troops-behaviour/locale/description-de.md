@@ -4,8 +4,4 @@ Stellt fehlende AIV-Positionen für Pikeniere und beide Schwertkämpfertypen wie
 
 Pro Truppentyp höchstens eine Option je Paar wählen. Wache: AIV-Positionen beziehen; Graben: Starttruppen dem Ausheben von Burggräben zuweisen. Halten: am Verteidigungsplatz bleiben; Patrouille: gemäß den AIC-Patrouilleneinstellungen der KI zwischen Verteidigungsplätzen wechseln. Zurücksetzen stellt das Spielverhalten wieder her.
 
-Für einzelne KIs: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) und `AIVTroops_Movement_<Troop>` (`"hold"` / `"patrol"`). Ohne Truppensuffix gilt die Einstellung für die ganze KI; die gemeinsame Rolle erlaubt nur `"defend"`. Aktivierte AIC-Überschreibungen haben Vorrang; fehlende Felder erben.
-
-Beispiel: `AIVTroops_InitialRole_Slave: "dig"` weist Sklaven dem Graben zu. Truppennamen und Details stehen in der [AIC-Feldreferenz](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour).
-
-Truppeneinstellungen sind anfangs deaktiviert. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.
+Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.
