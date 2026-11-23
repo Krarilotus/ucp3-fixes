@@ -6,7 +6,7 @@ GPL-3.0 for inclusion in this repository; consent relayed by Krarilotus on
 2026-11-22. Source: Monsterfisch/Build-over-Workers, merged from
 Krarilotus/Build-over-Workers@b6caee5.
 
-License: GNU General Public License, version 3 (GPL-3.0).
+License: GNU General Public License, version 3 (GPL-3.0); see LICENSE.
 
 UCP packaging and vanilla defaults: Krarilotus / UCP contributors.
 

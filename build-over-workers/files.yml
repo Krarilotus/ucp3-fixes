@@ -8,3 +8,4 @@ files:
 - src: templates.lua
 - src: locale
 - src: CREDITS.md
+- src: LICENSE

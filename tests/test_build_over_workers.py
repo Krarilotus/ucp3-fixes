@@ -119,7 +119,7 @@ class BuildOverWorkersTests(unittest.TestCase):
                 self.assertEqual(Path(archive.filename).name, f'{NAME}-1.1.0.zip')
                 files = {n for n in archive.namelist() if not n.endswith('/')}
                 self.assertEqual(files, {'definition.yml', 'description.md', 'options.yml', 'init.lua',
-                                         'templates.lua', 'CREDITS.md',
+                                         'templates.lua', 'CREDITS.md', 'LICENSE',
                                          *(f'locale/{l}.yml' for l in LANGUAGES),
                                          *(f'locale/description-{l}.md' for l in LANGUAGES)})
 
