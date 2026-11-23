@@ -11,4 +11,4 @@ Active des correctifs vérifiés pour Stronghold Crusader et Crusader Extreme 1.
 - correctifs d'interface et visuels : les aperçus de bâtiments uniques disparaissent après le placement, les aperçus de bâtiments restent visibles lors du défilement, les arbres morts affichent leur stade debout, les portes de tours s'alignent avec les murs adjacents et les textures de falaises restent continues après rotation ;
 - correctifs audio : le volume des effets enregistré s'applique dès le démarrage, les vidéos suivent le volume des effets et la mise en sourdine, et les sons proches ne se coupent plus en haute résolution ou en vue dézoomée.
 
-Les correctifs se trouvent dans leurs propres modules, désactivés par défaut ; ce plugin les sélectionne et active les correctifs. Chaque correctif peut toujours être désactivé dans Personnalisations. Il ne modifie ni les textures ni l'équilibrage du jeu.
+Chaque correctif peut toujours être désactivé dans Personnalisations. Il ne modifie ni les textures ni l'équilibrage du jeu.

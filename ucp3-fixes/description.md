@@ -11,4 +11,4 @@ Turns on reviewed bug fixes for Stronghold Crusader and Crusader Extreme 1.41:
 - interface and visual fixes: unique-building previews clear after placement, building previews stay visible while scrolling, dead trees show their standing stage, tower doors line up with connecting walls, and cliff textures continue after rotation;
 - audio fixes: the saved FX volume applies from the start, videos follow the FX volume and mute setting, and nearby sounds no longer cut out at large resolutions or when zoomed out.
 
-The fixes live in their own modules, which are off by default; this plugin selects them and switches the fixes on. Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.
+Each fix can still be switched off in Customizations. It does not change textures or gameplay balance.

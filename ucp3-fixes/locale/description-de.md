@@ -11,4 +11,4 @@ Aktiviert geprüfte Fehlerkorrekturen für Stronghold Crusader und Crusader Extr
 - Oberflächen- und Grafikkorrekturen: Vorschauen einzigartiger Gebäude verschwinden nach dem Platzieren, Gebäudevorschauen bleiben beim Scrollen sichtbar, abgestorbene Bäume zeigen ihre stehende Phase, Turmtüren fluchten mit angrenzenden Mauern und Klippentexturen setzen sich nach dem Drehen fort;
 - Audiokorrekturen: Die gespeicherte Effektlautstärke gilt von Beginn an, Videos folgen der Effektlautstärke und Stummschaltung, und nahe Geräusche brechen bei hohen Auflösungen oder herausgezoomter Ansicht nicht mehr ab.
 
-Die Korrekturen befinden sich in eigenen Modulen, die standardmäßig deaktiviert sind; dieses Plugin wählt sie aus und schaltet die Korrekturen ein. Jede Korrektur lässt sich unter Anpassungen wieder ausschalten. Es ändert weder Texturen noch die Spielbalance.
+Jede Korrektur lässt sich unter Anpassungen wieder ausschalten. Es ändert weder Texturen noch die Spielbalance.

@@ -11,4 +11,4 @@ Bekapcsolja a Stronghold Crusader és a Crusader Extreme 1.41 ellenőrzött hiba
 - felületi és vizuális javítások: az egyedi épületek előnézete elhelyezés után eltűnik, az épületek előnézete görgetés közben is látható marad, az elhalt fák az álló állapotukat mutatják, a tornyok ajtajai illeszkednek a csatlakozó falakhoz, és a sziklatextúrák elforgatás után is folytonosak maradnak;
 - hangjavítások: a mentett hangeffekt-hangerő már induláskor érvényesül, a videók követik a hangeffektek hangerejét és némítását, a közeli hangok pedig nem szakadnak meg nagy felbontáson vagy kizoomolva.
 
-A javítások saját moduljaikban találhatók, amelyek alapértelmezés szerint ki vannak kapcsolva; ez a bővítmény kiválasztja őket és bekapcsolja a javításokat. Minden javítás továbbra is kikapcsolható a Testreszabások lapon. Nem módosítja a textúrákat és a játékegyensúlyt.
+Minden javítás továbbra is kikapcsolható a Testreszabások lapon. Nem módosítja a textúrákat és a játékegyensúlyt.

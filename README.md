@@ -53,11 +53,10 @@ them in the Store but rejects them at install.
 | [ucp3-recommended](ucp3-recommended/) | Recommended | UCP3 Basics, UCP3 Fixes, ConqueringArabia, Build Over Workers (all switches on) and Interface and Visual Fixes' lobby map descriptions and Load in the skirmish lobby |
 
 Basics has no configuration demands, so it never claims the family slot when another
-member depends on it. The members differ only in modules that write no save data, so
-switching members is meant to keep saves loadable (the in-game check is still
-pending). None of them adds snow textures or gameplay rebalancing; Build Over
-Workers' placement rule in Recommended is the only rule change and can be switched
-off.
+member depends on it. The members differ only in modules that write no save data: a
+save made with one member loads and keeps playing under the others (tested on Crusader
+and Extreme 1.41). None of them adds snow textures or gameplay rebalancing;
+Recommended's Build Over Workers placement can be switched off.
 
 The [extension ownership review](docs/extension-ownership.md) maps related
 gatehouse, tunneler, stable, building, projectile, texture and AI work to its
