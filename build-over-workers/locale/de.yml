@@ -1,0 +1,12 @@
+buildings: Gebäude über Arbeitern platzieren
+buildings_tooltip: Du kannst Gebäude direkt auf deinen eigenen Arbeitern platzieren. Sie treten auf das nächste freie Feld neben dem neuen Gebäude zur Seite und setzen ihre Arbeit fort.
+walls: Mauern über Arbeitern platzieren
+walls_tooltip: 'Dasselbe für Mauern: Im Weg stehende Arbeiter werden neben die Mauer verschoben, möglichst auf dieselbe Seite, auf der sie standen.'
+keep_on_walls: Reparieren lässt Truppen auf Mauern stehen
+keep_on_walls_tooltip: Truppen und Personen auf einer Mauer oder Treppe bleiben beim Reparieren dieser Mauer stehen.
+allies: Arbeiter Verbündeter gelten als freundlich
+allies_tooltip: Auch über Arbeitern von Verbündeten deines Teams darf gebaut werden.
+balance_changes: Balance-Änderungen
+bugfixes: Fehlerkorrekturen
+tags.behavior: Verhalten
+tags.bugfixes: Fehlerkorrekturen

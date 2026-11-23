@@ -1,0 +1,42 @@
+options:
+- url: build-over-workers.buildings
+  name: build-over-workers-buildings
+  display: UCP2Switch
+  contents:
+    type: boolean
+    value: false
+  header: '{{buildings}}'
+  text: '{{buildings_tooltip}}'
+  category:
+  - '{{bugfixes}}'
+- url: build-over-workers.walls
+  name: build-over-workers-walls
+  display: UCP2Switch
+  contents:
+    type: boolean
+    value: false
+  header: '{{walls}}'
+  text: '{{walls_tooltip}}'
+  category:
+  - '{{bugfixes}}'
+  children:
+  - url: build-over-workers.keepOnWalls
+    name: build-over-workers-keep-on-walls
+    display: UCP2Switch
+    contents:
+      type: boolean
+      value: true
+    header: '{{keep_on_walls}}'
+    text: '{{keep_on_walls_tooltip}}'
+- url: build-over-workers.allies
+  name: build-over-workers-allies
+  display: UCP2Switch
+  contents:
+    type: boolean
+    value: false
+  header: '{{allies}}'
+  text: '{{allies_tooltip}}'
+  category:
+  - '{{balance_changes}}'
+meta:
+  version: 1.0.0

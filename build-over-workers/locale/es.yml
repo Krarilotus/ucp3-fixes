@@ -1,0 +1,12 @@
+buildings: Colocar edificios sobre trabajadores
+buildings_tooltip: Puedes colocar un edificio encima de tus propios trabajadores. Se apartan a la casilla libre más cercana junto al nuevo edificio y siguen con su tarea.
+walls: Colocar muros sobre trabajadores
+walls_tooltip: 'Lo mismo para los muros: los trabajadores que estorben se desplazan junto al muro, si es posible al mismo lado en el que estaban.'
+keep_on_walls: Reparar un muro deja a quienes están encima
+keep_on_walls_tooltip: Las tropas y personas que están sobre un muro o escalera permanecen en su sitio al reparar ese muro.
+allies: Los trabajadores aliados cuentan como amigos
+allies_tooltip: También puedes construir sobre trabajadores de jugadores de tu equipo.
+balance_changes: Cambios de equilibrio
+bugfixes: Correcciones
+tags.behavior: Comportamiento
+tags.bugfixes: Correcciones

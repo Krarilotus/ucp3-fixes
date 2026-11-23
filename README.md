@@ -1,6 +1,6 @@
 # ucp3-fixes
 
-Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as six
+Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as seven
 independently selectable UCP3 modules. An optional UCP3 Fixes bundle selects
 Worker Delivery, Gatehouse Capture, Hunter Targeting, Fixed Engineers, AI Hop Farm
 Counting and the external Gatehouse Fixes module together. This expanded bundle is an integration test candidate,
@@ -27,6 +27,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Worker Delivery Fix](docs/worker-delivery.md) | Lets workers deliver to reachable granaries and armories when the keep route is blocked, and prevents AI from removing otherwise valid stores for that reason. Stockpiles use a different native check. In-game acceptance is pending. |
 | [Gatehouse Capture Fix](docs/gatehouse-capture.md) | Counts living troops, but not dying troops, for gatehouse capture and defense. In-game acceptance is pending. |
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
+| [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 
 The [UCP3 Fixes bundle](ucp3-fixes/) contains dependency metadata and translated
 descriptions, not copies of the fixes. Its six dependencies still own their

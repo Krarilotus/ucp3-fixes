@@ -1,0 +1,12 @@
+buildings: 允许在工人所在位置建造建筑
+buildings_tooltip: 你可以直接将建筑放置在己方工人站立的位置。工人会退到新建筑旁最近的空地并继续工作。
+walls: 允许在工人所在位置建造城墙
+walls_tooltip: 城墙同样适用：挡路的工人会被移到城墙旁，并尽量保留在原本一侧。
+keep_on_walls: 修复城墙时保留墙上人员
+keep_on_walls_tooltip: 修复城墙时，站在城墙或阶梯上的部队与人员会留在原地。
+allies: 盟友工人视为友方
+allies_tooltip: 允许在同队盟友工人的位置上建造。
+balance_changes: 平衡性改动
+bugfixes: 错误修复
+tags.behavior: 行为
+tags.bugfixes: 错误修复
