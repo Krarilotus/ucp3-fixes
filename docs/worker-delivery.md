@@ -71,7 +71,8 @@ ON. Do not use it as a release package yet.
   blockage and no worker disappears unexpectedly.
 - [ ] With an AI player, block the keep route while a granary or armory has a
   valid entrance. Confirm it stays built and reachable workers can deliver.
-  Repeat with an invalid entrance and check native removal still applies.
+  Repeat with an invalid entrance: the game removes it, unless UCP2 Legacy's
+  `ai_access` is on, which keeps buildings without an entrance.
 - [ ] Reopen the keep route, save and reload, and confirm delivery continues.
 - [ ] Repeat with the switch OFF after restarting, then repeat ON in normal
   Crusader and Extreme. Note the game build and active modules.

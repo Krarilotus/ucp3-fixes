@@ -1,4 +1,4 @@
-# Fixed Engineers 0.2.0: focused test candidate
+# Fixed Engineers
 
 This branch replaces the engineer and general equipment corrections from Unit
 Behaviour Fixes. It contains no tunneler patch, recruitment census,
