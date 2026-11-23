@@ -121,14 +121,6 @@ then executes their x86 output in Unicorn. It covers:
 - Definition, option URL, locale-key and package-input consistency, including
   English description fallback equality.
 
-`tests/test_route_search.py` covers route-search: nothing changes until the first
-policy is enabled; missing, ambiguous and already redirected calls are refused
-before any write; order and equal-order refusal; registration only while modules
-are enabled. It also runs the stub the module writes, with test policies, from
-setDestinationForUnit's own instructions in Unicorn. That covers the stack, `ret 8`,
-preserved registers, the unit seen by every policy and a nested search.
-`python tests/check_route_search.py <exe>...` repeats that on licensed executables.
-
 The optional PE audit invokes the Lua patches against memory-mapped copies of
 the supplied binaries, checks signature uniqueness and executable sections,
 reports write addresses, and verifies the source files remain unchanged.
