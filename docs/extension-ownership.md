@@ -113,13 +113,8 @@ path calls and with other consumers such as Improved Tunnelers.
 
 Legacy `port/ai_access.lua` ("Disable demolishing of inaccessible buildings", on
 in ucp2-legacy-defaults and therefore in every UCP3 setup) owns the branch after
-the AI heatmap's accessibility call: it writes `jmp` over the `jne`, which drops the
-removal for result 0 (no entrance tile in any area). Result 2 (an entrance exists,
-but the keep can't reach it) still removes the building. Worker Delivery Fix only
-reads that branch: it accepts the original `jne` or Legacy's `jmp` and refuses
-anything else. Its store query, in the keep check itself, turns result 2 into 1 for
-granaries and armories with a valid entrance, so the two changes add up in either
-load order.
+the AI heatmap's accessibility call. Worker Delivery Fix only reads that branch;
+[its documentation](worker-delivery.md) explains how the two changes add up.
 
 Smarter Gatehouses still needs native binding ambiguity checks, complete preflight
 for its optional stairs hooks, safe unload ownership, bounded gate/link restoration
