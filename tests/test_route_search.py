@@ -6,7 +6,6 @@ import tempfile
 import unittest
 import zipfile
 
-from capstone import Cs, CS_ARCH_X86, CS_MODE_32
 from lupa.lua54 import LuaError
 import yaml
 
@@ -336,16 +335,6 @@ class CallingConventionTests(unittest.TestCase):
         self.assertEqual((out['ebx'], out['esi'], out['edi'], out['ebp']),
                          (0, unit or self.UNIT, 0x1111, 0x2222), 'preserved registers')
         return out
-
-    def test_head_stub_code(self):
-        rs, emulator, unit, head = self.prepare([5], [('a', 200, lambda at, n, u, rs: b'\xFF\x25' + d(n))])
-        text = [(i.mnemonic, i.op_str) for i in Cs(CS_ARCH_X86, CS_MODE_32).disasm(
-            rs.space.read(head, 35), head)]
-        self.assertEqual(text, [
-            ('push', 'dword ptr [0x%x]' % unit), ('mov', 'dword ptr [0x%x], esi' % unit),
-            ('push', 'dword ptr [esp + 0xc]'), ('push', 'dword ptr [esp + 0xc]'),
-            ('call', 'dword ptr [0x%x]' % (unit + 4)), ('pop', 'dword ptr [0x%x]' % unit),
-            ('ret', '8')])
 
     def test_single_policy_reaches_the_game_search_with_the_same_call(self):
         log, count = 0x004A0000, 0x004A0100

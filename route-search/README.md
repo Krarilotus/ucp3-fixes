@@ -7,7 +7,8 @@ route-search changes nothing in the game.
 ## Why it exists
 
 `UnitsState::setDestinationForUnit` asks `PathFindingState::doPathfinding(owner, canClimb)`
-for every unit route through a single call. Smarter Pathing's assassin shortcut and Gatehouse
+for a unit's route through one call (its other search, used when the last argument is not 0,
+is not covered; see below). Smarter Pathing's assassin shortcut and Gatehouse
 Fixes' route rules both need that call:
 
 - The shortcut runs two candidate searches (ground, then climbing) and keeps the better one.
