@@ -53,68 +53,21 @@ local function found(address)
   return address ~= nil and address ~= 0
 end
 
--- UCP 3.0.7 has no unique-match or code-section scan API (owner gap: a framework
--- core.scanForAOBUnique with code-section bounds), so this is the module's one local helper.
--- The executable's section that holds address, read from the PE headers at the image base
--- where core.scanForAOB starts by default. nil when they don't look like PE headers; the
--- caller then scans the framework's whole default range.
-local IMAGE_BASE = 0x400000
-local function sectionOf(address)
-  if core.readByte(IMAGE_BASE) ~= 0x4D or core.readByte(IMAGE_BASE + 1) ~= 0x5A then
-    return nil
-  end
-  local header = core.readInteger(IMAGE_BASE + 0x3C)
-  if header < 0x40 or header > 0x1000 then return nil end
-  local pe = IMAGE_BASE + header
-  if core.readInteger(pe) ~= 0x00004550 then return nil end
-  local sections = core.readSmallInteger(pe + 6)
-  local optional = core.readSmallInteger(pe + 0x14)
-  if sections < 1 or sections > 96 or optional < 0 or optional > 0x1000 then return nil end
-  for index = 0, sections - 1 do
-    local entry = pe + 0x18 + optional + index * 40
-    local size, start = core.readInteger(entry + 8), core.readInteger(entry + 12)
-    local low = IMAGE_BASE + start
-    if start >= 0 and size > 0 and address >= low and address < low + size then
-      return low, low + size
-    end
-  end
-  return nil
-end
-
--- The one match of a pattern, or nil and why not. Uniqueness is proven inside the code
--- section that holds the match (a few MB), not the whole address space with every heap:
--- copies of these bytes elsewhere are not game code.
-local function unique(pattern, purpose)
-  local ok, first = pcall(core.AOBScan, pattern)
-  if not ok or not found(first) then
+local function find(pattern, purpose)
+  local ok, at = pcall(core.AOBScan, pattern)
+  if not ok or not found(at) then
     return nil, string.format("%s was not found; this executable is not supported", purpose)
   end
-  local low, high = sectionOf(first)
-  local earliest, again
-  if low then
-    earliest = core.scanForAOB(pattern, low, high)
-  else
-    earliest = core.scanForAOB(pattern)
-  end
-  if found(earliest) then first = earliest end
-  if low then
-    again = core.scanForAOB(pattern, first + 1, high)
-  else
-    again = core.scanForAOB(pattern, first + 1)
-  end
-  if found(again) then
-    return nil, string.format("%s matches more than once; refusing to guess", purpose)
-  end
-  return first
+  return at
 end
 
 local function resolve()
   if site or problem then return end
   local call, searchAt, why
-  call, why = unique(SITE, "setDestinationForUnit's route search call")
+  call, why = find(SITE, "setDestinationForUnit's route search call")
   if call then
     call = call + SITE_CALL
-    searchAt, why = unique(SEARCH, "the game's route search (PathFindingState::doPathfinding)")
+    searchAt, why = find(SEARCH, "the game's route search (PathFindingState::doPathfinding)")
   end
   if searchAt then
     for _, pair in ipairs(SEARCH_SAME_OPERANDS) do

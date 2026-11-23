@@ -126,7 +126,6 @@ class RouteSearch:
     def __init__(self, space, hooks=True):
         self.space = space
         self.scans, self.code_writes, self.data_writes, self.allocations = [], [], [], []
-        self.scan_ranges = []
         self.stub_writes = []
         self.logs, self.after_init = [], []
         lua = self.lua = LuaRuntime(unpack_returned_tuples=True)
@@ -139,11 +138,9 @@ class RouteSearch:
             g.hooks = hook_table
         core = lua.table()
         core.AOBScan = self.aob_scan
-        core.scanForAOB = self.scan_for_aob
         core.readInteger = lambda address: struct.unpack('<i', space.read(int(address), 4))[0]
-        # RPS pushes *(BYTE*) for readByte (unsigned) and *(short*) for readSmallInteger.
+        # RPS pushes *(BYTE*) for readByte (unsigned).
         core.readByte = lambda address: space.read(int(address), 1)[0]
-        core.readSmallInteger = lambda address: struct.unpack('<h', space.read(int(address), 2))[0]
         core.writeCodeBytes = self.write_code_bytes
         core.writeCode = self.write_code
         core.writeInteger = self.write_integer
@@ -170,14 +167,6 @@ class RouteSearch:
         if not hits:
             raise Exception('AOB not found: ' + pattern)
         return hits[0]
-
-    def scan_for_aob(self, pattern, start=None, stop=None):
-        self.scans.append(('scanForAOB', pattern, start))
-        self.scan_ranges.append((start, stop))
-        low = self.space.base if start is None else int(start)
-        high = None if stop is None else int(stop)
-        return next((hit for hit in self.find_all(pattern)
-                     if hit >= low and (high is None or hit < high)), None)
 
     def flatten(self, values):
         """Bytes of a code table as core.compile reads it: numbers and nested tables."""

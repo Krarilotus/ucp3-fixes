@@ -89,14 +89,10 @@ class ResolutionTests(unittest.TestCase):
         self.assertIn(('code', head, 35), rs.allocations)
         self.assertTrue(any('a (100) -> b (200) -> the game' in m for _, m in rs.logs))
 
-    def test_uses_the_framework_cache_then_proves_uniqueness(self):
+    def test_uses_the_framework_cache(self):
         rs = module()
         rs.add('a', 100)
-        kinds = [kind for kind, *_ in rs.scans]
-        self.assertEqual(kinds.count('AOBScan'), 2)
-        # One match each, proven from the start of the image and after the match.
-        later = [start for kind, _, start in rs.scans if kind == 'scanForAOB' and start is not None]
-        self.assertEqual(sorted(later), [BASE + SITE_AT + 1, SEARCH + 1])
+        self.assertEqual([(kind, rest) for kind, _, rest in rs.scans], [('AOBScan', 0)] * 2)
 
     def test_occupied_call_is_refused_before_any_write(self):
         rs = module(image(target=BASE + OTHER_AT))
@@ -135,15 +131,6 @@ class ResolutionTests(unittest.TestCase):
         self.assertTrue(any(level == 'ERROR' and 'no longer goes to route-search' in message
                             for level, message in rs.logs))
 
-    def test_ambiguous_site_or_search_is_refused(self):
-        for name, extra in (('call', [(OTHER_AT, site_bytes(BASE + OTHER_AT + 18, SEARCH))]),
-                            ('search', [(OTHER_AT, search_bytes())])):
-            with self.subTest(duplicate=name):
-                rs = module(image(extra=extra))
-                with self.assertRaisesRegex(LuaError, 'matches more than once; refusing to guess'):
-                    rs.add('a', 100)
-                self.assertEqual(rs.code_writes, [])
-
     def test_missing_site_or_search_is_refused(self):
         broken_search = bytearray(image())
         broken_search[SEARCH_AT + 0x54] = 0xC3            # its first return is no longer ret 8
@@ -162,50 +149,6 @@ class ResolutionTests(unittest.TestCase):
         rs = module(bytes(memory))
         with self.assertRaisesRegex(LuaError, 'does not read its tables'):
             rs.add('a', 100)
-
-
-def with_pe_header(memory, section_start=0x1000, section_size=0x5000):
-    """A minimal PE header at the image base: one section [base+start, base+start+size)."""
-    memory = bytearray(memory)
-    memory[0:2] = b'MZ'
-    memory[0x3C:0x40] = d(0x80)
-    memory[0x80:0x84] = b'PE\0\0'
-    memory[0x86:0x88] = (1).to_bytes(2, 'little')          # NumberOfSections
-    memory[0x94:0x96] = (0xE0).to_bytes(2, 'little')       # SizeOfOptionalHeader
-    entry = 0x80 + 0x18 + 0xE0
-    memory[entry + 8:entry + 12] = d(section_size)          # VirtualSize
-    memory[entry + 12:entry + 16] = d(section_start)        # VirtualAddress
-    return bytes(memory)
-
-
-class CodeSectionTests(unittest.TestCase):
-    """With PE headers, uniqueness is proven in the code section only: fast in the game, and a
-    copy of the bytes outside game code (another module's buffer) is not ambiguity."""
-
-    def test_bounded_to_the_section_that_holds_the_match(self):
-        rs = module(with_pe_header(image()))
-        rs.add('a', 100)
-        bounded = [r for r in rs.scan_ranges if r[1] is not None]
-        self.assertEqual(len(bounded), 4)
-        self.assertTrue(all(stop == BASE + 0x6000 for _, stop in bounded))
-        self.assertEqual([r for r in rs.scan_ranges if r[1] is None], [])
-
-    def test_copy_outside_the_section_is_not_ambiguous(self):
-        copy = (0x6800, site_bytes(BASE + 0x6800 + 18, SEARCH))
-        rs = module(with_pe_header(image(extra=[copy])))
-        rs.add('a', 100)
-        rs.enable_policy('a', 0x7000000)
-        self.assertEqual(rs.code_writes[0][0], CALL)
-
-    def test_second_match_inside_the_section_is_still_refused(self):
-        rs = module(with_pe_header(image(extra=[(OTHER_AT, site_bytes(BASE + OTHER_AT + 18, SEARCH))])))
-        with self.assertRaisesRegex(LuaError, 'matches more than once'):
-            rs.add('a', 100)
-
-    def test_without_headers_the_whole_default_range_is_scanned(self):
-        rs = module()
-        rs.add('a', 100)
-        self.assertTrue(all(stop is None for _, stop in rs.scan_ranges))
 
 
 class OrderAndLifecycleTests(unittest.TestCase):

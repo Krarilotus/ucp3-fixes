@@ -23,14 +23,10 @@ redirects the call once and runs the policies in a fixed, documented order.
 
 | What | How it is found | Checked |
 | --- | --- | --- |
-| The call in `setDestinationForUnit` | `0F BF 8E AA 06 00 00 8B 44 24 14 50 51 B9 ? ? ? ? E8 ? ? ? ? 3B C3 89 1D ? ? ? ? 0F 8E`, call at +18 | exactly one match; the caller tests `eax` against `ebx` (0) right after it |
-| `PathFindingState::doPathfinding` | its code from the first instruction to its first `ret 8` | exactly one match; reads the same row table and area map twice; the call above must go there |
+| The call in `setDestinationForUnit` | `0F BF 8E AA 06 00 00 8B 44 24 14 50 51 B9 ? ? ? ? E8 ? ? ? ? 3B C3 89 1D ? ? ? ? 0F 8E`, call at +18 | the caller tests `eax` against `ebx` (0) right after it |
+| `PathFindingState::doPathfinding` | its code from the first instruction to its first `ret 8` | reads the same row table and area map twice; the call above must go there |
 
-SHC 1.41: call at `0x53D7B4` → search at `0x4A9B20`. Crusader Extreme 1.41: `0x53DBD4` →
-`0x4A9C90`. These addresses are evidence, not bindings; the module finds both at runtime.
-The call is the only direct call of the search in either executable.
-
-If either pattern is missing or matches more than once, or the call already goes somewhere
+If either pattern is missing, or the call already goes somewhere
 else, route-search refuses: `addPolicy` raises an error that names the problem, and the game
 code stays unchanged.
 
@@ -116,7 +112,7 @@ table must be added to that list. Plugins don't see route-search's API (`public`
 | Legacy ladder climb, Smarter Walls, Build over Workers, Smarter Buildings, Improved Tunnelers, Outpost Control, Improved Siege Engines | patch other places of `setDestinationForUnit` or call it; none patches this call or the search |
 
 Not covered by contract 1: `setDestinationForUnit`'s other search, used when its last
-argument is not 0 (`call 0x4A9DD0` on SHC), and searches other game functions run directly.
+argument is not 0, and searches other game functions run directly.
 
 ## Tests
 
