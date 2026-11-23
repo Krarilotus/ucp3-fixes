@@ -1,7 +1,7 @@
 ai: MI
 fixes: Javítások
 title: 'MI: AIV-csapatviselkedés'
-description: Helyreállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-pozícióit. Alapértelmezés szerint ki van kapcsolva; az UCP3 Fixes bővítmény kapcsolja be.
+description: Helyreállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-pozícióit.
 behavior_title: Csapatbeállítások
 aic_overrides: AIC-felülírások használata
 initial_role: Kezdőcsapatok feladata

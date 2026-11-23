@@ -1,7 +1,7 @@
 ai: IA
 fixes: Correctifs
 title: 'IA : Correction du comptage des houblonnières'
-description: Compte les houblonnières dans la limite de fermes de l’IA. La limite reste inchangée. Désactivé par défaut ; le plugin UCP3 Fixes l'active. Redémarrez le jeu après modification.
+description: Compte les houblonnières dans la limite de fermes de l’IA. La limite reste inchangée. Redémarrez le jeu après modification.
 tags.ai: IA
 tags.economy: Économie
 tags.bugfixes: Corrections

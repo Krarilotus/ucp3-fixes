@@ -2,7 +2,7 @@ ai: AI
 behavior_title: Troop settings
 fixes: Fixes
 title: 'AI: AIV Troop Behaviour'
-description: Restores missing AIV positions for pikemen, swordsmen and Arabian swordsmen. Off by default; the UCP3 Fixes plugin turns it on.
+description: Restores missing AIV positions for pikemen, swordsmen and Arabian swordsmen.
 aic_overrides: Use AIC overrides
 initial_role: Starting troop role
 slot_movement: Defender movement

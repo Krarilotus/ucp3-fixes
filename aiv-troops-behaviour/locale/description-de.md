@@ -8,4 +8,4 @@ Für einzelne KIs: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) und `A
 
 Beispiel: `AIVTroops_InitialRole_Slave: "dig"` weist Sklaven dem Graben zu. Truppennamen und Details stehen in der [AIC-Feldreferenz](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour).
 
-Die Positionskorrektur und die Truppeneinstellungen sind standardmäßig deaktiviert: Die Auswahl dieses Moduls allein ändert das Spiel nicht. Schalte die Positionskorrektur unter **KI → AIV-Truppenverhalten** ein oder wähle das Plugin **UCP3 Fixes**, das sie aktiviert. Truppeneinstellungen bleiben ausgeschaltet, bis du sie aktivierst. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.
+Die Positionskorrektur und die Truppeneinstellungen sind standardmäßig deaktiviert. Nach Änderungen das Spiel neu starten und eine neue Partie beginnen.

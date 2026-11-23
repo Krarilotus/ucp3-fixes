@@ -1,7 +1,7 @@
 ai: IA
 fixes: Correcciones
 title: 'IA: Comportamiento de tropas AIV'
-description: Restaura las posiciones AIV ausentes de piqueros, espadachines y espadachines árabes. Desactivado por defecto; el plugin UCP3 Fixes lo activa.
+description: Restaura las posiciones AIV ausentes de piqueros, espadachines y espadachines árabes.
 behavior_title: Ajustes de tropas
 aic_overrides: Usar anulaciones AIC
 initial_role: Tarea de las tropas iniciales

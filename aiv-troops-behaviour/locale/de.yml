@@ -2,7 +2,7 @@ ai: KI
 behavior_title: Truppeneinstellungen
 fixes: Fehlerbehebungen
 title: 'KI: AIV-Truppenverhalten'
-description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her. Standardmäßig deaktiviert; das Plugin UCP3 Fixes aktiviert diese Korrektur.
+description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her.
 aic_overrides: AIC-Überschreibungen verwenden
 initial_role: Aufgabe der Starttruppen
 slot_movement: Bewegung der Verteidiger

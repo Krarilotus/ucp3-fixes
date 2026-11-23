@@ -35,7 +35,7 @@ local AOB = "0F B7 0A 66 83 F9 1E 74 0C 66 83 F9 20 74 06 66 83 F9 21 75 11 85 F
 
 return {
   enable = function(self, config)
-    -- Off unless configured on (since 0.2.0): the module keeps the game's
+    -- Off unless configured on: the module keeps the game's
     -- behaviour by default. The UCP3 Fixes plugin switches it on.
     if self.applied or not config or config.enabled ~= true then
       return

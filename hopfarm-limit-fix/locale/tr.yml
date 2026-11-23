@@ -1,7 +1,7 @@
 ai: Yapay zekâ
 fixes: Düzeltmeler
 title: 'Yapay zekâ: Şerbetçiotu çiftliği sayım düzeltmesi'
-description: Şerbetçiotu çiftliklerini yapay zekânın çiftlik sınırına dâhil eder. Sınır değişmez. Varsayılan olarak kapalıdır; UCP3 Fixes eklentisi bunu açar. Ayarı değiştirdikten sonra oyunu yeniden başlatın.
+description: Şerbetçiotu çiftliklerini yapay zekânın çiftlik sınırına dâhil eder. Sınır değişmez. Ayarı değiştirdikten sonra oyunu yeniden başlatın.
 tags.ai: Yapay zekâ
 tags.economy: Ekonomi
 tags.bugfixes: Hata düzeltmeleri

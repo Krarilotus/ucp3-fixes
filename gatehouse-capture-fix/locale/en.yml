@@ -1,4 +1,4 @@
 bugfixes: Bugfixes
 living_gatehouse_occupants: Living gatehouse defenders
-living_gatehouse_occupants_descr: Fallen troops no longer capture or defend gatehouses. Off by default; the UCP3 Fixes plugin turns it on. Restart after changing.
+living_gatehouse_occupants_descr: Fallen troops no longer capture or defend gatehouses. Restart after changing.
 tags.bugfixes: Bug fixes

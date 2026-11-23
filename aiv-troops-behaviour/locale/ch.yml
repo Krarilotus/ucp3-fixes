@@ -1,7 +1,7 @@
 ai: AI
 fixes: 修复
 title: AI：AIV部队行为
-description: 恢复长枪兵、剑士和阿拉伯剑士缺失的AIV位置。默认关闭；UCP3 Fixes 插件会将其开启。
+description: 恢复长枪兵、剑士和阿拉伯剑士缺失的AIV位置。
 behavior_title: 部队设置
 aic_overrides: 使用AIC覆盖
 initial_role: 初始部队任务

@@ -8,4 +8,4 @@ For individual AIs, use `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) a
 
 Example: `AIVTroops_InitialRole_Slave: "dig"` assigns slave diggers. See the [AIC field reference](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) for troop names and details.
 
-The position fix and the troop settings are off by default: selecting this module alone does not change the game. Switch the position fix on under **AI → AIV Troop Behaviour**, or select the **UCP3 Fixes** plugin, which turns it on. Troop settings stay off until you enable them. Restart and start a new match after changes.
+The position fix and the troop settings are off by default. Restart and start a new match after changes.

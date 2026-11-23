@@ -8,4 +8,4 @@
 
 示例：`AIVTroops_InitialRole_Slave: "dig"`将奴隶分配为挖掘部队。兵种名和详细说明见[AIC字段参考](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour)。
 
-位置修复与部队设置均默认关闭：单独选择此模块不会更改游戏。请在 **AI → AIV部队行为** 下开启位置修复，或选择 **UCP3 Fixes** 插件（它会自动开启此修复）。部队设置在你主动启用前保持关闭。修改后重启游戏并开始新对局。
+位置修复与部队设置均默认关闭。修改后重启游戏并开始新对局。
