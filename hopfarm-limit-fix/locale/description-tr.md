@@ -2,4 +2,4 @@
 
 Şerbetçiotu çiftliklerini, buğday ve süt çiftlikleri ile elma bahçeleri gibi yapay zekânın çiftlik sınırına dâhil eder. Sınırın kendisi değişmez.
 
-Varsayılan olarak kapalıdır. Değişikliklerden sonra oyunu yeniden başlatın.
+Düzeltmeyi **Yapay zekâ → Düzeltmeler** altında açıp kapatabilirsiniz. Değişikliklerden sonra oyunu yeniden başlatın.

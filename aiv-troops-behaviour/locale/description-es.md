@@ -8,4 +8,4 @@ Por IA: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) y `AIVTroops_Move
 
 Ejemplo: `AIVTroops_InitialRole_Slave: "dig"` asigna esclavos a cavar. Los nombres de tropas y los detalles están en la [referencia AIC](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour).
 
-La corrección de posiciones y los ajustes de tropas están desactivados por defecto. Reinicia el juego y comienza una partida nueva tras los cambios.
+Los ajustes de tropas comienzan desactivados. Reinicia el juego y comienza una partida nueva tras los cambios.

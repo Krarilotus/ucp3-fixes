@@ -1,7 +1,8 @@
 ai: AI
 fixes: Fixes
 title: 'AI: Hop Farm Counting Fix'
-description: Count hop farms towards the AI farm limit. The limit stays the same. Restart the game after changing this setting.
+description: Count hop farms towards the AI farm limit. The limit stays the same. Restart the game after
+  changing this setting.
 tags.ai: AI
 tags.economy: Economy
 tags.bugfixes: Bug fixes

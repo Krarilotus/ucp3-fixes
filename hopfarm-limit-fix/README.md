@@ -74,10 +74,9 @@ shifts the balance of existing AIVs; check the farm-limit values (AIV field
 
 ## Configuration and review
 
-The enable switch appears under **AI → Fixes**. Since 0.2.0 it is off by default,
-also for configs without the option, so selecting the module alone keeps the
-original counting. The UCP3 Fixes plugin turns it on. Disable it and restart to
-restore the original counting behaviour. The fix respects the
+The enable switch appears under **AI → Fixes**. It is off by default, also for
+configs without the option, so selecting the module alone keeps the original
+counting; changing it needs a restart. The fix respects the
 existing AIV farm limit rather than introducing a separate configurable cap.
 
 The review confirmed the comparison block at `0x40AA42` in Crusader and
@@ -89,4 +88,5 @@ recruitment collapse is made.
 
 ## Release notes
 
-- **0.2.0:** The fix is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.
+- **0.2.0:** The fix is off by default. After updating, switch it on in Customizations
+  unless you saved it on.

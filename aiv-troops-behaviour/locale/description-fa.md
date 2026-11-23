@@ -8,4 +8,4 @@
 
 مثال: `AIVTroops_InitialRole_Slave: "dig"` بردگان را به حفاری اختصاص می‌دهد. نام نیروها و جزئیات در [مرجع فیلدهای AIC](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) آمده‌اند.
 
-اصلاح موقعیت‌ها و تنظیمات نیروها به‌صورت پیش‌فرض خاموش هستند. پس از تغییر، بازی را دوباره اجرا کنید و نبرد جدیدی آغاز کنید.
+تنظیمات نیروها در ابتدا خاموش است. پس از تغییر، بازی را دوباره اجرا کنید و نبرد جدیدی آغاز کنید.

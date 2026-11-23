@@ -1,6 +1,5 @@
 return {
   enable = function(self, config)
-    -- Off unless configured on: the module keeps the game's behaviour by default.
     if self.applied or not (config and config.reachable_delivery == true) then return end
     local delivery = require("delivery")
     local native = delivery.resolve() -- Validate every binding before patching.

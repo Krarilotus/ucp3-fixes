@@ -22,7 +22,6 @@ def entry():
 
 class WorkerDeliveryEntryTests(unittest.TestCase):
     def test_default_off_explicit_on_and_idempotence(self):
-        # Since 0.2.0 the fix keeps the game's behaviour unless configured on.
         for setting, expected in ((None, 0), ({}, 0), ({'reachable_delivery': True}, 1),
                                   ({'reachable_delivery': False}, 0)):
             with self.subTest(setting=setting):

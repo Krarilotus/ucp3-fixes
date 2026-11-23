@@ -89,7 +89,6 @@ class ModuleTests(unittest.TestCase):
                 self.assertEqual(h.scans[0][1], 0, 'use the framework AOB cache')
 
     def test_unconfigured_module_keeps_game_behaviour(self):
-        # Since 0.2.0/0.3.0 the fixes are off unless a configuration turns them on.
         for name, fixture in FIXTURES.items():
             for config in ({}, {'enabled': None}):
                 with self.subTest(module=name, config=config):

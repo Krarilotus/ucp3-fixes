@@ -8,4 +8,4 @@ Her yapay zekâ için: `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) ve
 
 Örnek: `AIVTroops_InitialRole_Slave: "dig"` köleleri kazmaya atar. Birlik adları ve ayrıntılar için [AIC alanları rehberine](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) bakın.
 
-Konum düzeltmesi ve birlik ayarları varsayılan olarak kapalıdır. Değişiklikten sonra oyunu yeniden başlatıp yeni bir oyun açın.
+Birlik ayarları başlangıçta kapalıdır. Değişiklikten sonra oyunu yeniden başlatıp yeni bir oyun açın.

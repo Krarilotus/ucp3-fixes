@@ -1,7 +1,6 @@
 return {
   enable = function(self, config)
     if self.applied then return end
-    -- Each fix is off unless configured on, matching the game's behaviour.
     local crewEnabled = config ~= nil and config.crew_lifecycle == true
     local stopEnabled = config ~= nil and config.siege_target_stop == true
     if not crewEnabled and not stopEnabled then return end

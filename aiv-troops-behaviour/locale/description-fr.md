@@ -8,4 +8,4 @@ Par IA : `AIVTroops_InitialRole_<Troop>` (`"defend"` / `"dig"`) et `AIVTroops_Mo
 
 Exemple : `AIVTroops_InitialRole_Slave: "dig"` affecte les esclaves au creusement. Consultez la [référence AIC](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour) pour les noms de troupes et les détails.
 
-Le correctif des positions et les réglages des troupes sont désactivés par défaut. Redémarrez le jeu et commencez une nouvelle partie après modification.
+Les réglages des troupes sont désactivés au départ. Redémarrez le jeu et commencez une nouvelle partie après modification.

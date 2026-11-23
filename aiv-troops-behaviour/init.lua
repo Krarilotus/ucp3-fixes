@@ -54,8 +54,6 @@ local SKIP_OFFSETS = {
 
 return {
   enable = function(self, config)
-    -- Off unless configured on: the module keeps the game's
-    -- behaviour by default. The UCP3 Fixes plugin switches it on.
     if self.applied or not config or config.enabled ~= true then
       return
     end

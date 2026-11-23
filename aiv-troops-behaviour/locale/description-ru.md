@@ -8,4 +8,4 @@
 
 Пример: `AIVTroops_InitialRole_Slave: "dig"` назначает рабов землекопами. Названия войск и подробности — в [справочнике AIC](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour).
 
-Исправление позиций и настройки войск по умолчанию отключены. После изменений перезапустите игру и начните новую партию.
+Настройки войск изначально выключены. После изменений перезапустите игру и начните новую партию.

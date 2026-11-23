@@ -12,9 +12,8 @@ the native repair/removal path.
 Stockpiles already bypass this particular keep-region check in the original
 game, so this module does not change their delivery logic.
 
-The **Granary and armory delivery** switch is under **Bugfixes**. It is off by
-default (0.2.0 and later); the UCP3 Fixes plugin turns it on. Turn it off to
-compare original behavior, then restart the game. The package provides option text and descriptions in
+The **Granary and armory delivery** switch is under **Bugfixes** and is off by
+default. Restart the game after changing it. The package provides option text and descriptions in
 all nine currently supported UCP frontend languages. It adds no saved state or
 map-format section.
 
@@ -35,7 +34,7 @@ addresses are not runtime bindings.
 The AI heatmap removes a building when the check returns 0 (no entrance tile in
 any area) or 2 (an entrance exists, but the keep can't reach it). UCP2 Legacy's
 **Disable demolishing of inaccessible buildings** (`ai_access`, on in
-ucp2-legacy-defaults and so in every UCP3 setup) replaces the `jne` after that
+ucp2-legacy-defaults) replaces the `jne` after that
 call with `jmp`, which drops only the removal for result 0. That byte is its
 patch site. This module accepts either form there, refuses anything else, and
 writes nothing in that code. Its store query turns result 2 into 1 for a granary
@@ -61,7 +60,7 @@ Build `worker-delivery-fix-0.2.0.zip` with
 `python tools/build_modules.py --output ./local-packages`, then put that ZIP in
 `ucp/modules/`. It is unsigned, so enable **Disable Security** for this local
 test, select **Worker Delivery Fix** in Content, and turn its Bugfixes switch
-ON (it is off by default). Do not use it as a release package yet.
+ON. Do not use it as a release package yet.
 
 - [ ] With a farmer and weapon maker, confirm normal deliveries to a granary
   and armory while the keep route is open. Observe stockpile delivery as a
@@ -83,4 +82,6 @@ editor check has not yet been run.
 
 ## Release notes
 
-- **0.2.0:** Starts next to UCP2 Legacy's "Disable demolishing of inaccessible buildings", which every UCP3 setup turns on. With 0.1.2 that combination stopped the game before the main menu ("AOB could not be found"). The fix is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.
+- **0.2.0:** Starts next to UCP2 Legacy's "Disable demolishing of inaccessible
+  buildings" (0.1.2 stopped the game at startup there). The fix is off by default;
+  after updating, switch it on in Customizations unless you saved it on.

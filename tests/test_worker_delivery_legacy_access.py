@@ -2,8 +2,8 @@
 
 ai_access ("Disable demolishing of inaccessible buildings", on in
 ucp2-legacy-defaults) writes `jmp` over the `jne` that follows the AI heatmap's
-accessibility call. Worker Delivery Fix 0.2.0 required the `jne` there and
-stopped the game at startup with "AOB could not be found". ai_access drops
+accessibility call. A binding that requires the `jne` there stops the game at
+startup with "AOB could not be found". ai_access drops
 only the removal for result 0; result 2 (valid entrance, blocked keep route)
 still removes, so this module's store query must stay active next to it.
 A synthetic image holds every binding the module checks, laid out as in the

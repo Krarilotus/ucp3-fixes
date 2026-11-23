@@ -6,7 +6,6 @@ from lupa.lua54 import LuaRuntime, LuaError
 
 class EngineerEntryTests(unittest.TestCase):
     def test_default_off_explicit_on_and_idempotence(self):
-        # Since 0.3.0 both fixes keep the game's behaviour unless configured on.
         for config, expected, resolved in ((None, 0, 0), ({}, 0, 0),
                                            ({'crew_lifecycle': True,
                                              'siege_target_stop': True}, 3, 1),
