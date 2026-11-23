@@ -1,11 +1,11 @@
 buildings: Buildings can be placed over workers
-buildings_tooltip: You can place a building on top of your own workers. They step aside to the closest free tile next to the new building and carry on with their job. Soldiers and enemy units still block the spot, as before. Off by default; the UCP3 Recommended setup turns it on. Turning this off restores original building placement.
+buildings_tooltip: You can place a building on top of your own workers. They step aside to the closest free tile next to the new building and carry on with their job. Soldiers and enemy units still block the spot, as before. Turning this off restores original building placement.
 walls: Walls can be placed over workers
-walls_tooltip: 'The same for walls: workers standing in the way are moved next to the wall, on the side they were on when possible. Off by default; the UCP3 Recommended setup turns it on. Turning this off restores original human and AI wall placement.'
+walls_tooltip: 'The same for walls: workers standing in the way are moved next to the wall, on the side they were on when possible. Turning this off restores original human and AI wall placement.'
 keep_on_walls: Repairing a wall leaves people on top of it
-keep_on_walls_tooltip: Troops and people standing on top of a wall or stairs stay where they are when you repair that wall. Only people on the ground underneath a new wall are moved aside. On by default; it only matters when walls can be placed over workers.
+keep_on_walls_tooltip: Troops and people standing on top of a wall or stairs stay where they are when you repair that wall. Only people on the ground underneath a new wall are moved aside. It only matters when walls can be placed over workers.
 allies: Allies' workers count as friendly
-allies_tooltip: Workers of players on your team can be built over too. When this is off, only your own workers can. Off by default; the UCP3 Recommended setup turns it on.
+allies_tooltip: Workers of players on your team can be built over too. When this is off, only your own workers can.
 balance_changes: Balance Changes
 bugfixes: Bugfixes
 tags.behavior: Behavior

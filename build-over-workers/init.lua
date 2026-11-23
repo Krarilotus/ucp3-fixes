@@ -27,9 +27,8 @@ local templates = require("templates")
 
 local MODULE_NAME = "build-over-workers"
 
--- Vanilla by default (since 1.1.0): placement over workers is off unless configured on.
--- keepOnWalls stays on: it is the 1.0.2 protection for people standing on a wall that is
--- repaired, and nothing runs while both buildings and walls are off.
+-- Placement over workers is off unless configured on. keepOnWalls protects people standing on
+-- a wall that is repaired; nothing runs while both buildings and walls are off.
 local DEFAULTS = { buildings = false, walls = false, allies = false, keepOnWalls = true }
 
 ---------------------------------------------------------------------------------------
