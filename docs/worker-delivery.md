@@ -1,4 +1,4 @@
-# Worker Delivery Fix 0.1.0 preview
+# Worker Delivery Fix
 
 Workers sometimes fail to deliver goods when their route to a granary or
 armory is open but the route from the keep to that store is blocked.
@@ -32,6 +32,15 @@ entrance selector, pathfinder and movement routine remain in place. The Ghidra p
 are in the workspace's `Roadmap/Investigations/R080` directory; reference
 addresses are not runtime bindings.
 
+The AI heatmap removes a building when the check returns 0 (no entrance tile in
+any area) or 2 (an entrance exists, but the keep can't reach it). UCP2 Legacy's
+**Disable demolishing of inaccessible buildings** (`ai_access`, on in
+ucp2-legacy-defaults and so in every UCP3 setup) replaces the `jne` after that
+call with `jmp`, which drops only the removal for result 0. That byte is its
+patch site. This module accepts either form there, refuses anything else, and
+writes nothing in that code. Its store query turns result 2 into 1 for a granary
+or armory with a valid entrance, so the two changes add up, in either load order.
+
 Runtime discovery uses the UCP 3.0.7 `core.AOBScan` cache and native detour
 facility. Every required signature and operand relationship is checked before
 the hook is installed. No static executable address, copied pathfinder,
@@ -48,11 +57,11 @@ and GUI Customizations checks remain pending.
 
 ## Try it in single-player
 
-Build `worker-delivery-fix-0.1.0.zip` with
+Build `worker-delivery-fix-0.2.0.zip` with
 `python tools/build_modules.py --output ./local-packages`, then put that ZIP in
 `ucp/modules/`. It is unsigned, so enable **Disable Security** for this local
-test, select **Worker Delivery Fix** in Content, and leave its Bugfixes switch
-ON. Do not use it as a release package yet.
+test, select **Worker Delivery Fix** in Content, and turn its Bugfixes switch
+ON (it is off by default). Do not use it as a release package yet.
 
 - [ ] With a farmer and weapon maker, confirm normal deliveries to a granary
   and armory while the keep route is open. Observe stockpile delivery as a
@@ -74,4 +83,4 @@ editor check has not yet been run.
 
 ## Release notes
 
-- **0.2.0:** The fix is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.
+- **0.2.0:** Starts next to UCP2 Legacy's "Disable demolishing of inaccessible buildings", which every UCP3 setup turns on. With 0.1.2 that combination stopped the game before the main menu ("AOB could not be found"). The fix is off by default, so the module keeps the game's behaviour until you turn it on. The **UCP3 Fixes** plugin turns it on. Players who added the module on its own will see it switched off after updating; switch it on again in Customizations or select UCP3 Fixes. Settings you saved explicitly stay as they are. Plugins that depend on an older version range keep that older default-on release.
