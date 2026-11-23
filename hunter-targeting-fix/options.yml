@@ -9,4 +9,4 @@ options:
   url: hunter-targeting-fix.hunter_targeting
   contents:
     type: boolean
-    value: true
+    value: false

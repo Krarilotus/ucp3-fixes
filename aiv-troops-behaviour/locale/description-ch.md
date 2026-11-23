@@ -4,8 +4,4 @@
 
 每种部队的每组选项最多选一项。防守：前往AIV位置；挖掘：将初始部队分配为护城河挖掘单位。驻守：留在防御位置；巡逻：按照该AI的AIC巡逻设置在防御位置之间移动。重置可恢复游戏默认行为。
 
-为各AI设置`AIVTroops_InitialRole_<Troop>`（`"defend"` / `"dig"`）和`AIVTroops_Movement_<Troop>`（`"hold"` / `"patrol"`）。去掉兵种后缀即为该AI的通用设置；通用职责仅接受`"defend"`。启用的AIC覆盖优先；省略的字段继承默认值。
-
-示例：`AIVTroops_InitialRole_Slave: "dig"`将奴隶分配为挖掘部队。兵种名和详细说明见[AIC字段参考](https://github.com/UnofficialCrusaderPatch/UCP-Wiki/blob/docs/extension-aic-fields/docs/Stronghold-Crusader-Wiki/AI-Lords/AI-Character-Parameters.md#aiv-troop-behaviour)。
-
-部队设置初始为关闭。修改后重启游戏并开始新对局。
+修改后重启游戏并开始新对局。

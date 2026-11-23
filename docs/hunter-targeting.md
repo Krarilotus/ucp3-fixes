@@ -6,7 +6,7 @@ native path and try shooting again from a closer position. The hunter stops
 approaching if the path ends or it gets within three tiles without a clear shot.
 No new pathfinder, target list or saved state is introduced.
 
-The **Bugfixes → Hunter targeting** switch defaults to on and needs a restart
+The **Bugfixes → Hunter targeting** switch is off by default and needs a restart
 when changed. Maps and saves keep their original format and remain usable
 without this optional module.
 
@@ -22,3 +22,8 @@ Suggested single-player test:
 - [ ] Block the first shot with terrain or a wall; the hunter should approach, then shoot when clear.
 - [ ] Give the hunter no usable path or no clear shot within three tiles; it should give up cleanly.
 - [ ] Save/load and replay a hunt; compare behavior with the switch off.
+
+## Release notes
+
+- **0.2.0:** The fix is off by default. After updating, switch it on in Customizations
+  unless you saved it on.

@@ -60,9 +60,9 @@ Place each ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local packages re
 the launch option **Disable Security**. Select the module in Content, then use its
 settings under **AI → AIV Troop Behaviour** for troop controls, **AI → Fixes**
 for the hop farm fix, or **Bugfixes** for Fixed Engineers, Worker Delivery Fix, Gatehouse Capture Fix and Hunter Targeting Fix. Changing a switch
-requires restarting the game. Simple fixes default to on when their module is
-selected; the AIV module's additional troop controls are opt-in. The modules are
-not selected by default.
+requires restarting the game. Every fix is off by default, so selecting a module
+alone keeps the game's behaviour until you switch its fix on; the AIV module's
+additional troop controls are opt-in too. The modules are not selected by default.
 
 Each module uses `core` and therefore has type `module`, not `plugin`. Their
 `UCP2Switch` controls follow the established AI or Bugfixes categories.

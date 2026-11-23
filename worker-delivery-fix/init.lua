@@ -1,6 +1,6 @@
 return {
   enable = function(self, config)
-    if self.applied or (config and config.reachable_delivery == false) then return end
+    if self.applied or not (config and config.reachable_delivery == true) then return end
     local delivery = require("delivery")
     local native = delivery.resolve() -- Validate every binding before patching.
     delivery.install(native)

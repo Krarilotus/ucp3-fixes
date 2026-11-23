@@ -11,4 +11,4 @@ options:
   url: hopfarm-limit-fix.enabled
   contents:
     type: boolean
-    value: true
+    value: false

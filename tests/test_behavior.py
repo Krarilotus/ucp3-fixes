@@ -119,7 +119,7 @@ class BehaviorHarness(ModuleHarness):
         return original
 
     def install(self, **config):
-        self.enable({'behavior': self.lua.table_from({'enabled': True, **config}, recursive=True)})
+        self.enable({'enabled': True, 'behavior': self.lua.table_from({'enabled': True, **config}, recursive=True)})
     def set_aic(self, ai, key, value): self.aic[key][0](ai, value)
     def callback(self, site, **registers):
         return self.callbacks[self.sites[site]][0](self.lua.table_from(registers))
@@ -211,7 +211,7 @@ class BehaviorTests(unittest.TestCase):
             h = BehaviorHarness()
             original = bytes(h.get(h.sites['initial'], 126))
             if mode == 'base':
-                h.enable()
+                h.enable({'enabled': True})
                 self.assertEqual(bytes(h.get(h.sites['initial'], 126)), original)
                 start = h.sites['initial']
             else:

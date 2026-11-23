@@ -74,9 +74,9 @@ shifts the balance of existing AIVs; check the farm-limit values (AIV field
 
 ## Configuration and review
 
-The enable switch appears under **AI → Fixes**. It defaults to on when this module
-is selected; existing configs without the option retain that behaviour. Disable
-it and restart to restore the original counting behaviour. The fix respects the
+The enable switch appears under **AI → Fixes**. It is off by default, also for
+configs without the option, so selecting the module alone keeps the original
+counting; changing it needs a restart. The fix respects the
 existing AIV farm limit rather than introducing a separate configurable cap.
 
 The review confirmed the comparison block at `0x40AA42` in Crusader and
@@ -85,3 +85,8 @@ makes the 32-bit range check valid; ECX is dead after the check and flags are
 reset by the following `test edi, edi`. See `docs/validation.md` in the source
 repository for hashes and test coverage. No claim that this prevents late-game
 recruitment collapse is made.
+
+## Release notes
+
+- **0.2.0:** The fix is off by default. After updating, switch it on in Customizations
+  unless you saved it on.

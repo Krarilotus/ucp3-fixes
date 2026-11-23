@@ -54,7 +54,7 @@ local SKIP_OFFSETS = {
 
 return {
   enable = function(self, config)
-    if config.enabled == false or self.applied then
+    if self.applied or not config or config.enabled ~= true then
       return
     end
     -- Troop behaviour controls are opt-in. Resolve every behavior site before

@@ -167,6 +167,33 @@ class Probe:
         else: raise AssertionError('Changed AI caller context accepted')
         self.data[heat_offset] = 0x0f
 
+        # UCP2 Legacy's ai_access writes `jmp` over the result-0 removal branch
+        # after the AI call (heatmap + 29); result 2 (valid entrance, blocked
+        # keep route) still removes. This module binds next to it and keeps
+        # its store query, which avoids result 2, while worker deliveries are
+        # unchanged and invalid entrances stay native.
+        branch = heat_offset + 29
+        assert self.data[branch] == 0x75
+        self.data[branch] = 0xeb
+        assert self.delivery.resolve().sites.heatmap == s.heatmap
+        self.write(building + 0xe6, 19, 2)
+        self.write(stack + 28, s.heatmap + 27, 4)
+        assert call().ECX == 5
+        assert callback(self.lua.table_from({'ESP': stack, 'ESI': building,
+            'ECX': 3, 'EAX': 5, 'EBX': 1})).ECX == 3
+        assert callback(self.lua.table_from({'ESP': stack, 'ESI': building,
+            'ECX': 3, 'EAX': 0, 'EBX': 0})).ECX == 3
+        self.write(stack + 28, s.producers + 0x100, 4)
+        assert call().ECX == 9
+        cases.append('ucp2-legacy ai_access branch accepted, AI store query kept')
+        self.data[branch] = 0x74
+        try:
+            self.delivery.resolve()
+        except (LuaError, RuntimeError):
+            cases.append('unknown AI removal branch rejected')
+        else: raise AssertionError('Unknown AI removal branch accepted')
+        self.data[branch] = 0x75
+
         self.data[offset] = 0x90
         try:
             self.delivery.install(native)

@@ -9,7 +9,7 @@ options:
   url: fixed-engineers.siege_target_stop
   contents:
     type: boolean
-    value: true
+    value: false
 - name: crew_lifecycle
   category: ['{{bugfixes}}']
   display: UCP2Switch
@@ -18,4 +18,4 @@ options:
   url: fixed-engineers.crew_lifecycle
   contents:
     type: boolean
-    value: true
+    value: false

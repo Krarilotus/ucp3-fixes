@@ -1,6 +1,6 @@
 return {
   enable = function(self, config)
-    if self.applied or (config and config.hunter_targeting == false) then return end
+    if self.applied or not (config and config.hunter_targeting == true) then return end
     local install = require("hunting").prepare()
     install()
     self.applied = true

@@ -11,7 +11,7 @@ options:
   url: aiv-troops-behaviour.enabled
   contents:
     type: boolean
-    value: true
+    value: false
 - name: aiv_troop_behavior
   category:
   - '{{ai}}'

@@ -1,4 +1,4 @@
-# Worker Delivery Fix 0.1.0 preview
+# Worker Delivery Fix
 
 Workers sometimes fail to deliver goods when their route to a granary or
 armory is open but the route from the keep to that store is blocked.
@@ -12,9 +12,8 @@ the native repair/removal path.
 Stockpiles already bypass this particular keep-region check in the original
 game, so this module does not change their delivery logic.
 
-The **Granary and armory delivery** switch is under **Bugfixes** and defaults
-to ON when the module is selected. Turn it OFF to compare original behavior,
-then restart the game. The package provides option text and descriptions in
+The **Granary and armory delivery** switch is under **Bugfixes** and is off by
+default. Restart the game after changing it. The package provides option text and descriptions in
 all nine currently supported UCP frontend languages. It adds no saved state or
 map-format section.
 
@@ -32,6 +31,15 @@ entrance selector, pathfinder and movement routine remain in place. The Ghidra p
 are in the workspace's `Roadmap/Investigations/R080` directory; reference
 addresses are not runtime bindings.
 
+The AI heatmap removes a building when the check returns 0 (no entrance tile in
+any area) or 2 (an entrance exists, but the keep can't reach it). UCP2 Legacy's
+**Disable demolishing of inaccessible buildings** (`ai_access`, on in
+ucp2-legacy-defaults) replaces the `jne` after that
+call with `jmp`, which drops only the removal for result 0. That byte is its
+patch site. This module accepts either form there, refuses anything else, and
+writes nothing in that code. Its store query turns result 2 into 1 for a granary
+or armory with a valid entrance, so the two changes add up, in either load order.
+
 Runtime discovery uses the UCP 3.0.7 `core.AOBScan` cache and native detour
 facility. Every required signature and operand relationship is checked before
 the hook is installed. No static executable address, copied pathfinder,
@@ -48,10 +56,10 @@ and GUI Customizations checks remain pending.
 
 ## Try it in single-player
 
-Build `worker-delivery-fix-0.1.0.zip` with
+Build `worker-delivery-fix-0.2.0.zip` with
 `python tools/build_modules.py --output ./local-packages`, then put that ZIP in
 `ucp/modules/`. It is unsigned, so enable **Disable Security** for this local
-test, select **Worker Delivery Fix** in Content, and leave its Bugfixes switch
+test, select **Worker Delivery Fix** in Content, and turn its Bugfixes switch
 ON. Do not use it as a release package yet.
 
 - [ ] With a farmer and weapon maker, confirm normal deliveries to a granary
@@ -63,7 +71,8 @@ ON. Do not use it as a release package yet.
   blockage and no worker disappears unexpectedly.
 - [ ] With an AI player, block the keep route while a granary or armory has a
   valid entrance. Confirm it stays built and reachable workers can deliver.
-  Repeat with an invalid entrance and check native removal still applies.
+  Repeat with an invalid entrance: the game removes it, unless UCP2 Legacy's
+  `ai_access` is on, which keeps buildings without an entrance.
 - [ ] Reopen the keep route, save and reload, and confirm delivery continues.
 - [ ] Repeat with the switch OFF after restarting, then repeat ON in normal
   Crusader and Extreme. Note the game build and active modules.
@@ -71,3 +80,9 @@ ON. Do not use it as a release package yet.
 Multiplayer testing is left to players. A save renamed to `.map` should remain
 editable without this module because the module adds no map or save data; that
 editor check has not yet been run.
+
+## Release notes
+
+- **0.2.0:** Starts next to UCP2 Legacy's "Disable demolishing of inaccessible
+  buildings" (0.1.2 stopped the game at startup there). The fix is off by default;
+  after updating, switch it on in Customizations unless you saved it on.

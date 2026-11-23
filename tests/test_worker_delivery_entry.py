@@ -21,8 +21,8 @@ def entry():
 
 
 class WorkerDeliveryEntryTests(unittest.TestCase):
-    def test_default_on_explicit_off_and_idempotence(self):
-        for setting, expected in ((None, 1), ({}, 1), ({'reachable_delivery': True}, 1),
+    def test_default_off_explicit_on_and_idempotence(self):
+        for setting, expected in ((None, 0), ({}, 0), ({'reachable_delivery': True}, 1),
                                   ({'reachable_delivery': False}, 0)):
             with self.subTest(setting=setting):
                 lua, module = entry()
@@ -36,7 +36,7 @@ class WorkerDeliveryEntryTests(unittest.TestCase):
         lua, module = entry()
         lua.execute('package.preload.delivery=function() return {resolve=function() error("bad binding") end} end')
         with self.assertRaisesRegex(LuaError, 'bad binding'):
-            module.enable(module, lua.table())
+            module.enable(module, lua.table_from({'reachable_delivery': True}))
         self.assertEqual(lua.globals().installed, 0)
         self.assertFalse(module.applied)
 

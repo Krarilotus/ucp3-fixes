@@ -6,7 +6,7 @@ the unit started dying. The game's own living-unit census also checks the
 native dying flag. This module adds that check to the existing occupancy loop;
 native tile lists, troop values, teams and capture handling remain in charge.
 
-The **Bugfixes → Living gatehouse defenders** switch defaults to on and needs a
+The **Bugfixes → Living gatehouse defenders** switch is off by default and needs a
 restart when changed. No save or map data is added. The module is optional;
 maps remain usable without it, although gatehouse control follows the original
 rules when it is off.
@@ -23,3 +23,8 @@ Suggested single-player test:
 - [ ] Kill the last attacker while a defender remains; the corpse must not take control.
 - [ ] Repeat with an assassin and a unit with a long death animation.
 - [ ] Save and load during the death animation, then repeat with the switch off.
+
+## Release notes
+
+- **0.2.0:** The fix is off by default. After updating, switch it on in Customizations
+  unless you saved it on.

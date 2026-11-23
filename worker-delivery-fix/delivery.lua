@@ -4,7 +4,8 @@ local PATTERNS = {
   accessible = "83 EC 0C 8B 44 24 10 85 C0 57 8B F9 89 7C 24 04 7F 09 33 C0",
   custom = "83 EC 08 8B 44 24 0C 85 C0 53 8B D9 89 5C 24 04 7F 09 33 C0",
   route = "6A 00 50 51 55 B9 ? ? ? ? E8 ? ? ? ? 85 C0 75 05 BB 01 00 00 00",
-  heatmap = "0F BF 4E 02 83 3C 8D ? ? ? ? 00 75 3E 6A 00 57 B9 ? ? ? ? E8 ? ? ? ? 85 C0 75 07 66 C7 06 03 00 EB 12 83 F8 02 75 07 66 C7 06 03 00 EB 06 66 83 3E 03 75 14",
+  -- The opcode at +29 is the removal branch; UCP2 Legacy's ai_access may own it.
+  heatmap = "0F BF 4E 02 83 3C 8D ? ? ? ? 00 75 3E 6A 00 57 B9 ? ? ? ? E8 ? ? ? ? 85 C0 ? 07 66 C7 06 03 00 EB 12 83 F8 02 75 07 66 C7 06 03 00 EB 06 66 83 3E 03 75 14",
   row = "03 14 8D ? ? ? ? 0F B7 04 55 ? ? ? ? 66 85 C0",
   area = "0F BF 04 55 ? ? ? ? 3B C1 74 29 0F BF 96 E6 00 00 00",
   ox = "53 55 56 8B 35 ? ? ? ? 69 F6 90 04 00 00 0F BF 86 ? ? ? ? 0F BF 8E ? ? ? ? 33 ED 3B C5 57",
@@ -21,6 +22,16 @@ local PATTERNS = {
 local UNIT_STRIDE, BUILDING_STRIDE = 0x490, 0x32C
 -- Stockpile (10) is exempt from this native keep-region check already.
 local STORAGE_TYPES = {[11] = true, [19] = true}
+
+-- The AI heatmap marks a building for removal when the accessibility call
+-- returns 0 (no entrance tile in any area) or 2 (an entrance exists, but the
+-- keep can't reach it). UCP2 Legacy's "ai_access" option (on in
+-- ucp2-legacy-defaults) turns the `jne` after the call into `jmp`, which drops
+-- only the 0 case. That byte is its patch site; this module only reads it.
+-- The 2 case stays native, and this module's store query avoids it, so the
+-- two changes add up in either load order.
+local HEATMAP_BRANCH = 29
+local NATIVE_BRANCH, LEGACY_AI_ACCESS_BRANCH = 0x75, 0xEB
 
 local function unique(pattern, name)
   local address = core.AOBScan(pattern)
@@ -69,6 +80,9 @@ local function resolve()
       and sites.heatmap + 27 + signedInteger(core.readInteger(sites.heatmap + 23))
           == sites.accessible,
     "worker-delivery-fix: unexpected AI store accessibility call")
+  local branch = core.readByte(sites.heatmap + HEATMAP_BRANCH)
+  assert(branch == NATIVE_BRANCH or branch == LEGACY_AI_ACCESS_BRANCH,
+    string.format("worker-delivery-fix: unexpected AI store removal branch 0x%02X", branch))
 
   -- These operands name existing native roots; no reference VA is retained.
   local currentSlot = core.readInteger(sites.producers + 6)
