@@ -1,11 +1,11 @@
 buildings: Construire des bâtiments par-dessus les ouvriers
-buildings_tooltip: Vous pouvez placer un bâtiment sur vos propres ouvriers. Ils s'écartent vers la case libre la plus proche à côté du nouveau bâtiment et poursuivent leur tâche. Les soldats et les unités ennemies bloquent toujours l'emplacement comme avant. Désactiver cette option rétablit le placement d'origine des bâtiments.
+buildings_tooltip: Vous pouvez placer un bâtiment sur vos propres ouvriers. Ils s'écartent vers la case libre la plus proche à côté du nouveau bâtiment et poursuivent leur tâche.
 walls: Construire des murs par-dessus les ouvriers
-walls_tooltip: 'Même principe pour les murs : les ouvriers sur le passage sont déplacés à côté du mur, si possible du même côté où ils se trouvaient. Désactiver cette option rétablit le placement d''origine des murs pour les joueurs et l''IA.'
+walls_tooltip: 'Même principe pour les murs : les ouvriers sur le passage sont déplacés à côté du mur, si possible du même côté où ils se trouvaient.'
 keep_on_walls: Réparer un mur laisse les unités dessus
-keep_on_walls_tooltip: Les troupes et personnes debout sur un mur ou un escalier restent en place lorsque vous réparez ce mur. Seules les personnes au sol sous un nouveau mur sont écartées. Cela n'a d'effet que lorsque les murs peuvent être placés sur les ouvriers.
+keep_on_walls_tooltip: Les troupes et personnes debout sur un mur ou un escalier restent en place lorsque vous réparez ce mur.
 allies: Les ouvriers alliés comptent comme amicaux
-allies_tooltip: Il est également possible de construire sur les ouvriers des joueurs de votre équipe. Lorsque cette option est désactivée, seuls vos propres ouvriers sont concernés.
+allies_tooltip: Il est également possible de construire sur les ouvriers des joueurs de votre équipe.
 balance_changes: Modifications de l'équilibrage
 bugfixes: Corrections
 tags.behavior: Comportement

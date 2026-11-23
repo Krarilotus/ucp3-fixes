@@ -1,11 +1,11 @@
 buildings: Binalar işçilerin üzerine yerleştirilebilir
-buildings_tooltip: Kendi işçilerinin bulunduğu yere bina yerleştirebilirsin. Yeni binanın yanındaki en yakın boş kareye çekilip işlerine devam ederler. Askerler ve düşman birimleri eskisi gibi alanı engellemeye devam eder. Kapatıldığında oyunun özgün bina yerleştirme davranışı geri döner.
+buildings_tooltip: Kendi işçilerinin bulunduğu yere bina yerleştirebilirsin. Yeni binanın yanındaki en yakın boş kareye çekilip işlerine devam ederler.
 walls: Surlar işçilerin üzerine yerleştirilebilir
-walls_tooltip: 'Surlar için de aynısı geçerlidir: yolda duran işçiler mümkünse bulundukları tarafta kalacak şekilde surun yanına çekilir. Kapatıldığında oyuncu ve yapay zekâ için özgün sur yerleştirme geri döner.'
+walls_tooltip: 'Surlar için de aynısı geçerlidir: yolda duran işçiler mümkünse bulundukları tarafta kalacak şekilde surun yanına çekilir.'
 keep_on_walls: Sur onarımı üstündeki birimleri yerinde bırakır
-keep_on_walls_tooltip: Bir suru onardığında surun veya merdivenin üstünde duran askerler ve siviller yerlerinde kalır. Yalnızca yeni bir surun altında zeminde duranlar kenara çekilir. Yalnızca surlar işçilerin üzerine yerleştirilebildiğinde geçerlidir.
+keep_on_walls_tooltip: Bir suru onardığında surun veya merdivenin üstünde duran askerler ve siviller yerlerinde kalır.
 allies: Müttefik işçileri dost sayılır
-allies_tooltip: Takımındaki oyuncuların işçilerinin üzerine de inşa edilebilir. Kapalıyken yalnızca kendi işçilerin için geçerlidir.
+allies_tooltip: Takımındaki oyuncuların işçilerinin üzerine de inşa edilebilir.
 balance_changes: Denge değişiklikleri
 bugfixes: Hata düzeltmeleri
 tags.behavior: Davranış
