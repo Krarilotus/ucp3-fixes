@@ -33,6 +33,11 @@ config-sparse:
         enabled:
           contents:
             suggested-value: true
+    scenario-settings-fix:
+      config:
+        map_settings:
+          contents:
+            suggested-value: true
     aiv-troops-behaviour:
       config:
         enabled:

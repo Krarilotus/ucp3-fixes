@@ -22,6 +22,7 @@ FIXES_DEPENDENCIES = {
     'hunter-targeting-fix': '^0.2.0', 'fixed-engineers': '^0.3.0',
     'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.0',
     'interface-visual-fixes': '^0.2.0', 'audio-fixes': '^0.2.0',
+    'scenario-settings-fix': '^0.1.0',
 }
 # Every option URL UCP3 Fixes turns on. Interface & Visual's two
 # interface features and its Ghost Objects repair are deliberately absent.
@@ -34,6 +35,7 @@ FIXES_SUGGESTED = {
     'interface-visual-fixes.distinct-dead-tree-sprites', 'interface-visual-fixes.tower-door-height',
     'interface-visual-fixes.cliff-texture-direction',
     'audio-fixes.startup-sfx-volume', 'audio-fixes.video-fx-volume', 'audio-fixes.positional-audio',
+    'scenario-settings-fix.map_settings',
 }
 MEMBERS = {
     'ucp3-basics': dict(
@@ -115,7 +117,7 @@ class FixesPluginTests(unittest.TestCase):
     def test_plugin_depends_on_the_neutral_fix_modules(self):
         fixes = definition(FIXES)
         self.assertEqual((fixes['type'], fixes['version'], fixes['display-name']),
-                         ('plugin', '0.2.0', 'UCP3 Fixes'))
+                         ('plugin', '0.3.0', 'UCP3 Fixes'))
         self.assertNotIn('family', fixes)
         self.assertEqual(fixes['dependencies'], FIXES_DEPENDENCIES)
         self.assertNotIn('smarter-gatehouses', fixes['dependencies'])
