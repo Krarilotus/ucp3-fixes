@@ -120,3 +120,5 @@ argument is not 0, and searches other game functions run directly.
 stub it writes, with test policies, in unicorn from `setDestinationForUnit`'s own
 instructions. `tests/check_route_search.py <exe>...` does the same on licensed 1.41
 executables.
+
+Executable coverage: Stronghold Crusader.exe and Stronghold_Crusader_Extreme.exe (the SHC 1.41 and SHCE 1.41 entries in definition.yml). Both route signatures must match exactly once.

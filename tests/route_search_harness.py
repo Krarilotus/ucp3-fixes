@@ -138,6 +138,7 @@ class RouteSearch:
             g.hooks = hook_table
         core = lua.table()
         core.AOBScan = self.aob_scan
+        core.scanForAOB = self.scan_for_aob
         core.readInteger = lambda address: struct.unpack('<i', space.read(int(address), 4))[0]
         # RPS pushes *(BYTE*) for readByte (unsigned).
         core.readByte = lambda address: space.read(int(address), 1)[0]
@@ -167,6 +168,9 @@ class RouteSearch:
         if not hits:
             raise Exception('AOB not found: ' + pattern)
         return hits[0]
+
+    def scan_for_aob(self, pattern, start=0):
+        return next((hit for hit in self.find_all(pattern) if hit >= start), None)
 
     def flatten(self, values):
         """Bytes of a code table as core.compile reads it: numbers and nested tables."""

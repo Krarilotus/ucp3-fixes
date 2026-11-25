@@ -58,6 +58,9 @@ local function find(pattern, purpose)
   if not ok or not found(at) then
     return nil, string.format("%s was not found; this executable is not supported", purpose)
   end
+  if core.scanForAOB(pattern) ~= at or found(core.scanForAOB(pattern, at + 1)) then
+    return nil, string.format("%s does not have exactly one match; this executable is not supported", purpose)
+  end
   return at
 end
 
