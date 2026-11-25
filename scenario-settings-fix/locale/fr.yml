@@ -1,4 +1,4 @@
 bugfixes: Corrections
-map_settings: Disponibilités de la carte
-map_settings_descr: Les escarmouches, parties multijoueurs et « Jouer une carte » gardent les troupes, armes et marchandises interdites par la carte dans l'éditeur de scénario. Tous les joueurs doivent avoir le même réglage. Redémarrer après modification.
+map_settings: Paramètres de disponibilité de la carte
+map_settings_descr: En escarmouche, en multijoueur et dans « Jouer une carte », les troupes, armes et marchandises interdites dans l'éditeur de scénario restent interdites. Tous les joueurs doivent avoir le même réglage. Redémarrer après modification.
 tags.bugfixes: Corrections
