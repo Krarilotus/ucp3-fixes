@@ -1,6 +1,8 @@
 -- The scenario editor saves which troops can be recruited, which weapons can be made and which
 -- goods can be traded with the map (MapPropertiesState: euro and mercenary troops at +0x582 and
 -- +0x590, weapons at +0x59E, goods at +0x134D0). Every start loads them with the map, but:
+--   commitBuildingAvailability, run by every start after loading, sets the saved archer flag to 1
+--     when one of the map's first five buildings is allowed;
 --   LaunchSkirmishGame (skirmish, multiplayer, trail missions) then allows every troop, weapon and
 --     good again;
 --   LaunchSinglePlayerGameUnk (Play a Map) applies troops and goods but allows every weapon again;
@@ -30,11 +32,18 @@ local TRADE = "56 57 33 FF 8D B1 ? ? ? ? 89 3D ? ? ? ? 89 3D ? ? ? ? C7 05 ? ? ?
 -- setupBuildingData: the product of a new pole turner or fletcher, then its next product. The
 -- bytes Custom Skirmish Trails detours before it are left out.
 local WORKSHOP = "66 89 84 37 A2 02 00 00 66 89 84 37 A4 02 00 00 E9 ? ? ? ? ? ? ? ? ? EB E4"
+-- commitBuildingAvailability's loop: "cmp [table], -1" first, "mov ebx, base / sub ebx, id /
+-- mov [map + ebx*2], ax" for a negative id. A table row is a key (-1 ends the table) and up to
+-- nine ids (0 ends the row).
+local COMMIT = "83 3D ? ? ? ? FF 8D 7D 01 0F 84 ? ? ? ? 8D 82 ? ? ? ? 53 33 C9 89 44 24 0C 56 8B 74 24 10 33 C0 "
+  .. "66 39 06 8D B1 ? ? ? ? 0F 95 C0 8B 4E FC 85 C9 7E 0A 66 89 84 4A ? ? ? ? EB 11 7D 5D 85 C0 74 0B "
+  .. "BB ? ? ? ? 2B D9 66 89 04 5A"
 
 local SKIRMISH_SITE, SKIRMISH_SIZE = 0x0F, 6
 local RESET_SITE, RESET_SIZE, PAIR = 0x24, 7, 13
 local RESET_FROM_LAUNCHER = 0x15C
 local WORKSHOP_SITE, WORKSHOP_SIZE = 8, 8
+local COMMIT_ROWS, COMMIT_BASE, ROW, IDS = 2, 72, 40, 9
 local EURO_SAVE, MERC_SAVE, WEAPON_SAVE = 0x582, 0x590, 0x59E
 local BOW, CROSSBOW, SPEAR, PIKE = 0x11, 0x12, 0x13, 0x14
 
@@ -144,6 +153,7 @@ local function prepare()
   local saved = find(LAUNCHER_UNITS, "Play a Map's recruitable troops")
   local trade = find(TRADE, "the map's tradeable goods")
   local workshop = find(WORKSHOP, "the new workshops' products") + WORKSHOP_SITE
+  local commit = find(COMMIT, "the start's building availability")
 
   local map = core.readInteger(reset + 1)
   local site = reset + RESET_SITE
@@ -171,6 +181,22 @@ local function prepare()
       CROSSBOW_NOW = now[1], BOW_NOW = now[2], PIKE_NOW = now[3], SPEAR_NOW = now[4],
     } },
   }
+  -- The building table's ids that set the saved archer flag end their rows instead.
+  local archer = core.readInteger(commit + COMMIT_BASE) - EURO_SAVE // 2
+  local row = core.readInteger(commit + COMMIT_ROWS)
+  local links = #hooks
+  while core.readInteger(row) ~= -1 do
+    for i = 1, IDS do
+      local id = core.readInteger(row + 4 * i)
+      if id == 0 then break end
+      if id == archer then
+        check(i == IDS or core.readInteger(row + 4 * i + 4) == 0, "building table")
+        hooks[#hooks + 1] = { site = row + 4 * i, size = 4, patch = { 0, 0, 0, 0 } }
+      end
+    end
+    row = row + ROW
+  end
+  check(#hooks > links, "building table")
   for _, hook in ipairs(hooks) do hook.original = bytes(hook.site, hook.size) end
 
   return function()
@@ -181,12 +207,15 @@ local function prepare()
         for i, byte in ipairs(hook.original) do
           check(original[i] == byte, "code at 0x" .. string.format("%X", hook.site) .. " changed after preflight")
         end
-        hook.values.RESUME = hook.site + hook.size
-        local cave = core.allocateAssembly(hook.script .. "  db " .. table.concat(original, ", ")
-          .. "\n  jmp RESUME\n" .. (hook.data or ""), hook.values)
-        local jump = { 0xE9, core.itob(core.getRelativeAddress(hook.site, cave, -5)) }
-        for _ = 6, hook.size do jump[#jump + 1] = 0x90 end
-        core.writeCode(hook.site, jump)
+        local patch = hook.patch
+        if not patch then
+          hook.values.RESUME = hook.site + hook.size
+          local cave = core.allocateAssembly(hook.script .. "  db " .. table.concat(original, ", ")
+            .. "\n  jmp RESUME\n" .. (hook.data or ""), hook.values)
+          patch = { 0xE9, core.itob(core.getRelativeAddress(hook.site, cave, -5)) }
+          for _ = 6, hook.size do patch[#patch + 1] = 0x90 end
+        end
+        core.writeCode(hook.site, patch)
         written[#written + 1] = hook
       end
     end)
