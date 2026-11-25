@@ -1,6 +1,6 @@
 # ucp3-fixes
 
-Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as seven
+Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as eight
 independently selectable UCP3 modules, plus four configuration plugins: UCP3
 Fixes, which turns the fixes on, and the UCP3 setup family (UCP3 Basics, UCP3
 Basics + Fixes, UCP3 Recommended). Every module is off by default. The hop farm
@@ -26,6 +26,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Worker Delivery Fix](docs/worker-delivery.md) | Lets workers deliver to reachable granaries and armories when the keep route is blocked, and prevents AI from removing otherwise valid stores for that reason. Stockpiles use a different native check. In-game acceptance is pending. |
 | [Gatehouse Capture Fix](docs/gatehouse-capture.md) | Counts living troops, but not dying troops, for gatehouse capture and defense. In-game acceptance is pending. |
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
+| [Scenario Settings Fix](docs/scenario-settings.md) | Keeps the troops, weapons and goods a map forbids in the scenario editor forbidden in skirmish, multiplayer, trail and Play a Map games. Not part of the UCP3 Fixes plugin. In-game acceptance is pending. |
 | [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 | [Route Search](route-search/) | Not a fix: the one owner of a unit's route search. Other modules' route policies (Smarter Pathing's assassin shortcut, Gatehouse Fixes' gate routes) run there in a fixed order, so they work together. No settings; alone it changes nothing. Its README documents the policy contract. MIT. |
 
@@ -78,7 +79,7 @@ Place each module ZIP in `ucp/modules/<name>-<version>.zip`. Unsigned local modu
 the launch option **Disable Security**. Plugins (UCP3 Fixes and the UCP3 family) go to
 `ucp/plugins/<name>-<version>.zip`, which the launcher unpacks, and need no signature. Select the module in Content, then use its
 settings under **AI → AIV Troop Behaviour** for troop controls, **AI → Fixes**
-for the hop farm fix, or **Bugfixes** for Fixed Engineers, Worker Delivery Fix, Gatehouse Capture Fix and Hunter Targeting Fix. Changing a switch
+for the hop farm fix, or **Bugfixes** for Fixed Engineers, Worker Delivery Fix, Gatehouse Capture Fix, Hunter Targeting Fix and Scenario Settings Fix. Changing a switch
 requires restarting the game. Every fix is off by default, so selecting a module
 alone keeps the game's behaviour until you switch its fix on; the AIV module's
 additional troop controls are opt-in too. The modules are not selected by default.

@@ -1,0 +1,4 @@
+bugfixes: Correcciones
+map_settings: Disponibilidad del mapa
+map_settings_descr: Las escaramuzas, partidas multijugador y «Jugar un mapa» mantienen las tropas, armas y mercancías que el mapa prohíbe en el editor de escenarios. Todos los jugadores necesitan el mismo ajuste. Reinicia tras cambiarlo.
+tags.bugfixes: Correcciones
