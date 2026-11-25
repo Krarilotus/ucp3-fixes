@@ -178,6 +178,9 @@ Native rules and this alias remain unchanged when all relevant choices are nativ
 
 ## Implementation and validation
 
+Other modules read the policy with `defenseRowFor(ai, unitType)` (defence row) and
+`defenseGroupsFor(ai, row, slots, patrolGroups)` (group count); nil means the game's own.
+
 The troop list and capability/field definitions live in `behavior/policy.lua`.
 Policy, AIC registration, address resolution and hook installation are separate.
 The hooks reuse native assignment and movement routines rather than duplicating

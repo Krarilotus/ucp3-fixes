@@ -32,16 +32,16 @@ local function prepare(config)
 
     -- Override group capacity after the vanilla special cases for rows 8/10/17.
     core.detourCode(function(r)
-      local mode = policy:get(game.ai(r.EBP), "Movement", r.EAX)
-      if mode ~= 0 then r.EBX = Policy.groupCount(mode, game.slots(r.EBP, r.EAX), r.EDX) end
+      local groups = policy:groups(game.ai(r.EBP), r.EAX, game.slots(r.EBP, r.EAX), r.EDX)
+      if groups then r.EBX = groups end
       return r
     end, sites.groupLimit, 9)
 
     -- Let held native-patrol rows retain a group for every slot. Adjust before
     -- the original cmp, so its condition flags and local group counts agree.
     core.detourCode(function(r)
-      local mode = policy:get(game.ai(r.EBP), "Movement", core.readInteger(r.EBX))
-      if mode ~= 0 then r.EAX = Policy.groupCount(mode, r.ECX, r.EAX) end
+      local groups = policy:groups(game.ai(r.EBP), core.readInteger(r.EBX), r.ECX, r.EAX)
+      if groups then r.EAX = groups end
       return r
     end, sites.patrolLimit, 8)
 
@@ -67,7 +67,7 @@ local function prepare(config)
     end, sites.movement, 4, 1, 7)
 
     require("behavior.aic")(policy)
-  end
+  end, policy
 end
 
 return {prepare = prepare, initialGate = initialGate}

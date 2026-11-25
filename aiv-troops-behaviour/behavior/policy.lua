@@ -37,6 +37,13 @@ local CHOICES = {
   Movement = {inherit = -1, native = 0, hold = 1, patrol = 2},
 }
 
+local function groupCount(mode, slots, patrolGroups)
+  slots = math.max(0, math.min(10, slots))
+  if mode == 1 then return slots end
+  -- Zero patrol groups means no cycling; retain one stationary defense group.
+  return math.min(slots, math.max(1, patrolGroups))
+end
+
 local function new(config)
   config = config or {}
   local defaults = {}
@@ -102,14 +109,11 @@ local function new(config)
       return troop.row
     end
   end
+  function policy:groups(ai, row, slots, patrolGroups)
+    local mode = self:get(ai, "Movement", row)
+    if mode ~= 0 then return groupCount(mode, slots, patrolGroups) end
+  end
   return policy
-end
-
-local function groupCount(mode, slots, patrolGroups)
-  slots = math.max(0, math.min(10, slots))
-  if mode == 1 then return slots end
-  -- Zero patrol groups means no cycling; retain one stationary defense group.
-  return math.min(slots, math.max(1, patrolGroups))
 end
 
 local function slotIndex(mode, ordinal, slots, patrolGroups, rallyHits)

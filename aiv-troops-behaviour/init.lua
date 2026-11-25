@@ -59,9 +59,9 @@ return {
     end
     -- Troop behaviour controls are opt-in. Resolve every behavior site before
     -- applying even the base row fix, so a failed preflight leaves no patches.
-    local installBehavior
+    local installBehavior, policy
     if config.behavior and config.behavior.enabled == true then
-      installBehavior = require("behavior").prepare(config.behavior)
+      installBehavior, policy = require("behavior").prepare(config.behavior)
     end
     -- AOBScan raises on failure. Validate the entire block before any write.
     local ok, target = pcall(core.AOBScan, AOB)
@@ -71,9 +71,22 @@ return {
     for _, offset in ipairs(SKIP_OFFSETS) do
       core.writeCode(target + offset, NOP6)
     end
-    if installBehavior then installBehavior() end
+    if installBehavior then
+      installBehavior()
+      self.policy = policy
+    end
     self.applied = true
     log(INFO, string.format("aiv-troops-behaviour: patched AIV spot decoder at 0x%X", target))
+  end,
+
+  -- Read-only policy answers for other modules; nil means the game's own value.
+  -- ai is the aicloader personality (1 Rat .. 16 Abbot).
+  defenseRowFor = function(self, ai, unitType)
+    return self.policy and self.policy:ownRow(ai, unitType) or nil
+  end,
+
+  defenseGroupsFor = function(self, ai, row, slots, patrolGroups)
+    return self.policy and self.policy:groups(ai, row, slots, patrolGroups) or nil
   end,
 
   disable = function(self, config)
