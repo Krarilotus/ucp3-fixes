@@ -1,0 +1,4 @@
+bugfixes: Correcciones
+map_settings: Ajustes de disponibilidad del mapa
+map_settings_descr: En escaramuzas, multijugador y «Jugar un mapa» siguen prohibidas las tropas, armas y mercancías que el mapa prohíbe en el editor de escenarios. Todos los jugadores necesitan el mismo ajuste. Reinicia tras cambiarlo.
+tags.bugfixes: Correcciones

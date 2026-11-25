@@ -1,0 +1,12 @@
+meta:
+  version: 1.0.0
+options:
+- name: map_settings
+  category: ['{{bugfixes}}']
+  display: UCP2Switch
+  header: '{{map_settings}}'
+  text: '{{map_settings_descr}}'
+  url: scenario-settings-fix.map_settings
+  contents:
+    type: boolean
+    value: false

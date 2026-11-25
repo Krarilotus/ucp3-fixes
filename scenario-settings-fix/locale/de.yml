@@ -1,0 +1,4 @@
+bugfixes: Fehlerkorrekturen
+map_settings: Verfügbarkeitseinstellungen der Karte
+map_settings_descr: Im Szenario-Editor gesperrte Truppen, Waffen und Güter bleiben in Gefecht, Mehrspieler und „Karte spielen“ gesperrt. Alle Spieler brauchen dieselbe Einstellung. Nach Änderung neu starten.
+tags.bugfixes: Fehlerkorrekturen

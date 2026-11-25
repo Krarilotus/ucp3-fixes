@@ -1,7 +1,7 @@
 name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
-version: 0.2.0
+version: 0.3.0
 type: plugin
 game:
 - SHC==1.41
@@ -21,3 +21,4 @@ dependencies:
   aiv-troops-behaviour: ^0.3.0
   interface-visual-fixes: ^0.2.0
   audio-fixes: ^0.2.0
+  scenario-settings-fix: ^0.1.0
