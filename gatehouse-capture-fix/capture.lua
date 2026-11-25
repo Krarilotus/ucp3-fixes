@@ -4,10 +4,16 @@ local pattern = "69 F6 90 04 00 00 66 83 BE ? ? ? ? 00 74 54 " ..
   "0F BF 86 ? ? ? ? 0F BF BE ? ? ? ? 50 B9 ? ? ? ? E8 ? ? ? ? " ..
   "8B 1D ? ? ? ? 01 44 BC 38"
 
+-- The executable's code section ends at image base + BaseOfCode + SizeOfCode.
+local function codeEnd()
+  local header = 0x400000 + core.readInteger(0x400000 + 0x3C)
+  return 0x400000 + core.readInteger(header + 0x2C) + core.readInteger(header + 0x1C) - 1
+end
+
 local function prepare()
   local block = core.AOBScan(pattern)
   assert(core.scanForAOB(pattern) == block
-      and core.scanForAOB(pattern, block + 1) == nil,
+      and core.scanForAOB(pattern, block + 1, codeEnd()) == nil,
     "gatehouse-capture-fix: ambiguous native occupancy check")
   local site = block + 6
   local original = core.readBytes(site, 10)

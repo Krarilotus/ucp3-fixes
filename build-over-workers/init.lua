@@ -120,13 +120,19 @@ local MAP_SIZE = 400
 -- Helpers
 ---------------------------------------------------------------------------------------
 
+-- The executable's code section ends at image base + BaseOfCode + SizeOfCode.
+local function codeEnd()
+  local header = 0x400000 + core.readInteger(0x400000 + 0x3C)
+  return 0x400000 + core.readInteger(header + 0x2C) + core.readInteger(header + 0x1C) - 1
+end
+
 local function scan(pattern, purpose)
   local ok, address = pcall(core.AOBScan, pattern)
   if not ok or address == nil then
     error(MODULE_NAME .. ": could not find " .. purpose)
   end
   -- Refuse an ambiguous signature instead of patching the first of several matches.
-  local duplicate = core.scanForAOB(pattern, address + 1)
+  local duplicate = core.scanForAOB(pattern, address + 1, codeEnd())
   if duplicate and duplicate ~= 0 then
     error(MODULE_NAME .. ": the signature for " .. purpose .. " matches more than once")
   end

@@ -37,7 +37,8 @@ def options():
 def entry(aob=None, duplicate=None):
     """Load init.lua with a core whose every access is recorded.
 
-    AOBScan fails unless `aob` gives an address; scanForAOB returns `duplicate` (or 0).
+    AOBScan fails unless `aob` gives an address; scanForAOB returns `duplicate` (or 0);
+    readInteger returns 0.
     """
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().first_hit = aob
@@ -52,6 +53,7 @@ def entry(aob=None, duplicate=None):
             error("AOB not found")
           end
           if name == "scanForAOB" then return second_hit end
+          if name == "readInteger" then return 0 end
           error("unexpected core." .. name)
         end
       end})
@@ -85,7 +87,8 @@ class BuildOverWorkersTests(unittest.TestCase):
         lua, module = entry(aob=0x401000, duplicate=0x402000)
         with self.assertRaisesRegex(LuaError, NAME + ': the signature for .* matches more than once'):
             module.enable(module, lua.table_from({'buildings': True}))
-        self.assertEqual(list(lua.globals().calls.values()), ['AOBScan', 'scanForAOB'])
+        self.assertEqual(list(lua.globals().calls.values()),
+                         ['AOBScan'] + ['readInteger'] * 3 + ['scanForAOB'])
 
     def test_runtime_disable_reports_restart(self):
         lua, module = entry()

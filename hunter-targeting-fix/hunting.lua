@@ -15,10 +15,16 @@ local stepPattern = "83 FF 20 7E 1E 69 F6 90 04 00 00 5F " ..
 local failedShotPattern = "56 B9 ? ? ? ? 66 C7 80 ? ? ? ? 04 00 " ..
   "E8 ? ? ? ? 85 C0 A1 ? ? ? ? 0F 84 ? ? ? ? 8B C8 69 C9 90 04 00 00"
 
+-- The executable's code section ends at image base + BaseOfCode + SizeOfCode.
+local function codeEnd()
+  local header = 0x400000 + core.readInteger(0x400000 + 0x3C)
+  return 0x400000 + core.readInteger(header + 0x2C) + core.readInteger(header + 0x1C) - 1
+end
+
 local function unique(pattern, name)
   local address = core.AOBScan(pattern)
   assert(core.scanForAOB(pattern) == address
-      and core.scanForAOB(pattern, address + 1) == nil,
+      and core.scanForAOB(pattern, address + 1, codeEnd()) == nil,
     "hunter-targeting-fix: ambiguous " .. name)
   return address
 end
