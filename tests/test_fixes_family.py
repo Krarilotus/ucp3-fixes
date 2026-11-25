@@ -117,7 +117,7 @@ class FixesPluginTests(unittest.TestCase):
     def test_plugin_depends_on_the_neutral_fix_modules(self):
         fixes = definition(FIXES)
         self.assertEqual((fixes['type'], fixes['version'], fixes['display-name']),
-                         ('plugin', '0.3.0', 'UCP3 Fixes'))
+                         ('plugin', '0.2.1', 'UCP3 Fixes'))
         self.assertNotIn('family', fixes)
         self.assertEqual(fixes['dependencies'], FIXES_DEPENDENCIES)
         self.assertNotIn('smarter-gatehouses', fixes['dependencies'])

@@ -1,7 +1,7 @@
 name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
-version: 0.3.0
+version: 0.2.1
 type: plugin
 game:
 - SHC==1.41
