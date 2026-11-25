@@ -19,6 +19,7 @@ yet and is not in the public Store.
 | --- | --- | --- |
 | Dead troops affecting gate capture/defense | `gatehouse-capture-fix` in this repository | Fixes member; turned on by the UCP3 Fixes plugin |
 | Gate closing, enemy-gate routes, optional gate stairs | [Gatehouse Fixes](https://github.com/Monsterfisch/SmarterGatehouses), package ID `smarter-gatehouses` | Module dependency in the 0.1.4 test candidate only, not in UCP3 Fixes 0.2.0; each switch remains configurable and stairs stay opt-in |
+| A unit's route search (`setDestinationForUnit`'s call of the game's search) | [`route-search`](../route-search/) in this repository | Owner module with a versioned policy API; Gatehouse Fixes' route rules (order 200) and Smarter Pathing's assassin shortcut (order 100) register there instead of each redirecting the call |
 | Tunneler digging, target selection, collapse, terrain cleanup and raid participation | [Improved Tunnelers](https://github.com/Monsterfisch/ImprovedTunnelers) | Keep its own module and test package; no mandatory Fixes dependency |
 | AI starting troop counts and initial acquisition/assignment | [AI Swapper](https://github.com/UnofficialCrusaderPatch/extension-aiSwapper) | AI Swapper owns the native initialization consumer, including tunnelers |
 | Siege crew identity, death, fire, dismount and ordinary command stopping | `fixed-engineers` in this repository | Existing independent module selected by the unreleased bundle; Store acceptance remains pending |

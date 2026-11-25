@@ -27,6 +27,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Gatehouse Capture Fix](docs/gatehouse-capture.md) | Counts living troops, but not dying troops, for gatehouse capture and defense. In-game acceptance is pending. |
 | [Hunter Targeting Fix](docs/hunter-targeting.md) | Lets hunters choose nearby deer and approach along their native path when a shot is blocked. In-game acceptance is pending. |
 | [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
+| [Route Search](route-search/) | Not a fix: the one owner of a unit's route search. Other modules' route policies (Smarter Pathing's assassin shortcut, Gatehouse Fixes' gate routes) run there in a fixed order, so they work together. No settings; alone it changes nothing. Its README documents the policy contract. MIT. |
 
 ## UCP3 Fixes plugin
 
