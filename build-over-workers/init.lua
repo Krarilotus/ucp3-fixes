@@ -120,10 +120,26 @@ local MAP_SIZE = 400
 -- Helpers
 ---------------------------------------------------------------------------------------
 
--- The executable's code section ends at image base + BaseOfCode + SizeOfCode.
-local function codeEnd()
-  local header = 0x400000 + core.readInteger(0x400000 + 0x3C)
-  return 0x400000 + core.readInteger(header + 0x2C) + core.readInteger(header + 0x1C) - 1
+-- The end of the executable section that holds an address, from the PE header of the image
+-- around it, which starts on a 64 KiB boundary below the address.
+local function sectionEnd(address)
+  local base = address - address % 0x10000
+  while base > 0 do
+    local header = base + core.readInteger(base + 0x3C)
+    if (core.readInteger(base) & 0xFFFF) == 0x5A4D and header > base and header < base + 0x1000
+        and core.readInteger(header) == 0x4550 then
+      local section = header + 0x18 + (core.readInteger(header + 0x14) & 0xFFFF)
+      for _ = 1, core.readInteger(header + 6) & 0xFFFF do
+        local first = base + core.readInteger(section + 12)
+        local stop = first + core.readInteger(section + 8)
+        if address >= first and address < stop then return stop end
+        section = section + 40
+      end
+      break
+    end
+    base = base - 0x10000
+  end
+  error(string.format("%s: no executable section holds 0x%X", MODULE_NAME, address))
 end
 
 local function scan(pattern, purpose)
@@ -131,9 +147,10 @@ local function scan(pattern, purpose)
   if not ok or address == nil then
     error(MODULE_NAME .. ": could not find " .. purpose)
   end
-  -- Refuse an ambiguous signature instead of patching the first of several matches.
-  local duplicate = core.scanForAOB(pattern, address + 1, codeEnd())
-  if duplicate and duplicate ~= 0 then
+  -- Refuse an ambiguous signature: a second match in the section that holds the first.
+  local stop = sectionEnd(address)
+  local duplicate = core.scanForAOB(pattern, address + 1, stop - 1)
+  if duplicate and duplicate ~= 0 and duplicate < stop then
     error(MODULE_NAME .. ": the signature for " .. purpose .. " matches more than once")
   end
   return address

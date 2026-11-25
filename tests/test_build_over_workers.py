@@ -34,15 +34,22 @@ def options():
     return found
 
 
+# An image away from 0x400000: MZ, PE at 0x100, one section at 0x1000 of 0x2000 bytes.
+IMAGE = 0x10400000
+HEADER = {IMAGE: 0x5A4D, IMAGE + 0x3C: 0x100, IMAGE + 0x100: 0x4550, IMAGE + 0x106: 1,
+          IMAGE + 0x114: 0xE0, IMAGE + 0x204: 0x1000, IMAGE + 0x200: 0x2000}
+
+
 def entry(aob=None, duplicate=None):
     """Load init.lua with a core whose every access is recorded.
 
-    AOBScan fails unless `aob` gives an address; scanForAOB returns `duplicate` (or 0);
-    readInteger returns 0.
+    AOBScan fails unless `aob` gives an address; scanForAOB records its arguments and returns
+    `duplicate` (or 0); readInteger reads HEADER.
     """
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().first_hit = aob
     lua.globals().second_hit = duplicate or 0
+    lua.globals().header = lua.table_from(HEADER)
     lua.execute('''
       calls = {}
       core = setmetatable({}, {__index = function(_, name)
@@ -52,8 +59,8 @@ def entry(aob=None, duplicate=None):
             if first_hit then return first_hit end
             error("AOB not found")
           end
-          if name == "scanForAOB" then return second_hit end
-          if name == "readInteger" then return 0 end
+          if name == "scanForAOB" then second_scan = {...}; return second_hit end
+          if name == "readInteger" then return header[...] or 0 end
           error("unexpected core." .. name)
         end
       end})
@@ -84,11 +91,12 @@ class BuildOverWorkersTests(unittest.TestCase):
                 self.assertEqual(list(lua.globals().calls.values()), ['AOBScan'])
 
     def test_ambiguous_signature_is_refused_before_writing(self):
-        lua, module = entry(aob=0x401000, duplicate=0x402000)
+        lua, module = entry(aob=IMAGE + 0x1000, duplicate=IMAGE + 0x2FFF)
         with self.assertRaisesRegex(LuaError, NAME + ': the signature for .* matches more than once'):
             module.enable(module, lua.table_from({'buildings': True}))
-        self.assertEqual(list(lua.globals().calls.values()),
-                         ['AOBScan'] + ['readInteger'] * 3 + ['scanForAOB'])
+        self.assertEqual([c for c in lua.globals().calls.values() if c != 'readInteger'],
+                         ['AOBScan', 'scanForAOB'])
+        self.assertEqual(list(lua.globals().second_scan.values())[1:], [IMAGE + 0x1001, IMAGE + 0x2FFF])
 
     def test_runtime_disable_reports_restart(self):
         lua, module = entry()
