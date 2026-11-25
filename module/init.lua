@@ -484,14 +484,6 @@ local function scanUnique(pattern, label)
   return addr
 end
 
-local function writeJump(site, target, patchSize)
-  local code = { 0xE9, core.itob(core.getRelativeAddress(site, target, -5)) }
-  for i = 6, patchSize do
-    code[#code + 1] = 0x90
-  end
-  core.writeCode(site, code)
-end
-
 local M = {}
 
 function M:enable(config)
@@ -606,12 +598,12 @@ function M:enable(config)
     INVALID_RET = clickTileInvalid,
   })
 
-  writeJump(setupSite, setupStub, 5)
-  writeJump(blitSite, blitStub, 6)
-  writeJump(unitNormalSite, unitNormalStub, 6)
-  writeJump(unitAltRSite, unitAltRStub, 6)
-  writeJump(scrollAddr, scrollStub, 5)
-  writeJump(clickTileSite, clickTileStub, 5)
+  core.writeCode(setupSite, { core.jmpTo(setupStub) })
+  core.writeCode(blitSite, { core.jmpTo(blitStub), 0x90 })
+  core.writeCode(unitNormalSite, { core.jmpTo(unitNormalStub), 0x90 })
+  core.writeCode(unitAltRSite, { core.jmpTo(unitAltRStub), 0x90 })
+  core.writeCode(scrollAddr, { core.jmpTo(scrollStub) })
+  core.writeCode(clickTileSite, { core.jmpTo(clickTileStub) })
 
   log(INFO, "full-minimap: enabled full-map scaling for minimap display, viewport frame, and clicks")
 end
