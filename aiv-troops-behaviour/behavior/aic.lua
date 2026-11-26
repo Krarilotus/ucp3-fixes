@@ -19,7 +19,7 @@ return function(policy)
     end, function(ai) policy:reset(ai, key) end)
   end
   loader:registerAICUpdateProvider(owner, {
-    -- AIC Loader rejects a reset unless every owner of a registered field takes part.
+    -- Takes part in every reset, so its fields reset in the same transaction.
     handles = function(_, spec, resetting)
       if resetting then return true end
       for key in pairs(spec) do
