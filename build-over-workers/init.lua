@@ -132,7 +132,9 @@ local function sectionEnd(address)
       for _ = 1, core.readInteger(header + 6) & 0xFFFF do
         local first = base + core.readInteger(section + 12)
         local stop = first + core.readInteger(section + 8)
-        if address >= first and address < stop then return stop end
+        if address >= first and address < stop and core.readInteger(section + 36) & 0x20000000 ~= 0 then
+          return stop
+        end
         section = section + 40
       end
       break

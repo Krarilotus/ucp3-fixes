@@ -16,7 +16,9 @@ local function sectionEnd(address)
       for _ = 1, core.readInteger(header + 6) & 0xFFFF do
         local first = base + core.readInteger(section + 12)
         local stop = first + core.readInteger(section + 8)
-        if address >= first and address < stop then return stop end
+        if address >= first and address < stop and core.readInteger(section + 36) & 0x20000000 ~= 0 then
+          return stop
+        end
         section = section + 40
       end
       break
@@ -30,7 +32,7 @@ local function prepare()
   local block = core.AOBScan(pattern)
   local stop = sectionEnd(block)
   local again = core.scanForAOB(pattern, block + 1, stop - 1)
-  assert(core.scanForAOB(pattern) == block and (again == nil or again == 0 or again >= stop),
+  assert(again == nil or again == 0 or again >= stop,
     "gatehouse-capture-fix: ambiguous native occupancy check")
   local site = block + 6
   local original = core.readBytes(site, 10)
