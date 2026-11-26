@@ -127,7 +127,7 @@ class BuildOverWorkersTests(unittest.TestCase):
         spec.loader.exec_module(builder)
         with tempfile.TemporaryDirectory() as output:
             with zipfile.ZipFile(builder.build_module(FOLDER, output)) as archive:
-                self.assertEqual(Path(archive.filename).name, f'{NAME}-1.1.0.zip')
+                self.assertEqual(Path(archive.filename).name, f'{NAME}-1.1.1.zip')
                 files = {n for n in archive.namelist() if not n.endswith('/')}
                 self.assertEqual(files, {'definition.yml', 'description.md', 'options.yml', 'init.lua',
                                          'templates.lua', 'CREDITS.md', 'LICENSE',

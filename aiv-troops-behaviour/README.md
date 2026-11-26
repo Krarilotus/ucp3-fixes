@@ -1,6 +1,6 @@
 # AI: AIV Troop Behaviour
 
-Version 0.2.3 combines restored AIV positions with opt-in controls for initial
+Version 0.3.1 combines restored AIV positions with opt-in controls for initial
 troop assignments and defensive slot movement across all 15 supported troop types.
 The base patch restores rows **9, 11 and 18** (pikemen and both swordsman types).
 Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.16,

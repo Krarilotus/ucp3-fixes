@@ -1,7 +1,7 @@
 name: build-over-workers
 display-name: Build Over Workers
 type: module
-version: 1.1.0
+version: 1.1.1
 author: Monsterfish
 meta:
   version: 1.0.0
