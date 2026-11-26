@@ -207,5 +207,6 @@ See the source repository's `docs/validation.md` for the complete checklist.
 
 ## Release notes
 
+- **0.3.1:** Other modules can read the defence row and group count it sets.
 - **0.3.0:** The position fix (main switch) is off by default. After updating, switch it
   on in Customizations unless you saved it on.

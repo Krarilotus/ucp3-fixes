@@ -20,7 +20,7 @@ FIXES_DEPENDENCIES = {
     'framework': '^3.0.7', 'frontend': '^1.0.2',
     'worker-delivery-fix': '^0.2.0', 'gatehouse-capture-fix': '^0.2.0',
     'hunter-targeting-fix': '^0.2.0', 'fixed-engineers': '^0.3.0',
-    'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.0',
+    'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.1',
     'interface-visual-fixes': '^0.2.0', 'audio-fixes': '^0.2.0',
     'scenario-settings-fix': '^0.1.0',
 }
