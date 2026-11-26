@@ -27,18 +27,21 @@ return function(policy)
       end
       return false
     end,
+    -- An invalid value is ignored with a warning, as on the loader's per-field path;
+    -- the update's valid values still apply.
     prepare = function(ai, spec, _, resetting)
-      local previous = {}
-      for _, key in ipairs(keys) do previous[key] = policy:raw(ai, key) end
+      local previous, accepted = {}, {}
+      for _, key in ipairs(keys) do
+        previous[key] = policy:raw(ai, key)
+        if not resetting and spec[key] ~= nil then
+          local ok, reason = policy:accepts(ai, key, spec[key])
+          if ok then accepted[key] = spec[key] else log(WARNING, reason) end
+        end
+      end
       return {
         commit = function()
           if resetting then return restore(ai, {}) end
-          for _, key in ipairs(keys) do
-            if spec[key] ~= nil then
-              local ok, reason = policy:set(ai, key, spec[key])
-              if not ok then log(WARNING, reason) end
-            end
-          end
+          for key, value in pairs(accepted) do policy:set(ai, key, value) end
         end,
         rollback = function() restore(ai, previous) end,
       }

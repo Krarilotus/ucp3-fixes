@@ -62,13 +62,17 @@ local function new(config)
     values[ai] = {}
   end
   local policy = {}
-  function policy:set(ai, key, value)
+  function policy:accepts(ai, key, value)
     local field = FIELDS[key]
     if not values[ai] or not field or type(value) ~= "string" or not field.choices[value] then
       return false, "invalid AIV troop setting: " .. tostring(ai) .. "/" .. tostring(key) .. "=" .. tostring(value)
     end
-    values[ai][key] = value
     return true
+  end
+  function policy:set(ai, key, value)
+    local ok, reason = self:accepts(ai, key, value)
+    if ok then values[ai][key] = value end
+    return ok, reason
   end
   function policy:reset(ai, key)
     if not values[ai] or not FIELDS[key] then return false end
