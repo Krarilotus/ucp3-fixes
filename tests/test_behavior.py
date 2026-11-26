@@ -52,11 +52,13 @@ class BehaviorHarness(ModuleHarness):
         self.lua.globals().core.detourCode = lambda cb, a, n: self.callbacks.update({a: (cb, n)})
         self.lua.globals().core.hookCode = self.hook
         self.lua.globals().core.insertCode = self.insert
-        self.lua.globals().register_aic = lambda key, setter, reset: self.aic.update({key: (setter, reset)})
+        self.lua.globals().register_aic = lambda owner, key, getter, reset: self.aic.update({key: (getter, reset, owner)})
+        self.lua.globals().register_provider = lambda owner, provider: setattr(self, 'provider', (owner, provider))
         self.lua.execute('''
-          modules = {aicloader = {setAdditionalAICValue = function(self, key, setter, reset)
-            register_aic(key, setter, reset)
-          end}}
+          modules = {aicloader = {
+            registerAdditionalAICValue = function(self, owner, key, getter, reset) register_aic(owner, key, getter, reset) end,
+            registerAICUpdateProvider = function(self, owner, provider) register_provider(owner, provider) end,
+          }}
           WARNING = 1
           core.relTo = function(dst, offset)
             return function(address)
@@ -120,7 +122,11 @@ class BehaviorHarness(ModuleHarness):
 
     def install(self, **config):
         self.enable({'enabled': True, 'behavior': self.lua.table_from({'enabled': True, **config}, recursive=True)})
-    def set_aic(self, ai, key, value): self.aic[key][0](ai, value)
+    def update_aic(self, ai, spec, resetting=False):
+        provider = self.provider[1]
+        spec = self.lua.table_from(spec)
+        if provider.handles(ai, spec, resetting): provider.prepare(ai, spec, None, resetting).commit()
+    def set_aic(self, ai, key, value): self.update_aic(ai, {key: value})
     def callback(self, site, **registers):
         return self.callbacks[self.sites[site]][0](self.lua.table_from(registers))
 
@@ -138,6 +144,7 @@ class BehaviorTests(unittest.TestCase):
         h = self.h
         h.install()
         self.assertEqual(len(h.aic), 32)
+        self.assertEqual({entry[2] for entry in h.aic.values()} | {h.provider[0]}, {'aiv-troops-behaviour'})
         key = 'AIVTroops_InitialRole_Slave'
         self.assertIsNone(h.aic[key][0](1, None))
         h.set_aic(1, key, 'dig')
@@ -146,7 +153,7 @@ class BehaviorTests(unittest.TestCase):
         for invalid in (-1, 0, 1, 2, 3, -2, 0.5, True, '2', 'native', 'inherit', 'Dig', 'hold', float('nan')):
             h.set_aic(1, key, invalid)
             self.assertEqual(h.aic[key][0](1, None), 'dig')
-        h.aic[key][1](1)
+        h.update_aic(1, {}, True)
         self.assertIsNone(h.aic[key][0](1, None))
         for key in ('AIVTroops_InitialRole_Swordsman', 'AIVTroops_InitialRole'):
             h.set_aic(1, key, 'dig')
@@ -157,7 +164,7 @@ class BehaviorTests(unittest.TestCase):
         h.install()
         policy = h.lua.execute('return require("behavior.policy").new()')
         troops = h.lua.execute('return require("behavior.policy").troops')
-        for key, (handler, reset) in h.aic.items():
+        for key, (handler, reset, _) in h.aic.items():
             role = key.startswith('AIVTroops_InitialRole')
             troop = next((t for t in troops.values() if key.endswith('_' + t.name)), None)
             allowed = {'defend': 1} if role else {'hold': 1, 'patrol': 2}
@@ -165,7 +172,7 @@ class BehaviorTests(unittest.TestCase):
                 allowed['dig'] = 2
             for value, expected in allowed.items():
                 with self.subTest(key=key, value=value):
-                    handler(16, value)
+                    h.set_aic(16, key, value)
                     self.assertEqual(handler(16, None), value)
                     self.assertIsNone(handler(1, None))
                     self.assertTrue(policy.set(policy, 16, key, value))

@@ -4,7 +4,7 @@ Version 0.2.3 combines restored AIV positions with opt-in controls for initial
 troop assignments and defensive slot movement across all 15 supported troop types.
 The base patch restores rows **9, 11 and 18** (pikemen and both swordsman types).
 Requires Crusader / Crusader Extreme 1.41, framework >=3.0.4, frontend >=1.0.16,
-and aicloader >=1.1.0. The proposed store target is UCP 3.0.7.
+and aicloader >=1.1.5. The proposed store target is UCP 3.0.7.
 
 ## Name and migration
 
@@ -105,7 +105,7 @@ mid-match; save/load and multiplayer behaviour still need validation.
 
 ## Optional per-AI AIC overrides
 
-`aicloader` is a declared dependency because it owns additional-field registration.
+`aicloader` is a declared dependency: this module registers the fields below as their owner.
 UCP's dependency schema has no optional-dependency declaration. The override
 **behavior** is optional via the menu switch. `aiSwapper` is not required:
 vanilla AI personalities work too. If aiSwapper is used, its character `aic`
@@ -207,6 +207,7 @@ See the source repository's `docs/validation.md` for the complete checklist.
 
 ## Release notes
 
-- **0.3.1:** Other modules can read the defence row and group count it sets.
+- **0.3.1:** Other modules can read the defence row and group count it sets. The AIC fields
+  are registered as owned by this module, so they also apply with AIC Tactics on (aicloader >=1.1.5).
 - **0.3.0:** The position fix (main switch) is off by default. After updating, switch it
   on in Customizations unless you saved it on.
