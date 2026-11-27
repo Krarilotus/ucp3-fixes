@@ -1,16 +1,16 @@
 ai: Yapay zekâ
 fixes: Düzeltmeler
-title: 'Yapay zekâ: AIV birlik davranışı'
-description: Kargıcıların, kılıçlıların ve Arap kılıçlıların eksik AIV konumlarını geri getirir.
-behavior_title: Birlik ayarları
-aic_overrides: AIC geçersiz kılmalarını kullan
-initial_role: Başlangıç birliklerinin görevi
+title: Eksik yapay zekâ savunma mevzilerini geri getir
+description: Kargıcılara, kılıçlılara ve Arap kılıçlılara kale savunma mevzilerini verir.
+behavior_title: Yapay zekâ başlangıç ve savunma rollerini ayarla
+aic_overrides: Tekil yapay zekâ kişilikleri bu seçimleri geçersiz kılabilsin
+initial_role: Başlangıç rolü
 slot_movement: Savunmacıların hareketi
-native: Oyunun özgün davranışı
-defend: AIV konumlarını savun
+native: Oyun varsayılanı
+defend: Kale mevzilerini savun
 dig: Hendek kaz
-hold: Atanan konumda kal
-patrol: AIV konumları arasında devriye gez
+hold: Konumu koru
+patrol: Mevziler arasında devriye gez
 troop_Engineer: Mühendisler
 troop_Archer: Avrupalı okçular
 troop_Crossbowman: Arbaletçiler
@@ -26,14 +26,14 @@ troop_ArabianArcher: Arap okçular
 troop_HorseArcher: Atlı okçular
 troop_ArabianSwordsman: Arap kılıçlılar
 troop_FireThrower: Ateş atıcılar
-table_unit: Birlik
+table_unit: Birlikler
 table_role: Başlangıç görevi
-table_movement: AIV hareketi
+table_movement: Savunmacı hareketi
 table_defend: Savun
 table_dig: Kaz
 table_hold: Bekle
 table_patrol: Devriye
-table_help: 'Her birlik türü için her çiftten en fazla bir seçenek seçin. Savun: AIV konumlarına git; Kaz: başlangıç birliklerini hendek kazmaya ata. Bekle: savunma noktasında kal; Devriye: yapay zekânın AIC devriye ayarlarına göre savunma noktaları arasında dolaş. Sıfırlama, oyunun varsayılan davranışını geri getirir.'
+table_help: Yapay zekâ → Düzeltmeler altında savunma mevzilerini geri getirmeyi açın, ardından her birlik için bir başlangıç rolü ve bir savunmacı hareketi seçin.
 tags.ai: Yapay zekâ
 tags.aic: Yapay zekâ davranışı
 tags.aiv: Yapay zekâ kaleleri

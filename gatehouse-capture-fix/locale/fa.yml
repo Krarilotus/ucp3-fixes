@@ -1,4 +1,4 @@
 bugfixes: رفع خطاها
-living_gatehouse_occupants: مدافعان زندهٔ دروازه
-living_gatehouse_occupants_descr: سربازان کشته‌شده دیگر دروازه را تصرف یا دفاع نمی‌کنند. پس از تغییر، بازی را دوباره اجرا کنید.
+living_gatehouse_occupants: فقط نیروهای زنده برای کنترل دروازه شمارش شوند
+living_gatehouse_occupants_descr: نیروهای کشته‌شده دیگر در تصرف یا حفظ دروازه محاسبه نمی‌شوند.
 tags.bugfixes: رفع اشکال

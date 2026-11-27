@@ -1,4 +1,4 @@
 bugfixes: 错误修复
-hunter_targeting: 猎人目标选择
-hunter_targeting_descr: 猎人会选择近处的鹿；射线受阻时会靠近。更改后请重启游戏。
+hunter_targeting: 视线受阻时猎人会靠近鹿群
+hunter_targeting_descr: 猎人会挑选附近的鹿并靠近以获得清晰射界。
 tags.bugfixes: 错误修复

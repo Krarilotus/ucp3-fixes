@@ -1,16 +1,16 @@
 ai: IA
 fixes: Correctifs
-title: 'IA : Comportement des troupes AIV'
-description: Rétablit les positions AIV manquantes des piquiers, épéistes et épéistes arabes.
-behavior_title: Réglages des troupes
-aic_overrides: Utiliser les remplacements AIC
-initial_role: Rôle des troupes de départ
+title: Restaurer les postes de défense IA manquants
+description: Attribue aux piquiers, épéistes et épéistes arabes leurs postes de défense du château.
+behavior_title: Définir les rôles initiaux et défensifs de l’IA
+aic_overrides: Laisser chaque personnalité d’IA remplacer ces choix
+initial_role: Rôle initial
 slot_movement: Déplacement des défenseurs
-native: Comportement du jeu d’origine
-defend: Défendre les positions AIV
+native: Par défaut du jeu
+defend: Défendre les postes du château
 dig: Creuser des douves
-hold: Rester à la position assignée
-patrol: Patrouiller entre les positions AIV
+hold: Tenir la position
+patrol: Patrouiller entre les postes
 troop_Engineer: Ingénieurs
 troop_Archer: Archers européens
 troop_Crossbowman: Arbalétriers
@@ -26,14 +26,14 @@ troop_ArabianArcher: Archers arabes
 troop_HorseArcher: Archers montés
 troop_ArabianSwordsman: Épéistes arabes
 troop_FireThrower: Lanceurs de feu
-table_unit: Troupe
+table_unit: Troupes
 table_role: Rôle initial
-table_movement: Déplacement AIV
+table_movement: Déplacement des défenseurs
 table_defend: Défendre
 table_dig: Creuser
 table_hold: Rester
 table_patrol: Patrouille
-table_help: 'Pour chaque troupe, choisir au plus une option par paire. Défendre : rejoindre les positions AIV ; Creuser : affecter les troupes initiales au creusement des douves. Rester : garder un poste défensif ; Patrouille : circuler entre les postes selon les réglages de patrouille AIC de l’IA. Réinitialiser rétablit le comportement du jeu.'
+table_help: Activez la restauration des postes de défense sous IA → Correctifs, puis choisissez un rôle initial et un déplacement défensif par troupe.
 tags.ai: IA
 tags.aic: Comportement IA
 tags.aiv: Châteaux IA
