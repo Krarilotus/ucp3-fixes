@@ -33,7 +33,7 @@ table_defend: Savun
 table_dig: Kaz
 table_hold: Bekle
 table_patrol: Devriye
-table_help: Yapay zekâ → Düzeltmeler altında savunma mevzilerini geri getirmeyi açın, ardından her birlik için bir başlangıç rolü ve bir savunmacı hareketi seçin.
+table_help: Yapay zekâ → Düzeltmeler altında savunma mevzilerini geri getirmeyi açın. Ardından her birlik türü için bir başlangıç rolü ve savunma hareketi seçin.
 tags.ai: Yapay zekâ
 tags.aic: Yapay zekâ davranışı
 tags.aiv: Yapay zekâ kaleleri

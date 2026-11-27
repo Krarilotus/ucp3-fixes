@@ -33,7 +33,7 @@ table_defend: Védelem
 table_dig: Ásás
 table_hold: Tartás
 table_patrol: Járőr
-table_help: Kapcsold be a védőállások visszaállítását az MI → Javítások alatt, majd válassz egy kezdő szerepet és egy védőmozgást csapatonként.
+table_help: Kapcsold be a védőállások visszaállítását az MI → Javítások alatt, majd minden egységtípushoz válassz kezdő szerepet és védőmozgást.
 tags.ai: MI
 tags.aic: MI-viselkedés
 tags.aiv: MI-várak
