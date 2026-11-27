@@ -26,7 +26,6 @@ troop_ArabianArcher: Arap okçular
 troop_HorseArcher: Atlı okçular
 troop_ArabianSwordsman: Arap kılıçlılar
 troop_FireThrower: Ateş atıcılar
-troops_category: AIV birlik davranışı
 table_unit: Birlik
 table_role: Başlangıç görevi
 table_movement: AIV hareketi
@@ -40,3 +39,4 @@ tags.aic: Yapay zekâ davranışı
 tags.aiv: Yapay zekâ kaleleri
 tags.behavior: Davranış
 tags.bugfixes: Hata düzeltmeleri
+improvements: İyileştirmeler

@@ -26,7 +26,6 @@ troop_ArabianArcher: Archers arabes
 troop_HorseArcher: Archers montés
 troop_ArabianSwordsman: Épéistes arabes
 troop_FireThrower: Lanceurs de feu
-troops_category: Comportement des troupes AIV
 table_unit: Troupe
 table_role: Rôle initial
 table_movement: Déplacement AIV
@@ -40,3 +39,4 @@ tags.aic: Comportement IA
 tags.aiv: Châteaux IA
 tags.behavior: Comportement
 tags.bugfixes: Corrections
+improvements: Améliorations

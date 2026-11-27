@@ -26,7 +26,6 @@ troop_ArabianArcher: Arab íjászok
 troop_HorseArcher: Lovasíjászok
 troop_ArabianSwordsman: Arab kardforgatók
 troop_FireThrower: Tűzhajítók
-troops_category: AIV-csapatviselkedés
 table_unit: Egység
 table_role: Kezdő feladat
 table_movement: AIV-mozgás
@@ -40,3 +39,4 @@ tags.aic: MI-viselkedés
 tags.aiv: MI-várak
 tags.behavior: Viselkedés
 tags.bugfixes: Hibajavítások
+improvements: Fejlesztések

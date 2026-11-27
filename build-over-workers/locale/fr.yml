@@ -7,6 +7,6 @@ keep_on_walls_tooltip: Les troupes et personnes debout sur un mur ou un escalier
 allies: Les ouvriers alliés comptent comme amicaux
 allies_tooltip: Il est également possible de construire sur les ouvriers des joueurs de votre équipe.
 balance_changes: Modifications de l'équilibrage
-bugfixes: Corrections
+bugfixes: Corrections de bugs
 tags.behavior: Comportement
 tags.bugfixes: Corrections

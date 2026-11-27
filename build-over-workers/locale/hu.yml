@@ -6,7 +6,7 @@ keep_on_walls: Faljavításkor a rajta állók helyben maradnak
 keep_on_walls_tooltip: A falon vagy lépcsőn álló katonák és emberek a helyükön maradnak, amikor megjavítod a falat.
 allies: A szövetségesek munkásai is barátságosnak számítanak
 allies_tooltip: A csapatodhoz tartozó játékosok munkásaira is építhetsz.
-balance_changes: Egyensúly-módosítások
+balance_changes: Egyensúlymódosítások
 bugfixes: Hibajavítások
 tags.behavior: Viselkedés
 tags.bugfixes: Hibajavítások

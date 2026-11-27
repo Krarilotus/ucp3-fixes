@@ -26,7 +26,6 @@ troop_ArabianArcher: Arabische Bogenschützen
 troop_HorseArcher: Berittene Bogenschützen
 troop_ArabianSwordsman: Arabische Schwertkämpfer
 troop_FireThrower: Feuerwerfer
-troops_category: AIV-Truppenverhalten
 table_unit: Truppe
 table_role: Startaufgabe
 table_movement: AIV-Bewegung
@@ -40,3 +39,4 @@ tags.aic: KI-Verhalten
 tags.aiv: KI-Burgen
 tags.behavior: Verhalten
 tags.bugfixes: Fehlerkorrekturen
+improvements: Verbesserungen
