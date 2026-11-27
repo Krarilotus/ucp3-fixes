@@ -90,6 +90,7 @@ local function resolve()
   end
   if why then
     problem = why
+    log(ERROR, "Custom route rules are off. The game route search could not be verified.")
     log(WARNING, "route policies are unavailable: " .. why)
     return
   end

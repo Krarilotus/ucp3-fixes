@@ -3,6 +3,7 @@ return {
     if self.applied or not (config and config.hunter_targeting == true) then return end
     local ok, install = pcall(require("hunting").prepare)
     if not ok then
+      log(ERROR, "The hunter targeting fix is off.")
       log(WARNING, tostring(install) .. "; hunter-targeting-fix is left off")
       return
     end
