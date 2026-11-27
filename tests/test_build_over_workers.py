@@ -6,7 +6,7 @@ import tempfile
 import unittest
 import zipfile
 
-from lupa.lua54 import LuaRuntime, LuaError
+from lupa.lua54 import LuaRuntime
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,38 +34,24 @@ def options():
     return found
 
 
-# An image away from 0x400000: MZ, PE at 0x100, one section at 0x1000 of 0x2000 bytes.
-IMAGE = 0x10400000
-HEADER = {IMAGE: 0x5A4D, IMAGE + 0x3C: 0x100, IMAGE + 0x100: 0x4550, IMAGE + 0x106: 1,
-          IMAGE + 0x114: 0xE0, IMAGE + 0x204: 0x1000, IMAGE + 0x200: 0x2000, IMAGE + 0x21C: 0x60000020}
-
-
-def entry(aob=None, duplicate=None):
-    """Load init.lua with a core whose every access is recorded.
-
-    AOBScan fails unless `aob` gives an address; scanForAOB records its arguments and returns
-    `duplicate` (or 0); readInteger reads HEADER.
-    """
+def entry(ambiguous=False):
     lua = LuaRuntime(unpack_returned_tuples=True)
-    lua.globals().first_hit = aob
-    lua.globals().second_hit = duplicate or 0
-    lua.globals().header = lua.table_from(HEADER)
-    lua.execute('''
-      calls = {}
+    lua.globals().ambiguous = ambiguous
+    lua.execute("""
+      ERROR = 2
+      calls, logs = {}, {}
+      log = function(level, message) logs[#logs + 1] = {level, message} end
       core = setmetatable({}, {__index = function(_, name)
-        return function(...)
+        return function()
           calls[#calls + 1] = name
-          if name == "AOBScan" then
-            if first_hit then return first_hit end
-            error("AOB not found")
+          if name == "AOBScanUnique" then
+            return nil, ambiguous and "found more than once" or "not found"
           end
-          if name == "scanForAOB" then second_scan = {...}; return second_hit end
-          if name == "readInteger" then return header[...] or 0 end
           error("unexpected core." .. name)
         end
       end})
       package.preload.templates = function() return {} end
-    ''')
+    """)
     return lua, lua.execute((FOLDER / 'init.lua').read_text(encoding='utf-8'))
 
 
@@ -86,17 +72,17 @@ class BuildOverWorkersTests(unittest.TestCase):
         for part in ('buildings', 'walls'):
             with self.subTest(part=part):
                 lua, module = entry()
-                with self.assertRaisesRegex(LuaError, NAME + ': could not find'):
-                    module.enable(module, lua.table_from({part: True}))
-                self.assertEqual(list(lua.globals().calls.values()), ['AOBScan'])
+                module.enable(module, lua.table_from({part: True}))
+                self.assertEqual(list(lua.globals().calls.values()), ['AOBScanUnique'])
+                self.assertIn('is off:', lua.globals().logs[1][2])
+                self.assertEqual(lua.globals().logs[1][1], 2)
 
     def test_ambiguous_signature_is_refused_before_writing(self):
-        lua, module = entry(aob=IMAGE + 0x1000, duplicate=IMAGE + 0x2FFF)
-        with self.assertRaisesRegex(LuaError, NAME + ': the signature for .* matches more than once'):
-            module.enable(module, lua.table_from({'buildings': True}))
-        self.assertEqual([c for c in lua.globals().calls.values() if c != 'readInteger'],
-                         ['AOBScan', 'scanForAOB'])
-        self.assertEqual(list(lua.globals().second_scan.values())[1:], [IMAGE + 0x1001, IMAGE + 0x2FFF])
+        lua, module = entry(ambiguous=True)
+        module.enable(module, lua.table_from({'buildings': True}))
+        self.assertEqual(list(lua.globals().calls.values()), ['AOBScanUnique'])
+        self.assertEqual(lua.globals().logs[1][2],
+                         'Building over workers is off: the building placement test: found more than once')
 
     def test_runtime_disable_reports_restart(self):
         lua, module = entry()

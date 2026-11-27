@@ -11,5 +11,5 @@ tags:
 meta:
   version: 1.0.0
 dependencies:
-  framework: ^3.0.7
+  framework: ^3.0.8
   frontend: ^1.0.0

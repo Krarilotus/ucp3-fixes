@@ -54,29 +54,38 @@ local SKIP_OFFSETS = {
 
 return {
   enable = function(self, config)
-    if self.applied or not config or config.enabled ~= true then
-      return
+    if self.started or not config then return end
+    if config.enabled ~= nil and type(config.enabled) ~= "boolean" then
+      log(ERROR, "AIV troop rows enabled must be a boolean.")
     end
-    -- Troop behaviour controls are opt-in. Resolve every behavior site before
-    -- applying even the base row fix, so a failed preflight leaves no patches.
-    local installBehavior, policy
-    if config.behavior and config.behavior.enabled == true then
-      installBehavior, policy = require("behavior").prepare(config.behavior)
+    if config.enabled ~= true then return end
+    local target, reason = core.AOBScanUnique(AOB)
+    if target then
+      for _, offset in ipairs(SKIP_OFFSETS) do
+        core.writeCode(target + offset, NOP6)
+      end
+      self.applied = true
+    else
+      log(ERROR, "AIV troop rows are off: " .. reason)
     end
-    -- AOBScan raises on failure. Validate the entire block before any write.
-    local ok, target = pcall(core.AOBScan, AOB)
-    if not ok then
-      error("aiv-troops-behaviour: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
+
+    local behavior = config.behavior
+    if behavior ~= nil and type(behavior) ~= "table" then
+      log(ERROR, "AIV troop behaviour settings must be a table.")
+    elseif behavior and behavior.enabled == true then
+      local ok, install, policy = pcall(function()
+        return require("behavior").prepare(behavior)
+      end)
+      if ok then
+        install()
+        self.policy = policy
+      else
+        log(ERROR, "AIV troop behaviour controls are off: " .. tostring(install))
+      end
+    elseif behavior and behavior.enabled ~= nil and type(behavior.enabled) ~= "boolean" then
+      log(ERROR, "AIV troop behaviour enabled must be a boolean.")
     end
-    for _, offset in ipairs(SKIP_OFFSETS) do
-      core.writeCode(target + offset, NOP6)
-    end
-    if installBehavior then
-      installBehavior()
-      self.policy = policy
-    end
-    self.applied = true
-    log(INFO, string.format("aiv-troops-behaviour: patched AIV spot decoder at 0x%X", target))
+    self.started = true
   end,
 
   -- Read-only policy answers for other modules; nil means the game's own value.

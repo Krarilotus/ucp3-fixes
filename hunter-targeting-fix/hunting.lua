@@ -15,36 +15,9 @@ local stepPattern = "83 FF 20 7E 1E 69 F6 90 04 00 00 5F " ..
 local failedShotPattern = "56 B9 ? ? ? ? 66 C7 80 ? ? ? ? 04 00 " ..
   "E8 ? ? ? ? 85 C0 A1 ? ? ? ? 0F 84 ? ? ? ? 8B C8 69 C9 90 04 00 00"
 
--- The end of the executable section that holds an address, from the PE header of the image
--- around it, which starts on a 64 KiB boundary below the address.
-local function sectionEnd(address)
-  local base = address - address % 0x10000
-  while base > 0 do
-    local header = base + core.readInteger(base + 0x3C)
-    if (core.readInteger(base) & 0xFFFF) == 0x5A4D and header > base and header < base + 0x1000
-        and core.readInteger(header) == 0x4550 then
-      local section = header + 0x18 + (core.readInteger(header + 0x14) & 0xFFFF)
-      for _ = 1, core.readInteger(header + 6) & 0xFFFF do
-        local first = base + core.readInteger(section + 12)
-        local stop = first + core.readInteger(section + 8)
-        if address >= first and address < stop and core.readInteger(section + 36) & 0x20000000 ~= 0 then
-          return stop
-        end
-        section = section + 40
-      end
-      break
-    end
-    base = base - 0x10000
-  end
-  error(string.format("hunter-targeting-fix: no executable section holds 0x%X", address))
-end
-
 local function unique(pattern, name)
-  local address = core.AOBScan(pattern)
-  local stop = sectionEnd(address)
-  local again = core.scanForAOB(pattern, address + 1, stop - 1)
-  assert(again == nil or again == 0 or again >= stop,
-    "hunter-targeting-fix: ambiguous " .. name)
+  local address, reason = core.AOBScanUnique(pattern)
+  if not address then error(name .. ": " .. reason, 0) end
   return address
 end
 

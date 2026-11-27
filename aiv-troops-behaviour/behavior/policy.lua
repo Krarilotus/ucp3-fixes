@@ -46,14 +46,32 @@ end
 
 local function new(config)
   config = config or {}
+  local settings = config.defaults
+  if settings ~= nil and type(settings) ~= "table" then
+    log(ERROR, "AIV troop behaviour defaults must be a table.")
+    settings = nil
+  end
+  local overrides = config.aic_overrides
+  if overrides ~= nil and type(overrides) ~= "boolean" then
+    log(ERROR, "AIV troop behaviour AIC overrides must be a boolean. Using the default.")
+    overrides = true
+  end
   local defaults = {}
   for key, field in pairs(FIELDS) do
     local suffix = key:sub(#"AIVTroops_" + 1)
     local kind = suffix:match("^[^_]+")
-    local choice = (config.defaults or {})[suffix]
-    local value = choice and CHOICES[kind][choice] or nil
-    if choice ~= nil and (value == nil or value < field.min or value > field.max) then
-      error("aiv-troops-behaviour: invalid customization " .. suffix .. "=" .. tostring(choice))
+    local choice = settings and settings[suffix]
+    local value
+    if choice ~= nil then
+      if type(choice) ~= "string" then
+        log(ERROR, "AIV troop behaviour " .. suffix .. " must be text.")
+      else
+        value = CHOICES[kind][choice]
+        if value == nil or value < field.min or value > field.max then
+          log(WARNING, "Invalid AIV troop behaviour " .. suffix .. ": " .. choice .. ". Using the default.")
+          value = nil
+        end
+      end
     end
     defaults[key] = value or (suffix == kind and 0 or -1)
   end
@@ -89,7 +107,7 @@ local function new(config)
     local prefix = "AIVTroops_" .. kind
     local key = prefix .. "_" .. troop.name
     -- AIC troop > AIC common > menu troop > menu common > native.
-    if config.aic_overrides ~= false then
+    if overrides ~= false then
       for _, setting in ipairs({key, prefix}) do
         local value = values[ai][setting]
         if value ~= nil then return FIELDS[setting].choices[value] end

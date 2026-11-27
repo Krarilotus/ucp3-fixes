@@ -22,6 +22,7 @@ import zipfile
 
 from lupa.lua54 import LuaRuntime, LuaError, lua_type
 import pefile
+from test_modules import unique_hit
 from unicorn import Uc, UcError, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE, UC_HOOK_MEM_UNMAPPED
 from unicorn.x86_const import (UC_X86_REG_EAX, UC_X86_REG_ECX, UC_X86_REG_EDX, UC_X86_REG_EBX,
     UC_X86_REG_ESP, UC_X86_REG_EBP, UC_X86_REG_ESI, UC_X86_REG_EDI, UC_X86_REG_EIP)
@@ -66,9 +67,8 @@ class Game:
         self.base = pe.OPTIONAL_HEADER.ImageBase
         self.sections = [(self.base + s.VirtualAddress, s.PointerToRawData, s.SizeOfRawData)
                          for s in pe.sections]
-        self.extents = [(self.base + s.VirtualAddress, self.base + s.VirtualAddress + s.Misc_VirtualSize)
-                        for s in pe.sections]
-        self.bounds = []
+        self.executable = [(self.base + s.VirtualAddress, s.SizeOfRawData)
+                           for s in pe.sections if s.Characteristics & 0x20000000]
         self.work = work
         self.uc = Uc(UC_ARCH_X86, UC_MODE_32)
         self.uc.hook_add(UC_HOOK_MEM_UNMAPPED, lambda uc, access, address, size, value, data:
@@ -80,10 +80,9 @@ class Game:
         g.INFO, g.WARNING, g.ERROR = 0, 1, 2
         g.log = lambda level, message: self.logs.append(str(message))
         core = lua.table()
-        core.AOBScan = lambda pattern, start=None: self.scan(pattern, start, required=True)
-        # Like the 3.0.7 scanner, a match past `stop` may come back.
-        core.scanForAOB = lambda pattern, start=None, stop=None: (
-            self.bounds.append((int(start), stop)), self.scan(pattern, start) or 0)[1]
+        core.AOBScanUnique = lambda pattern: unique_hit(
+            [va + match.start() for va, size in self.executable
+             for match in regex(pattern).finditer(self.read(va, size))])
         core.readInteger = lambda a: struct.unpack('<i', self.read(a, 4))[0]
         core.readSmallInteger = lambda a: struct.unpack('<h', self.read(a, 2))[0]
         core.readByte = lambda a: struct.unpack('<b', self.read(a, 1))[0]
@@ -255,11 +254,7 @@ def check(exe, work):
                          edi=tms, esi=tile, ecx=0x2222, edx=0x3333)
 
         label = '%s, walls %s' % (exe.name, 'on' if walls else 'off')
-        assert g.bounds, 'no second-match scan'
-        for start, stop in g.bounds:
-            past = next(end for first, end in g.extents if first < start <= end)
-            assert stop == past - 1, 'second-match scan from %08X stops at %s, not %08X' % (start, stop, past - 1)
-        label += ', second-match scans stop at %08X' % g.bounds[0][1]
+        assert not g.logs, g.logs
         if not walls:
             assert regex(AI_WALL_UNITS).fullmatch(g.read(ai_units, 24)), 'AI wall code patched with walls off'
             validate()

@@ -4,36 +4,9 @@ local pattern = "69 F6 90 04 00 00 66 83 BE ? ? ? ? 00 74 54 " ..
   "0F BF 86 ? ? ? ? 0F BF BE ? ? ? ? 50 B9 ? ? ? ? E8 ? ? ? ? " ..
   "8B 1D ? ? ? ? 01 44 BC 38"
 
--- The end of the executable section that holds an address, from the PE header of the image
--- around it, which starts on a 64 KiB boundary below the address.
-local function sectionEnd(address)
-  local base = address - address % 0x10000
-  while base > 0 do
-    local header = base + core.readInteger(base + 0x3C)
-    if (core.readInteger(base) & 0xFFFF) == 0x5A4D and header > base and header < base + 0x1000
-        and core.readInteger(header) == 0x4550 then
-      local section = header + 0x18 + (core.readInteger(header + 0x14) & 0xFFFF)
-      for _ = 1, core.readInteger(header + 6) & 0xFFFF do
-        local first = base + core.readInteger(section + 12)
-        local stop = first + core.readInteger(section + 8)
-        if address >= first and address < stop and core.readInteger(section + 36) & 0x20000000 ~= 0 then
-          return stop
-        end
-        section = section + 40
-      end
-      break
-    end
-    base = base - 0x10000
-  end
-  error(string.format("gatehouse-capture-fix: no executable section holds 0x%X", address))
-end
-
 local function prepare()
-  local block = core.AOBScan(pattern)
-  local stop = sectionEnd(block)
-  local again = core.scanForAOB(pattern, block + 1, stop - 1)
-  assert(again == nil or again == 0 or again >= stop,
-    "gatehouse-capture-fix: ambiguous native occupancy check")
+  local block, reason = core.AOBScanUnique(pattern)
+  if not block then error("native occupancy check: " .. reason, 0) end
   local site = block + 6
   local original = core.readBytes(site, 10)
   assert(original[1] == 0x66 and original[2] == 0x83 and original[3] == 0xBE

@@ -1,6 +1,5 @@
 """Policy, AIC integration, register ABI and initial-assignment trampoline checks."""
 from pathlib import Path
-import re
 import struct
 import unittest
 import yaml
@@ -9,7 +8,7 @@ from lupa.lua54 import lua_type
 from unicorn import Uc, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE
 from unicorn.x86_const import UC_X86_REG_EAX, UC_X86_REG_EFLAGS, UC_X86_REG_ESP, UC_X86_REG_ESI, UC_X86_REG_EBX, UC_X86_REG_EBP
 
-from test_modules import ROOT, BASE, AIV, FIXTURES, ModuleHarness, LuaError
+from test_modules import ROOT, BASE, AIV, FIXTURES, ModuleHarness
 
 
 def enable_require(lua):
@@ -81,12 +80,6 @@ class BehaviorHarness(ModuleHarness):
     def i32(self, address, value): self.put(address, struct.pack('<I', value))
     def i16(self, address, value): self.put(address, struct.pack('<H', value))
 
-    def scan(self, pattern, extra_arguments):
-        self.scans.append((pattern, extra_arguments))
-        regex = b''.join(b'.' if x == '?' else re.escape(bytes([int(x, 16)])) for x in pattern.split())
-        result = re.search(regex, self.memory, re.DOTALL)
-        return self.base + result.start() if result else None
-
     def compile(self, code, address):
         result = bytearray()
         def add(item):
@@ -134,11 +127,23 @@ class BehaviorHarness(ModuleHarness):
 class BehaviorTests(unittest.TestCase):
     def setUp(self): self.h = BehaviorHarness()
 
-    def test_all_sites_preflight_before_any_writes(self):
-        self.h.put(self.h.sites['initial'], b'\x90')
-        with self.assertRaisesRegex(LuaError, 'cannot resolve behavior hook initial'):
-            self.h.install()
-        self.assertFalse(self.h.writes or self.h.callbacks or self.h.hooks or self.h.aic)
+    def test_row_and_behavior_preflights_are_independent(self):
+        for failure in ('initial', 'row'):
+            with self.subTest(failure=failure):
+                h = BehaviorHarness()
+                if failure == 'initial':
+                    h.put(h.sites['initial'], b'\x90')
+                    h.install()
+                    self.assertEqual(len(h.writes), 3)
+                    self.assertFalse(h.callbacks or h.hooks or h.aic)
+                    message = 'AIV troop behaviour controls are off: cannot resolve behavior hook initial: not found'
+                else:
+                    h.put(BASE + 37, b'\x90')
+                    h.install()
+                    self.assertEqual(h.writes, [])
+                    self.assertTrue(h.callbacks and h.hooks and h.aic)
+                    message = 'AIV troop rows are off: not found'
+                self.assertEqual(h.logs, [(2, message)])
 
     def test_registration_getter_validation_and_per_ai_reset(self):
         h = self.h
@@ -286,11 +291,14 @@ class BehaviorTests(unittest.TestCase):
         for ai in (1, 16):
             self.assertEqual(gate(h.lua.table_from({'EBP': ai, 'ESI': 0x120000})).EAX, 1)
 
-    def test_invalid_menu_value_fails_before_writes_or_hooks(self):
+    def test_invalid_menu_value_uses_default(self):
         for defaults in ({'InitialRole_Swordsman': 'dig'}, {'Movement': 'typo'}):
-            with self.assertRaisesRegex(LuaError, 'invalid customization'):
-                self.h.install(defaults=defaults)
-            self.assertFalse(self.h.writes or self.h.hooks or self.h.callbacks)
+            h = BehaviorHarness()
+            h.install(defaults=defaults)
+            self.assertTrue(h.writes and h.hooks and h.callbacks)
+            self.assertEqual(len(h.logs), 1)
+            self.assertEqual(h.logs[0][0], 1)
+            self.assertIn('Using the default', h.logs[0][1])
 
     def test_menu_choices_cover_runtime_fields_and_only_capable_diggers(self):
         options = yaml.safe_load((ROOT / AIV / 'options.yml').read_text(encoding='utf-8'))

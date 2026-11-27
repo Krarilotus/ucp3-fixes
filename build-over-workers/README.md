@@ -8,7 +8,7 @@ on, instead of being removed or left stuck inside.
 Author: **Monsterfish**. Licensed under GPL-3.0 (`LICENSE`); see `CREDITS.md`.
 
 - Targets Stronghold Crusader 1.41 and Stronghold Crusader Extreme 1.41
-- Requires UCP framework 3.0.7 and frontend 1.0.2 or a compatible later version
+- Requires UCP framework 3.0.8 and frontend 1.0.2 or a compatible later version
 - Writes no save data. Moved units keep their native position, height and destination,
   which the game saves as usual.
 
