@@ -1,4 +1,4 @@
-bugfixes: Corrections
+bugfixes: Corrections de bugs
 crew_lifecycle: Suppression des équipages de siège
 crew_lifecycle_descr: Corrige la suppression ignorée des équipages de siège et rejette
   les références périmées lors de la sortie d'un engin. Les ingénieurs survivants
