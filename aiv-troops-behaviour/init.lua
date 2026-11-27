@@ -52,6 +52,24 @@ local SKIP_OFFSETS = {
   37, -- row 18: Arabian swordsmen
 }
 
+local function installRows()
+  local target, reason = core.AOBScanUnique(AOB)
+  if not target then error(reason, 0) end
+  local original = {}
+  for index, offset in ipairs(SKIP_OFFSETS) do
+    original[index] = core.readBytes(target + offset, #NOP6)
+  end
+  for index, offset in ipairs(SKIP_OFFSETS) do
+    local ok, failure = pcall(core.writeCode, target + offset, NOP6)
+    if not ok then
+      for touched = index, 1, -1 do
+        pcall(core.writeCode, target + SKIP_OFFSETS[touched], original[touched])
+      end
+      error(failure, 0)
+    end
+  end
+end
+
 return {
   enable = function(self, config)
     if self.started or config == nil then return end
@@ -63,7 +81,6 @@ return {
       log(ERROR, "AIV troop rows enabled must be a boolean.")
     end
     if config.enabled ~= true then return end
-    local target, reason = core.AOBScanUnique(AOB)
     local behavior, install = config.behavior
     if behavior ~= nil and type(behavior) ~= "table" then
       log(ERROR, "AIV troop behaviour settings must be a table.")
@@ -80,13 +97,11 @@ return {
       log(ERROR, "AIV troop behaviour enabled must be a boolean.")
     end
 
-    if target then
-      for _, offset in ipairs(SKIP_OFFSETS) do
-        core.writeCode(target + offset, NOP6)
-      end
+    local rowsOk, reason = pcall(installRows)
+    if rowsOk then
       self.applied = true
     else
-      log(ERROR, "AIV troop rows are off: " .. reason)
+      log(ERROR, "AIV troop rows are off: " .. tostring(reason))
     end
 
     if install then

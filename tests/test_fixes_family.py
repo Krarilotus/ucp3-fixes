@@ -20,7 +20,7 @@ FIXES_DEPENDENCIES = {
     'framework': '^3.0.7', 'frontend': '^1.0.2',
     'worker-delivery-fix': '^0.2.0', 'gatehouse-capture-fix': '^0.2.1',
     'hunter-targeting-fix': '^0.2.1', 'fixed-engineers': '^0.3.0',
-    'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.2',
+    'hopfarm-limit-fix': '^0.2.0', 'aiv-troops-behaviour': '^0.3.3',
     'interface-visual-fixes': '^0.2.0', 'audio-fixes': '^0.2.0',
     'scenario-settings-fix': '^0.1.0',
 }
@@ -117,7 +117,7 @@ class FixesPluginTests(unittest.TestCase):
     def test_plugin_depends_on_the_neutral_fix_modules(self):
         fixes = definition(FIXES)
         self.assertEqual((fixes['type'], fixes['version'], fixes['display-name']),
-                         ('plugin', '0.2.3', 'UCP3 Fixes'))
+                         ('plugin', '0.2.4', 'UCP3 Fixes'))
         self.assertNotIn('family', fixes)
         self.assertEqual(fixes['dependencies'], FIXES_DEPENDENCIES)
         self.assertNotIn('smarter-gatehouses', fixes['dependencies'])

@@ -1,7 +1,7 @@
 name: route-search
 display-name: Route Search
 author: Krarilotus
-version: 1.0.2
+version: 1.0.3
 type: module
 game:
 - SHC==1.41

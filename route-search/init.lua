@@ -132,7 +132,6 @@ local function relink()
     core.writeInteger(policy.next, inner and inner.entry or site.search)
   end
   core.writeInteger(firstSlot, enabled[1] and enabled[1].entry or site.search)
-  log(INFO, "unit route search: " .. describe(enabled))
 end
 
 -- The call must still be what route-search found (or redirected) before anything is written.
@@ -211,17 +210,26 @@ local function enablePolicy(self, id, entry)
     fail("the route policy '%s' is already enabled", id)
   end
   checkCall()
-  local stub
-  if not head then
-    stub = core.allocateCode(STUB_SIZE)
+  if head then
+    policy.entry = entry
+    relink()
+  else
+    local stub = core.allocateCode(STUB_SIZE)
     core.writeCode(stub, headCode())
+    local ok, reason = pcall(function()
+      core.writeInteger(firstSlot, entry)
+      core.writeCode(site.call, { 0xE8, core.itob(stub - (site.call + 5)) })
+    end)
+    if not ok then
+      pcall(core.writeInteger, firstSlot, site.search)
+      if not isCallTo(site.search) then
+        pcall(core.writeCode, site.call, { 0xE8, core.itob(site.search - (site.call + 5)) })
+      end
+      error(reason, 0)
+    end
+    head, policy.entry = stub, entry
   end
-  policy.entry = entry
-  relink()
-  if stub then
-    core.writeCode(site.call, { 0xE8, core.itob(stub - (site.call + 5)) })
-    head = stub
-  end
+  log(INFO, "unit route search: " .. describe(chain()))
 end
 
 local function policyList(self)

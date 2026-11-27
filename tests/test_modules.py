@@ -41,6 +41,7 @@ class ModuleHarness:
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         self.lua.globals().scan = self.scan
         self.lua.globals().write = self.write
+        self.lua.globals().read = lambda a, n: self.lua.table_from(self.memory[a - self.base:a - self.base + n])
         self.lua.globals().unique = self.scan_unique
         self.lua.globals().log = lambda level, message: self.logs.append((level, message))
         # Match core.AOBScan's throwing contract, not the original module's nil assumption.
@@ -52,6 +53,7 @@ class ModuleHarness:
               return address
             end,
             AOBScanUnique = unique,
+            readBytes = read,
             writeCode = write,
           }
           INFO = 0
