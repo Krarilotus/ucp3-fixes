@@ -17,8 +17,8 @@ end
 local function prepare(config)
   local policy = Policy.new(config)
   local game = require("behavior.game").resolve()
-  return function()
-    local sites = game.sites
+  local sites = game.sites
+  local function install(original, touching)
     local gate = core.allocateCode({0x90, 0x90, 0x90, 0x90, 0x90, 0xC3})
     core.detourCode(function(r)
       -- This point is reached only for live, selectable, unassigned AI units.
@@ -28,9 +28,15 @@ local function prepare(config)
         core.readSmallInteger(r.ESI + 0x2E0) ~= 0)
       return r
     end, gate, 5)
-    core.insertCode(sites.initial, 7, initialGate(gate, sites.initial + 119, sites.initial + 109), nil, "after")
+    local entry = initialGate(gate, sites.initial + 119, sites.initial + 109)
+    entry[#entry + 1] = original[sites.initial]
+    entry[#entry + 1] = core.jmpTo(sites.initial + 7)
+    local bridge = core.allocateCode(core.calculateCodeSize(entry))
+    core.writeCode(bridge, entry)
+    local initialPatch = core.compile({core.jmpTo(bridge), 0x90, 0x90}, sites.initial)
 
     -- Override group capacity after the vanilla special cases for rows 8/10/17.
+    touching[#touching + 1] = sites.groupLimit
     core.detourCode(function(r)
       local groups = policy:groups(game.ai(r.EBP), r.EAX, game.slots(r.EBP, r.EAX), r.EDX)
       if groups then r.EBX = groups end
@@ -39,12 +45,14 @@ local function prepare(config)
 
     -- Let held native-patrol rows retain a group for every slot. Adjust before
     -- the original cmp, so its condition flags and local group counts agree.
+    touching[#touching + 1] = sites.patrolLimit
     core.detourCode(function(r)
       local groups = policy:groups(game.ai(r.EBP), core.readInteger(r.EBX), r.ECX, r.EAX)
       if groups then r.EAX = groups end
       return r
     end, sites.patrolLimit, 8)
 
+    touching[#touching + 1] = sites.mapper
     local originalMapper
     originalMapper = core.hookCode(function(this, unitID, firstPause)
       local unit, ai = game.unit(unitID)
@@ -53,6 +61,7 @@ local function prepare(config)
       return originalMapper(this, unitID, firstPause)
     end, sites.mapper, 3, 1, 10)
 
+    touching[#touching + 1] = sites.movement
     local originalMovement
     originalMovement = core.hookCode(function(this, tribe, row, slot)
       local ai, ordinal, slots, hits = game.movementContext(tribe, row)
@@ -65,9 +74,28 @@ local function prepare(config)
       end
       return originalMovement(this, tribe, row, slot)
     end, sites.movement, 4, 1, 7)
-
-    require("behavior.aic")(policy)
-  end, policy
+    touching[#touching + 1] = sites.initial
+    core.writeCodeBytes(sites.initial, initialPatch)
+  end
+  return function()
+    local original, touching = {}, {}
+    for address, size in pairs({
+      [sites.initial] = 7, [sites.groupLimit] = 9, [sites.patrolLimit] = 8,
+      [sites.mapper] = 10, [sites.movement] = 7,
+    }) do
+      original[address] = core.readBytes(address, size)
+    end
+    local unregister = require("behavior.aic")(policy)
+    local ok, reason = pcall(install, original, touching)
+    if not ok then
+      for _, address in ipairs(touching) do
+        pcall(core.writeCodeBytes, address, original[address])
+      end
+      unregister()
+      error(reason, 0)
+    end
+    return policy
+  end
 end
 
 return {prepare = prepare, initialGate = initialGate}

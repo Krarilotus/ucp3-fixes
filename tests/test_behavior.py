@@ -45,12 +45,16 @@ class BehaviorHarness(ModuleHarness):
         for row in range(20): self.i32(self.pointers['rowToTribe'] + row * 4, row * 10)
         self.callbacks, self.hooks, self.native_calls, self.aic = {}, {}, [], {}
         self.next_code = 0x1E0000
+        self.lua.globals().core.readBytes = lambda a, n: self.lua.table_from(self.get(a, n))
+        self.lua.globals().core.writeCodeBytes = self.write
         self.lua.globals().core.readInteger = lambda a: int.from_bytes(self.get(a, 4), 'little', signed=True)
         self.lua.globals().core.readSmallInteger = lambda a: int.from_bytes(self.get(a, 2), 'little', signed=True)
         self.lua.globals().core.allocateCode = self.allocate
         self.lua.globals().core.detourCode = lambda cb, a, n: self.callbacks.update({a: (cb, n)})
         self.lua.globals().core.hookCode = self.hook
-        self.lua.globals().core.insertCode = self.insert
+        self.lua.globals().core.calculateCodeSize = lambda code: len(self.compile(code, 0))
+        self.lua.globals().core.compile = lambda code, at: self.lua.table_from(self.compile(code, at))
+        self.lua.globals().core.writeCode = self.write_code
         self.lua.globals().register_aic = lambda owner, key, getter, reset: self.aic.update({key: (getter, reset, owner)})
         self.lua.globals().register_provider = lambda owner, provider: setattr(self, 'provider', (owner, provider))
         self.lua.execute('''
@@ -58,6 +62,9 @@ class BehaviorHarness(ModuleHarness):
             registerAdditionalAICValue = function(self, owner, key, getter, reset) register_aic(owner, key, getter, reset) end,
             registerAICUpdateProvider = function(self, owner, provider) register_provider(owner, provider) end,
           }}
+          core.jmpTo = function(dst)
+            return {0xE9, core.relTo(dst, -4)}
+          end
           WARNING = 1
           core.relTo = function(dst, offset)
             return function(address)
@@ -93,18 +100,15 @@ class BehaviorHarness(ModuleHarness):
     def allocate(self, code):
         address = self.next_code
         self.next_code += 256
-        self.put(address, self.compile(code, address))
+        if not isinstance(code, int): self.put(address, self.compile(code, address))
         return address
 
-    def insert(self, site, size, code, return_to, original):
-        self.assert_original = original
-        address = self.next_code
-        data = self.compile(code, address) + bytes(self.get(site, size))
-        data += b'\xE9' + struct.pack('<i', (return_to or site + size) - (address + len(data) + 5))
+    def write_code(self, address, code):
+        if address < 0x1E0000:
+            return self.write(address, code)
+        data = self.compile(code, address)
         self.put(address, data)
         self.inserted = (address, data)
-        self.next_code += 256
-        return address
 
     def hook(self, cb, address, argc, convention, size):
         self.hooks[address] = (cb, argc, convention, size)
@@ -140,7 +144,7 @@ class BehaviorTests(unittest.TestCase):
                 else:
                     h.put(BASE + 37, b'\x90')
                     h.install()
-                    self.assertEqual(h.writes, [])
+                    self.assertEqual([address for address, _ in h.writes], [h.sites["initial"]])
                     self.assertTrue(h.callbacks and h.hooks and h.aic)
                     message = 'AIV troop rows are off: not found'
                 self.assertEqual(h.logs, [(2, message)])
@@ -399,7 +403,7 @@ class BehaviorTests(unittest.TestCase):
         h = self.h
         h.install()
         address, code = h.inserted
-        self.assertEqual(h.assert_original, 'after')
+        self.assertEqual(code[-12:-5], bytes.fromhex('0F B7 06 66 3D 37 00'))
         gate = 0x1E0000
         for role, expected in ((0, h.sites['initial'] + 7), (1, h.sites['initial'] + 119), (2, h.sites['initial'] + 109)):
             with self.subTest(role=role):

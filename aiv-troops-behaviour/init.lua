@@ -54,12 +54,32 @@ local SKIP_OFFSETS = {
 
 return {
   enable = function(self, config)
-    if self.started or not config then return end
+    if self.started or config == nil then return end
+    if type(config) ~= "table" then
+      log(ERROR, "AIV troop settings must be a table.")
+      return
+    end
     if config.enabled ~= nil and type(config.enabled) ~= "boolean" then
       log(ERROR, "AIV troop rows enabled must be a boolean.")
     end
     if config.enabled ~= true then return end
     local target, reason = core.AOBScanUnique(AOB)
+    local behavior, install = config.behavior
+    if behavior ~= nil and type(behavior) ~= "table" then
+      log(ERROR, "AIV troop behaviour settings must be a table.")
+    elseif behavior and behavior.enabled == true then
+      local ok, prepared = pcall(function()
+        return require("behavior").prepare(behavior)
+      end)
+      if ok then
+        install = prepared
+      else
+        log(ERROR, "AIV troop behaviour controls are off: " .. tostring(prepared))
+      end
+    elseif behavior and behavior.enabled ~= nil and type(behavior.enabled) ~= "boolean" then
+      log(ERROR, "AIV troop behaviour enabled must be a boolean.")
+    end
+
     if target then
       for _, offset in ipairs(SKIP_OFFSETS) do
         core.writeCode(target + offset, NOP6)
@@ -69,21 +89,13 @@ return {
       log(ERROR, "AIV troop rows are off: " .. reason)
     end
 
-    local behavior = config.behavior
-    if behavior ~= nil and type(behavior) ~= "table" then
-      log(ERROR, "AIV troop behaviour settings must be a table.")
-    elseif behavior and behavior.enabled == true then
-      local ok, install, policy = pcall(function()
-        return require("behavior").prepare(behavior)
-      end)
+    if install then
+      local ok, policy = pcall(install)
       if ok then
-        install()
         self.policy = policy
       else
-        log(ERROR, "AIV troop behaviour controls are off: " .. tostring(install))
+        log(ERROR, "AIV troop behaviour controls are off: " .. tostring(policy))
       end
-    elseif behavior and behavior.enabled ~= nil and type(behavior.enabled) ~= "boolean" then
-      log(ERROR, "AIV troop behaviour enabled must be a boolean.")
     end
     self.started = true
   end,

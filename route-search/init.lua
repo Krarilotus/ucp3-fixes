@@ -49,19 +49,12 @@ local function fail(message, ...)
   error(NAME .. ": " .. string.format(message, ...), 0)
 end
 
-local function found(address)
-  return address ~= nil and address ~= 0
-end
-
 local function find(pattern, purpose)
-  local ok, at = pcall(core.AOBScan, pattern)
-  if not ok or not found(at) then
-    return nil, string.format("%s was not found; this executable is not supported", purpose)
+  local address, reason = core.AOBScanUnique(pattern)
+  if not address then
+    return nil, string.format("%s was %s; this executable is not supported", purpose, reason)
   end
-  if core.scanForAOB(pattern) ~= at or found(core.scanForAOB(pattern, at + 1)) then
-    return nil, string.format("%s does not have exactly one match; this executable is not supported", purpose)
-  end
-  return at
+  return address
 end
 
 local function resolve()
@@ -90,8 +83,7 @@ local function resolve()
   end
   if why then
     problem = why
-    log(ERROR, "Custom route rules are off. The game route search could not be verified.")
-    log(WARNING, "route policies are unavailable: " .. why)
+    log(ERROR, "Custom route rules are off. " .. why .. ".")
     return
   end
   site = { call = call, search = searchAt }
@@ -162,14 +154,6 @@ local function checkCall()
   end
 end
 
--- Redirect the call once, after the chain it leads to is written.
-local function redirect()
-  if head then return end
-  head = core.allocateCode(STUB_SIZE)
-  core.writeCode(head, headCode())
-  core.writeCode(site.call, { 0xE8, core.itob(head - (site.call + 5)) })
-end
-
 local function checkOpen(what)
   if closed then
     fail("%s is only possible while modules are enabled, before the game starts", what)
@@ -227,9 +211,17 @@ local function enablePolicy(self, id, entry)
     fail("the route policy '%s' is already enabled", id)
   end
   checkCall()
+  local stub
+  if not head then
+    stub = core.allocateCode(STUB_SIZE)
+    core.writeCode(stub, headCode())
+  end
   policy.entry = entry
   relink()
-  redirect()
+  if stub then
+    core.writeCode(site.call, { 0xE8, core.itob(stub - (site.call + 5)) })
+    head = stub
+  end
 end
 
 local function policyList(self)

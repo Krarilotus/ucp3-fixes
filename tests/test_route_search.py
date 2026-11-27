@@ -89,10 +89,10 @@ class ResolutionTests(unittest.TestCase):
         self.assertIn(('code', head, 35), rs.allocations)
         self.assertTrue(any('a (100) -> b (200) -> the game' in m for _, m in rs.logs))
 
-    def test_uses_the_framework_cache(self):
+    def test_uses_the_framework_unique_scanner(self):
         rs = module()
         rs.add('a', 100)
-        self.assertEqual([(kind, rest) for kind, _, rest in rs.scans], [('AOBScan', 0)] * 2)
+        self.assertEqual([kind for kind, _ in rs.scans], ['AOBScanUnique'] * 2)
 
     def test_occupied_call_is_refused_before_any_write(self):
         rs = module(image(target=BASE + OTHER_AT))
@@ -100,7 +100,7 @@ class ResolutionTests(unittest.TestCase):
                                               r'of the game.s search at 0x403000'):
             rs.add('a', 100)
         self.assertEqual((rs.code_writes, rs.data_writes), ([], []))
-        self.assertTrue(any(level == 'WARNING' for level, _ in rs.logs))
+        self.assertEqual([level for level, _ in rs.logs], ['ERROR'])
         # Every later attempt gets the same answer.
         with self.assertRaisesRegex(LuaError, 'already goes to'):
             rs.add('b', 200)
