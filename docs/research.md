@@ -84,7 +84,7 @@ Inside `drawMinimap`:
 Two `MinimapViewState` methods handle minimap clicks; no other code outside `MinimapViewState` reads its scale/offset fields (`+0x10..+0x30`).
 
 ### 2.1 Camera Scroll (`scrollViewportToMinimapClick`, `0x004B5110` SHC / `0x004B5280` Ext)
-- `0x004B5110..0x004B5133`: menu/mouse-button guard (skips right-click during gameplay so unit orders don't scroll).
+- `0x004B5110..0x004B5133`: guard. With troops selected (`0x01FE7D20 == 0x3D` or `0x01FE7BEC == 1`), it scrolls only while the right button is held (`MouseState.rightClickState`, `0x00F2C9F8`). A left click then falls through to `MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk` (`0x004348D0`), which orders the troops to the tile from `convertMinimapClickToTileXY`; that handler ignores a right click over the minimap.
 - `0x004B5134..0x004B519F`:
   ```c
   int tx = ((DAT_MouseXScreenSpace - this->x) / this->widthFactor) * this->oneOrTwo + this->startX;
@@ -122,7 +122,7 @@ Two `MinimapViewState` methods handle minimap clicks; no other code outside `Min
 ### Framework & Subsystem Reuse
 | Capability | Existing Owner / Symbol | Reuse Decision |
 |---|---|---|
-| AOB discovery & uniqueness check | UCP3 framework `core.AOBScan` + `core.scanForAOB` | Used directly |
+| AOB discovery | UCP3 framework `core.AOBScan` (each pattern checked unique offline in both executables) | Used directly |
 | Code allocation, assembly, patching | UCP3 framework `core.allocate`, `core.allocateAssembly`, `core.writeCode`, `core.itob`, `core.getRelativeAddress` | Used directly |
 | Pre-rendered terrain+building map cache | `MinimapViewState::renderMinimapTileColors` & `renderMinimapTileStripWithLuminescence` (`field17_0x44`) | Reused untouched — already renders the full map for all sizes and rotations |
 | Live unit scan, stealth, wildlife, Alt+R, lord blink | `MinimapViewState::drawMinimap` unit loops | Reused untouched — only the two `oneOrTwo == 2` pixel-plot blocks are scaled |

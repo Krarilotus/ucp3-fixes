@@ -470,15 +470,10 @@ local function readRelTarget(nextInsn, relAddr)
   return (nextInsn + rel) & 0xFFFFFFFF
 end
 
-local function scanUnique(pattern, label)
+local function scan(pattern, label)
   local ok, addr = pcall(core.AOBScan, pattern)
   if not ok or addr == nil or addr == 0 then
-    log(WARNING, "full-minimap: " .. label .. " not found; nothing changed")
-    return nil
-  end
-  local duplicate = core.scanForAOB(pattern, addr + 1)
-  if duplicate and duplicate ~= 0 then
-    log(WARNING, "full-minimap: " .. label .. " signature is ambiguous; nothing changed")
+    log(ERROR, "full-minimap: " .. label .. " not found; nothing changed")
     return nil
   end
   return addr
@@ -491,13 +486,13 @@ function M:enable(config)
     return
   end
 
-  local scrollAddr = scanUnique(SCROLL_AOB, "scrollViewportToMinimapClick")
-  local clickTileAddr = scanUnique(CLICK_TILE_AOB, "convertMinimapClickToTileXY")
-  local mapSizeAddr = scanUnique(MAPSIZE_AOB, "drawMinimap mapSize read")
-  local drawSetupAddr = scanUnique(DRAW_SETUP_AOB, "drawMinimap setup")
-  local drawBlitAddr = scanUnique(DRAW_BLIT_AOB, "drawMinimap blit")
-  local drawUnitNormalAddr = scanUnique(DRAW_UNIT_NORMAL_AOB, "drawMinimap normal unit plot")
-  local drawUnitAltRAddr = scanUnique(DRAW_UNIT_ALTR_AOB, "drawMinimap Alt+R unit plot")
+  local scrollAddr = scan(SCROLL_AOB, "scrollViewportToMinimapClick")
+  local clickTileAddr = scan(CLICK_TILE_AOB, "convertMinimapClickToTileXY")
+  local mapSizeAddr = scan(MAPSIZE_AOB, "drawMinimap mapSize read")
+  local drawSetupAddr = scan(DRAW_SETUP_AOB, "drawMinimap setup")
+  local drawBlitAddr = scan(DRAW_BLIT_AOB, "drawMinimap blit")
+  local drawUnitNormalAddr = scan(DRAW_UNIT_NORMAL_AOB, "drawMinimap normal unit plot")
+  local drawUnitAltRAddr = scan(DRAW_UNIT_ALTR_AOB, "drawMinimap Alt+R unit plot")
 
   if not (scrollAddr and clickTileAddr and mapSizeAddr and drawSetupAddr
       and drawBlitAddr and drawUnitNormalAddr and drawUnitAltRAddr) then

@@ -6,6 +6,6 @@ Scales the entire map to fit the interactive minimap (`126x126` in-game and `128
 - terrain and building background blit from `MinimapViewState`'s pre-rendered full-map buffer;
 - live unit dots in both normal and Alt+R modes (preserving stealth, wildlife, disguised units, blinking lord, and all 4 map rotations);
 - the white visible-area viewport frame;
-- left-click/drag camera scrolling and right-click unit command targeting.
+- click/drag camera scrolling and the move target of a minimap left-click with troops selected (as in vanilla, a right-click then pans the camera).
 
 Editor preview and map/save thumbnail rendering are left untouched. See `docs/research.md` for binary analysis details.
