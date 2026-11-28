@@ -49,13 +49,13 @@ class Game:
 
         accessible = 0x1000
         put('accessible', accessible, '83 EC 0C 8B 44 24 10 85 C0 57 8B F9 89 7C 24 04 7F 09 33 C0')
-        put('row', accessible + 0x9B, '03 14 8D', le(ROWS), '0F B7 04 55', le(AREAS), '66 85 C0')
+        put('row', accessible + 0x9B, '03 14 8D', le(ROWS), '0F B7 04 55', le(AREAS), '66 85 C0', '0F B6 BA')
         put('area', accessible + 0xFC, '0F BF 04 55', le(AREAS), '3B C1 74 29 0F BF 96 E6 00 00 00')
         put('flags', accessible + 0x112, le(FLAGS))
         put('route', accessible + 0x119, '6A 00 50 51 55 B9', le(BUILDINGS), 'E8', le(0),
             '85 C0 75 05 BB 01 00 00 00')
         put('custom', 0x1400, '83 EC 08 8B 44 24 0C 85 C0 53 8B D9 89 5C 24 04 7F 09 33 C0')
-        put('nextRow', 0x1460, '03 14 8D', le(ROWS), '0F B7 04 55', le(AREAS), '66 85 C0')
+        put('nextRow', 0x1460, '03 14 8D', le(ROWS), '0F B7 04 55', le(AREAS), '66 85 C0', '0F B6 9A')
         put('storage', 0x1800, '53 55 56 8B 74 24 10 57 56 8B F9 E8', le(0),
             '83 F8 0A 0F 85', le(0))
         put('armory', 0x1A00, '8B 44 24 04 85 C0 57 8B F9 74 1B 8B 4C 24 14 8B 54 24 10 51')

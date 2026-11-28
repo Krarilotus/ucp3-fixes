@@ -6,7 +6,9 @@ local PATTERNS = {
   route = "6A 00 50 51 55 B9 ? ? ? ? E8 ? ? ? ? 85 C0 75 05 BB 01 00 00 00",
   -- The opcode at +29 is the removal branch; UCP2 Legacy's ai_access may own it.
   heatmap = "0F BF 4E 02 83 3C 8D ? ? ? ? 00 75 3E 6A 00 57 B9 ? ? ? ? E8 ? ? ? ? 85 C0 ? 07 66 C7 06 03 00 EB 12 83 F8 02 75 07 66 C7 06 03 00 EB 06 66 83 3E 03 75 14",
-  row = "03 14 8D ? ? ? ? 0F B7 04 55 ? ? ? ? 66 85 C0",
+  -- The keep and custom resolvers index the same row table; the next register tells them apart.
+  row = "03 14 8D ? ? ? ? 0F B7 04 55 ? ? ? ? 66 85 C0 0F B6 BA",
+  customRow = "03 14 8D ? ? ? ? 0F B7 04 55 ? ? ? ? 66 85 C0 0F B6 9A",
   area = "0F BF 04 55 ? ? ? ? 3B C1 74 29 0F BF 96 E6 00 00 00",
   ox = "53 55 56 8B 35 ? ? ? ? 69 F6 90 04 00 00 0F BF 86 ? ? ? ? 0F BF 8E ? ? ? ? 33 ED 3B C5 57",
   afterOx = "51 53 8B 5C 24 0C 56 8B F3 69 F6 90 04 00 00 8B 86 ? ? ? ? 57",
@@ -48,15 +50,12 @@ end
 local function resolve()
   local sites = {}
   for name, pattern in pairs(PATTERNS) do
-    if name ~= "row" then sites[name] = core.AOBScan(pattern) end
+    sites[name] = core.AOBScan(pattern)
   end
-  -- The same row-index instruction occurs in the keep and custom resolvers.
-  -- Select the occurrence inside the keep resolver, before the delivery gate.
-  local row = core.AOBScan(PATTERNS.row)
+  local row, nextRow = sites.row, sites.customRow
   assert(inRange(row, sites.accessible, sites.route),
     "worker-delivery-fix: row lookup is outside the native keep check")
-  local nextRow = core.scanForAOB(PATTERNS.row, row + 1)
-  assert(nextRow and inRange(nextRow, sites.custom, sites.storage),
+  assert(inRange(nextRow, sites.custom, sites.storage),
     "worker-delivery-fix: unexpected row lookup context")
   assert(inRange(sites.area, row, sites.route)
       and inRange(sites.route, sites.accessible, sites.custom)
