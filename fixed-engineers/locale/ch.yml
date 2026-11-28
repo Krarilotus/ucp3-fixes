@@ -5,3 +5,4 @@ siege_target_stop: 瞄准时停止攻城器械
 siege_target_stop_descr: 投石车和重型投石机收到攻击单位的命令后会停止移动。
   更改此设置后请重新启动游戏。
 tags.bugfixes: 错误修复
+cat_siege_digging: 攻城器械与挖掘

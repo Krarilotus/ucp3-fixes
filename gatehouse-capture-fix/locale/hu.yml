@@ -2,3 +2,4 @@ bugfixes: Hibajavítások
 living_gatehouse_occupants: Csak az élő csapatok számítanak a kapuház birtoklásakor
 living_gatehouse_occupants_descr: Az elesett csapatok többé nem számítanak bele a kapuház elfoglalásába vagy megtartásába.
 tags.bugfixes: Hibajavítások
+cat_gates_capture: Kapuk és elfoglalás

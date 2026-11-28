@@ -6,3 +6,4 @@ description: Count hop farms towards the AI farm limit. The limit stays the same
 tags.ai: AI
 tags.economy: Economy
 tags.bugfixes: Bug fixes
+cat_production_supplies: Production and supplies

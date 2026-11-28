@@ -2,7 +2,7 @@ meta:
   version: 1.0.0
 options:
 - name: living_gatehouse_occupants
-  category: ['{{bugfixes}}']
+  category: ['{{bugfixes}}', '{{cat_gates_capture}}']
   display: UCP2Switch
   header: '{{living_gatehouse_occupants}}'
   text: '{{living_gatehouse_occupants_descr}}'

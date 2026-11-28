@@ -2,3 +2,4 @@ bugfixes: Corrections de bugs
 living_gatehouse_occupants: Seules les troupes vivantes comptent pour contrôler une porte
 living_gatehouse_occupants_descr: Les troupes tombées ne comptent plus pour capturer ou tenir un corps de garde.
 tags.bugfixes: Corrections
+cat_gates_capture: Portes et capture

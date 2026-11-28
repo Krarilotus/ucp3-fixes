@@ -2,7 +2,7 @@ meta:
   version: 1.0.0
 options:
 - name: siege_target_stop
-  category: ['{{bugfixes}}']
+  category: ['{{bugfixes}}', '{{cat_siege_digging}}']
   display: UCP2Switch
   header: '{{siege_target_stop}}'
   text: '{{siege_target_stop_descr}}'
@@ -11,7 +11,7 @@ options:
     type: boolean
     value: false
 - name: crew_lifecycle
-  category: ['{{bugfixes}}']
+  category: ['{{bugfixes}}', '{{cat_siege_digging}}']
   display: UCP2Switch
   header: '{{crew_lifecycle}}'
   text: '{{crew_lifecycle_descr}}'

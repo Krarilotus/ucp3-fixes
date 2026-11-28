@@ -5,6 +5,7 @@ options:
   category:
   - '{{ai}}'
   - '{{fixes}}'
+  - '{{cat_production_supplies}}'
   display: UCP2Switch
   header: '{{title}}'
   text: '{{description}}'

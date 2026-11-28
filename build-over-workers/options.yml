@@ -9,6 +9,7 @@ options:
   text: '{{buildings_tooltip}}'
   category:
   - '{{bugfixes}}'
+  - '{{cat_buildings_placement}}'
 - url: build-over-workers.walls
   name: build-over-workers-walls
   display: UCP2Switch
@@ -19,6 +20,7 @@ options:
   text: '{{walls_tooltip}}'
   category:
   - '{{bugfixes}}'
+  - '{{cat_buildings_placement}}'
   children:
   - url: build-over-workers.keepOnWalls
     name: build-over-workers-keep-on-walls
@@ -38,5 +40,6 @@ options:
   text: '{{allies_tooltip}}'
   category:
   - '{{balance_changes}}'
+  - '{{cat_building_farming}}'
 meta:
   version: 1.0.0

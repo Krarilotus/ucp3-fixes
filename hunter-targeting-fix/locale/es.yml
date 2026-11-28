@@ -2,3 +2,4 @@ bugfixes: Correcciones de errores
 hunter_targeting: Los cazadores se acercan a los ciervos si el tiro está bloqueado
 hunter_targeting_descr: Los cazadores eligen ciervos cercanos y se acercan para tener tiro despejado.
 tags.bugfixes: Correcciones
+cat_unit_orders: Órdenes y objetivos de unidades

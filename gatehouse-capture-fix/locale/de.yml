@@ -2,3 +2,4 @@ bugfixes: Fehlerkorrekturen
 living_gatehouse_occupants: Nur lebende Truppen zählen für die Torhaus-Kontrolle
 living_gatehouse_occupants_descr: Gefallene Truppen zählen nicht mehr dafür, wer ein Torhaus erobert oder hält.
 tags.bugfixes: Fehlerkorrekturen
+cat_gates_capture: Tore und Einnahme

@@ -5,6 +5,7 @@ options:
   category:
   - '{{ai}}'
   - '{{fixes}}'
+  - '{{cat_castle_defence}}'
   display: UCP2Switch
   header: '{{title}}'
   text: '{{description}}'
@@ -16,6 +17,7 @@ options:
   category:
   - '{{ai}}'
   - '{{improvements}}'
+  - '{{cat_recruitment_defenders}}'
   display: UCP2Switch
   header: '{{behavior_title}}'
   text: '{{table_help}}'

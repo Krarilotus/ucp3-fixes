@@ -2,3 +2,4 @@ bugfixes: 错误修复
 hunter_targeting: 视线受阻时猎人会靠近鹿群
 hunter_targeting_descr: 猎人会挑选附近的鹿并靠近以获得清晰射界。
 tags.bugfixes: 错误修复
+cat_unit_orders: 部队指令与目标

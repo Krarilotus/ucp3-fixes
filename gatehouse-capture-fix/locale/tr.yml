@@ -2,3 +2,4 @@ bugfixes: Hata düzeltmeleri
 living_gatehouse_occupants: Kapı binası kontrolünde yalnızca yaşayan birlikler sayılsın
 living_gatehouse_occupants_descr: Ölen birlikler bir kapı binasını ele geçirme veya tutma hesabına artık katılmaz.
 tags.bugfixes: Hata düzeltmeleri
+cat_gates_capture: Kapılar ve ele geçirme
