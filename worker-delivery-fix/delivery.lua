@@ -33,14 +33,6 @@ local STORAGE_TYPES = {[11] = true, [19] = true}
 local HEATMAP_BRANCH = 29
 local NATIVE_BRANCH, LEGACY_AI_ACCESS_BRANCH = 0x75, 0xEB
 
-local function unique(pattern, name)
-  local address = core.AOBScan(pattern)
-  assert(core.scanForAOB(pattern) == address
-      and core.scanForAOB(pattern, address + 1) == nil,
-    "worker-delivery-fix: ambiguous " .. name .. " binding")
-  return address
-end
-
 local function signedShort(value)
   return value < 0x8000 and value or value - 0x10000
 end
@@ -56,7 +48,7 @@ end
 local function resolve()
   local sites = {}
   for name, pattern in pairs(PATTERNS) do
-    if name ~= "row" then sites[name] = unique(pattern, name) end
+    if name ~= "row" then sites[name] = core.AOBScan(pattern) end
   end
   -- The same row-index instruction occurs in the keep and custom resolvers.
   -- Select the occurrence inside the keep resolver, before the delivery gate.

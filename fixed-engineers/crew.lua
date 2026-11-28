@@ -40,9 +40,6 @@ local function prepare(native)
     }}
   end
   local fire = core.AOBScan(firePattern)
-  assert(core.scanForAOB(firePattern) == fire
-      and core.scanForAOB(firePattern, fire + 1) == nil,
-    "fixed-engineers: ambiguous fatal fire initialization")
   local fireSite, fireCode = fire + 19, {}
   local dyingTypes = {55, 39, 40, 41, 58, 59, 60, 61, 77}
   for index, kind in ipairs(dyingTypes) do

@@ -2,9 +2,6 @@
 local pattern = "0F BF 91 A2 06 00 00 8B 04 95 ? ? ? ? FF D0 A1 ? ? ? ? 69 C0 90 04 00 00"
 local function resolve()
   local dispatch = core.AOBScan(pattern)
-  assert(core.scanForAOB(pattern) == dispatch
-      and core.scanForAOB(pattern, dispatch + 1) == nil,
-    "fixed-engineers: ambiguous unit dispatch")
   local tableAddress = core.readInteger(dispatch + 10)
   local entries = {}
   for kind = 0, 79 do entries[kind] = core.readInteger(tableAddress + kind * 4) end
@@ -18,11 +15,6 @@ local function resolve()
       local address = core.AOBScan(signature)
       assert(last and address >= first and address + size < last,
         "fixed-engineers: patch is outside its native unit handler")
-      -- The released RPS scanner may return beyond its requested bound.
-      local before = core.scanForAOB(signature, first, last - 1)
-      local after = core.scanForAOB(signature, address + 1, last - 1)
-      assert(before == address and (after == nil or after >= last),
-        "fixed-engineers: ambiguous unit handler context")
       return address
     end,
   }

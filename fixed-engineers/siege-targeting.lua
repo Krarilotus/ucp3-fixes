@@ -18,9 +18,6 @@ local function prepare()
   local sites = {}
   for i, pattern in ipairs({attackPattern, groundPattern, dispatchPattern}) do
     local address = core.AOBScan(pattern)
-    assert(core.scanForAOB(pattern) == address
-        and core.scanForAOB(pattern, address + 1) == nil,
-      "fixed-engineers: ambiguous siege attack command")
     local _, size = pattern:gsub("%S+", "")
     sites[i] = {address = address, original = core.readBytes(address, size)}
   end

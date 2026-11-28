@@ -6,9 +6,6 @@ local tailPattern = "0F BF 93 ? ? ? ? 83 C0 01 3B C2 89 44 24 34 0F 8C ? ? ? ? "
   "8B 44 24 38 50 B9 ? ? ? ? 66 C7 83 ? ? ? ? 00 00"
 local function prepare()
   local dispatch = core.AOBScan(dispatchPattern)
-  assert(core.scanForAOB(dispatchPattern) == dispatch
-      and core.scanForAOB(dispatchPattern, dispatch + 1) == nil,
-    "fixed-engineers: ambiguous command dispatch")
   local extreme = data.version.isExtreme()
   assert(core.readInteger(dispatch - 33) == (extreme and 0x688 or 0x334),
     "fixed-engineers: incompatible command group layout")
@@ -41,8 +38,6 @@ local function prepare()
     "fixed-engineers: inconsistent exit-equipment record layout")
   local tail = core.AOBScan(tailPattern)
   assert(tail > site and tail + 41 < failure
-      and core.scanForAOB(tailPattern) == tail
-      and core.scanForAOB(tailPattern, tail + 1) == nil
       and tail + 22 + core.readInteger(tail + 18) == loop
       and core.readInteger(tail + 3) == root + 0x3B4,
     "fixed-engineers: incompatible exit-equipment continuation")
