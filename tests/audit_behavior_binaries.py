@@ -32,7 +32,7 @@ def audit(path):
         assert any(s.VirtualAddress <= offset < s.VirtualAddress + s.Misc_VirtualSize
                    and s.Characteristics & 0x20000000 for s in pe.sections)
         return base + offset
-    h.lua.globals().core.AOBScanUnique = scan
+    h.lua.globals().core.AOBScan = scan
     pointers = []
     def read(address):
         offset = address - base

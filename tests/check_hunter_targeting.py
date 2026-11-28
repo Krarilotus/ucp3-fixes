@@ -61,7 +61,7 @@ def check(path, framework):
         next_cave[0] += 0x1000
         return address
 
-    core.AOBScanUnique = scan_unique
+    core.AOBScan = scan_unique
     core.readByte = lambda address: read(address, 1)[0]
     core.readInteger = lambda address: int.from_bytes(read(address, 4), 'little')
     core.readBytes = lambda address, count: lua.table_from(read(address, count))

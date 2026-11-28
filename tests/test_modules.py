@@ -27,11 +27,8 @@ def aob(pattern):
 
 
 def unique_hit(addresses):
-    if not addresses:
-        return None, 'not found'
-    if len(addresses) > 1:
-        return None, 'found more than once'
-    return addresses[0], None
+    assert len(addresses) == 1, addresses
+    return addresses[0]
 
 
 class ModuleHarness:
@@ -42,7 +39,6 @@ class ModuleHarness:
         self.lua.globals().scan = self.scan
         self.lua.globals().write = self.write
         self.lua.globals().read = lambda a, n: self.lua.table_from(self.memory[a - self.base:a - self.base + n])
-        self.lua.globals().unique = self.scan_unique
         self.lua.globals().log = lambda level, message: self.logs.append((level, message))
         # Match core.AOBScan's throwing contract, not the original module's nil assumption.
         self.lua.execute('''
@@ -52,7 +48,6 @@ class ModuleHarness:
               if address == nil then error('AOB not found: ' .. pattern) end
               return address
             end,
-            AOBScanUnique = unique,
             readBytes = read,
             writeCode = write,
           }
@@ -63,12 +58,8 @@ class ModuleHarness:
 
     def scan(self, pattern, extra_arguments):
         self.scans.append((pattern, extra_arguments))
-        offset = self.memory.find(bytes.fromhex(pattern))
-        return None if offset < 0 else self.base + offset
-
-    def scan_unique(self, pattern):
-        self.scans.append((pattern, 0))
-        return unique_hit([self.base + match.start() for match in aob(pattern).finditer(self.memory)])
+        match = aob(pattern).search(self.memory)
+        return None if match is None else self.base + match.start()
 
     def write(self, address, code):
         data = bytes(code.values())

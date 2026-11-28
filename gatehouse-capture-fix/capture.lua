@@ -5,8 +5,8 @@ local pattern = "69 F6 90 04 00 00 66 83 BE ? ? ? ? 00 74 54 " ..
   "8B 1D ? ? ? ? 01 44 BC 38"
 
 local function prepare()
-  local block, reason = core.AOBScanUnique(pattern)
-  if not block then error("native occupancy check: " .. reason, 0) end
+  local ok, block = pcall(core.AOBScan, pattern)
+  if not ok then error("native occupancy check: not found", 0) end
   local site = block + 6
   local original = core.readBytes(site, 10)
   assert(original[1] == 0x66 and original[2] == 0x83 and original[3] == 0xBE

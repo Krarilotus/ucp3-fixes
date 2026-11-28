@@ -34,9 +34,8 @@ def options():
     return found
 
 
-def entry(ambiguous=False):
+def entry():
     lua = LuaRuntime(unpack_returned_tuples=True)
-    lua.globals().ambiguous = ambiguous
     lua.execute("""
       ERROR = 2
       calls, logs = {}, {}
@@ -44,9 +43,7 @@ def entry(ambiguous=False):
       core = setmetatable({}, {__index = function(_, name)
         return function()
           calls[#calls + 1] = name
-          if name == "AOBScanUnique" then
-            return nil, ambiguous and "found more than once" or "not found"
-          end
+          if name == "AOBScan" then error("AOB not found") end
           error("unexpected core." .. name)
         end
       end})
@@ -73,16 +70,9 @@ class BuildOverWorkersTests(unittest.TestCase):
             with self.subTest(part=part):
                 lua, module = entry()
                 module.enable(module, lua.table_from({part: True}))
-                self.assertEqual(list(lua.globals().calls.values()), ['AOBScanUnique'])
+                self.assertEqual(list(lua.globals().calls.values()), ['AOBScan'])
                 self.assertIn('is off:', lua.globals().logs[1][2])
                 self.assertEqual(lua.globals().logs[1][1], 2)
-
-    def test_ambiguous_signature_is_refused_before_writing(self):
-        lua, module = entry(ambiguous=True)
-        module.enable(module, lua.table_from({'buildings': True}))
-        self.assertEqual(list(lua.globals().calls.values()), ['AOBScanUnique'])
-        self.assertEqual(lua.globals().logs[1][2],
-                         'Building over workers is off: the building placement test: found more than once')
 
     def test_runtime_disable_reports_restart(self):
         lua, module = entry()

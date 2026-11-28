@@ -16,8 +16,8 @@ local PLAYER_STRIDE, UNIT_STRIDE = 0x39F4, 0x490
 local function resolve()
   local sites = {}
   for key, pattern in pairs(PATTERNS) do
-    local address, reason = core.AOBScanUnique(pattern)
-    if not address then error("cannot resolve behavior hook " .. key .. ": " .. reason, 0) end
+    local ok, address = pcall(core.AOBScan, pattern)
+    if not ok then error("cannot resolve behavior hook " .. key .. ": not found", 0) end
     sites[key] = address
   end
   local unitType = core.readInteger(sites.mapper + 13)

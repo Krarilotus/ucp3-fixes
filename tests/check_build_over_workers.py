@@ -80,7 +80,7 @@ class Game:
         g.INFO, g.WARNING, g.ERROR = 0, 1, 2
         g.log = lambda level, message: self.logs.append(str(message))
         core = lua.table()
-        core.AOBScanUnique = lambda pattern: unique_hit(
+        core.AOBScan = lambda pattern: unique_hit(
             [va + match.start() for va, size in self.executable
              for match in regex(pattern).finditer(self.read(va, size))])
         core.readInteger = lambda a: struct.unpack('<i', self.read(a, 4))[0]

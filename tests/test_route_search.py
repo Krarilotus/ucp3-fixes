@@ -89,10 +89,10 @@ class ResolutionTests(unittest.TestCase):
         self.assertIn(('code', head, 35), rs.allocations)
         self.assertTrue(any('a (100) -> b (200) -> the game' in m for _, m in rs.logs))
 
-    def test_uses_the_framework_unique_scanner(self):
+    def test_uses_the_framework_scanner(self):
         rs = module()
         rs.add('a', 100)
-        self.assertEqual([kind for kind, _ in rs.scans], ['AOBScanUnique'] * 2)
+        self.assertEqual([kind for kind, _ in rs.scans], ['AOBScan'] * 2)
 
     def test_occupied_call_is_refused_before_any_write(self):
         rs = module(image(target=BASE + OTHER_AT))

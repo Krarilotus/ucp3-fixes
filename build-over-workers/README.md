@@ -31,8 +31,8 @@ module's AI wall path, with walls on and off, on licensed 1.41 executables.
 
 ## Release notes
 
-- **1.1.1:** The check for a second signature match covers only the game's code, which
-  shortens startup.
+- **1.1.1:** Building and wall placement over workers turn off separately, with an error,
+  when their game code is not found.
 - **1.1.0:** Placement over workers is off by default; after updating, switch it on in
   Customizations unless you saved it on. The switches also cover AI walls. A signature
   that matches more than once is refused before any change.

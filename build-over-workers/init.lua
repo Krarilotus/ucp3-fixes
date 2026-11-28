@@ -121,8 +121,8 @@ local MAP_SIZE = 400
 ---------------------------------------------------------------------------------------
 
 local function scan(pattern, purpose)
-  local address, reason = core.AOBScanUnique(pattern)
-  if not address then error(purpose .. ": " .. reason, 0) end
+  local ok, address = pcall(core.AOBScan, pattern)
+  if not ok then error(purpose .. ": not found", 0) end
   return address
 end
 
@@ -350,11 +350,11 @@ local function enable(self, config)
   end
   local teams
   if allies then
-    local address, reason = core.AOBScanUnique(AOB_PLAYER_TEAMS)
-    if address then
+    local found, address = pcall(core.AOBScan, AOB_PLAYER_TEAMS)
+    if found then
       teams = core.readInteger(address + PLAYER_TEAMS_OPERAND)
     else
-      log(ERROR, "Placement over allied workers is off: " .. reason)
+      log(ERROR, "Placement over allied workers is off: not found")
       allies = false
     end
   end

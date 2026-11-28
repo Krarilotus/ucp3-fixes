@@ -53,8 +53,8 @@ local SKIP_OFFSETS = {
 }
 
 local function installRows()
-  local target, reason = core.AOBScanUnique(AOB)
-  if not target then error(reason, 0) end
+  local found, target = pcall(core.AOBScan, AOB)
+  if not found then error("not found", 0) end
   local original = {}
   for index, offset in ipairs(SKIP_OFFSETS) do
     original[index] = core.readBytes(target + offset, #NOP6)

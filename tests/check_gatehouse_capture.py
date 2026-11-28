@@ -42,7 +42,7 @@ def check(path, framework):
         compiled = core.compile(code, address)
         for offset, byte in enumerate(compiled.values()): changes[address + offset] = byte
 
-    core.AOBScanUnique = scan_unique
+    core.AOBScan = scan_unique
     core.readInteger = lambda address: int.from_bytes(read(address, 4), 'little')
     core.readByte = lambda address: read(address, 1)[0]
     core.readBytes = lambda address, count: lua.table_from(read(address, count))

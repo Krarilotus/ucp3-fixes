@@ -50,9 +50,9 @@ local function fail(message, ...)
 end
 
 local function find(pattern, purpose)
-  local address, reason = core.AOBScanUnique(pattern)
-  if not address then
-    return nil, string.format("%s was %s; this executable is not supported", purpose, reason)
+  local ok, address = pcall(core.AOBScan, pattern)
+  if not ok then
+    return nil, string.format("%s was not found; this executable is not supported", purpose)
   end
   return address
 end
