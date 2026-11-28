@@ -2,3 +2,4 @@ enabled: Show whole map on minimap
 enabled_tooltip: Scales the entire map to fit the minimap on every map size instead of scrolling a zoomed-in window. Clicks, unit orders, and the visible-area frame match the scaled minimap.
 qol: Quality of Life
 tags.qol: Quality of Life
+cat_display_camera: Display and camera

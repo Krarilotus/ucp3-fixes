@@ -29,7 +29,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Scenario Settings Fix](docs/scenario-settings.md) | Keeps the troops, weapons and goods a map forbids in the scenario editor forbidden in skirmish, multiplayer, trail and Play a Map games. Not part of the UCP3 Fixes plugin. In-game acceptance is pending. |
 | [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 | [Route Search](route-search/) | Not a fix: the one owner of a unit's route search. Other modules' route policies (Smarter Pathing's assassin shortcut, Gatehouse Fixes' gate routes) run there in a fixed order, so they work together. No settings; alone it changes nothing. Its README documents the policy contract. MIT. |
-| [Full Minimap](full-minimap/) | Not a fix: shows the whole map on the minimap on every map size, with the visible-area frame, clicks and unit orders scaled to match. On once selected. English texts only. Not part of the UCP3 Fixes plugin. In-game check of the Alt+R dot mode is pending. |
+| [Full Minimap](full-minimap/) | Not a fix: shows the whole map on the minimap on every map size, with the visible-area frame, clicks and unit orders scaled to match. Off until its option is ticked. English texts only. Not part of the UCP3 Fixes plugin. In-game check of the Alt+R dot mode is pending. |
 
 ## UCP3 Fixes plugin
 

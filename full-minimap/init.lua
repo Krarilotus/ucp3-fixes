@@ -470,34 +470,48 @@ local function readRelTarget(nextInsn, relAddr)
   return (nextInsn + rel) & 0xFFFFFFFF
 end
 
-local function scan(pattern, label)
-  local ok, addr = pcall(core.AOBScan, pattern)
-  if not ok or addr == nil or addr == 0 then
-    log(ERROR, "full-minimap: " .. label .. " not found; nothing changed")
-    return nil
+local PATTERNS = {
+  { "scroll", SCROLL_AOB, "scrollViewportToMinimapClick" },
+  { "clickTile", CLICK_TILE_AOB, "convertMinimapClickToTileXY" },
+  { "mapSize", MAPSIZE_AOB, "drawMinimap mapSize read" },
+  { "drawSetup", DRAW_SETUP_AOB, "drawMinimap setup" },
+  { "drawBlit", DRAW_BLIT_AOB, "drawMinimap blit" },
+  { "drawUnitNormal", DRAW_UNIT_NORMAL_AOB, "drawMinimap normal unit plot" },
+  { "drawUnitAltR", DRAW_UNIT_ALTR_AOB, "drawMinimap Alt+R unit plot" },
+}
+
+-- Resolves the patterns in order and stops at the first miss.
+local function resolve()
+  local found = {}
+  for _, pattern in ipairs(PATTERNS) do
+    local ok, addr = pcall(core.AOBScan, pattern[2])
+    if not ok then
+      return nil, pattern[3] .. " not found"
+    end
+    found[pattern[1]] = addr
   end
-  return addr
+  return found
+end
+
+local function fail(reason)
+  log(ERROR, "full-minimap: " .. reason .. "; nothing changed")
 end
 
 local M = {}
 
 function M:enable(config)
-  if type(config) == "table" and config.enabled == false then
+  if type(config) ~= "table" or config.enabled ~= true then
     return
   end
 
-  local scrollAddr = scan(SCROLL_AOB, "scrollViewportToMinimapClick")
-  local clickTileAddr = scan(CLICK_TILE_AOB, "convertMinimapClickToTileXY")
-  local mapSizeAddr = scan(MAPSIZE_AOB, "drawMinimap mapSize read")
-  local drawSetupAddr = scan(DRAW_SETUP_AOB, "drawMinimap setup")
-  local drawBlitAddr = scan(DRAW_BLIT_AOB, "drawMinimap blit")
-  local drawUnitNormalAddr = scan(DRAW_UNIT_NORMAL_AOB, "drawMinimap normal unit plot")
-  local drawUnitAltRAddr = scan(DRAW_UNIT_ALTR_AOB, "drawMinimap Alt+R unit plot")
-
-  if not (scrollAddr and clickTileAddr and mapSizeAddr and drawSetupAddr
-      and drawBlitAddr and drawUnitNormalAddr and drawUnitAltRAddr) then
-    return
+  -- Every binding is resolved and checked before the first write.
+  local found, reason = resolve()
+  if not found then
+    return fail(reason)
   end
+  local scrollAddr, clickTileAddr = found.scroll, found.clickTile
+  local mapSizeAddr, drawSetupAddr, drawBlitAddr = found.mapSize, found.drawSetup, found.drawBlit
+  local drawUnitNormalAddr, drawUnitAltRAddr = found.drawUnitNormal, found.drawUnitAltR
 
   local mouseX = readU32(scrollAddr + 0x01)
   local mouseY = readU32(scrollAddr + 0x0F)
@@ -511,16 +525,14 @@ function M:enable(config)
   local clickMouseX = readU32(clickTileAddr + 0x0B)
   local clickMouseY = readU32(clickTileAddr + 0x25)
   if clickMouseX ~= mouseX or clickMouseY ~= mouseY then
-    log(WARNING, "full-minimap: mouse global mismatch between click handlers; nothing changed")
-    return
+    return fail("mouse global mismatch between click handlers")
   end
 
   local mapSize = readU32(mapSizeAddr + 0x01)
   local surfacePtr = readU32(drawBlitAddr + 0x02)
   local surfacePitch = readU32(drawBlitAddr + 0x12)
   if readU32(drawBlitAddr + 0x57) ~= surfacePitch then
-    log(WARNING, "full-minimap: surface pitch mismatch in drawMinimap blit; nothing changed")
-    return
+    return fail("surface pitch mismatch in drawMinimap blit")
   end
 
   local setupSite = drawSetupAddr + 0x1E
