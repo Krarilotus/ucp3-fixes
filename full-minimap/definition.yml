@@ -1,0 +1,15 @@
+name: full-minimap
+display-name: Full Minimap
+type: module
+version: 1.0.0
+author: Krarilotus
+meta:
+  version: 1.0.0
+game:
+- SHC==1.41
+- SHCE==1.41
+tags:
+- qol
+dependencies:
+  framework: ^3.0.8
+  frontend: ^1.0.2

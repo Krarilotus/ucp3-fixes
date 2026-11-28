@@ -1,4 +1,5 @@
 bugfixes: Hata düzeltmeleri
-hunter_targeting: Avcı hedef seçimi
-hunter_targeting_descr: Avcılar yakındaki geyikleri seçer ve atış engellenirse yaklaşır. Değişiklikten sonra yeniden başlatın.
+hunter_targeting: Atış engellenince avcılar geyiklere yaklaşır
+hunter_targeting_descr: Avcılar yakındaki geyikleri seçer ve açık atış için yaklaşır.
 tags.bugfixes: Hata düzeltmeleri
+cat_unit_orders: Birlik emirleri ve hedefleme

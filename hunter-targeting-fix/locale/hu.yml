@@ -1,4 +1,5 @@
 bugfixes: Hibajavítások
-hunter_targeting: Vadászok célválasztása
-hunter_targeting_descr: A vadászok a közeli szarvasokat választják, és közelebb mennek, ha a lövés akadályba ütközik. Módosítás után indítsd újra.
+hunter_targeting: A vadászok közelebb lépnek a szarvashoz, ha blokkolt a lövés
+hunter_targeting_descr: A vadászok közeli szarvast választanak, és közelebb mennek a tiszta lövéshez.
 tags.bugfixes: Hibajavítások
+cat_unit_orders: Egységparancsok és célpontok

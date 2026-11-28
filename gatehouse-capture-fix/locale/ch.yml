@@ -1,4 +1,5 @@
 bugfixes: 错误修复
-living_gatehouse_occupants: 存活的城门守军
-living_gatehouse_occupants_descr: 阵亡士兵不再参与占领或防守城门。更改后请重启游戏。
+living_gatehouse_occupants: 仅存活部队计入城门控制权
+living_gatehouse_occupants_descr: 阵亡部队不再计入城门的占领或守卫判定。
 tags.bugfixes: 错误修复
+cat_gates_capture: 城门与占领

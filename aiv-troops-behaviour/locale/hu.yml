@@ -1,16 +1,16 @@
 ai: MI
 fixes: Javítások
-title: 'MI: AIV-csapatviselkedés'
-description: Helyreállítja a pikások, kardforgatók és arab kardforgatók hiányzó AIV-pozícióit.
-behavior_title: Csapatbeállítások
-aic_overrides: AIC-felülírások használata
-initial_role: Kezdőcsapatok feladata
+title: Hiányzó MI-védőállások visszaállítása
+description: A pikások, kardforgatók és arab kardforgatók megkapják a várbeli védőállásaikat.
+behavior_title: MI kezdő és védő szerepeinek beállítása
+aic_overrides: Az egyes MI-személyiségek felülírhatják ezeket a választásokat
+initial_role: Kezdő szerep
 slot_movement: Védők mozgása
-native: Eredeti játékviselkedés
-defend: AIV-pozíciók védelme
+native: Játék alapértelmezése
+defend: Várállások védelme
 dig: Várárok ásása
-hold: Maradjon a kijelölt pozíción
-patrol: Járőrözés az AIV-pozíciók között
+hold: Helyben maradás
+patrol: Járőrözés az állások között
 troop_Engineer: Mérnökök
 troop_Archer: Európai íjászok
 troop_Crossbowman: Számszeríjászok
@@ -26,17 +26,19 @@ troop_ArabianArcher: Arab íjászok
 troop_HorseArcher: Lovasíjászok
 troop_ArabianSwordsman: Arab kardforgatók
 troop_FireThrower: Tűzhajítók
-troops_category: AIV-csapatviselkedés
-table_unit: Egység
+table_unit: Csapatok
 table_role: Kezdő feladat
-table_movement: AIV-mozgás
+table_movement: Védők mozgása
 table_defend: Védelem
 table_dig: Ásás
 table_hold: Tartás
 table_patrol: Járőr
-table_help: 'Egységtípusonként mindkét párból legfeljebb egy lehetőséget válassz. Védelem: az AIV-helyek elfoglalása; Ásás: a kezdőcsapatok várárokásásra kijelölése. Tartás: maradás a védelmi helyen; Járőr: mozgás a védelmi helyek között az MI AIC-járőrbeállításai szerint. A visszaállítás a játék eredeti viselkedését állítja vissza.'
+table_help: Kapcsold be a védőállások visszaállítását az MI → Javítások alatt, majd minden egységtípushoz válassz kezdő szerepet és védőmozgást.
 tags.ai: MI
 tags.aic: MI-viselkedés
 tags.aiv: MI-várak
 tags.behavior: Viselkedés
 tags.bugfixes: Hibajavítások
+improvements: Fejlesztések
+cat_castle_defence: Várvédelem
+cat_recruitment_defenders: Toborzás és védők

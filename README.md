@@ -3,7 +3,7 @@
 Bug fixes for Stronghold Crusader / Crusader Extreme 1.41, packaged as eight
 independently selectable UCP3 modules, plus four configuration plugins: UCP3
 Fixes, which turns the fixes on, and the UCP3 setup family (UCP3 Basics, UCP3
-Basics + Fixes, UCP3 Recommended). Every module is off by default. The hop farm
+Basics + Fixes, UCP3 Recommended). Every fix module is off by default. The hop farm
 fix was created by Daniel Fleger (Samurai, Discord: D. Daniel). AIV Troop
 Behaviour builds on his original module and is mainly authored by Krarilotus. Fixed
 Engineers is maintained by UCP contributors. Each packaged module includes
@@ -29,6 +29,7 @@ to Improved Tunnelers and starting troops to AI Swapper.
 | [Scenario Settings Fix](docs/scenario-settings.md) | Keeps the troops, weapons and goods a map forbids in the scenario editor forbidden in skirmish, multiplayer, trail and Play a Map games. Not part of the UCP3 Fixes plugin. In-game acceptance is pending. |
 | [Build Over Workers](build-over-workers/) | By Monsterfish (GPL-3.0): place buildings and walls over your own (optionally allied) workers, who step aside to a free tile instead of being removed; AI walls move people aside too. Writes no save data. |
 | [Route Search](route-search/) | Not a fix: the one owner of a unit's route search. Other modules' route policies (Smarter Pathing's assassin shortcut, Gatehouse Fixes' gate routes) run there in a fixed order, so they work together. No settings; alone it changes nothing. Its README documents the policy contract. MIT. |
+| [Full Minimap](full-minimap/) | Not a fix: shows the whole map on the minimap on every map size, with the visible-area frame, clicks and unit orders scaled to match. Off until its option is ticked. English texts only. Not part of the UCP3 Fixes plugin. In-game check of the Alt+R dot mode is pending. |
 
 ## UCP3 Fixes plugin
 

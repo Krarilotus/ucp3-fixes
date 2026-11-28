@@ -1,4 +1,5 @@
-bugfixes: Correcciones
-living_gatehouse_occupants: Defensores vivos de las puertas
-living_gatehouse_occupants_descr: Las tropas caídas ya no capturan ni defienden las puertas. Reinicia tras cambiarlo.
+bugfixes: Correcciones de errores
+living_gatehouse_occupants: Solo las tropas vivas cuentan para controlar una puerta
+living_gatehouse_occupants_descr: Las tropas caídas dejan de contar para capturar o mantener una casa de la puerta.
 tags.bugfixes: Correcciones
+cat_gates_capture: Puertas y captura

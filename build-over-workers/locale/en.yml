@@ -1,12 +1,14 @@
-buildings: Buildings can be placed over workers
-buildings_tooltip: You can place a building on top of your own workers. They step aside to the closest free tile next to the new building and carry on with their job.
-walls: Walls can be placed over workers
-walls_tooltip: 'The same for walls: workers standing in the way are moved next to the wall, on the side they were on when possible.'
-keep_on_walls: Repairing a wall leaves people on top of it
-keep_on_walls_tooltip: Troops and people standing on top of a wall or stairs stay where they are when you repair that wall.
-allies: Allies' workers count as friendly
-allies_tooltip: Workers of players on your team can be built over too.
+buildings: "Place buildings over your workers"
+buildings_tooltip: "Place a building as usual and your workers step onto a nearby free tile."
+walls: "Place walls over your workers"
+walls_tooltip: "Drag a wall as usual and your workers step onto a nearby free tile."
+keep_on_walls: "Leave people on walls during repair"
+keep_on_walls_tooltip: "Troops and workers on the wall or stairs stay in place during repairs."
+allies: "Also move allied workers aside"
+allies_tooltip: "Workers belonging to a teammate step aside when you build over them."
 balance_changes: Balance Changes
 bugfixes: Bugfixes
 tags.behavior: Behavior
 tags.bugfixes: Bug fixes
+cat_building_farming: Building and farming
+cat_buildings_placement: Buildings and placement

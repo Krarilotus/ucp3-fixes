@@ -21,13 +21,25 @@ FIXTURES = {
 ON = {'enabled': True}
 
 
+def aob(pattern):
+    return re.compile(b''.join(b'.' if token == '?' else re.escape(bytes.fromhex(token))
+                               for token in pattern.split()), re.DOTALL)
+
+
+def unique_hit(addresses):
+    assert len(addresses) == 1, addresses
+    return addresses[0]
+
+
 class ModuleHarness:
     def __init__(self, name, memory, base=BASE):
         self.name, self.memory, self.base = name, bytearray(memory), base
-        self.scans, self.writes = [], []
+        self.scans, self.writes, self.logs = [], [], []
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         self.lua.globals().scan = self.scan
         self.lua.globals().write = self.write
+        self.lua.globals().read = lambda a, n: self.lua.table_from(self.memory[a - self.base:a - self.base + n])
+        self.lua.globals().log = lambda level, message: self.logs.append((level, message))
         # Match core.AOBScan's throwing contract, not the original module's nil assumption.
         self.lua.execute('''
           core = {
@@ -36,17 +48,18 @@ class ModuleHarness:
               if address == nil then error('AOB not found: ' .. pattern) end
               return address
             end,
+            readBytes = read,
             writeCode = write,
           }
           INFO = 0
-          log = function(...) end
+          ERROR = 2
         ''')
         self.module = self.lua.execute((ROOT / name / 'init.lua').read_text(encoding='utf-8'))
 
     def scan(self, pattern, extra_arguments):
         self.scans.append((pattern, extra_arguments))
-        offset = self.memory.find(bytes.fromhex(pattern))
-        return None if offset < 0 else self.base + offset
+        match = aob(pattern).search(self.memory)
+        return None if match is None else self.base + match.start()
 
     def write(self, address, code):
         data = bytes(code.values())
@@ -72,8 +85,12 @@ class ModuleTests(unittest.TestCase):
         for name in FIXTURES:
             with self.subTest(module=name):
                 h = ModuleHarness(name, b'unsupported executable')
-                with self.assertRaisesRegex(LuaError, name + ': cannot locate'):
-                    h.enable({'enabled': True})
+                if name == AIV:
+                    h.enable(ON)
+                    self.assertEqual(h.logs, [(2, 'AIV troop rows are off: not found')])
+                else:
+                    with self.assertRaisesRegex(LuaError, name + ': cannot locate'):
+                        h.enable(ON)
                 self.assertEqual(h.writes, [])
                 self.assertFalse(h.module.applied)
 
@@ -86,7 +103,7 @@ class ModuleTests(unittest.TestCase):
                 h.enable({'enabled': True})
                 self.assertEqual((bytes(h.memory), h.writes), (memory, writes))
                 self.assertEqual(len(h.scans), 1)
-                self.assertEqual(h.scans[0][1], 0, 'use the framework AOB cache')
+                self.assertEqual(h.scans[0][1], 0)
 
     def test_unconfigured_module_keeps_game_behaviour(self):
         for name, fixture in FIXTURES.items():
@@ -130,9 +147,9 @@ class ModuleTests(unittest.TestCase):
         memory = bytearray(FIXTURES[AIV])
         memory[37] = 0x90  # another patch has modified the last jump
         h = ModuleHarness(AIV, memory)
-        with self.assertRaises(LuaError):
-            h.enable(ON)
+        h.enable(ON)
         self.assertEqual(h.writes, [])
+        self.assertEqual(h.logs, [(2, 'AIV troop rows are off: not found')])
 
     def test_hop_machine_code_accepts_exactly_four_farm_types(self):
         h = ModuleHarness(HOP, FIXTURES[HOP])

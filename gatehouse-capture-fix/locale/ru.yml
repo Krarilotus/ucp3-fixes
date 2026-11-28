@@ -1,4 +1,5 @@
-bugfixes: Исправления
-living_gatehouse_occupants: Живые защитники ворот
-living_gatehouse_occupants_descr: Павшие воины больше не захватывают и не защищают ворота. После изменения перезапустите игру.
+bugfixes: Исправления ошибок
+living_gatehouse_occupants: Для контроля ворот учитываются только живые войска
+living_gatehouse_occupants_descr: Павшие воины больше не учитываются при захвате и удержании барбакана.
 tags.bugfixes: Исправления
+cat_gates_capture: Ворота и захват

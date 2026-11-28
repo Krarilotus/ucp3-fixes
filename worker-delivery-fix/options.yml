@@ -2,7 +2,7 @@ meta:
   version: 1.0.0
 options:
 - name: reachable_delivery
-  category: ['{{bugfixes}}']
+  category: ['{{bugfixes}}', '{{cat_worker_routes}}']
   display: UCP2Switch
   header: '{{reachable_delivery}}'
   text: '{{reachable_delivery_descr}}'

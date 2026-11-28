@@ -17,7 +17,7 @@ local function resolve()
   local sites = {}
   for key, pattern in pairs(PATTERNS) do
     local ok, address = pcall(core.AOBScan, pattern)
-    if not ok then error("aiv-troops-behaviour: cannot resolve behavior hook " .. key .. ": " .. tostring(address)) end
+    if not ok then error("cannot resolve behavior hook " .. key .. ": not found", 0) end
     sites[key] = address
   end
   local unitType = core.readInteger(sites.mapper + 13)

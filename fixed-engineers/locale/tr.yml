@@ -7,3 +7,4 @@ siege_target_stop: Nişan alırken kuşatma araçlarını durdur
 siege_target_stop_descr: Mancınıklar ve trebuşeler bir birime saldırı emri alınca durur.
   Bu ayarı değiştirdikten sonra oyunu yeniden başlatın.
 tags.bugfixes: Hata düzeltmeleri
+cat_siege_digging: Kuşatma donanımı ve kazı

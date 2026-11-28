@@ -1,4 +1,5 @@
 bugfixes: Fehlerkorrekturen
-hunter_targeting: Zielwahl der Jäger
-hunter_targeting_descr: Jäger wählen nahe Hirsche und gehen bei versperrter Schussbahn näher heran. Nach Änderung neu starten.
+hunter_targeting: Jäger nähern sich Hirschen bei blockiertem Schussfeld
+hunter_targeting_descr: Jäger wählen nahe Hirsche und gehen näher heran, um frei schießen zu können.
 tags.bugfixes: Fehlerkorrekturen
+cat_unit_orders: Truppenbefehle und Zielwahl

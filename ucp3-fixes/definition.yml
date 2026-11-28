@@ -1,7 +1,7 @@
 name: ucp3-fixes
 display-name: UCP3 Fixes
 author: UCP contributors
-version: 0.2.1
+version: 0.2.4
 type: plugin
 game:
 - SHC==1.41
@@ -14,11 +14,11 @@ dependencies:
   framework: ^3.0.7
   frontend: ^1.0.2
   worker-delivery-fix: ^0.2.0
-  gatehouse-capture-fix: ^0.2.0
-  hunter-targeting-fix: ^0.2.0
+  gatehouse-capture-fix: ^0.2.1
+  hunter-targeting-fix: ^0.2.1
   fixed-engineers: ^0.3.0
   hopfarm-limit-fix: ^0.2.0
-  aiv-troops-behaviour: ^0.3.0
+  aiv-troops-behaviour: ^0.3.3
   interface-visual-fixes: ^0.2.0
   audio-fixes: ^0.2.0
   scenario-settings-fix: ^0.1.0

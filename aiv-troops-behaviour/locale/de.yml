@@ -1,16 +1,16 @@
 ai: KI
-behavior_title: Truppeneinstellungen
-fixes: Fehlerbehebungen
-title: 'KI: AIV-Truppenverhalten'
-description: Stellt fehlende AIV-Positionen für Pikeniere, Schwertkämpfer und arabische Schwertkämpfer wieder her.
-aic_overrides: AIC-Überschreibungen verwenden
-initial_role: Aufgabe der Starttruppen
+behavior_title: KI-Start- und Verteidigerrollen festlegen
+fixes: Korrekturen
+title: Fehlende KI-Verteidigerpositionen wiederherstellen
+description: Weist Pikenieren, Schwertkämpfern und arabischen Schwertkämpfern ihre Burg-Verteidigerpositionen zu.
+aic_overrides: Einzelne KI-Persönlichkeiten dürfen diese Auswahl überschreiben
+initial_role: Startrolle
 slot_movement: Bewegung der Verteidiger
-native: Originalverhalten des Spiels
-defend: AIV-Positionen verteidigen
+native: Spielstandard
+defend: Burgpositionen verteidigen
 dig: Gräben ausheben
-hold: An der zugewiesenen Position bleiben
-patrol: Zwischen AIV-Positionen patrouillieren
+hold: Position halten
+patrol: Zwischen Positionen patrouillieren
 troop_Engineer: Ingenieure
 troop_Archer: Europäische Bogenschützen
 troop_Crossbowman: Armbrustschützen
@@ -26,17 +26,19 @@ troop_ArabianArcher: Arabische Bogenschützen
 troop_HorseArcher: Berittene Bogenschützen
 troop_ArabianSwordsman: Arabische Schwertkämpfer
 troop_FireThrower: Feuerwerfer
-troops_category: AIV-Truppenverhalten
-table_unit: Truppe
+table_unit: Truppen
 table_role: Startaufgabe
-table_movement: AIV-Bewegung
+table_movement: Verteidigerbewegung
 table_defend: Wache
 table_dig: Graben
 table_hold: Halten
 table_patrol: Patrouille
-table_help: 'Pro Truppentyp höchstens eine Option je Paar wählen. Wache: AIV-Positionen beziehen; Graben: Starttruppen dem Ausheben von Burggräben zuweisen. Halten: am Verteidigungsplatz bleiben; Patrouille: gemäß den AIC-Patrouilleneinstellungen der KI zwischen Verteidigungsplätzen wechseln. Zurücksetzen stellt das Spielverhalten wieder her.'
+table_help: Aktiviere „Fehlende KI-Verteidigerpositionen wiederherstellen“ unter KI → Korrekturen und wähle dann je Truppentyp eine Startrolle und eine Verteidigerbewegung.
 tags.ai: KI
 tags.aic: KI-Verhalten
 tags.aiv: KI-Burgen
 tags.behavior: Verhalten
 tags.bugfixes: Fehlerkorrekturen
+improvements: Verbesserungen
+cat_castle_defence: Burgverteidigung
+cat_recruitment_defenders: Rekrutierung und Verteidiger

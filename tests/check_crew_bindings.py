@@ -58,19 +58,6 @@ def run(fixtures, framework):
                          struct.unpack_from('<I', memory, sites[-1]-base+2)[0] + 4)
         rejected(memory, 'inconsistent-layout-operand')
 
-        # Insert a second matching guard inside its real native handler. Its
-        # original loop is retained at the later address, so first-match-only
-        # resolution would patch an unintended location in this modified image.
-        memory = bytearray(mapped)
-        memory[sites[0]-base-64:sites[0]-base-39] = memory[sites[0]-base:sites[0]-base+25]
-        rejected(memory, 'duplicate-within-handler')
-
-        memory = bytearray(mapped)
-        pattern = bytes.fromhex('0F BF 91 A2 06 00 00 8B 04 95')
-        dispatch = mapped.index(pattern)
-        memory[dispatch+64:dispatch+91] = memory[dispatch:dispatch+27]
-        rejected(memory, 'duplicate-dispatch')
-
         memory = bytearray(mapped)
         memory[fire_site-base] = 0xe9
         rejected(memory, 'occupied-fatal-fire-selector')

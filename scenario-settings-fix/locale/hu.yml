@@ -2,3 +2,4 @@ bugfixes: Hibajavítások
 map_settings: A térkép elérhetőségi beállításai
 map_settings_descr: A forgatókönyv-szerkesztőben tiltott egységek, fegyverek és áruk csetepatéban, többjátékos módban és a „Térkép játszása” módban is tiltva maradnak. Minden játékosnak ugyanaz a beállítás kell. Módosítás után indítsd újra.
 tags.bugfixes: Hibajavítások
+cat_lobby_multiplayer: Előtér és többjátékos mód

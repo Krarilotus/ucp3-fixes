@@ -22,6 +22,7 @@ import zipfile
 
 from lupa.lua54 import LuaRuntime, LuaError, lua_type
 import pefile
+from test_modules import unique_hit
 from unicorn import Uc, UcError, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE, UC_HOOK_MEM_UNMAPPED
 from unicorn.x86_const import (UC_X86_REG_EAX, UC_X86_REG_ECX, UC_X86_REG_EDX, UC_X86_REG_EBX,
     UC_X86_REG_ESP, UC_X86_REG_EBP, UC_X86_REG_ESI, UC_X86_REG_EDI, UC_X86_REG_EIP)
@@ -66,6 +67,8 @@ class Game:
         self.base = pe.OPTIONAL_HEADER.ImageBase
         self.sections = [(self.base + s.VirtualAddress, s.PointerToRawData, s.SizeOfRawData)
                          for s in pe.sections]
+        self.executable = [(self.base + s.VirtualAddress, s.SizeOfRawData)
+                           for s in pe.sections if s.Characteristics & 0x20000000]
         self.work = work
         self.uc = Uc(UC_ARCH_X86, UC_MODE_32)
         self.uc.hook_add(UC_HOOK_MEM_UNMAPPED, lambda uc, access, address, size, value, data:
@@ -77,8 +80,9 @@ class Game:
         g.INFO, g.WARNING, g.ERROR = 0, 1, 2
         g.log = lambda level, message: self.logs.append(str(message))
         core = lua.table()
-        core.AOBScan = lambda pattern, start=None: self.scan(pattern, start, required=True)
-        core.scanForAOB = lambda pattern, start=None, stop=None: self.scan(pattern, start) or 0
+        core.AOBScan = lambda pattern: unique_hit(
+            [va + match.start() for va, size in self.executable
+             for match in regex(pattern).finditer(self.read(va, size))])
         core.readInteger = lambda a: struct.unpack('<i', self.read(a, 4))[0]
         core.readSmallInteger = lambda a: struct.unpack('<h', self.read(a, 2))[0]
         core.readByte = lambda a: struct.unpack('<b', self.read(a, 1))[0]
@@ -250,6 +254,7 @@ def check(exe, work):
                          edi=tms, esi=tile, ecx=0x2222, edx=0x3333)
 
         label = '%s, walls %s' % (exe.name, 'on' if walls else 'off')
+        assert not g.logs, g.logs
         if not walls:
             assert regex(AI_WALL_UNITS).fullmatch(g.read(ai_units, 24)), 'AI wall code patched with walls off'
             validate()

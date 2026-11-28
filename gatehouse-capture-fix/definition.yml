@@ -1,7 +1,7 @@
 name: gatehouse-capture-fix
 display-name: Gatehouse Capture Fix
 author: UCP contributors
-version: 0.2.0
+version: 0.2.1
 type: module
 game:
 - SHC==1.41
@@ -11,5 +11,5 @@ tags:
 meta:
   version: 1.0.0
 dependencies:
-  framework: ^3.0.7
+  framework: ^3.0.8
   frontend: ^1.0.0

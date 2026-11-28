@@ -1,4 +1,5 @@
 bugfixes: Bugfixes
-hunter_targeting: Hunter targeting
-hunter_targeting_descr: Hunters target nearby deer and move closer when a shot is blocked. Restart after changing.
+hunter_targeting: "Hunters approach deer when a shot is blocked"
+hunter_targeting_descr: "Hunters pick nearby deer and move closer for a clear shot."
 tags.bugfixes: Bug fixes
+cat_unit_orders: Unit orders and targeting

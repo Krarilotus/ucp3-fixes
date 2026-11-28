@@ -2,7 +2,7 @@ meta:
   version: 1.0.0
 options:
 - name: map_settings
-  category: ['{{bugfixes}}']
+  category: ['{{bugfixes}}', '{{cat_lobby_multiplayer}}']
   display: UCP2Switch
   header: '{{map_settings}}'
   text: '{{map_settings_descr}}'

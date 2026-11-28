@@ -2,7 +2,7 @@
 from pathlib import Path
 import unittest
 
-from lupa.lua54 import LuaRuntime, LuaError
+from lupa.lua54 import LuaRuntime
 
 
 ENTRY = Path(__file__).resolve().parents[1] / 'worker-delivery-fix' / 'init.lua'
@@ -12,6 +12,11 @@ def entry():
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.execute('''
       resolved=0; installed=0
+      ERROR=2; errors={}
+      function log(level, message)
+        assert(level == ERROR)
+        table.insert(errors, message)
+      end
       package.preload.delivery=function() return {
         resolve=function() resolved=resolved+1; return {} end,
         install=function() installed=installed+1 end
@@ -35,10 +40,13 @@ class WorkerDeliveryEntryTests(unittest.TestCase):
     def test_failed_preflight_does_not_install(self):
         lua, module = entry()
         lua.execute('package.preload.delivery=function() return {resolve=function() error("bad binding") end} end')
-        with self.assertRaisesRegex(LuaError, 'bad binding'):
-            module.enable(module, lua.table_from({'reachable_delivery': True}))
+        module.enable(module, lua.table_from({'reachable_delivery': True}))
         self.assertEqual(lua.globals().installed, 0)
         self.assertFalse(module.applied)
+        errors = list(lua.globals().errors.values())
+        self.assertEqual(len(errors), 1)
+        self.assertTrue(errors[0].startswith('Granary and armory delivery is off:'))
+        self.assertIn('bad binding', errors[0])
 
 
 if __name__ == '__main__':

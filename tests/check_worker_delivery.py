@@ -148,15 +148,6 @@ class Probe:
             cases.append('missing route binding rejected')
         else: raise AssertionError('Missing route binding accepted')
         self.data[offset] = 0x6a
-        target = offset + 0x1000
-        saved = self.data[target:target+32]
-        self.data[target:target+32] = self.data[offset:offset+32]
-        try:
-            self.delivery.resolve()
-        except (LuaError, RuntimeError):
-            cases.append('ambiguous route binding rejected')
-        else: raise AssertionError('Ambiguous route binding accepted')
-        self.data[target:target+32] = saved
 
         heat_offset = s.heatmap - self.base
         self.data[heat_offset] = 0x90

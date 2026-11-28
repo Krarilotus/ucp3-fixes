@@ -1,4 +1,5 @@
-bugfixes: Corrections
-living_gatehouse_occupants: Défenseurs vivants des portes
-living_gatehouse_occupants_descr: Les troupes tombées ne capturent ni ne défendent plus les portes. Redémarrer après modification.
+bugfixes: Corrections de bugs
+living_gatehouse_occupants: Seules les troupes vivantes comptent pour contrôler une porte
+living_gatehouse_occupants_descr: Les troupes tombées ne comptent plus pour capturer ou tenir un corps de garde.
 tags.bugfixes: Corrections
+cat_gates_capture: Portes et capture

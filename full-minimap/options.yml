@@ -1,0 +1,14 @@
+options:
+- url: full-minimap.enabled
+  name: full-minimap-enabled
+  display: UCP2Switch
+  contents:
+    type: boolean
+    value: false
+  header: '{{enabled}}'
+  text: '{{enabled_tooltip}}'
+  category:
+  - '{{qol}}'
+  - '{{cat_display_camera}}'
+meta:
+  version: 1.0.0

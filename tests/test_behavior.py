@@ -1,6 +1,5 @@
 """Policy, AIC integration, register ABI and initial-assignment trampoline checks."""
 from pathlib import Path
-import re
 import struct
 import unittest
 import yaml
@@ -9,7 +8,7 @@ from lupa.lua54 import lua_type
 from unicorn import Uc, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE
 from unicorn.x86_const import UC_X86_REG_EAX, UC_X86_REG_EFLAGS, UC_X86_REG_ESP, UC_X86_REG_ESI, UC_X86_REG_EBX, UC_X86_REG_EBP
 
-from test_modules import ROOT, BASE, AIV, FIXTURES, ModuleHarness, LuaError
+from test_modules import ROOT, BASE, AIV, FIXTURES, ModuleHarness
 
 
 def enable_require(lua):
@@ -46,17 +45,26 @@ class BehaviorHarness(ModuleHarness):
         for row in range(20): self.i32(self.pointers['rowToTribe'] + row * 4, row * 10)
         self.callbacks, self.hooks, self.native_calls, self.aic = {}, {}, [], {}
         self.next_code = 0x1E0000
+        self.lua.globals().core.readBytes = lambda a, n: self.lua.table_from(self.get(a, n))
+        self.lua.globals().core.writeCodeBytes = self.write
         self.lua.globals().core.readInteger = lambda a: int.from_bytes(self.get(a, 4), 'little', signed=True)
         self.lua.globals().core.readSmallInteger = lambda a: int.from_bytes(self.get(a, 2), 'little', signed=True)
         self.lua.globals().core.allocateCode = self.allocate
         self.lua.globals().core.detourCode = lambda cb, a, n: self.callbacks.update({a: (cb, n)})
         self.lua.globals().core.hookCode = self.hook
-        self.lua.globals().core.insertCode = self.insert
-        self.lua.globals().register_aic = lambda key, setter, reset: self.aic.update({key: (setter, reset)})
+        self.lua.globals().core.calculateCodeSize = lambda code: len(self.compile(code, 0))
+        self.lua.globals().core.compile = lambda code, at: self.lua.table_from(self.compile(code, at))
+        self.lua.globals().core.writeCode = self.write_code
+        self.lua.globals().register_aic = lambda owner, key, getter, reset: self.aic.update({key: (getter, reset, owner)})
+        self.lua.globals().register_provider = lambda owner, provider: setattr(self, 'provider', (owner, provider))
         self.lua.execute('''
-          modules = {aicloader = {setAdditionalAICValue = function(self, key, setter, reset)
-            register_aic(key, setter, reset)
-          end}}
+          modules = {aicloader = {
+            registerAdditionalAICValue = function(self, owner, key, getter, reset) register_aic(owner, key, getter, reset) end,
+            registerAICUpdateProvider = function(self, owner, provider) register_provider(owner, provider) end,
+          }}
+          core.jmpTo = function(dst)
+            return {0xE9, core.relTo(dst, -4)}
+          end
           WARNING = 1
           core.relTo = function(dst, offset)
             return function(address)
@@ -79,12 +87,6 @@ class BehaviorHarness(ModuleHarness):
     def i32(self, address, value): self.put(address, struct.pack('<I', value))
     def i16(self, address, value): self.put(address, struct.pack('<H', value))
 
-    def scan(self, pattern, extra_arguments):
-        self.scans.append((pattern, extra_arguments))
-        regex = b''.join(b'.' if x == '?' else re.escape(bytes([int(x, 16)])) for x in pattern.split())
-        result = re.search(regex, self.memory, re.DOTALL)
-        return self.base + result.start() if result else None
-
     def compile(self, code, address):
         result = bytearray()
         def add(item):
@@ -98,18 +100,15 @@ class BehaviorHarness(ModuleHarness):
     def allocate(self, code):
         address = self.next_code
         self.next_code += 256
-        self.put(address, self.compile(code, address))
+        if not isinstance(code, int): self.put(address, self.compile(code, address))
         return address
 
-    def insert(self, site, size, code, return_to, original):
-        self.assert_original = original
-        address = self.next_code
-        data = self.compile(code, address) + bytes(self.get(site, size))
-        data += b'\xE9' + struct.pack('<i', (return_to or site + size) - (address + len(data) + 5))
+    def write_code(self, address, code):
+        if address < 0x1E0000:
+            return self.write(address, code)
+        data = self.compile(code, address)
         self.put(address, data)
         self.inserted = (address, data)
-        self.next_code += 256
-        return address
 
     def hook(self, cb, address, argc, convention, size):
         self.hooks[address] = (cb, argc, convention, size)
@@ -120,7 +119,11 @@ class BehaviorHarness(ModuleHarness):
 
     def install(self, **config):
         self.enable({'enabled': True, 'behavior': self.lua.table_from({'enabled': True, **config}, recursive=True)})
-    def set_aic(self, ai, key, value): self.aic[key][0](ai, value)
+    def update_aic(self, ai, spec, resetting=False):
+        provider = self.provider[1]
+        spec = self.lua.table_from(spec)
+        if provider.handles(ai, spec, resetting): provider.prepare(ai, spec, None, resetting).commit()
+    def set_aic(self, ai, key, value): self.update_aic(ai, {key: value})
     def callback(self, site, **registers):
         return self.callbacks[self.sites[site]][0](self.lua.table_from(registers))
 
@@ -128,16 +131,29 @@ class BehaviorHarness(ModuleHarness):
 class BehaviorTests(unittest.TestCase):
     def setUp(self): self.h = BehaviorHarness()
 
-    def test_all_sites_preflight_before_any_writes(self):
-        self.h.put(self.h.sites['initial'], b'\x90')
-        with self.assertRaisesRegex(LuaError, 'cannot resolve behavior hook initial'):
-            self.h.install()
-        self.assertFalse(self.h.writes or self.h.callbacks or self.h.hooks or self.h.aic)
+    def test_row_and_behavior_preflights_are_independent(self):
+        for failure in ('initial', 'row'):
+            with self.subTest(failure=failure):
+                h = BehaviorHarness()
+                if failure == 'initial':
+                    h.put(h.sites['initial'], b'\x90')
+                    h.install()
+                    self.assertEqual(len(h.writes), 3)
+                    self.assertFalse(h.callbacks or h.hooks or h.aic)
+                    message = 'AIV troop behaviour controls are off: cannot resolve behavior hook initial: not found'
+                else:
+                    h.put(BASE + 37, b'\x90')
+                    h.install()
+                    self.assertEqual([address for address, _ in h.writes], [h.sites["initial"]])
+                    self.assertTrue(h.callbacks and h.hooks and h.aic)
+                    message = 'AIV troop rows are off: not found'
+                self.assertEqual(h.logs, [(2, message)])
 
     def test_registration_getter_validation_and_per_ai_reset(self):
         h = self.h
         h.install()
         self.assertEqual(len(h.aic), 32)
+        self.assertEqual({entry[2] for entry in h.aic.values()} | {h.provider[0]}, {'aiv-troops-behaviour'})
         key = 'AIVTroops_InitialRole_Slave'
         self.assertIsNone(h.aic[key][0](1, None))
         h.set_aic(1, key, 'dig')
@@ -146,7 +162,7 @@ class BehaviorTests(unittest.TestCase):
         for invalid in (-1, 0, 1, 2, 3, -2, 0.5, True, '2', 'native', 'inherit', 'Dig', 'hold', float('nan')):
             h.set_aic(1, key, invalid)
             self.assertEqual(h.aic[key][0](1, None), 'dig')
-        h.aic[key][1](1)
+        h.update_aic(1, {}, True)
         self.assertIsNone(h.aic[key][0](1, None))
         for key in ('AIVTroops_InitialRole_Swordsman', 'AIVTroops_InitialRole'):
             h.set_aic(1, key, 'dig')
@@ -157,7 +173,7 @@ class BehaviorTests(unittest.TestCase):
         h.install()
         policy = h.lua.execute('return require("behavior.policy").new()')
         troops = h.lua.execute('return require("behavior.policy").troops')
-        for key, (handler, reset) in h.aic.items():
+        for key, (handler, reset, _) in h.aic.items():
             role = key.startswith('AIVTroops_InitialRole')
             troop = next((t for t in troops.values() if key.endswith('_' + t.name)), None)
             allowed = {'defend': 1} if role else {'hold': 1, 'patrol': 2}
@@ -165,7 +181,7 @@ class BehaviorTests(unittest.TestCase):
                 allowed['dig'] = 2
             for value, expected in allowed.items():
                 with self.subTest(key=key, value=value):
-                    handler(16, value)
+                    h.set_aic(16, key, value)
                     self.assertEqual(handler(16, None), value)
                     self.assertIsNone(handler(1, None))
                     self.assertTrue(policy.set(policy, 16, key, value))
@@ -279,11 +295,14 @@ class BehaviorTests(unittest.TestCase):
         for ai in (1, 16):
             self.assertEqual(gate(h.lua.table_from({'EBP': ai, 'ESI': 0x120000})).EAX, 1)
 
-    def test_invalid_menu_value_fails_before_writes_or_hooks(self):
+    def test_invalid_menu_value_uses_default(self):
         for defaults in ({'InitialRole_Swordsman': 'dig'}, {'Movement': 'typo'}):
-            with self.assertRaisesRegex(LuaError, 'invalid customization'):
-                self.h.install(defaults=defaults)
-            self.assertFalse(self.h.writes or self.h.hooks or self.h.callbacks)
+            h = BehaviorHarness()
+            h.install(defaults=defaults)
+            self.assertTrue(h.writes and h.hooks and h.callbacks)
+            self.assertEqual(len(h.logs), 1)
+            self.assertEqual(h.logs[0][0], 1)
+            self.assertIn('Using the default', h.logs[0][1])
 
     def test_menu_choices_cover_runtime_fields_and_only_capable_diggers(self):
         options = yaml.safe_load((ROOT / AIV / 'options.yml').read_text(encoding='utf-8'))
@@ -384,7 +403,7 @@ class BehaviorTests(unittest.TestCase):
         h = self.h
         h.install()
         address, code = h.inserted
-        self.assertEqual(h.assert_original, 'after')
+        self.assertEqual(code[-12:-5], bytes.fromhex('0F B7 06 66 3D 37 00'))
         gate = 0x1E0000
         for role, expected in ((0, h.sites['initial'] + 7), (1, h.sites['initial'] + 119), (2, h.sites['initial'] + 109)):
             with self.subTest(role=role):

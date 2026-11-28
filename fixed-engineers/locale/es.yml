@@ -1,4 +1,4 @@
-bugfixes: Correcciones
+bugfixes: Correcciones de errores
 crew_lifecycle: Eliminación de la dotación de asedio
 crew_lifecycle_descr: Corrige la eliminación omitida de dotaciones de asedio y rechaza
   referencias obsoletas al abandonar una máquina. Los ingenieros supervivientes conservan
@@ -7,3 +7,4 @@ siege_target_stop: Detener máquinas de asedio al apuntar
 siege_target_stop_descr: Las catapultas y los trabuquetes se detienen al recibir la orden de
   atacar una unidad. Reinicia el juego tras cambiar esta opción.
 tags.bugfixes: Correcciones
+cat_siege_digging: Equipo de asedio y excavación

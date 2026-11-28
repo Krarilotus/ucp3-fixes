@@ -7,3 +7,4 @@ siege_target_stop: Stop siege engines when targeting
 siege_target_stop_descr: Catapults and trebuchets stop moving when ordered to attack a unit.
   Restart the game after changing this setting.
 tags.bugfixes: Bug fixes
+cat_siege_digging: Siege equipment and digging

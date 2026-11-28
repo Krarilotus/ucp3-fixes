@@ -2,3 +2,4 @@ bugfixes: 错误修复
 map_settings: 地图可用性设置
 map_settings_descr: 地图在剧本编辑器中禁用的兵种、武器和货物，在遭遇战、多人游戏和“自定义地图”中仍然禁用。所有玩家需要相同设置。更改后请重启游戏。
 tags.bugfixes: 错误修复
+cat_lobby_multiplayer: 大厅与多人游戏

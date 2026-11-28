@@ -1,12 +1,14 @@
-buildings: Construire des bâtiments par-dessus les ouvriers
-buildings_tooltip: Vous pouvez placer un bâtiment sur vos propres ouvriers. Ils s'écartent vers la case libre la plus proche à côté du nouveau bâtiment et poursuivent leur tâche.
-walls: Construire des murs par-dessus les ouvriers
-walls_tooltip: 'Même principe pour les murs : les ouvriers sur le passage sont déplacés à côté du mur, si possible du même côté où ils se trouvaient.'
-keep_on_walls: Réparer un mur laisse les unités dessus
-keep_on_walls_tooltip: Les troupes et personnes debout sur un mur ou un escalier restent en place lorsque vous réparez ce mur.
-allies: Les ouvriers alliés comptent comme amicaux
-allies_tooltip: Il est également possible de construire sur les ouvriers des joueurs de votre équipe.
+buildings: Placer des bâtiments sur vos ouvriers
+buildings_tooltip: Placez un bâtiment comme d’habitude et vos ouvriers se décalent sur une case libre voisine.
+walls: Placer des murs sur vos ouvriers
+walls_tooltip: Tracez un mur comme d’habitude et vos ouvriers se décalent sur une case libre voisine.
+keep_on_walls: Laisser les unités sur les murs pendant les réparations
+keep_on_walls_tooltip: Les troupes et ouvriers sur le mur ou les escaliers restent en place durant les réparations.
+allies: Écarter aussi les ouvriers alliés
+allies_tooltip: Les ouvriers d’un allié s’écartent lorsque vous construisez sur eux.
 balance_changes: Modifications de l'équilibrage
-bugfixes: Corrections
+bugfixes: Corrections de bugs
 tags.behavior: Comportement
 tags.bugfixes: Corrections
+cat_building_farming: Construction et agriculture
+cat_buildings_placement: Bâtiments et placement

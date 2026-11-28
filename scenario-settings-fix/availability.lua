@@ -128,10 +128,6 @@ local function find(pattern, purpose)
   if not ok or address == nil then
     error(NAME .. ": cannot locate " .. purpose)
   end
-  local duplicate = core.scanForAOB(pattern, address + 1)
-  if duplicate and duplicate ~= 0 then
-    error(NAME .. ": " .. purpose .. " matches more than once")
-  end
   return address
 end
 

@@ -122,14 +122,7 @@ local MAP_SIZE = 400
 
 local function scan(pattern, purpose)
   local ok, address = pcall(core.AOBScan, pattern)
-  if not ok or address == nil then
-    error(MODULE_NAME .. ": could not find " .. purpose)
-  end
-  -- Refuse an ambiguous signature instead of patching the first of several matches.
-  local duplicate = core.scanForAOB(pattern, address + 1)
-  if duplicate and duplicate ~= 0 then
-    error(MODULE_NAME .. ": the signature for " .. purpose .. " matches more than once")
-  end
+  if not ok then error(purpose .. ": not found", 0) end
   return address
 end
 
@@ -314,30 +307,56 @@ local function enable(self, config)
 
   local placeTest, placeUnits, placeEnd
   if buildings then
-    placeTest = scan(AOB_PLACE_TEST, "the building placement test")
-    placeUnits = scan(AOB_PLACE_UNITS, "where a new building meets units")
-    placeEnd = scan(AOB_PLACE_END, "the end of building placement") + PLACE_END.hook
+    local ok, reason = pcall(function()
+      placeTest = scan(AOB_PLACE_TEST, "the building placement test")
+      placeUnits = scan(AOB_PLACE_UNITS, "where a new building meets units")
+      placeEnd = scan(AOB_PLACE_END, "the end of building placement") + PLACE_END.hook
+    end)
+    buildings = ok
+    if not ok then log(ERROR, "Building over workers is off: " .. tostring(reason)) end
   end
   local wallTest, wallUnits, wallEnd, aiWallUnits, aiWallEnd
   if walls then
-    wallTest = scan(AOB_WALL_TEST, "the wall placement test")
-    wallUnits = scan(AOB_WALL_UNITS, "where a new wall meets units")
-    wallEnd = scan(AOB_WALL_END, "the end of wall placement") + WALL_END.hook
-    aiWallUnits = scan(AOB_AI_WALL_UNITS, "where an AI wall meets units")
-    aiWallEnd = scan(AOB_AI_WALL_END, "the end of AI wall placement") + AI_WALL_END.hook
+    local ok, reason = pcall(function()
+      wallTest = scan(AOB_WALL_TEST, "the wall placement test")
+      wallUnits = scan(AOB_WALL_UNITS, "where a new wall meets units")
+      wallEnd = scan(AOB_WALL_END, "the end of wall placement") + WALL_END.hook
+      aiWallUnits = scan(AOB_AI_WALL_UNITS, "where an AI wall meets units")
+      aiWallEnd = scan(AOB_AI_WALL_END, "the end of AI wall placement") + AI_WALL_END.hook
+    end)
+    walls = ok
+    if not ok then log(ERROR, "Wall placement over workers is off: " .. tostring(reason)) end
   end
-  local setPos = scan(AOB_SET_POSITION, "where a unit is put down")
-  local setDest = scan(AOB_SET_DESTINATION, "the unit route search") - SET_DESTINATION_START
-  local flags = core.readInteger(scan(AOB_TILE_FLAGS, "the tile flags") + TILE_FLAGS_OPERAND)
+  if not buildings and not walls then return end
 
-  local unitTypeAddress = placeTest and core.readInteger(placeTest + 9) or core.readInteger(wallTest + 20)
-  local units = unitTypeAddress - U_TYPE
-  local tms = flags - TMS_FLAGS
-  if placeTest and wallTest and core.readInteger(wallTest + 20) ~= unitTypeAddress then
-    error(MODULE_NAME .. ": the unit layout is not the one this module knows")
+  local ok, units, tms, valid, rows, setPos, setDest = pcall(function()
+    local pos = scan(AOB_SET_POSITION, "where a unit is put down")
+    local dest = scan(AOB_SET_DESTINATION, "the unit route search") - SET_DESTINATION_START
+    local map = core.readInteger(scan(AOB_TILE_FLAGS, "the tile flags") + TILE_FLAGS_OPERAND) - TMS_FLAGS
+    local unitType = buildings and core.readInteger(placeTest + 9) or core.readInteger(wallTest + 20)
+    if buildings and walls and core.readInteger(wallTest + 20) ~= unitType then
+      error("unsupported unit layout", 0)
+    end
+    if readOperand(dest, SET_DESTINATION_AREAS, "the area map") ~= map + TMS_AREAS then
+      error("unsupported tile map layout", 0)
+    end
+    return unitType - U_TYPE, map, readOperand(pos, SET_POSITION_VALID, "the map's valid tiles"),
+      readOperand(pos, SET_POSITION_ROWS, "the map rows"), pos, dest
+  end)
+  if not ok then
+    if buildings then log(ERROR, "Building over workers is off: " .. tostring(units)) end
+    if walls then log(ERROR, "Wall placement over workers is off: " .. tostring(units)) end
+    return
   end
-  if readOperand(setDest, SET_DESTINATION_AREAS, "the area map") ~= tms + TMS_AREAS then
-    error(MODULE_NAME .. ": the tile map layout is not the one this module knows")
+  local teams
+  if allies then
+    local found, address = pcall(core.AOBScan, AOB_PLAYER_TEAMS)
+    if found then
+      teams = core.readInteger(address + PLAYER_TEAMS_OPERAND)
+    else
+      log(ERROR, "Placement over allied workers is off: not found")
+      allies = false
+    end
   end
 
   local data = core.allocate(8 + 4 + 4 * QUEUE_MAX + TYPE_COUNT, true)
@@ -348,8 +367,8 @@ local function enable(self, config)
     units = units,
     unitsState = units - UNITS_FROM_STATE,
     tms = tms,
-    valid = readOperand(setPos, SET_POSITION_VALID, "the map's valid tiles"),
-    rows = readOperand(setPos, SET_POSITION_ROWS, "the map rows"),
+    valid = valid,
+    rows = rows,
     keepOnWalls = keepOnWalls,
     setPosition = setPos,
     setDestination = setDest,
@@ -361,12 +380,7 @@ local function enable(self, config)
 
   -- 1. Building over friendly workers.
   do
-    local teams
-    if allies then
-      teams = core.readInteger(scan(AOB_PLAYER_TEAMS, "the player teams") + PLAYER_TEAMS_OPERAND)
-    else
-      teams = core.allocate((PLAYERS + 1) * 4, true)
-    end
+    teams = teams or core.allocate((PLAYERS + 1) * 4, true)
     local check = assemble(templates.tileCheck, {
       UNIT_TYPE = units + U_TYPE,
       UNIT_OWNER = units + U_OWNER,

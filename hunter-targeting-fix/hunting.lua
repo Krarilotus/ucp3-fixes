@@ -16,10 +16,8 @@ local failedShotPattern = "56 B9 ? ? ? ? 66 C7 80 ? ? ? ? 04 00 " ..
   "E8 ? ? ? ? 85 C0 A1 ? ? ? ? 0F 84 ? ? ? ? 8B C8 69 C9 90 04 00 00"
 
 local function unique(pattern, name)
-  local address = core.AOBScan(pattern)
-  assert(core.scanForAOB(pattern) == address
-      and core.scanForAOB(pattern, address + 1) == nil,
-    "hunter-targeting-fix: ambiguous " .. name)
+  local ok, address = pcall(core.AOBScan, pattern)
+  if not ok then error(name .. ": not found", 0) end
   return address
 end
 

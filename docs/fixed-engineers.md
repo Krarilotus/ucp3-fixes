@@ -33,8 +33,9 @@ corrections resolve and preflight before installation.
 | Tunnelers | ImprovedTunnelers for behaviour; AI Swapper 1.5.0 for starting counts/native initialization; neither required here |
 
 The module-local handler resolver is needed for the eight engine handlers. It
-resolves once at initialization, checks context and rejects occupied or ambiguous
-sites. Crew correction allocates 217 bytes and replaces 66 original bytes;
+resolves once at initialization and checks handler boundaries and instruction
+context. Signature uniqueness is checked offline. Crew correction allocates
+217 bytes and replaces 66 original bytes;
 dismount allocates 83 bytes and replaces 7; target stop allocates 27 bytes and
 replaces 7. No per-tick Lua callback, scan or census. The target-stop site belongs
 to the tribe-command dispatcher, outside the bounded unit-handler resolver; it

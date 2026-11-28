@@ -1,16 +1,16 @@
 ai: AI
-behavior_title: Troop settings
+behavior_title: "Set AI starting and defender roles"
 fixes: Fixes
-title: 'AI: AIV Troop Behaviour'
-description: Restores missing AIV positions for pikemen, swordsmen and Arabian swordsmen.
-aic_overrides: Use AIC overrides
-initial_role: Starting troop role
+title: "Restore missing AI defender positions"
+description: "Give pikemen, swordsmen and Arabian swordsmen their castle defender positions."
+aic_overrides: "Let individual AI personalities override these choices"
+initial_role: "Starting role"
 slot_movement: Defender movement
-native: Native game behaviour
-defend: Defend AIV positions
+native: "Game default"
+defend: "Defend castle positions"
 dig: Dig moats
-hold: Stay at the assigned position
-patrol: Patrol between AIV positions
+hold: "Hold position"
+patrol: "Patrol between positions"
 troop_Engineer: Engineers
 troop_Archer: Crusader archers
 troop_Crossbowman: Crossbowmen
@@ -26,17 +26,19 @@ troop_ArabianArcher: Arabian archers
 troop_HorseArcher: Horse archers
 troop_ArabianSwordsman: Arabian swordsmen
 troop_FireThrower: Fire throwers
-troops_category: AIV Troop Behaviour
-table_unit: Troop
+table_unit: "Troops"
 table_role: Starting role
-table_movement: Slot movement
+table_movement: "Defender movement"
 table_defend: Defend
 table_dig: Dig
 table_hold: Hold
 table_patrol: Patrol
-table_help: 'Per troop, choose at most one option in each pair. Defend: move to AIV positions; Dig: assign starting troops to moat digging. Hold: stay at a defense slot; Patrol: move between defense slots using the AI''s AIC patrol settings. Reset restores game behaviour.'
+table_help: "Enable restored defender positions under AI Fixes, then choose one starting role and one defender movement per troop."
 tags.ai: AI
 tags.aic: AI behavior
 tags.aiv: AI castles
 tags.behavior: Behavior
 tags.bugfixes: Bug fixes
+improvements: Improvements
+cat_castle_defence: Castle defence
+cat_recruitment_defenders: Recruitment and defenders

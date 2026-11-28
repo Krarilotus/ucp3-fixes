@@ -37,9 +37,10 @@ for fixture in [f for p in args.fixtures for f in json.loads(p.read_text())]:
         changed = bytearray(mapped)
         changed[offset] ^= 0x01
         reject(changed)
-    duplicate = bytearray(mapped)
-    duplicate[tail_offset-128:tail_offset-87] = mapped[tail_offset:tail_offset+41]
-    reject(duplicate)
+    # A copied tail's relative jump no longer returns to the crew loop.
+    changed = bytearray(mapped)
+    changed[tail_offset-128:tail_offset-87] = mapped[tail_offset:tail_offset+41]
+    reject(changed)
     for offset in (site-base, entry-base+0x3c, tail_offset+18):
         h, install = prepare(mapped)
         h.memory[offset] ^= 1
@@ -47,4 +48,4 @@ for fixture in [f for p in args.fixtures for f in json.loads(p.read_text())]:
         except LuaError:
             assert not h.patches and not h.allocations
         else: raise AssertionError('Changed prepared context accepted')
-    print(f'{path}: unman occupied/layout/UID/continuation/ambiguity/preflight passed', flush=True)
+    print(f'{path}: unman occupied/layout/UID/continuation/preflight passed', flush=True)

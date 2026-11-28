@@ -52,28 +52,77 @@ local SKIP_OFFSETS = {
   37, -- row 18: Arabian swordsmen
 }
 
+local function installRows()
+  local found, target = pcall(core.AOBScan, AOB)
+  if not found then error("not found", 0) end
+  local original = {}
+  for index, offset in ipairs(SKIP_OFFSETS) do
+    original[index] = core.readBytes(target + offset, #NOP6)
+  end
+  for index, offset in ipairs(SKIP_OFFSETS) do
+    local ok, failure = pcall(core.writeCode, target + offset, NOP6)
+    if not ok then
+      for touched = index, 1, -1 do
+        pcall(core.writeCode, target + SKIP_OFFSETS[touched], original[touched])
+      end
+      error(failure, 0)
+    end
+  end
+end
+
 return {
   enable = function(self, config)
-    if self.applied or not config or config.enabled ~= true then
+    if self.started or config == nil then return end
+    if type(config) ~= "table" then
+      log(ERROR, "AIV troop settings must be a table.")
       return
     end
-    -- Troop behaviour controls are opt-in. Resolve every behavior site before
-    -- applying even the base row fix, so a failed preflight leaves no patches.
-    local installBehavior
-    if config.behavior and config.behavior.enabled == true then
-      installBehavior = require("behavior").prepare(config.behavior)
+    if config.enabled ~= nil and type(config.enabled) ~= "boolean" then
+      log(ERROR, "AIV troop rows enabled must be a boolean.")
     end
-    -- AOBScan raises on failure. Validate the entire block before any write.
-    local ok, target = pcall(core.AOBScan, AOB)
-    if not ok then
-      error("aiv-troops-behaviour: cannot locate the AIV row checks; unsupported executable or conflicting patch. No changes applied. " .. tostring(target))
+    if config.enabled ~= true then return end
+    local behavior, install = config.behavior
+    if behavior ~= nil and type(behavior) ~= "table" then
+      log(ERROR, "AIV troop behaviour settings must be a table.")
+    elseif behavior and behavior.enabled == true then
+      local ok, prepared = pcall(function()
+        return require("behavior").prepare(behavior)
+      end)
+      if ok then
+        install = prepared
+      else
+        log(ERROR, "AIV troop behaviour controls are off: " .. tostring(prepared))
+      end
+    elseif behavior and behavior.enabled ~= nil and type(behavior.enabled) ~= "boolean" then
+      log(ERROR, "AIV troop behaviour enabled must be a boolean.")
     end
-    for _, offset in ipairs(SKIP_OFFSETS) do
-      core.writeCode(target + offset, NOP6)
+
+    local rowsOk, reason = pcall(installRows)
+    if rowsOk then
+      self.applied = true
+    else
+      log(ERROR, "AIV troop rows are off: " .. tostring(reason))
     end
-    if installBehavior then installBehavior() end
-    self.applied = true
-    log(INFO, string.format("aiv-troops-behaviour: patched AIV spot decoder at 0x%X", target))
+
+    if install then
+      local ok, policy = pcall(install)
+      if ok then
+        self.policy = policy
+      else
+        log(ERROR, "AIV troop behaviour controls are off: " .. tostring(policy))
+      end
+    end
+    self.started = true
+  end,
+
+  -- Read-only policy answers for other modules; nil means the game's own value.
+  -- ai is the aicloader personality (1 Rat .. 16 Abbot).
+  defenseRowFor = function(self, ai, unitType)
+    return self.policy and self.policy:ownRow(ai, unitType) or nil
+  end,
+
+  defenseGroupsFor = function(self, ai, row, slots, patrolGroups)
+    return self.policy and self.policy:groups(ai, row, slots, patrolGroups) or nil
   end,
 
   disable = function(self, config)

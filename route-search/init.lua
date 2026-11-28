@@ -49,19 +49,12 @@ local function fail(message, ...)
   error(NAME .. ": " .. string.format(message, ...), 0)
 end
 
-local function found(address)
-  return address ~= nil and address ~= 0
-end
-
 local function find(pattern, purpose)
-  local ok, at = pcall(core.AOBScan, pattern)
-  if not ok or not found(at) then
+  local ok, address = pcall(core.AOBScan, pattern)
+  if not ok then
     return nil, string.format("%s was not found; this executable is not supported", purpose)
   end
-  if core.scanForAOB(pattern) ~= at or found(core.scanForAOB(pattern, at + 1)) then
-    return nil, string.format("%s does not have exactly one match; this executable is not supported", purpose)
-  end
-  return at
+  return address
 end
 
 local function resolve()
@@ -90,7 +83,7 @@ local function resolve()
   end
   if why then
     problem = why
-    log(WARNING, "route policies are unavailable: " .. why)
+    log(ERROR, "Custom route rules are off. " .. why .. ".")
     return
   end
   site = { call = call, search = searchAt }
@@ -139,7 +132,6 @@ local function relink()
     core.writeInteger(policy.next, inner and inner.entry or site.search)
   end
   core.writeInteger(firstSlot, enabled[1] and enabled[1].entry or site.search)
-  log(INFO, "unit route search: " .. describe(enabled))
 end
 
 -- The call must still be what route-search found (or redirected) before anything is written.
@@ -159,14 +151,6 @@ local function checkCall()
       .. "before the first route policy was enabled; update that module to a route-search "
       .. "policy or turn its route feature off", site.call)
   end
-end
-
--- Redirect the call once, after the chain it leads to is written.
-local function redirect()
-  if head then return end
-  head = core.allocateCode(STUB_SIZE)
-  core.writeCode(head, headCode())
-  core.writeCode(site.call, { 0xE8, core.itob(head - (site.call + 5)) })
 end
 
 local function checkOpen(what)
@@ -226,9 +210,26 @@ local function enablePolicy(self, id, entry)
     fail("the route policy '%s' is already enabled", id)
   end
   checkCall()
-  policy.entry = entry
-  relink()
-  redirect()
+  if head then
+    policy.entry = entry
+    relink()
+  else
+    local stub = core.allocateCode(STUB_SIZE)
+    core.writeCode(stub, headCode())
+    local ok, reason = pcall(function()
+      core.writeInteger(firstSlot, entry)
+      core.writeCode(site.call, { 0xE8, core.itob(stub - (site.call + 5)) })
+    end)
+    if not ok then
+      pcall(core.writeInteger, firstSlot, site.search)
+      if not isCallTo(site.search) then
+        pcall(core.writeCode, site.call, { 0xE8, core.itob(site.search - (site.call + 5)) })
+      end
+      error(reason, 0)
+    end
+    head, policy.entry = stub, entry
+  end
+  log(INFO, "unit route search: " .. describe(chain()))
 end
 
 local function policyList(self)

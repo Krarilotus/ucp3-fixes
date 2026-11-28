@@ -2,3 +2,4 @@ bugfixes: Bugfixes
 map_settings: Map availability settings
 map_settings_descr: Skirmish, multiplayer and Play a Map games keep the troops, weapons and goods the map forbids in the scenario editor. All players need the same setting. Restart after changing.
 tags.bugfixes: Bug fixes
+cat_lobby_multiplayer: Lobby and multiplayer

@@ -1,12 +1,14 @@
-buildings: Épületek elhelyezése munkásokon át
-buildings_tooltip: Saját munkásaid helyére is építhetsz épületet. Az új épület melletti legközelebbi szabad mezőre lépnek, és folytatják a munkájukat.
-walls: Falak elhelyezése munkásokon át
-walls_tooltip: 'Ugyanez falaknál: az útban álló munkások a fal mellé lépnek, lehetőség szerint arra az oldalra, amelyiken álltak.'
-keep_on_walls: Faljavításkor a rajta állók helyben maradnak
-keep_on_walls_tooltip: A falon vagy lépcsőn álló katonák és emberek a helyükön maradnak, amikor megjavítod a falat.
-allies: A szövetségesek munkásai is barátságosnak számítanak
-allies_tooltip: A csapatodhoz tartozó játékosok munkásaira is építhetsz.
-balance_changes: Egyensúly-módosítások
+buildings: Épületek lerakása saját munkásokra
+buildings_tooltip: Helyezd le az épületet a megszokott módon, és a munkásaid egy közeli szabad mezőre lépnek.
+walls: Várfalak húzása saját munkásokra
+walls_tooltip: Húzd meg a falat a megszokott módon, és a munkásaid egy közeli szabad mezőre lépnek.
+keep_on_walls: Egységek megtartása a falakon javítás közben
+keep_on_walls_tooltip: A falon vagy lépcsőn lévő csapatok és munkások a helyükön maradnak javítás közben.
+allies: Szövetséges munkások félreállítása is
+allies_tooltip: A csapattárs munkásai is félrelépnek, ha rájuk építesz.
+balance_changes: Egyensúlymódosítások
 bugfixes: Hibajavítások
 tags.behavior: Viselkedés
 tags.bugfixes: Hibajavítások
+cat_building_farming: Építés és gazdálkodás
+cat_buildings_placement: Épületek és elhelyezés

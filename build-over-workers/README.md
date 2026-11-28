@@ -8,7 +8,7 @@ on, instead of being removed or left stuck inside.
 Author: **Monsterfish**. Licensed under GPL-3.0 (`LICENSE`); see `CREDITS.md`.
 
 - Targets Stronghold Crusader 1.41 and Stronghold Crusader Extreme 1.41
-- Requires UCP framework 3.0.7 and frontend 1.0.2 or a compatible later version
+- Requires UCP framework 3.0.8 and frontend 1.0.2 or a compatible later version
 - Writes no save data. Moved units keep their native position, height and destination,
   which the game saves as usual.
 
@@ -31,6 +31,8 @@ module's AI wall path, with walls on and off, on licensed 1.41 executables.
 
 ## Release notes
 
+- **1.1.1:** Building and wall placement over workers turn off separately, with an error,
+  when their game code is not found.
 - **1.1.0:** Placement over workers is off by default; after updating, switch it on in
   Customizations unless you saved it on. The switches also cover AI walls. A signature
   that matches more than once is refused before any change.

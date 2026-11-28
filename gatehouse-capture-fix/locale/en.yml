@@ -1,4 +1,5 @@
 bugfixes: Bugfixes
-living_gatehouse_occupants: Living gatehouse defenders
-living_gatehouse_occupants_descr: Fallen troops no longer capture or defend gatehouses. Restart after changing.
+living_gatehouse_occupants: "Only living troops count for gatehouse control"
+living_gatehouse_occupants_descr: "Fallen troops stop counting toward who captures or holds a gatehouse."
 tags.bugfixes: Bug fixes
+cat_gates_capture: Gates and capture

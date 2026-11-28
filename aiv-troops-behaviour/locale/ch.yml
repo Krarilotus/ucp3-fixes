@@ -1,16 +1,16 @@
 ai: AI
-fixes: 修复
-title: AI：AIV部队行为
-description: 恢复长枪兵、剑士和阿拉伯剑士缺失的AIV位置。
-behavior_title: 部队设置
-aic_overrides: 使用AIC覆盖
-initial_role: 初始部队任务
+fixes: 修正
+title: 恢复缺失的 AI 防守位置
+description: 为长戟兵、剑士和阿拉伯剑士补全城堡防守位置。
+behavior_title: 设置 AI 初始与防守职责
+aic_overrides: 允许各 AI 性格覆盖这些设置
+initial_role: 初始职责
 slot_movement: 守军移动方式
-native: 游戏原版行为
-defend: 防守AIV位置
+native: 游戏默认
+defend: 驻守城堡位置
 dig: 挖掘护城河
-hold: 留在指定位置
-patrol: 在AIV位置之间巡逻
+hold: 原地待命
+patrol: 在各位置间巡逻
 troop_Engineer: 工程师
 troop_Archer: 欧洲弓箭手
 troop_Crossbowman: 弩手
@@ -26,17 +26,19 @@ troop_ArabianArcher: 阿拉伯弓箭手
 troop_HorseArcher: 骑射手
 troop_ArabianSwordsman: 阿拉伯剑士
 troop_FireThrower: 火焰投掷兵
-troops_category: AIV部队行为
-table_unit: 部队
+table_unit: 兵种
 table_role: 初始任务
-table_movement: AIV移动
+table_movement: 防守移动
 table_defend: 防守
 table_dig: 挖掘
 table_hold: 驻守
 table_patrol: 巡逻
-table_help: '每种部队的每组选项最多选一项。防守：前往AIV位置；挖掘：将初始部队分配为护城河挖掘单位。驻守：留在防御位置；巡逻：按照该AI的AIC巡逻设置在防御位置之间移动。重置可恢复游戏默认行为。'
+table_help: 先在 AI → 修正 中启用“恢复缺失的 AI 防守位置”，再为每个兵种选择一个初始职责和一种防守移动方式。
 tags.ai: 人工智能
 tags.aic: AI 行为
 tags.aiv: AI 城堡
 tags.behavior: 行为
 tags.bugfixes: 错误修复
+improvements: 改进
+cat_castle_defence: 城堡防御
+cat_recruitment_defenders: 招募与守军

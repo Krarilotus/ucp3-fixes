@@ -92,7 +92,7 @@ for fixture in [f for manifest in args.fixtures for f in json.loads(manifest.rea
                 assert changed<=allowed
                 assert bool(changed)==(order==4 and kind in (39,40) and not invalid_uid)
                 cases.append(dict(kind=kind,order=order,invalid_uid=invalid_uid,changed=sorted(changed)))
-    # Reject absent/occupied context, duplicates and a changed layout without writes.
+    # Reject absent/occupied context and invalid branch targets without writes.
     def rejected(memory, mutate_after=False):
         check=CrewFramework(memory,base,args.framework)
         try:

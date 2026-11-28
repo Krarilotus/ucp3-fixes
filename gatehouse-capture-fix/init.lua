@@ -1,7 +1,11 @@
 return {
   enable = function(self, config)
     if self.applied or not (config and config.living_gatehouse_occupants == true) then return end
-    local install = require("capture").prepare()
+    local ok, install = pcall(require("capture").prepare)
+    if not ok then
+      log(ERROR, "The occupied gatehouse capture fix is off: " .. tostring(install))
+      return
+    end
     install()
     self.applied = true
   end,

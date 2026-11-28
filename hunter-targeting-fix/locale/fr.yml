@@ -1,4 +1,5 @@
-bugfixes: Corrections
-hunter_targeting: Cibles des chasseurs
-hunter_targeting_descr: Les chasseurs visent le gibier proche et avancent si le tir est bloqué. Redémarrer après modification.
+bugfixes: Corrections de bugs
+hunter_targeting: Les chasseurs s’approchent des cerfs si le tir est bloqué
+hunter_targeting_descr: Les chasseurs choisissent des cerfs proches et s’avancent pour avoir une ligne de tir dégagée.
 tags.bugfixes: Corrections
+cat_unit_orders: Ordres et ciblage des unités

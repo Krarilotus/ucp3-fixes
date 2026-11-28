@@ -1,12 +1,12 @@
 """Probe the native gatehouse patch on licensed SHC/Extreme executables.
 
-Usage: python tests/check_gatehouse_capture.py --framework <3.0.7/core.lua> <game.exe> [more-game.exe ...]
+Usage: python tests/check_gatehouse_capture.py --framework <3.0.8/core.lua> <game.exe> [more-game.exe ...]
 """
 import argparse
 from pathlib import Path
-import re
 
 import pefile
+from test_modules import aob, unique_hit
 from lupa.lua54 import LuaRuntime
 from unicorn import Uc, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE
 from unicorn.x86_const import UC_X86_REG_ESI, UC_X86_REG_ESP
@@ -30,25 +30,19 @@ def check(path, framework):
         return bytes(changes.get(a, image[a-base] if 0 <= a-base < len(image) else 0)
                      for a in range(address, address + count))
 
-    def scan(pattern, start=None, stop=None):
-        regex = b''.join(b'.' if token == '?' else re.escape(bytes([int(token, 16)]))
-                         for token in pattern.split())
-        low = max(base, start or base) - base
-        high = min(base + len(image), stop or base + len(image)) - base
-        found = re.search(regex, image[low:high], re.DOTALL)
-        return base + low + found.start() if found else None
+    def scan_unique(pattern):
+        rx = aob(pattern)
+        return unique_hit([base + match.start() for section in pe.sections
+                           if section.Characteristics & 0x20000000
+                           for match in rx.finditer(image, section.VirtualAddress,
+                               section.VirtualAddress + section.Misc_VirtualSize)])
 
-    def aob(pattern):
-        address = scan(pattern)
-        if address is None: raise AssertionError('gatehouse signature absent')
-        return address
 
     def write_code(address, code):
         compiled = core.compile(code, address)
         for offset, byte in enumerate(compiled.values()): changes[address + offset] = byte
 
-    core.AOBScan = aob
-    core.scanForAOB = scan
+    core.AOBScan = scan_unique
     core.readInteger = lambda address: int.from_bytes(read(address, 4), 'little')
     core.readByte = lambda address: read(address, 1)[0]
     core.readBytes = lambda address, count: lua.table_from(read(address, count))

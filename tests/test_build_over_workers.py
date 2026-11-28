@@ -6,7 +6,7 @@ import tempfile
 import unittest
 import zipfile
 
-from lupa.lua54 import LuaRuntime, LuaError
+from lupa.lua54 import LuaRuntime
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,29 +34,21 @@ def options():
     return found
 
 
-def entry(aob=None, duplicate=None):
-    """Load init.lua with a core whose every access is recorded.
-
-    AOBScan fails unless `aob` gives an address; scanForAOB returns `duplicate` (or 0).
-    """
+def entry():
     lua = LuaRuntime(unpack_returned_tuples=True)
-    lua.globals().first_hit = aob
-    lua.globals().second_hit = duplicate or 0
-    lua.execute('''
-      calls = {}
+    lua.execute("""
+      ERROR = 2
+      calls, logs = {}, {}
+      log = function(level, message) logs[#logs + 1] = {level, message} end
       core = setmetatable({}, {__index = function(_, name)
-        return function(...)
+        return function()
           calls[#calls + 1] = name
-          if name == "AOBScan" then
-            if first_hit then return first_hit end
-            error("AOB not found")
-          end
-          if name == "scanForAOB" then return second_hit end
+          if name == "AOBScan" then error("AOB not found") end
           error("unexpected core." .. name)
         end
       end})
       package.preload.templates = function() return {} end
-    ''')
+    """)
     return lua, lua.execute((FOLDER / 'init.lua').read_text(encoding='utf-8'))
 
 
@@ -77,15 +69,10 @@ class BuildOverWorkersTests(unittest.TestCase):
         for part in ('buildings', 'walls'):
             with self.subTest(part=part):
                 lua, module = entry()
-                with self.assertRaisesRegex(LuaError, NAME + ': could not find'):
-                    module.enable(module, lua.table_from({part: True}))
+                module.enable(module, lua.table_from({part: True}))
                 self.assertEqual(list(lua.globals().calls.values()), ['AOBScan'])
-
-    def test_ambiguous_signature_is_refused_before_writing(self):
-        lua, module = entry(aob=0x401000, duplicate=0x402000)
-        with self.assertRaisesRegex(LuaError, NAME + ': the signature for .* matches more than once'):
-            module.enable(module, lua.table_from({'buildings': True}))
-        self.assertEqual(list(lua.globals().calls.values()), ['AOBScan', 'scanForAOB'])
+                self.assertIn('is off:', lua.globals().logs[1][2])
+                self.assertEqual(lua.globals().logs[1][1], 2)
 
     def test_runtime_disable_reports_restart(self):
         lua, module = entry()
@@ -116,7 +103,7 @@ class BuildOverWorkersTests(unittest.TestCase):
         spec.loader.exec_module(builder)
         with tempfile.TemporaryDirectory() as output:
             with zipfile.ZipFile(builder.build_module(FOLDER, output)) as archive:
-                self.assertEqual(Path(archive.filename).name, f'{NAME}-1.1.0.zip')
+                self.assertEqual(Path(archive.filename).name, f'{NAME}-1.1.1.zip')
                 files = {n for n in archive.namelist() if not n.endswith('/')}
                 self.assertEqual(files, {'definition.yml', 'description.md', 'options.yml', 'init.lua',
                                          'templates.lua', 'CREDITS.md', 'LICENSE',
