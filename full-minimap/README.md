@@ -8,4 +8,4 @@ Scales the entire map to fit the interactive minimap (`126x126` in-game and `128
 - the white visible-area viewport frame;
 - click/drag camera scrolling and the move target of a minimap left-click with troops selected (as in vanilla, a right-click then pans the camera).
 
-Editor preview and map/save thumbnail rendering are left untouched. See `docs/research.md` for binary analysis details.
+Editor preview and map/save thumbnail rendering are left untouched. See [docs/full-minimap.md](../docs/full-minimap.md) for binary analysis details.

@@ -4,3 +4,4 @@ files:
 - src: options.yml
 - src: init.lua
 - src: locale
+- src: CREDITS.md

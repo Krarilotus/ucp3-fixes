@@ -1,4 +1,4 @@
-# Minimap Research (Phase 1)
+# Full Minimap research
 
 ## Verified Target Executables
 
@@ -137,7 +137,7 @@ Searched UCP3 framework (`Krarilotus--UnofficialCrusaderPatch3`), `Community-Pak
 
 ---
 
-## 5. Phase 2 Feasibility Decision: Proceed
+## 5. Hook Sites
 
 Because `field17_0x44` already holds the complete map pre-rendered as a centered `bufDim × bufDim` square (`160`, `200`, `150`, or `200`) and `drawMinimap`'s own unit scanner already supports full-map bounds (used verbatim by `renderMiniMapForSaving`), **no renderer rewrite is needed**.
 
